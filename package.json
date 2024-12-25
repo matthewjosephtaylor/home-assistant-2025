@@ -2,6 +2,7 @@
   "name": "home-assistant-2025",
   "module": "index.ts",
   "type": "module",
+  "license": "MIT",
   "devDependencies": {
     "@types/bun": "latest",
     "@types/react": "^18.3.1",
