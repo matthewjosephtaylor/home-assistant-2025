@@ -21,7 +21,7 @@ export const App = () => (
         // maxHeight: "1024",
         width: '100%',        // Set width as needed
         height: '100vh',      // Set height as needed
-        backgroundImage: "url('/monet.jpg')",
+        backgroundImage: "url('monet.jpg')",
         backgroundSize: 'auto',         // Keeps the image at its natural size
         // backgroundPosition: 'center',   // Centers the image
         backgroundRepeat: 'no-repeat',  // Prevents tiling
