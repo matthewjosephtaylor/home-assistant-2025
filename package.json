@@ -27,6 +27,7 @@
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.0",
     "@mjtdev/avatar-3d": "https://github.com/matthewjosephtaylor/avatar-3d",
+    "@mjtdev/vad-2025": "github:matthewjosephtaylor/vad-2025",
     "@mui/material": "^6.3.0",
     "@mui/system": "^6.3.0",
     "@types/react": "^19.0.2",

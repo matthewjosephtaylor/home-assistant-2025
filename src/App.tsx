@@ -1,5 +1,5 @@
 import { Avatar3d } from "@mjtdev/avatar-3d";
-// import { PhonemeLevelsDisplay, Vads } from "@mjtdev/vad-2025";
+import { PhonemeLevelsDisplay, Vads } from "@mjtdev/vad-2025";
 import { Button, CssBaseline, ThemeProvider, createTheme } from "@mui/material";
 import { Stack } from "@mui/system";
 import { useState } from "react";
@@ -11,7 +11,7 @@ const darkTheme = createTheme({
 });
 export const App = () => {
   const [active, setActive] = useState(false);
-  // const analyserNode = Vads.useMicAudio(active);
+  const analyserNode = Vads.useMicAudio(active);
   // console.log("PhonemeLevelsDisplay", PhonemeLevelsDisplay);
   // console.log("analyzerNode", analyserNode);
   return (
@@ -29,8 +29,8 @@ export const App = () => {
       >
         Microphone {active ? "on" : "off"}
       </Button>
-      <Stack spacing={2}>
-        {/* {analyserNode && <PhonemeLevelsDisplay analyserNode={analyserNode} />} */}
+      <Stack direction={'row'} spacing={2}>
+        {analyserNode && <PhonemeLevelsDisplay analyserNode={analyserNode} />}
         <Avatar3d
           canvasWidth={768}
           canvasHeight={1920}
