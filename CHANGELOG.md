@@ -2,6 +2,7 @@
 
 
 ## 2025-01-15
+- added camera button ([ff76661](https://github.com/matthewjosephtaylor/home-assistant-2025/commit/ff76661946833667a0787bb3801c82f5a84ab997)) by Matt Taylor
 - added fullscreen button ([f838f1d](https://github.com/matthewjosephtaylor/home-assistant-2025/commit/f838f1df8428957575d2a4dde576229663a047d6)) by Matt Taylor
 - upped mem for building ([efc6109](https://github.com/matthewjosephtaylor/home-assistant-2025/commit/efc61092f335fd34330219f52e12aecc1c99567b)) by Matt Taylor
 - added versioning and changlog, cleaned up publish script ([3677c7c](https://github.com/matthewjosephtaylor/home-assistant-2025/commit/3677c7cc597e052827c6de9b19e1a7bdd107e209)) by Matt Taylor
