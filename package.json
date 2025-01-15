@@ -5,7 +5,7 @@
   "license": "MIT",
   "scripts": {
     "start": "vite --strictPort --force --port 7788",
-    "build": "vite build",
+    "build": "NODE_OPTIONS=--max-old-space-size=8192 vite build",
     "pages": "gh-pages --nojekyll --remote origin -d dist",
     "changelog": "./scripts/changes.sh > CHANGELOG.md",
     "changelog-version": "pnpm run changelog && ./scripts/version.sh",
