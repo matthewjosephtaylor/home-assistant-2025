@@ -4,7 +4,8 @@ import { Button, CssBaseline, ThemeProvider, createTheme } from "@mui/material";
 import { Stack } from "@mui/system";
 import { useState } from "react";
 import { play } from "./play";
-import { ConfigButton } from "./ConfigButton";
+import { ConfigButton } from "./ui/ConfigButton";
+import { FullscreenButton } from "./ui/FullscreenButton";
 
 const darkTheme = createTheme({
   palette: {
@@ -28,6 +29,7 @@ export const App = () => {
           Play
         </Button>
         <ConfigButton />
+        <FullscreenButton />
         <Button
           variant="contained"
           color="primary"

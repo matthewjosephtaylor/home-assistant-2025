@@ -8,7 +8,7 @@ import {
   TextField,
 } from "@mui/material";
 import { useEffect, useState } from "react";
-import { AppConfig } from "./AppConfig";
+import { AppConfig } from "../AppConfig";
 
 export const ConfigButton = () => {
   const [open, setOpen] = useState(false);
