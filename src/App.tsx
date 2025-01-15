@@ -7,6 +7,7 @@ import { play } from "./play";
 import { ConfigButton } from "./ui/ConfigButton";
 import { FullscreenButton } from "./ui/FullscreenButton";
 import { CameraButton } from "./ui/CameraButton";
+import { MicrophoneButton } from "./ui/MicrophoneButton";
 
 const darkTheme = createTheme({
   palette: {
@@ -40,6 +41,7 @@ export const App = () => {
         >
           Microphone {active ? "on" : "off"}
         </Button>
+        <MicrophoneButton />
         <CameraButton />
       </Stack>
       <Stack direction={"row"} spacing={2}>
