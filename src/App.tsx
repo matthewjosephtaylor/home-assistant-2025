@@ -6,6 +6,7 @@ import { useState } from "react";
 import { play } from "./play";
 import { ConfigButton } from "./ui/ConfigButton";
 import { FullscreenButton } from "./ui/FullscreenButton";
+import { CameraButton } from "./ui/CameraButton";
 
 const darkTheme = createTheme({
   palette: {
@@ -34,14 +35,12 @@ export const App = () => {
           variant="contained"
           color="primary"
           onClick={() => {
-            console.log("Start button clicked");
             setActive((a) => !a);
-            // getMicrophoneInput();
-            // startVad();
           }}
         >
           Microphone {active ? "on" : "off"}
         </Button>
+        <CameraButton />
       </Stack>
       <Stack direction={"row"} spacing={2}>
         {analyserNode && <PhonemeLevelsDisplay analyserNode={analyserNode} />}
