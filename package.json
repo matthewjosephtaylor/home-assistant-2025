@@ -6,7 +6,10 @@
   "scripts": {
     "start": "vite --strictPort --force --port 7788",
     "build": "vite build",
-    "deploy": "gh-pages --nojekyll --remote origin -d dist"
+    "pages": "gh-pages --nojekyll --remote origin -d dist",
+    "changelog": "./scripts/changes.sh > CHANGELOG.md",
+    "changelog-version": "pnpm run changelog && ./scripts/version.sh",
+    "publish": "pnpm run build && pnpm run pages && pnpm run changelog-version"
   },
   "devDependencies": {
     "@types/bun": "latest",
