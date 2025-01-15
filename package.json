@@ -26,6 +26,11 @@
   "dependencies": {
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.0",
+    "@mjt-engine/byte": "github:mjt-engine/byte",
+    "@mjt-engine/idb": "github:mjt-engine/idb",
+    "@mjt-engine/message": "github:mjt-engine/message",
+    "@mjt-services/asr-common-2025": "github:mjt-services/asr-common-2025",
+    "@mjt-services/textgen-common-2025": "github:mjt-services/textgen-common-2025",
     "@mjtdev/avatar-3d": "https://github.com/matthewjosephtaylor/avatar-3d",
     "@mjtdev/vad-2025": "github:matthewjosephtaylor/vad-2025",
     "@mui/material": "^6.3.0",

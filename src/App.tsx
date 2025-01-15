@@ -3,6 +3,8 @@ import { PhonemeLevelsDisplay, Vads } from "@mjtdev/vad-2025";
 import { Button, CssBaseline, ThemeProvider, createTheme } from "@mui/material";
 import { Stack } from "@mui/system";
 import { useState } from "react";
+import { play } from "./play";
+import { ConfigButton } from "./ConfigButton";
 
 const darkTheme = createTheme({
   palette: {
@@ -16,20 +18,30 @@ export const App = () => {
   // console.log("analyzerNode", analyserNode);
   return (
     <ThemeProvider theme={darkTheme}>
-      <CssBaseline />{" "}
-      <Button
-        variant="contained"
-        color="primary"
-        onClick={() => {
-          console.log("Start button clicked");
-          setActive((a) => !a);
-          // getMicrophoneInput();
-          // startVad();
-        }}
-      >
-        Microphone {active ? "on" : "off"}
-      </Button>
-      <Stack direction={'row'} spacing={2}>
+      <CssBaseline />
+      <Stack direction={"row"} spacing={2}>
+        <Button
+          onClick={() => {
+            play();
+          }}
+        >
+          Play
+        </Button>
+        <ConfigButton />
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={() => {
+            console.log("Start button clicked");
+            setActive((a) => !a);
+            // getMicrophoneInput();
+            // startVad();
+          }}
+        >
+          Microphone {active ? "on" : "off"}
+        </Button>
+      </Stack>
+      <Stack direction={"row"} spacing={2}>
         {analyserNode && <PhonemeLevelsDisplay analyserNode={analyserNode} />}
         <Avatar3d
           canvasWidth={768}
