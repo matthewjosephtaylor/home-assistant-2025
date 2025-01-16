@@ -1,6 +1,9 @@
 # Changelog
 
 
+## 2025-01-16
+- basic QR code added ([8871d34](https://github.com/matthewjosephtaylor/home-assistant-2025/commit/8871d34e304a93340b195756573ceed257d4cbc4)) by Matt Taylor
+
 ## 2025-01-15
 - added mic button ([8291fba](https://github.com/matthewjosephtaylor/home-assistant-2025/commit/8291fba7bfdc4992d703871233d2339827bb6c26)) by Matt Taylor
 - added camera button ([ff76661](https://github.com/matthewjosephtaylor/home-assistant-2025/commit/ff76661946833667a0787bb3801c82f5a84ab997)) by Matt Taylor
