@@ -8,6 +8,11 @@ import { ConfigButton } from "./ui/ConfigButton";
 import { FullscreenButton } from "./ui/FullscreenButton";
 import { CameraButton } from "./ui/CameraButton";
 import { MicrophoneButton } from "./ui/MicrophoneButton";
+import QRCode from "@zxing/library/esm/core/qrcode/encoder/QRCode";
+import { QRCodeHandler } from "./qr/QRCodeHandler";
+import { QRCodeScanner } from "./qr/QRCodeScanner";
+import { Idbs } from "@mjt-engine/idb";
+import { AppConfig } from "./AppConfig";
 
 const darkTheme = createTheme({
   palette: {
@@ -43,6 +48,15 @@ export const App = () => {
         </Button>
         <MicrophoneButton />
         <CameraButton />
+        <QRCodeScanner
+          onScan={(value) => {
+            Idbs.update(AppConfig, "config", (config) => ({
+              ...config,
+              authToken: value,
+            }));
+          }}
+        />
+        <QRCodeHandler />
       </Stack>
       <Stack direction={"row"} spacing={2}>
         {analyserNode && <PhonemeLevelsDisplay analyserNode={analyserNode} />}
