@@ -2,6 +2,7 @@
 
 
 ## 2025-01-17
+- added ASR text display ([c4b20fd](https://github.com/matthewjosephtaylor/home-assistant-2025/commit/c4b20fd8d6c86895bb3937c61bd6a364a3c31837)) by Matt Taylor
 - VAD, ASR working, simple wake-phrase, simple Q&A bot ([1abf031](https://github.com/matthewjosephtaylor/home-assistant-2025/commit/1abf031ea9c18ed48633598b6f361f0afe2a3198)) by Matt Taylor
 
 ## 2025-01-16
