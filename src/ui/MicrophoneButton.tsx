@@ -42,6 +42,7 @@ export const MicrophoneButton: React.FC = () => {
 
             // make sure the first words are the wake phrase
 
+            textUpdater(transcription.text);
             if (
               words.length > 2 &&
               words[0] === wakeWords[0] &&
