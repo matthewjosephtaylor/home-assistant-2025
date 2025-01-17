@@ -30,6 +30,7 @@
   "dependencies": {
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.0",
+    "@mjt-engine/assert": "github:mjt-engine/assert",
     "@mjt-engine/byte": "github:mjt-engine/byte",
     "@mjt-engine/idb": "github:mjt-engine/idb",
     "@mjt-engine/message": "github:mjt-engine/message",
@@ -37,6 +38,7 @@
     "@mjt-services/textgen-common-2025": "github:mjt-services/textgen-common-2025",
     "@mjtdev/avatar-3d": "https://github.com/matthewjosephtaylor/avatar-3d",
     "@mjtdev/vad-2025": "github:matthewjosephtaylor/vad-2025",
+    "@mui/icons-material": "^6.4.0",
     "@mui/material": "^6.3.0",
     "@mui/system": "^6.3.0",
     "@types/react": "^19.0.2",

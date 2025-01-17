@@ -1,5 +1,8 @@
-import React, { useRef, useState, useEffect } from "react";
-import { Button, Box } from "@mui/material";
+import { Vads } from "@mjtdev/vad-2025";
+import { Box, Button } from "@mui/material";
+import React, { useEffect, useRef, useState } from "react";
+import { Connections } from "../connection/Connections";
+import { textUpdater } from "./StreamingText";
 
 export const MicrophoneButton: React.FC = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -8,10 +11,67 @@ export const MicrophoneButton: React.FC = () => {
 
   const handleEnableMicrophone = async () => {
     try {
-      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-      const context = new AudioContext();
-      const source = context.createMediaStreamSource(stream);
+      const {
+        audioContext: context,
+        source,
+        stream,
+      } = await Vads.startVad({
+        onSpeechStart: () => {
+          textUpdater("...");
+        },
+        onSpeechEnd: async (wavBuffer) => {
+          console.log("Speech ended", wavBuffer);
+          const con = await Connections.getConnection();
+          const transcription = await con.request({
+            subject: "asr.transcribe",
+            request: {
+              body: { audio: wavBuffer, word_timestamps: true, output: "json" },
+            },
+          });
+          console.log("out", transcription);
+          if (typeof transcription != "string") {
+            console.log("transcription", transcription.text);
+            const words = transcription.text
+              .trim()
+              .split(" ")
+              .map((word) => {
+                return word.toLocaleLowerCase();
+              });
+            console.log("words", words);
+            const wakeWords = ["hey", "house,"];
+
+            // make sure the first words are the wake phrase
+
+            if (
+              words.length > 2 &&
+              words[0] === wakeWords[0] &&
+              words[1] === wakeWords[1]
+            ) {
+              const cleanWords = words.slice(2);
+              console.log("cleanWords", cleanWords);
+              con.requestMany({
+                subject: "textgen.generate",
+                onResponse: (response) => {
+                  console.log("response", response);
+                  textUpdater(response.text || "");
+                },
+                request: {
+                  body: {
+                    model: "google/gemini-flash-1.5",
+                    prompt: cleanWords.join(" "),
+                    stream: true,
+                  },
+                },
+              });
+            }
+          }
+        },
+      });
+      // const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      // const context = new AudioContext();
+      // const source = context.createMediaStreamSource(stream);
       const analyserNode = context.createAnalyser();
+      // const analyserNode = Asserts.assertValue(await Vads.getMicAudio(true));
       analyserNode.fftSize = 256;
 
       source.connect(analyserNode);

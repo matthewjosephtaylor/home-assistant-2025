@@ -1,18 +1,8 @@
 import { Avatar3d } from "@mjtdev/avatar-3d";
-import { PhonemeLevelsDisplay, Vads } from "@mjtdev/vad-2025";
-import { Button, CssBaseline, ThemeProvider, createTheme } from "@mui/material";
-import { Stack } from "@mui/system";
-import { useState } from "react";
-import { play } from "./play";
-import { ConfigButton } from "./ui/ConfigButton";
-import { FullscreenButton } from "./ui/FullscreenButton";
-import { CameraButton } from "./ui/CameraButton";
-import { MicrophoneButton } from "./ui/MicrophoneButton";
-import QRCode from "@zxing/library/esm/core/qrcode/encoder/QRCode";
-import { QRCodeHandler } from "./qr/QRCodeHandler";
-import { QRCodeScanner } from "./qr/QRCodeScanner";
-import { Idbs } from "@mjt-engine/idb";
-import { AppConfig } from "./AppConfig";
+import { CssBaseline, ThemeProvider, createTheme } from "@mui/material";
+import { Box, Stack } from "@mui/system";
+import StreamingText from "./ui/StreamingText";
+import TopMenu from "./ui/TopMenu";
 
 const darkTheme = createTheme({
   palette: {
@@ -20,46 +10,27 @@ const darkTheme = createTheme({
   },
 });
 export const App = () => {
-  const [active, setActive] = useState(false);
-  const analyserNode = Vads.useMicAudio(active);
+  // const analyserNode = Vads.useMicAudio(active);
   // console.log("PhonemeLevelsDisplay", PhonemeLevelsDisplay);
   // console.log("analyzerNode", analyserNode);
   return (
     <ThemeProvider theme={darkTheme}>
       <CssBaseline />
+      <TopMenu />
+      <Stack direction={"row"} spacing={2}></Stack>
+      <Box
+        sx={{
+          position: "absolute",
+          top: "50%",
+          left: "50%",
+          transform: "translate(-50%, -50%)",
+          zIndex: 10,
+        }}
+      >
+        <StreamingText />
+      </Box>
       <Stack direction={"row"} spacing={2}>
-        <Button
-          onClick={() => {
-            play();
-          }}
-        >
-          Play
-        </Button>
-        <ConfigButton />
-        <FullscreenButton />
-        <Button
-          variant="contained"
-          color="primary"
-          onClick={() => {
-            setActive((a) => !a);
-          }}
-        >
-          Microphone {active ? "on" : "off"}
-        </Button>
-        <MicrophoneButton />
-        <CameraButton />
-        <QRCodeScanner
-          onScan={(value) => {
-            Idbs.update(AppConfig, "config", (config) => ({
-              ...config,
-              authToken: value,
-            }));
-          }}
-        />
-        <QRCodeHandler />
-      </Stack>
-      <Stack direction={"row"} spacing={2}>
-        {analyserNode && <PhonemeLevelsDisplay analyserNode={analyserNode} />}
+        {/* {analyserNode && <PhonemeLevelsDisplay analyserNode={analyserNode} />} */}
         <Avatar3d
           canvasWidth={768}
           canvasHeight={1920}
