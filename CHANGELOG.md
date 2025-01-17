@@ -1,6 +1,9 @@
 # Changelog
 
 
+## 2025-01-17
+- VAD, ASR working, simple wake-phrase, simple Q&A bot ([1abf031](https://github.com/matthewjosephtaylor/home-assistant-2025/commit/1abf031ea9c18ed48633598b6f361f0afe2a3198)) by Matt Taylor
+
 ## 2025-01-16
 - basic QR code added ([8871d34](https://github.com/matthewjosephtaylor/home-assistant-2025/commit/8871d34e304a93340b195756573ceed257d4cbc4)) by Matt Taylor
 
