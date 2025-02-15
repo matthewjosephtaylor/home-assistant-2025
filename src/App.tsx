@@ -10,13 +10,20 @@ const darkTheme = createTheme({
   },
 });
 export const App = () => {
-  // const analyserNode = Vads.useMicAudio(active);
-  // console.log("PhonemeLevelsDisplay", PhonemeLevelsDisplay);
-  // console.log("analyzerNode", analyserNode);
   return (
     <ThemeProvider theme={darkTheme}>
       <CssBaseline />
-      <TopMenu />
+      <Box
+        sx={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+          width: "100%",
+          zIndex: 20,
+        }}
+      >
+        <TopMenu />
+      </Box>
       <Stack direction={"row"} spacing={2}></Stack>
       <Box
         sx={{
@@ -30,21 +37,15 @@ export const App = () => {
         <StreamingText />
       </Box>
       <Stack direction={"row"} spacing={2}>
-        {/* {analyserNode && <PhonemeLevelsDisplay analyserNode={analyserNode} />} */}
         <Avatar3d
           canvasWidth={768}
           canvasHeight={1920}
           path={"fem.vrm"}
           style={{
-            // backgroundColor: "purple",
-            // border: "1px solid white",
-            // maxWidth: "768",
-            // maxHeight: "1024",
             width: "100%", // Set width as needed
             height: "100vh", // Set height as needed
             backgroundImage: "url('monet.jpg')",
             backgroundSize: "auto", // Keeps the image at its natural size
-            // backgroundPosition: 'center',   // Centers the image
             backgroundRepeat: "no-repeat", // Prevents tiling
             overflow: "hidden", // Hides any overflow content
           }}
