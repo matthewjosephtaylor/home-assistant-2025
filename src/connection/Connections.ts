@@ -1,10 +1,11 @@
 import { Idbs } from "@mjt-engine/idb";
-import { Messages } from "@mjt-engine/message";
+import { Errors, Messages } from "@mjt-engine/message";
 import type { AsrConnectionMap } from "@mjt-services/asr-common-2025";
 import type { TextgenConnectionMap } from "@mjt-services/textgen-common-2025";
 import { AppConfig } from "../AppConfig";
 import { GLOBALS } from "../GLOBALS";
 import { useConnection } from "./useConnection";
+import type { DaimonConnectionMap } from "@mjt-services/daimon-common-2025";
 
 export let _connection:
   | Awaited<ReturnType<typeof createConnection>>
@@ -13,10 +14,17 @@ export let _connection:
 export const createConnection = async () => {
   const config = await Idbs.get(AppConfig, "config");
   const con = await Messages.createConnection<
-    AsrConnectionMap & TextgenConnectionMap
+    AsrConnectionMap & TextgenConnectionMap & DaimonConnectionMap
   >({
     server: GLOBALS.mqUrl,
-    options: { log: console.log },
+    options: {
+      log: (message, ...extra) => {
+        console.log(Errors.errorToText(message));
+        console.log(message, extra);
+        // console.log(message);
+        // console.log(extra);
+      },
+    },
     token: config?.authToken,
   });
 

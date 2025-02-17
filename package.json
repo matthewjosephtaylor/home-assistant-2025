@@ -22,12 +22,15 @@
     "eslint-plugin-prettier": "^5.2.3",
     "eslint-plugin-react": "^7.37.4",
     "eslint-plugin-react-hooks": "^5.1.0",
-    "prettier": "^3.5.1"
+    "prettier": "^3.5.1",
+    "sass-embedded": "^1.85.0"
   },
   "peerDependencies": {
     "typescript": "^5.7.2"
   },
   "dependencies": {
+    "@chatscope/chat-ui-kit-react": "^2.0.3",
+    "@chatscope/chat-ui-kit-styles": "^1.4.0",
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.0",
     "@mjt-engine/assert": "github:mjt-engine/assert",
@@ -35,13 +38,14 @@
     "@mjt-engine/idb": "github:mjt-engine/idb",
     "@mjt-engine/message": "github:mjt-engine/message",
     "@mjt-services/asr-common-2025": "github:mjt-services/asr-common-2025",
+    "@mjt-services/daimon-common-2025": "github:mjt-services/daimon-common-2025",
     "@mjt-services/textgen-common-2025": "github:mjt-services/textgen-common-2025",
     "@mjtdev/avatar-3d": "github:matthewjosephtaylor/avatar-3d",
     "@mjtdev/vad-2025": "github:matthewjosephtaylor/vad-2025",
     "@mui/icons-material": "^6.4.4",
     "@mui/material": "^6.4.4",
     "@mui/system": "^6.4.3",
-    "@types/react": "^19.0.8",
+    "@types/react": "^19.0.9",
     "@types/react-dom": "^19.0.3",
     "@zxing/library": "^0.21.3",
     "eslint": "^9.20.1",

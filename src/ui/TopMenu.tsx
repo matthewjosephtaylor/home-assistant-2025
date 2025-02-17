@@ -1,16 +1,16 @@
-import React, { useState } from "react";
+import { Idbs } from "@mjt-engine/idb";
+import CancelIcon from "@mui/icons-material/Cancel";
+import MenuIcon from "@mui/icons-material/Menu";
 import {
   AppBar,
-  Toolbar,
-  IconButton,
   Box,
-  Slide,
   Button,
+  IconButton,
+  Slide,
+  Toolbar,
 } from "@mui/material";
 import { styled } from "@mui/system";
-import MenuIcon from "@mui/icons-material/Menu";
-import CancelIcon from "@mui/icons-material/Cancel";
-import { Idbs } from "@mjt-engine/idb";
+import { useState } from "react";
 import { AppConfig } from "../AppConfig";
 import { play } from "../play";
 import { QRCodeHandler } from "../qr/QRCodeHandler";
