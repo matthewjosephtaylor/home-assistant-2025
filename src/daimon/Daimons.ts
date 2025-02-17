@@ -1,5 +1,3 @@
-export type Daimon = {
-  name: string;
-};
+import { listDaimons } from "./listDaimons";
 
-export const Daimons = {};
+export const Daimons = { listDaimons };

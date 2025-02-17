@@ -4,6 +4,7 @@ import { GenericCrud, type CrudSchema } from "../crud/GenericCrud";
 import { DaimonCharaCard } from "@mjt-services/daimon-common-2025";
 import { getConnection } from "../../connection/Connections";
 import { Errors } from "@mjt-engine/message";
+import { listDaimons } from "../../daimon/listDaimons";
 
 export const DaimonsScreen = () => {
   type DaimonCrud = DaimonCharaCard["data"] & { id: string };
@@ -18,11 +19,7 @@ export const DaimonsScreen = () => {
   };
   const [daimonCruds, setDaimonCruds] = useState<DaimonCrud[]>([]);
   useEffect(() => {
-    getConnection().then(async (connection) => {
-      const daimons = await connection.request({
-        subject: "daimon.list",
-        request: { body: {} },
-      });
+    listDaimons().then((daimons) => {
       const daimonCruds: DaimonCrud[] = daimons.map((daimon) => ({
         id: daimon.id,
         ...daimon.chara.data,
@@ -79,10 +76,7 @@ export const DaimonsScreen = () => {
             const daimonCrud: DaimonCrud = { ...item, id };
             setDaimonCruds((prev) => [...prev, daimonCrud]);
           } catch (error) {
-            // console.
             console.log(Errors.errorToText(error));
-            console.log("Error creating daimon", error);
-            console.log("Error creating daimon cause", error["cause"]);
           }
         }}
         onDelete={async (index) => {

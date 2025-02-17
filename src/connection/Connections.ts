@@ -6,6 +6,7 @@ import { AppConfig } from "../AppConfig";
 import { GLOBALS } from "../GLOBALS";
 import { useConnection } from "./useConnection";
 import type { DaimonConnectionMap } from "@mjt-services/daimon-common-2025";
+import type { DataConnectionMap } from "@mjt-services/data-common-2025";
 
 export let _connection:
   | Awaited<ReturnType<typeof createConnection>>
@@ -14,7 +15,10 @@ export let _connection:
 export const createConnection = async () => {
   const config = await Idbs.get(AppConfig, "config");
   const con = await Messages.createConnection<
-    AsrConnectionMap & TextgenConnectionMap & DaimonConnectionMap
+    AsrConnectionMap &
+      TextgenConnectionMap &
+      DaimonConnectionMap &
+      DataConnectionMap
   >({
     server: GLOBALS.mqUrl,
     options: {
