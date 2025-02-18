@@ -37,7 +37,7 @@ importers:
         version: https://codeload.github.com/mjt-services/asr-common-2025/tar.gz/54964348b27b2cf51132a587ba936830b025d5f5
       '@mjt-services/daimon-common-2025':
         specifier: github:mjt-services/daimon-common-2025
-        version: https://codeload.github.com/mjt-services/daimon-common-2025/tar.gz/b180f85d0d3dba2c070eb6e2e81a41b4d2199b09(nats.ws@1.29.2)
+        version: https://codeload.github.com/mjt-services/daimon-common-2025/tar.gz/e92516e2349498547dd9aca754db7a3f658251d5(nats.ws@1.29.2)
       '@mjt-services/data-common-2025':
         specifier: github:mjt-services/data-common-2025
         version: https://codeload.github.com/mjt-services/data-common-2025/tar.gz/53f82ffaf743507412637713aa2a7156a3685ecd(nats.ws@1.29.2)
@@ -557,10 +557,6 @@ packages:
     resolution: {integrity: sha512-GNKqxfHG2ySmJOBSHg7LxeUx4xpuCoFjacmlCoYWEbaPXLwvfIjixRI12xCQZeULksQb23uiA8F40w5TojpV7w==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
 
-  '@eslint/core@0.10.0':
-    resolution: {integrity: sha512-gFHJ+xBOo4G3WRlR1e/3G8A6/KZAH6zcE/hkLRCZTi/B9avAG365QhFA8uOGzTMqgTghpn7/fSnscW++dpMSAw==}
-    engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
-
   '@eslint/core@0.11.0':
     resolution: {integrity: sha512-DWUB2pksgNEb6Bz2fggIy1wh6fGgZP4Xyy/Mt0QZPiloKKXerbqq9D3SBQTlCRYOrcRPu4vuz+CGjwdfqxnoWA==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
@@ -577,8 +573,8 @@ packages:
     resolution: {integrity: sha512-RBMg5FRL0I0gs51M/guSAj5/e14VQ4tpZnQNWwuDT66P14I43ItmPfIZRhO9fUVIPOAQXU47atlywZ/czoqFPA==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
 
-  '@eslint/plugin-kit@0.2.5':
-    resolution: {integrity: sha512-lB05FkqEdUg2AA0xEbUz0SnkXT1LcCTa438W4IWTUh4hdOnVbQyOJ81OrDXsJk/LSiJHubgGEFoR5EHq1NsH1A==}
+  '@eslint/plugin-kit@0.2.6':
+    resolution: {integrity: sha512-+0TjwR1eAUdZtvv/ir1mGX+v0tUoR3VEPB8Up0LLJC+whRW0GgBBtpbOkg/a/U4Dxa6l5a3l9AJ1aWIQVyoWJA==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
 
   '@fortawesome/fontawesome-common-types@0.2.36':
@@ -667,9 +663,9 @@ packages:
     resolution: {tarball: https://codeload.github.com/mjt-services/asr-common-2025/tar.gz/54964348b27b2cf51132a587ba936830b025d5f5}
     version: 2025.1.13-1207
 
-  '@mjt-services/daimon-common-2025@https://codeload.github.com/mjt-services/daimon-common-2025/tar.gz/b180f85d0d3dba2c070eb6e2e81a41b4d2199b09':
-    resolution: {tarball: https://codeload.github.com/mjt-services/daimon-common-2025/tar.gz/b180f85d0d3dba2c070eb6e2e81a41b4d2199b09}
-    version: 2025.2.17-1404
+  '@mjt-services/daimon-common-2025@https://codeload.github.com/mjt-services/daimon-common-2025/tar.gz/e92516e2349498547dd9aca754db7a3f658251d5':
+    resolution: {tarball: https://codeload.github.com/mjt-services/daimon-common-2025/tar.gz/e92516e2349498547dd9aca754db7a3f658251d5}
+    version: 2025.2.18-1145
 
   '@mjt-services/data-common-2025@https://codeload.github.com/mjt-services/data-common-2025/tar.gz/53f82ffaf743507412637713aa2a7156a3685ecd':
     resolution: {tarball: https://codeload.github.com/mjt-services/data-common-2025/tar.gz/53f82ffaf743507412637713aa2a7156a3685ecd}
@@ -1709,8 +1705,8 @@ packages:
   flatbuffers@1.12.0:
     resolution: {integrity: sha512-c7CZADjRcl6j0PlvFy0ZqXQ67qSEZfrVPynmnL+2zPc+NtMvrF8Y0QceMo7QqnSPc7+uWjUIAbvCQ5WIKlMVdQ==}
 
-  flatted@3.3.2:
-    resolution: {integrity: sha512-AiwGJM8YcNOaobumgtng+6NHuOqC3A7MixFeDafM3X9cIUM+xUXoS5Vfgf+OihAYe20fxqNM9yPBXJzRtZ/4eA==}
+  flatted@3.3.3:
+    resolution: {integrity: sha512-GX+ysw4PBCz0PzosHDepZGANEuFCMLrnRTiEy9McGjmkCQYwRq4A/X786G/fjM/+OjsWSU1ZrY5qyARZmO/uwg==}
 
   for-each@0.3.5:
     resolution: {integrity: sha512-dKx12eRCVIzqCxFGplyFKJMPvLEWgmNtUrpTiJIR5u97zEhRG8ySrtboPHZXx7daLxQVrl643cTzbab2tkQjxg==}
@@ -3181,10 +3177,6 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@eslint/core@0.10.0':
-    dependencies:
-      '@types/json-schema': 7.0.15
-
   '@eslint/core@0.11.0':
     dependencies:
       '@types/json-schema': 7.0.15
@@ -3207,9 +3199,9 @@ snapshots:
 
   '@eslint/object-schema@2.1.6': {}
 
-  '@eslint/plugin-kit@0.2.5':
+  '@eslint/plugin-kit@0.2.6':
     dependencies:
-      '@eslint/core': 0.10.0
+      '@eslint/core': 0.11.0
       levn: 0.4.1
 
   '@fortawesome/fontawesome-common-types@0.2.36': {}
@@ -3287,7 +3279,7 @@ snapshots:
     dependencies:
       '@mjt-engine/object': https://codeload.github.com/mjt-engine/object/tar.gz/75263a186b55c31764efb3a1bc075285f971946b
 
-  '@mjt-services/daimon-common-2025@https://codeload.github.com/mjt-services/daimon-common-2025/tar.gz/b180f85d0d3dba2c070eb6e2e81a41b4d2199b09(nats.ws@1.29.2)':
+  '@mjt-services/daimon-common-2025@https://codeload.github.com/mjt-services/daimon-common-2025/tar.gz/e92516e2349498547dd9aca754db7a3f658251d5(nats.ws@1.29.2)':
     dependencies:
       '@mjt-services/data-common-2025': https://codeload.github.com/mjt-services/data-common-2025/tar.gz/53f82ffaf743507412637713aa2a7156a3685ecd(nats.ws@1.29.2)
     transitivePeerDependencies:
@@ -4384,7 +4376,7 @@ snapshots:
       '@eslint/core': 0.11.0
       '@eslint/eslintrc': 3.2.0
       '@eslint/js': 9.20.0
-      '@eslint/plugin-kit': 0.2.5
+      '@eslint/plugin-kit': 0.2.6
       '@humanfs/node': 0.16.6
       '@humanwhocodes/module-importer': 1.0.1
       '@humanwhocodes/retry': 0.4.1
@@ -4495,12 +4487,12 @@ snapshots:
 
   flat-cache@4.0.1:
     dependencies:
-      flatted: 3.3.2
+      flatted: 3.3.3
       keyv: 4.5.4
 
   flatbuffers@1.12.0: {}
 
-  flatted@3.3.2: {}
+  flatted@3.3.3: {}
 
   for-each@0.3.5:
     dependencies:

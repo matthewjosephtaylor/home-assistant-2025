@@ -2,57 +2,104 @@ import React, { useState, useEffect } from "react";
 import {
   Box,
   List,
-  ListItem,
+  ListItemButton,
   ListItemIcon,
   ListItemText,
   Divider,
   TextField,
+  IconButton,
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
 } from "@mui/material";
+import AddCircleIcon from "@mui/icons-material/AddCircle";
+import DeleteIcon from "@mui/icons-material/Delete";
+import EditIcon from "@mui/icons-material/Edit";
 
 /**
- * Minimal node structure.
- * - `hasChildren` used to decide if we should recursively render more columns.
+ * Minimal node structure for the tree.
  */
 export type TreeNode = {
   id: string;
   label: string;
   icon?: React.ReactNode;
-  hasChildren?: boolean;
 };
 
 /**
- * A function to load children for a given parentId and optional search query.
- * If `parentId` is undefined, we are at the root.
+ * Our "Tree API" includes all needed CRUD methods.
  */
-export type LoadChildrenFn = (
-  parentId?: string,
-  query?: string
-) => Promise<TreeNode[]>;
+export type TreeApi = {
+  loadChildren: (parentId?: string, query?: string) => Promise<TreeNode[]>;
 
-/**
- * RecursiveNode:
- * - Renders its own search bar (searches only *this* node's children).
- * - Displays the returned children in a List.
- * - For each child that has children, recursively renders another column to the right.
- */
+  addChild: (parentId: string, data: any) => Promise<TreeNode>;
+
+  updateNode: (nodeId: string, data: any) => Promise<TreeNode>;
+
+  removeNode: (nodeId: string) => Promise<void>;
+
+  /**
+   * Return the editor form for adding or updating a node.
+   * This function must accept enough info to know what form to render
+   * and also handle OK/Cancel.
+   *
+   * - parentId is defined for "Add" mode
+   * - nodeId is defined for "Edit" mode
+   */
+  getEditorForm: (options: {
+    parentId?: string;
+    nodeId?: string;
+    mode: "add" | "edit";
+    onCancel: () => void;
+    onOk: (formData: any) => void;
+  }) => React.ReactNode;
+};
+
 export const RecursiveNode: React.FC<{
   parentId?: string;
-  loadChildren: LoadChildrenFn;
-}> = ({ parentId, loadChildren }) => {
-  const [search, setSearch] = useState<string>();
+  treeApi: TreeApi;
+  onOpenEditor: (params: {
+    parentId?: string;
+    nodeId?: string;
+    mode: "add" | "edit";
+  }) => void;
+}> = ({ parentId, treeApi, onOpenEditor }) => {
+  const [search, setSearch] = useState("");
   const [children, setChildren] = useState<TreeNode[]>([]);
+  const [selectedChildId, setSelectedChildId] = useState<string | null>(null);
+  const [hoveredId, setHoveredId] = useState<string | null>(null);
 
-  // Fetch children whenever the parentId or search changes
+  // Load children
   useEffect(() => {
-    loadChildren(parentId, search).then((result) => setChildren(result));
-  }, [parentId, search, loadChildren]);
+    treeApi
+      .loadChildren(parentId, search)
+      .then((result) => {
+        setChildren(result);
+        if (!result.some((n) => n.id === selectedChildId)) {
+          setSelectedChildId(null);
+        }
+      })
+      .catch(() => {
+        setChildren([]);
+      });
+  }, [parentId, search, selectedChildId, treeApi]);
 
-  // If there are no children, don't render anything at this level
   if (!children.length) return null;
+
+  const handleDelete = async (nodeId: string) => {
+    try {
+      await treeApi.removeNode(nodeId);
+      // Force a re-fetch
+      setSearch((prev) => prev);
+    } catch (err) {
+      console.error("Failed to remove node:", err);
+    }
+  };
 
   return (
     <Box display="flex" flexDirection="row" alignItems="flex-start" gap={2}>
-      {/* Left portion: Search bar and list of children */}
+      {/* Left: Search + list */}
       <Box sx={{ minWidth: 240 }}>
         <TextField
           variant="outlined"
@@ -72,47 +119,160 @@ export const RecursiveNode: React.FC<{
         >
           {children.map((child, idx) => (
             <React.Fragment key={child.id}>
-              <ListItem>
+              <ListItemButton
+                selected={selectedChildId === child.id}
+                onClick={() => setSelectedChildId(child.id)}
+                onMouseEnter={() => setHoveredId(child.id)}
+                onMouseLeave={() => setHoveredId(null)}
+              >
                 {child.icon && <ListItemIcon>{child.icon}</ListItemIcon>}
                 <ListItemText primary={child.label} />
-              </ListItem>
+                {hoveredId === child.id && (
+                  <Box display="flex" flexDirection="row" sx={{ ml: 1 }}>
+                    {/* Edit */}
+                    <IconButton
+                      size="small"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        onOpenEditor({ nodeId: child.id, mode: "edit" });
+                      }}
+                    >
+                      <EditIcon fontSize="small" />
+                    </IconButton>
+
+                    {/* Add Child */}
+                    <IconButton
+                      size="small"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        onOpenEditor({ parentId: child.id, mode: "add" });
+                      }}
+                    >
+                      <AddCircleIcon fontSize="small" />
+                    </IconButton>
+
+                    {/* Delete */}
+                    <IconButton
+                      size="small"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleDelete(child.id);
+                      }}
+                    >
+                      <DeleteIcon fontSize="small" />
+                    </IconButton>
+                  </Box>
+                )}
+              </ListItemButton>
               {idx < children.length - 1 && <Divider component="li" />}
             </React.Fragment>
           ))}
         </List>
       </Box>
 
-      {/* Right portion: For each child that hasChildren, recursively render more columns */}
-      {children.map((child) => {
-        if (child.hasChildren) {
-          return (
-            <RecursiveNode
-              key={`${child.id}-children`}
-              parentId={child.id}
-              loadChildren={loadChildren}
-            />
-          );
-        }
-        return null;
-      })}
+      {/* Right: selected node’s children */}
+      {selectedChildId && (
+        <RecursiveNode
+          parentId={selectedChildId}
+          treeApi={treeApi}
+          onOpenEditor={onOpenEditor}
+        />
+      )}
     </Box>
   );
 };
 
-/**
- * TreeView:
- * - Entry point for the entire tree (root).
- * - Just renders a RecursiveNode with no parentId (meaning root).
- */
-export const TreeView: React.FC<{
-  loadChildren: LoadChildrenFn;
-}> = ({ loadChildren }) => {
-  return <RecursiveNode parentId={undefined} loadChildren={loadChildren} />;
-};
+export const TreeView: React.FC<{ treeApi: TreeApi }> = ({ treeApi }) => {
+  // Manage editor state
+  const [editorOpen, setEditorOpen] = useState(false);
+  const [editorMode, setEditorMode] = useState<"add" | "edit">("add");
+  const [editorParentId, setEditorParentId] = useState<string | undefined>();
+  const [editorNodeId, setEditorNodeId] = useState<string | undefined>();
 
-/*
- * Example Usage / Fake Data
- * -------------------------
- * This part is just a simple demonstration of how you might wire
- * up a "loadChildren" function that returns data from some source.
- */
+  /**
+   * Called by RecursiveNode to open the editor
+   */
+  const handleOpenEditor = (params: {
+    parentId?: string;
+    nodeId?: string;
+    mode: "add" | "edit";
+  }) => {
+    setEditorParentId(params.parentId);
+    setEditorNodeId(params.nodeId);
+    setEditorMode(params.mode);
+    setEditorOpen(true);
+  };
+
+  /**
+   * We'll render the editor form from the TreeApi.
+   * We pass it callbacks for cancel/ok (onCancel, onOk).
+   */
+  const editorForm = treeApi.getEditorForm({
+    parentId: editorParentId,
+    nodeId: editorNodeId,
+    mode: editorMode,
+    onCancel: () => setEditorOpen(false),
+    onOk: (formData: any) => {
+      // The form can call addChild / updateNode itself,
+      // or we can do that here depending on your preference.
+      // If it doesn't, do it here:
+      if (editorMode === "add" && editorParentId) {
+        treeApi
+          .addChild(editorParentId, formData)
+          .then(() => setEditorOpen(false));
+      } else if (editorMode === "edit" && editorNodeId) {
+        treeApi
+          .updateNode(editorNodeId, formData)
+          .then(() => setEditorOpen(false));
+      }
+      //
+      // But if you prefer the form to handle its own submission, just close:
+      setEditorOpen(false);
+    },
+  });
+
+  return (
+    <div>
+      <RecursiveNode
+        parentId={undefined}
+        treeApi={treeApi}
+        onOpenEditor={handleOpenEditor}
+      />
+
+      <Dialog
+        open={editorOpen}
+        onClose={() => setEditorOpen(false)}
+        fullWidth
+        maxWidth="sm"
+      >
+        <DialogTitle>
+          {editorMode === "add" ? "Add Child" : "Edit Node"}
+        </DialogTitle>
+        <DialogContent>
+          {/* The dynamic form from treeApi */}
+          {editorForm}
+        </DialogContent>
+        {/* 
+          If your treeApi.getEditorForm() already includes its own Cancel/OK buttons, 
+          you may not need these. 
+        */}
+        <DialogActions>
+          <Button onClick={() => setEditorOpen(false)} color="inherit">
+            Cancel
+          </Button>
+          <Button
+            onClick={() => {
+              // If the form doesn't have its own "OK" button, you might call the onOk callback from here.
+              // For example, if treeApi.getEditorForm(...) returns a ref or some callback:
+              // formRef.current.submit();
+            }}
+            color="primary"
+            variant="contained"
+          >
+            OK
+          </Button>
+        </DialogActions>
+      </Dialog>
+    </div>
+  );
+};
