@@ -7,6 +7,8 @@ import { type TreeApi, type TreeNode } from "../common/tree/Tree";
 import { loadDaimons } from "./loadDaimons";
 import { loadRooms } from "./loadRooms";
 
+let activeNoteParentId: string | undefined = undefined;
+
 export const rootTreeApi: TreeApi = {
   loadChildren: async (parentId, query) => {
     if (parentId === "daimons") {
@@ -52,13 +54,35 @@ export const rootTreeApi: TreeApi = {
     console.log("resp", resp);
     return { id: resp, label: data.label };
   },
-  removeNode: function (nodeId: string): Promise<void> {
-    throw new Error("Function not implemented.");
+  removeNode: async function (nodeId: string): Promise<void> {
+    Datas.remove(await getConnection())({
+      objectStore: ROOM_OBJECT_STORE,
+      query: nodeId,
+    });
   },
 
   updateNode: function (nodeId: string, data: any): Promise<TreeNode> {
     throw new Error("Function not implemented.");
   },
+  // Handle the currently active note:
+  getActiveNoteParentId: () => activeNoteParentId,
+  setActiveNoteParentId: (pid) => {
+    activeNoteParentId = pid;
+    console.log("activeNoteParentId", activeNoteParentId);
+    // If you want to trigger a re-render in your app, put this in React state,
+    // or if you are using an external store, update it there.
+  },
+
+  // Render note content for each parentId (a React component):
+  renderNoteContent: (parentId) => (
+    <div style={{ fontStyle: "italic", width: "100%" }}>
+      {/* Example: show dynamic text or a text field */}
+      This is the note area for <b>{parentId}</b>.
+      <br />
+      {/* Could add your own text input, rich editor, etc. */}
+    </div>
+  ),
+
   getEditorForm: ({ parentId, nodeId, mode, onCancel, onOk }) => {
     // If editing, fetch the node details (e.g., from your data store).
     // If adding, use a default form.

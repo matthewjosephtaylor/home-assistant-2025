@@ -31,13 +31,16 @@ importers:
         version: https://codeload.github.com/mjt-engine/idb/tar.gz/a3e4630b47e06ed3c3b744e25177cf96e8061c90
       '@mjt-engine/message':
         specifier: github:mjt-engine/message
-        version: https://codeload.github.com/mjt-engine/message/tar.gz/ad114d4e2fa7ba8d4ed184057094f0f9bb17932a(nats.ws@1.29.2)
+        version: https://codeload.github.com/mjt-engine/message/tar.gz/9f451ce857972b2960d5aed678d3bd48065e62a8(nats.ws@1.29.2)
+      '@mjt-engine/object':
+        specifier: github:mjt-engine/object
+        version: https://codeload.github.com/mjt-engine/object/tar.gz/75263a186b55c31764efb3a1bc075285f971946b
       '@mjt-services/asr-common-2025':
         specifier: github:mjt-services/asr-common-2025
         version: https://codeload.github.com/mjt-services/asr-common-2025/tar.gz/54964348b27b2cf51132a587ba936830b025d5f5
       '@mjt-services/daimon-common-2025':
         specifier: github:mjt-services/daimon-common-2025
-        version: https://codeload.github.com/mjt-services/daimon-common-2025/tar.gz/e92516e2349498547dd9aca754db7a3f658251d5(nats.ws@1.29.2)
+        version: https://codeload.github.com/mjt-services/daimon-common-2025/tar.gz/0c8c23dc9a396878169b413880f961cec2a52094(nats.ws@1.29.2)
       '@mjt-services/data-common-2025':
         specifier: github:mjt-services/data-common-2025
         version: https://codeload.github.com/mjt-services/data-common-2025/tar.gz/53f82ffaf743507412637713aa2a7156a3685ecd(nats.ws@1.29.2)
@@ -51,11 +54,11 @@ importers:
         specifier: github:matthewjosephtaylor/vad-2025
         version: https://codeload.github.com/matthewjosephtaylor/vad-2025/tar.gz/8d930278bf9005524b278c99532fd3aac549114e(@types/node@22.13.4)(@types/react@19.0.10)(react-dom@19.0.0(react@19.0.0))(react-router-dom@6.28.1(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(react@19.0.0)(rollup@4.34.8)(sass-embedded@1.85.0)(typescript@5.7.3)
       '@mui/icons-material':
-        specifier: ^6.4.4
-        version: 6.4.4(@mui/material@6.4.4(@emotion/react@11.14.0(@types/react@19.0.10)(react@19.0.0))(@emotion/styled@11.14.0(@emotion/react@11.14.0(@types/react@19.0.10)(react@19.0.0))(@types/react@19.0.10)(react@19.0.0))(@types/react@19.0.10)(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(@types/react@19.0.10)(react@19.0.0)
+        specifier: ^6.4.5
+        version: 6.4.5(@mui/material@6.4.5(@emotion/react@11.14.0(@types/react@19.0.10)(react@19.0.0))(@emotion/styled@11.14.0(@emotion/react@11.14.0(@types/react@19.0.10)(react@19.0.0))(@types/react@19.0.10)(react@19.0.0))(@types/react@19.0.10)(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(@types/react@19.0.10)(react@19.0.0)
       '@mui/material':
-        specifier: ^6.4.4
-        version: 6.4.4(@emotion/react@11.14.0(@types/react@19.0.10)(react@19.0.0))(@emotion/styled@11.14.0(@emotion/react@11.14.0(@types/react@19.0.10)(react@19.0.0))(@types/react@19.0.10)(react@19.0.0))(@types/react@19.0.10)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
+        specifier: ^6.4.5
+        version: 6.4.5(@emotion/react@11.14.0(@types/react@19.0.10)(react@19.0.0))(@emotion/styled@11.14.0(@emotion/react@11.14.0(@types/react@19.0.10)(react@19.0.0))(@types/react@19.0.10)(react@19.0.0))(@types/react@19.0.10)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       '@mui/system':
         specifier: ^6.4.3
         version: 6.4.3(@emotion/react@11.14.0(@types/react@19.0.10)(react@19.0.0))(@emotion/styled@11.14.0(@emotion/react@11.14.0(@types/react@19.0.10)(react@19.0.0))(@types/react@19.0.10)(react@19.0.0))(@types/react@19.0.10)(react@19.0.0)
@@ -93,8 +96,8 @@ importers:
         specifier: ^5.7.2
         version: 5.7.3
       vite:
-        specifier: ^6.1.0
-        version: 6.1.0(@types/node@22.13.4)(sass-embedded@1.85.0)
+        specifier: ^6.1.1
+        version: 6.1.1(@types/node@22.13.4)(sass-embedded@1.85.0)
       zustand:
         specifier: ^5.0.3
         version: 5.0.3(@types/react@19.0.10)(immer@10.1.1)(react@19.0.0)
@@ -615,8 +618,8 @@ packages:
     resolution: {integrity: sha512-JBxkERygn7Bv/GbN5Rv8Ul6LVknS+5Bp6RgDC/O8gEBU/yeH5Ui5C/OlWrTb6qct7LjjfT6Re2NxB0ln0yYybA==}
     engines: {node: '>=18.18'}
 
-  '@humanwhocodes/retry@0.4.1':
-    resolution: {integrity: sha512-c7hNEllBlenFTHBky65mhq8WD2kbN9Q6gk0bTk8lSBvc554jpXSkST1iePudpt7+A/AQvuHs9EMqjHDXMY1lrA==}
+  '@humanwhocodes/retry@0.4.2':
+    resolution: {integrity: sha512-xeO57FpIu4p1Ri3Jq/EXq4ClRm86dVF2z/+kvFnyqVYRavTZmaFaUBbWCOuuTh0o/g7DSsk6kc2vrS4Vl5oPOQ==}
     engines: {node: '>=18.18'}
 
   '@jridgewell/gen-mapping@0.3.8':
@@ -649,9 +652,9 @@ packages:
     resolution: {tarball: https://codeload.github.com/mjt-engine/idb/tar.gz/a3e4630b47e06ed3c3b744e25177cf96e8061c90}
     version: 2025.1.19-1221
 
-  '@mjt-engine/message@https://codeload.github.com/mjt-engine/message/tar.gz/ad114d4e2fa7ba8d4ed184057094f0f9bb17932a':
-    resolution: {tarball: https://codeload.github.com/mjt-engine/message/tar.gz/ad114d4e2fa7ba8d4ed184057094f0f9bb17932a}
-    version: 2025.2.16-1001
+  '@mjt-engine/message@https://codeload.github.com/mjt-engine/message/tar.gz/9f451ce857972b2960d5aed678d3bd48065e62a8':
+    resolution: {tarball: https://codeload.github.com/mjt-engine/message/tar.gz/9f451ce857972b2960d5aed678d3bd48065e62a8}
+    version: 2025.2.18-1214
     peerDependencies:
       nats.ws: ^1.27.0
 
@@ -663,9 +666,9 @@ packages:
     resolution: {tarball: https://codeload.github.com/mjt-services/asr-common-2025/tar.gz/54964348b27b2cf51132a587ba936830b025d5f5}
     version: 2025.1.13-1207
 
-  '@mjt-services/daimon-common-2025@https://codeload.github.com/mjt-services/daimon-common-2025/tar.gz/e92516e2349498547dd9aca754db7a3f658251d5':
-    resolution: {tarball: https://codeload.github.com/mjt-services/daimon-common-2025/tar.gz/e92516e2349498547dd9aca754db7a3f658251d5}
-    version: 2025.2.18-1145
+  '@mjt-services/daimon-common-2025@https://codeload.github.com/mjt-services/daimon-common-2025/tar.gz/0c8c23dc9a396878169b413880f961cec2a52094':
+    resolution: {tarball: https://codeload.github.com/mjt-services/daimon-common-2025/tar.gz/0c8c23dc9a396878169b413880f961cec2a52094}
+    version: 2025.2.19-1228
 
   '@mjt-services/data-common-2025@https://codeload.github.com/mjt-services/data-common-2025/tar.gz/53f82ffaf743507412637713aa2a7156a3685ecd':
     resolution: {tarball: https://codeload.github.com/mjt-services/data-common-2025/tar.gz/53f82ffaf743507412637713aa2a7156a3685ecd}
@@ -750,22 +753,22 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@mui/core-downloads-tracker@6.4.4':
-    resolution: {integrity: sha512-r+J0EditrekkTtO2CnCBCOGpNaDYwJqz8lH4rj6o/anDcskZFJodBlG8aCJkS8DL/CF/9EHS+Gz53EbmYEnQbw==}
+  '@mui/core-downloads-tracker@6.4.5':
+    resolution: {integrity: sha512-zoXvHU1YuoodgMlPS+epP084Pqv9V+Vg+5IGv9n/7IIFVQ2nkTngYHYxElCq8pdTTbDcgji+nNh0lxri2abWgA==}
 
-  '@mui/icons-material@6.4.4':
-    resolution: {integrity: sha512-uF1chGaoFmYdRUomK6f8kgJfWosk9A3HXWiVD0vQm+2mE7f25eTQ1E8RRO11LXpnUBqu8Rbv/uGlpnjT/u1Ksg==}
+  '@mui/icons-material@6.4.5':
+    resolution: {integrity: sha512-4A//t8Nrc+4u4pbVhGarIFU98zpuB5AV9hTNzgXx1ySZJ1tWtx+i/1SbQ8PtGJxWeXlljhwimZJNPQ3x0CiIFw==}
     engines: {node: '>=14.0.0'}
     peerDependencies:
-      '@mui/material': ^6.4.4
+      '@mui/material': ^6.4.5
       '@types/react': ^17.0.0 || ^18.0.0 || ^19.0.0
       react: ^17.0.0 || ^18.0.0 || ^19.0.0
     peerDependenciesMeta:
       '@types/react':
         optional: true
 
-  '@mui/material@6.4.4':
-    resolution: {integrity: sha512-ISVPrIsPQsxnwvS40C4u03AuNSPigFeS2+n1qpuEZ94hDsdMi19dQM2JcC9CHEhXecSIQjP1RTyY0mPiSpSrFQ==}
+  '@mui/material@6.4.5':
+    resolution: {integrity: sha512-5eyEgSXocIeV1JkXs8mYyJXU0aFyXZIWI5kq2g/mCnIgJe594lkOBNAKnCIaGVfQTu2T6TTEHF8/hHIqpiIRGA==}
     engines: {node: '>=14.0.0'}
     peerDependencies:
       '@emotion/react': ^11.5.0
@@ -2244,8 +2247,8 @@ packages:
     resolution: {integrity: sha512-/+5VFTchJDoVj3bhoqi6UeymcD00DAwb1nJwamzPvHEszJ4FpF6SNNbUbOS8yI56qHzdV8eK0qEfOSiodkTdxg==}
     engines: {node: '>= 0.4'}
 
-  postcss@8.5.2:
-    resolution: {integrity: sha512-MjOadfU3Ys9KYoX0AdkBlFEF1Vx37uCCeN4ZHnmwm9FfpbsGWMZeBLMmmpY+6Ocqod7mkdZ0DT31OlbsFrLlkA==}
+  postcss@8.5.3:
+    resolution: {integrity: sha512-dle9A3yYxlBSrt8Fu+IpjGT8SY8hN0mlaA6GY8t0P5PjIOZemULz/E2Bnm/2dcUOena75OTNkHI76uZBNUUq3A==}
     engines: {node: ^10 || ^12 || >=14}
 
   prelude-ls@1.2.1:
@@ -2742,8 +2745,8 @@ packages:
       terser:
         optional: true
 
-  vite@6.1.0:
-    resolution: {integrity: sha512-RjjMipCKVoR4hVfPY6GQTgveinjNuyLw+qruksLDvA5ktI1150VmcMBKmQaEWJhg/j6Uaf6dNCNA0AfdzUb/hQ==}
+  vite@6.1.1:
+    resolution: {integrity: sha512-4GgM54XrwRfrOp297aIYspIti66k56v16ZnqHvrIM7mG+HjDlAwS7p+Srr7J6fGvEdOJ5JcQ/D9T7HhtdXDTzA==}
     engines: {node: ^18.0.0 || ^20.0.0 || >=22.0.0}
     hasBin: true
     peerDependencies:
@@ -3233,7 +3236,7 @@ snapshots:
 
   '@humanwhocodes/retry@0.3.1': {}
 
-  '@humanwhocodes/retry@0.4.1': {}
+  '@humanwhocodes/retry@0.4.2': {}
 
   '@jridgewell/gen-mapping@0.3.8':
     dependencies:
@@ -3264,7 +3267,7 @@ snapshots:
       '@mjt-engine/byte': https://codeload.github.com/mjt-engine/byte/tar.gz/472e6b25258a1d694808e214d3a41e07f7d8504f
       '@mjt-engine/object': https://codeload.github.com/mjt-engine/object/tar.gz/75263a186b55c31764efb3a1bc075285f971946b
 
-  '@mjt-engine/message@https://codeload.github.com/mjt-engine/message/tar.gz/ad114d4e2fa7ba8d4ed184057094f0f9bb17932a(nats.ws@1.29.2)':
+  '@mjt-engine/message@https://codeload.github.com/mjt-engine/message/tar.gz/9f451ce857972b2960d5aed678d3bd48065e62a8(nats.ws@1.29.2)':
     dependencies:
       '@mjt-engine/byte': https://codeload.github.com/mjt-engine/byte/tar.gz/472e6b25258a1d694808e214d3a41e07f7d8504f
       '@mjt-engine/object': https://codeload.github.com/mjt-engine/object/tar.gz/75263a186b55c31764efb3a1bc075285f971946b
@@ -3279,7 +3282,7 @@ snapshots:
     dependencies:
       '@mjt-engine/object': https://codeload.github.com/mjt-engine/object/tar.gz/75263a186b55c31764efb3a1bc075285f971946b
 
-  '@mjt-services/daimon-common-2025@https://codeload.github.com/mjt-services/daimon-common-2025/tar.gz/e92516e2349498547dd9aca754db7a3f658251d5(nats.ws@1.29.2)':
+  '@mjt-services/daimon-common-2025@https://codeload.github.com/mjt-services/daimon-common-2025/tar.gz/0c8c23dc9a396878169b413880f961cec2a52094(nats.ws@1.29.2)':
     dependencies:
       '@mjt-services/data-common-2025': https://codeload.github.com/mjt-services/data-common-2025/tar.gz/53f82ffaf743507412637713aa2a7156a3685ecd(nats.ws@1.29.2)
     transitivePeerDependencies:
@@ -3287,7 +3290,7 @@ snapshots:
 
   '@mjt-services/data-common-2025@https://codeload.github.com/mjt-services/data-common-2025/tar.gz/53f82ffaf743507412637713aa2a7156a3685ecd(nats.ws@1.29.2)':
     dependencies:
-      '@mjt-engine/message': https://codeload.github.com/mjt-engine/message/tar.gz/ad114d4e2fa7ba8d4ed184057094f0f9bb17932a(nats.ws@1.29.2)
+      '@mjt-engine/message': https://codeload.github.com/mjt-engine/message/tar.gz/9f451ce857972b2960d5aed678d3bd48065e62a8(nats.ws@1.29.2)
     transitivePeerDependencies:
       - nats.ws
 
@@ -3302,7 +3305,7 @@ snapshots:
       '@emotion/react': 11.14.0(@types/react@19.0.10)(react@19.0.0)
       '@emotion/styled': 11.14.0(@emotion/react@11.14.0(@types/react@19.0.10)(react@19.0.0))(@types/react@19.0.10)(react@19.0.0)
       '@mjtdev/engine': https://codeload.github.com/matthewjosephtaylor/mjtdev-engine/tar.gz/bfee937b329f6b09376bbee52cf1875cbf17e7c0(nats.ws@1.29.2)
-      '@mui/material': 6.4.4(@emotion/react@11.14.0(@types/react@19.0.10)(react@19.0.0))(@emotion/styled@11.14.0(@emotion/react@11.14.0(@types/react@19.0.10)(react@19.0.0))(@types/react@19.0.10)(react@19.0.0))(@types/react@19.0.10)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
+      '@mui/material': 6.4.5(@emotion/react@11.14.0(@types/react@19.0.10)(react@19.0.0))(@emotion/styled@11.14.0(@emotion/react@11.14.0(@types/react@19.0.10)(react@19.0.0))(@types/react@19.0.10)(react@19.0.0))(@types/react@19.0.10)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       '@mui/system': 6.4.3(@emotion/react@11.14.0(@types/react@19.0.10)(react@19.0.0))(@emotion/styled@11.14.0(@emotion/react@11.14.0(@types/react@19.0.10)(react@19.0.0))(@types/react@19.0.10)(react@19.0.0))(@types/react@19.0.10)(react@19.0.0)
       '@pixiv/three-vrm': 3.3.4(three@0.169.0)
       babylon-vrm-loader: 2.0.0(@babylonjs/core@7.49.0)(@babylonjs/loaders@7.49.0(@babylonjs/core@7.49.0)(babylonjs-gltf2interface@7.42.0))
@@ -3343,7 +3346,7 @@ snapshots:
     dependencies:
       '@emotion/react': 11.14.0(@types/react@19.0.10)(react@19.0.0)
       '@emotion/styled': 11.14.0(@emotion/react@11.14.0(@types/react@19.0.10)(react@19.0.0))(@types/react@19.0.10)(react@19.0.0)
-      '@mui/material': 6.4.4(@emotion/react@11.14.0(@types/react@19.0.10)(react@19.0.0))(@emotion/styled@11.14.0(@emotion/react@11.14.0(@types/react@19.0.10)(react@19.0.0))(@types/react@19.0.10)(react@19.0.0))(@types/react@19.0.10)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
+      '@mui/material': 6.4.5(@emotion/react@11.14.0(@types/react@19.0.10)(react@19.0.0))(@emotion/styled@11.14.0(@emotion/react@11.14.0(@types/react@19.0.10)(react@19.0.0))(@types/react@19.0.10)(react@19.0.0))(@types/react@19.0.10)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       '@mui/system': 6.4.3(@emotion/react@11.14.0(@types/react@19.0.10)(react@19.0.0))(@emotion/styled@11.14.0(@emotion/react@11.14.0(@types/react@19.0.10)(react@19.0.0))(@types/react@19.0.10)(react@19.0.0))(@types/react@19.0.10)(react@19.0.0)
       '@ricky0123/vad-web': 0.0.22
       immer: 10.1.1
@@ -3352,7 +3355,7 @@ snapshots:
       react-dom: 19.0.0(react@19.0.0)
       react-router-dom: 6.28.1(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       typescript: 5.7.3
-      vite: 6.1.0(@types/node@22.13.4)(sass-embedded@1.85.0)
+      vite: 6.1.1(@types/node@22.13.4)(sass-embedded@1.85.0)
       zustand: 5.0.3(@types/react@19.0.10)(immer@10.1.1)(react@19.0.0)
     transitivePeerDependencies:
       - '@mui/material-pigment-css'
@@ -3390,20 +3393,20 @@ snapshots:
   '@msgpackr-extract/msgpackr-extract-win32-x64@3.0.3':
     optional: true
 
-  '@mui/core-downloads-tracker@6.4.4': {}
+  '@mui/core-downloads-tracker@6.4.5': {}
 
-  '@mui/icons-material@6.4.4(@mui/material@6.4.4(@emotion/react@11.14.0(@types/react@19.0.10)(react@19.0.0))(@emotion/styled@11.14.0(@emotion/react@11.14.0(@types/react@19.0.10)(react@19.0.0))(@types/react@19.0.10)(react@19.0.0))(@types/react@19.0.10)(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(@types/react@19.0.10)(react@19.0.0)':
+  '@mui/icons-material@6.4.5(@mui/material@6.4.5(@emotion/react@11.14.0(@types/react@19.0.10)(react@19.0.0))(@emotion/styled@11.14.0(@emotion/react@11.14.0(@types/react@19.0.10)(react@19.0.0))(@types/react@19.0.10)(react@19.0.0))(@types/react@19.0.10)(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(@types/react@19.0.10)(react@19.0.0)':
     dependencies:
       '@babel/runtime': 7.26.9
-      '@mui/material': 6.4.4(@emotion/react@11.14.0(@types/react@19.0.10)(react@19.0.0))(@emotion/styled@11.14.0(@emotion/react@11.14.0(@types/react@19.0.10)(react@19.0.0))(@types/react@19.0.10)(react@19.0.0))(@types/react@19.0.10)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
+      '@mui/material': 6.4.5(@emotion/react@11.14.0(@types/react@19.0.10)(react@19.0.0))(@emotion/styled@11.14.0(@emotion/react@11.14.0(@types/react@19.0.10)(react@19.0.0))(@types/react@19.0.10)(react@19.0.0))(@types/react@19.0.10)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       react: 19.0.0
     optionalDependencies:
       '@types/react': 19.0.10
 
-  '@mui/material@6.4.4(@emotion/react@11.14.0(@types/react@19.0.10)(react@19.0.0))(@emotion/styled@11.14.0(@emotion/react@11.14.0(@types/react@19.0.10)(react@19.0.0))(@types/react@19.0.10)(react@19.0.0))(@types/react@19.0.10)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)':
+  '@mui/material@6.4.5(@emotion/react@11.14.0(@types/react@19.0.10)(react@19.0.0))(@emotion/styled@11.14.0(@emotion/react@11.14.0(@types/react@19.0.10)(react@19.0.0))(@types/react@19.0.10)(react@19.0.0))(@types/react@19.0.10)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)':
     dependencies:
       '@babel/runtime': 7.26.9
-      '@mui/core-downloads-tracker': 6.4.4
+      '@mui/core-downloads-tracker': 6.4.5
       '@mui/system': 6.4.3(@emotion/react@11.14.0(@types/react@19.0.10)(react@19.0.0))(@emotion/styled@11.14.0(@emotion/react@11.14.0(@types/react@19.0.10)(react@19.0.0))(@types/react@19.0.10)(react@19.0.0))(@types/react@19.0.10)(react@19.0.0)
       '@mui/types': 7.2.21(@types/react@19.0.10)
       '@mui/utils': 6.4.3(@types/react@19.0.10)(react@19.0.0)
@@ -4379,7 +4382,7 @@ snapshots:
       '@eslint/plugin-kit': 0.2.6
       '@humanfs/node': 0.16.6
       '@humanwhocodes/module-importer': 1.0.1
-      '@humanwhocodes/retry': 0.4.1
+      '@humanwhocodes/retry': 0.4.2
       '@types/estree': 1.0.6
       '@types/json-schema': 7.0.15
       ajv: 6.12.6
@@ -5053,7 +5056,7 @@ snapshots:
 
   possible-typed-array-names@1.1.0: {}
 
-  postcss@8.5.2:
+  postcss@8.5.3:
     dependencies:
       nanoid: 3.3.8
       picocolors: 1.1.1
@@ -5580,17 +5583,17 @@ snapshots:
   vite@5.4.14(@types/node@22.13.4)(sass-embedded@1.85.0):
     dependencies:
       esbuild: 0.21.5
-      postcss: 8.5.2
+      postcss: 8.5.3
       rollup: 4.34.8
     optionalDependencies:
       '@types/node': 22.13.4
       fsevents: 2.3.3
       sass-embedded: 1.85.0
 
-  vite@6.1.0(@types/node@22.13.4)(sass-embedded@1.85.0):
+  vite@6.1.1(@types/node@22.13.4)(sass-embedded@1.85.0):
     dependencies:
       esbuild: 0.24.2
-      postcss: 8.5.2
+      postcss: 8.5.3
       rollup: 4.34.8
     optionalDependencies:
       '@types/node': 22.13.4

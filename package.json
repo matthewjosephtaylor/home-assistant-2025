@@ -37,14 +37,15 @@
     "@mjt-engine/byte": "github:mjt-engine/byte",
     "@mjt-engine/idb": "github:mjt-engine/idb",
     "@mjt-engine/message": "github:mjt-engine/message",
+    "@mjt-engine/object": "github:mjt-engine/object",
     "@mjt-services/asr-common-2025": "github:mjt-services/asr-common-2025",
     "@mjt-services/daimon-common-2025": "github:mjt-services/daimon-common-2025",
     "@mjt-services/data-common-2025": "github:mjt-services/data-common-2025",
     "@mjt-services/textgen-common-2025": "github:mjt-services/textgen-common-2025",
     "@mjtdev/avatar-3d": "github:matthewjosephtaylor/avatar-3d",
     "@mjtdev/vad-2025": "github:matthewjosephtaylor/vad-2025",
-    "@mui/icons-material": "^6.4.4",
-    "@mui/material": "^6.4.4",
+    "@mui/icons-material": "^6.4.5",
+    "@mui/material": "^6.4.5",
     "@mui/system": "^6.4.3",
     "@types/react": "^19.0.10",
     "@types/react-dom": "^19.0.4",
@@ -56,7 +57,7 @@
     "qrcode": "^1.5.4",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "vite": "^6.1.0",
+    "vite": "^6.1.1",
     "zustand": "^5.0.3"
   }
 }

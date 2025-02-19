@@ -28,24 +28,34 @@ export type TreeNode = {
 };
 
 /**
- * Our "Tree API" includes all needed CRUD methods.
+ * Our "Tree API" includes all the needed CRUD methods
+ * plus special methods for notes.
  */
 export type TreeApi = {
+  /**
+   * Load the child nodes of a given parent.
+   */
   loadChildren: (parentId?: string, query?: string) => Promise<TreeNode[]>;
 
+  /**
+   * Add a child under a given parent.
+   */
   addChild: (parentId: string, data: any) => Promise<TreeNode>;
 
+  /**
+   * Update a node by ID.
+   */
   updateNode: (nodeId: string, data: any) => Promise<TreeNode>;
 
+  /**
+   * Remove a node by ID.
+   */
   removeNode: (nodeId: string) => Promise<void>;
 
   /**
    * Return the editor form for adding or updating a node.
    * This function must accept enough info to know what form to render
    * and also handle OK/Cancel.
-   *
-   * - parentId is defined for "Add" mode
-   * - nodeId is defined for "Edit" mode
    */
   getEditorForm: (options: {
     parentId?: string;
@@ -54,8 +64,29 @@ export type TreeApi = {
     onCancel: () => void;
     onOk: (formData: any) => void;
   }) => React.ReactNode;
+
+  /**
+   * Which note (by parentId) is currently selected / active?
+   */
+  getActiveNoteParentId: () => string | undefined;
+
+  /**
+   * Set which note (by parentId) is currently selected / active.
+   */
+  setActiveNoteParentId: (pid?: string) => void;
+
+  /**
+   * Render the note’s content for a particular parentId.
+   * This is a React component you provide (could be a text field, etc.).
+   */
+  renderNoteContent: (parentId?: string) => React.ReactNode;
 };
 
+/**
+ * A RecursiveNode that lists:
+ * 1) Its children
+ * 2) At the very bottom, the custom "note" area
+ */
 export const RecursiveNode: React.FC<{
   parentId?: string;
   treeApi: TreeApi;
@@ -65,41 +96,51 @@ export const RecursiveNode: React.FC<{
     mode: "add" | "edit";
   }) => void;
 }> = ({ parentId, treeApi, onOpenEditor }) => {
+  // A fallback for top-level
+  const currentParentId = parentId ?? "root";
+
   const [search, setSearch] = useState("");
   const [children, setChildren] = useState<TreeNode[]>([]);
   const [selectedChildId, setSelectedChildId] = useState<string | null>(null);
   const [hoveredId, setHoveredId] = useState<string | null>(null);
 
-  // Load children
+  // Load children whenever parentId or search changes
   useEffect(() => {
     treeApi
       .loadChildren(parentId, search)
       .then((result) => {
         setChildren(result);
-        if (!result.some((n) => n.id === selectedChildId)) {
+        // If a previously selected child no longer exists, clear it
+        if (selectedChildId && !result.some((n) => n.id === selectedChildId)) {
           setSelectedChildId(null);
         }
       })
       .catch(() => {
         setChildren([]);
       });
-  }, [parentId, search, selectedChildId, treeApi]);
+  }, [parentId, search, treeApi]);
 
-  if (!children.length) return null;
-
+  // Handle node deletion
   const handleDelete = async (nodeId: string) => {
     try {
       await treeApi.removeNode(nodeId);
-      // Force a re-fetch
-      setSearch((prev) => prev);
+      // Force a refresh by nudging search
+      setSearch((prev) => prev + " ");
     } catch (err) {
       console.error("Failed to remove node:", err);
     }
   };
 
+  const handleSelectNote = () => {
+    treeApi.setActiveNoteParentId(currentParentId);
+  };
+
+  // Check if this node's note is currently selected
+  const isNoteSelected = treeApi.getActiveNoteParentId() === currentParentId;
+
   return (
     <Box display="flex" flexDirection="row" alignItems="flex-start" gap={2}>
-      {/* Left: Search + list */}
+      {/* Left side: Search + list */}
       <Box sx={{ minWidth: 240 }}>
         <TextField
           variant="outlined"
@@ -139,7 +180,6 @@ export const RecursiveNode: React.FC<{
                     >
                       <EditIcon fontSize="small" />
                     </IconButton>
-
                     {/* Add Child */}
                     <IconButton
                       size="small"
@@ -150,7 +190,6 @@ export const RecursiveNode: React.FC<{
                     >
                       <AddCircleIcon fontSize="small" />
                     </IconButton>
-
                     {/* Delete */}
                     <IconButton
                       size="small"
@@ -167,10 +206,25 @@ export const RecursiveNode: React.FC<{
               {idx < children.length - 1 && <Divider component="li" />}
             </React.Fragment>
           ))}
+
+          {/* Divider before note if there are any children */}
+          {children.length > 0 && <Divider component="li" />}
+
+          {/* The note item at the bottom */}
+          <ListItemButton
+            selected={isNoteSelected}
+            onClick={handleSelectNote}
+            onMouseEnter={() => setHoveredId("NOTE-" + currentParentId)}
+            onMouseLeave={() => setHoveredId(null)}
+          >
+            <ListItemText
+              primary={treeApi.renderNoteContent(currentParentId)}
+            />
+          </ListItemButton>
         </List>
       </Box>
 
-      {/* Right: selected node’s children */}
+      {/* Right side: if a real child is selected, show its children */}
       {selectedChildId && (
         <RecursiveNode
           parentId={selectedChildId}
@@ -182,16 +236,18 @@ export const RecursiveNode: React.FC<{
   );
 };
 
+/**
+ * The main TreeView component holds the top-level RecursiveNode and
+ * the editor dialog. We rely on treeApi.getActiveNoteParentId() / .setActiveNoteParentId().
+ */
 export const TreeView: React.FC<{ treeApi: TreeApi }> = ({ treeApi }) => {
-  // Manage editor state
+  // Editor dialog state
   const [editorOpen, setEditorOpen] = useState(false);
   const [editorMode, setEditorMode] = useState<"add" | "edit">("add");
   const [editorParentId, setEditorParentId] = useState<string | undefined>();
   const [editorNodeId, setEditorNodeId] = useState<string | undefined>();
 
-  /**
-   * Called by RecursiveNode to open the editor
-   */
+  // Called by RecursiveNode to open the editor
   const handleOpenEditor = (params: {
     parentId?: string;
     nodeId?: string;
@@ -203,42 +259,30 @@ export const TreeView: React.FC<{ treeApi: TreeApi }> = ({ treeApi }) => {
     setEditorOpen(true);
   };
 
-  /**
-   * We'll render the editor form from the TreeApi.
-   * We pass it callbacks for cancel/ok (onCancel, onOk).
-   */
+  // Get the form from the TreeApi
   const editorForm = treeApi.getEditorForm({
     parentId: editorParentId,
     nodeId: editorNodeId,
     mode: editorMode,
     onCancel: () => setEditorOpen(false),
     onOk: (formData: any) => {
-      // The form can call addChild / updateNode itself,
-      // or we can do that here depending on your preference.
-      // If it doesn't, do it here:
+      // By default, let's handle add/update here
       if (editorMode === "add" && editorParentId) {
-        treeApi
-          .addChild(editorParentId, formData)
-          .then(() => setEditorOpen(false));
+        treeApi.addChild(editorParentId, formData).then(() => setEditorOpen(false));
       } else if (editorMode === "edit" && editorNodeId) {
-        treeApi
-          .updateNode(editorNodeId, formData)
-          .then(() => setEditorOpen(false));
+        treeApi.updateNode(editorNodeId, formData).then(() => setEditorOpen(false));
       }
-      //
-      // But if you prefer the form to handle its own submission, just close:
+      // Close
       setEditorOpen(false);
     },
   });
 
   return (
     <div>
-      <RecursiveNode
-        parentId={undefined}
-        treeApi={treeApi}
-        onOpenEditor={handleOpenEditor}
-      />
+      {/* Top-level RecursiveNode (no parentId => 'root') */}
+      <RecursiveNode parentId={undefined} treeApi={treeApi} onOpenEditor={handleOpenEditor} />
 
+      {/* Editor dialog */}
       <Dialog
         open={editorOpen}
         onClose={() => setEditorOpen(false)}
@@ -248,23 +292,15 @@ export const TreeView: React.FC<{ treeApi: TreeApi }> = ({ treeApi }) => {
         <DialogTitle>
           {editorMode === "add" ? "Add Child" : "Edit Node"}
         </DialogTitle>
-        <DialogContent>
-          {/* The dynamic form from treeApi */}
-          {editorForm}
-        </DialogContent>
-        {/* 
-          If your treeApi.getEditorForm() already includes its own Cancel/OK buttons, 
-          you may not need these. 
-        */}
+        <DialogContent>{editorForm}</DialogContent>
         <DialogActions>
           <Button onClick={() => setEditorOpen(false)} color="inherit">
             Cancel
           </Button>
           <Button
             onClick={() => {
-              // If the form doesn't have its own "OK" button, you might call the onOk callback from here.
-              // For example, if treeApi.getEditorForm(...) returns a ref or some callback:
-              // formRef.current.submit();
+              // If your form doesn't have its own "OK" button,
+              // call the onOk callback or handle submission here.
             }}
             color="primary"
             variant="contained"
