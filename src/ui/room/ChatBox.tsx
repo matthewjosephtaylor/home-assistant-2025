@@ -16,15 +16,6 @@ export const ChatBox = () => {
       <ChatContainer>
         <MessageList>
           <MessageList />
-          <Message
-            model={{
-              message: "Hello Joe",
-              sentTime: "just now",
-
-              direction: "incoming",
-              position: "normal",
-            }}
-          />
         </MessageList>
         <MessageInput
           placeholder="Type message here"
