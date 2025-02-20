@@ -7,41 +7,62 @@ import {
 } from "@mjt-services/textgen-common-2025";
 import { AppConfig } from "./AppConfig";
 import type { AsrConnectionMap } from "@mjt-services/asr-common-2025";
+import { ChatLang } from "./chatlang/ChatLang";
+import { parseProgram } from "./chatlang/parseProgram";
+import { evaluateProgram } from "./chatlang/evaluateProgram";
+import { SimpleEvaluator } from "./chatlang/SimpleEvaluator";
 
 export const play = async () => {
   try {
-    await playAsr();
+    await playChat();
   } catch (error) {
     console.error(error);
   }
 };
 
-export const playAsr = async () => {
-  const config = await Idbs.get(AppConfig, "config");
-  const con = await Messages.createConnection<AsrConnectionMap>({
-    server: "wss://mq.daimix.com",
-    options: { log: console.log },
-    token: config?.authToken,
-  });
-  console.log("con", con);
-  const audio = await fetch("./female5.wav").then((r) => r.arrayBuffer());
-  console.log("audio", audio);
-  console.log("audio.length", audio.byteLength);
-  const hash = await Bytes.addressStringOf({ bytes: audio });
-  console.log("hash", hash);
-  const resp = await con.request({
-    subject: "asr.transcribe",
-    options: { timeoutMs: 10000 },
-    request: {
-      body: {
-        audio,
-        word_timestamps: true,
-        output: "json",
-      },
-    },
-  });
-  console.log("resp", resp);
+export const playChat = () => {
+  // const program = ChatLang.Program.parse("Hi @Joe /help");
+  // if (program.status) {
+  //   console.log("AST =>", JSON.stringify(program.value, null, 2));
+  // } else {
+  //   console.error("Parse Error:", program.expected);
+  // }
+  //  evaluateProgram(program, )
+
+  const input = "Hello @Joe how are you? /help /foo";
+  const ast = parseProgram(input);
+  // console.log("Parsed Program AST:", JSON.stringify(ast, null, 2));
+
+  const output = evaluateProgram(ast, SimpleEvaluator);
+  console.log("Evaluated Output =>", output);
 };
+
+// export const playAsr = async () => {
+//   const config = await Idbs.get(AppConfig, "config");
+//   const con = await Messages.createConnection<AsrConnectionMap>({
+//     server: "wss://mq.daimix.com",
+//     options: { log: console.log },
+//     token: config?.authToken,
+//   });
+//   console.log("con", con);
+//   const audio = await fetch("./female5.wav").then((r) => r.arrayBuffer());
+//   console.log("audio", audio);
+//   console.log("audio.length", audio.byteLength);
+//   const hash = await Bytes.addressStringOf({ bytes: audio });
+//   console.log("hash", hash);
+//   const resp = await con.request({
+//     subject: "asr.transcribe",
+//     options: { timeoutMs: 10000 },
+//     request: {
+//       body: {
+//         audio,
+//         word_timestamps: true,
+//         output: "json",
+//       },
+//     },
+//   });
+//   console.log("resp", resp);
+// };
 
 // export const playTextgen = async () => {
 //   // const creds = await (await fetch("./home.creds")).text();
