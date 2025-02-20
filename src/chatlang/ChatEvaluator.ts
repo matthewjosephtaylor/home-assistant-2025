@@ -12,11 +12,11 @@ import type { ChatAstSpec } from "./ChatAstSpec";
 
 export type ChatEvaluator = {
   /** Called when we see a mention node. Return the transformed text, or "" to remove it. */
-  handleMention(node: ChatAstSpec["Mention"]): string;
+  handleMention(node: ChatAstSpec["Mention"]): string | Promise<string>;
 
   /** Called when we see a command node. Return replacement text, or "" to remove. */
-  handleCommand(node: ChatAstSpec["Command"]): string;
+  handleCommand(node: ChatAstSpec["Command"]): string | Promise<string>;
 
   /** Called when we see a text node. Typically returns the same text, or transforms it. */
-  handleText(node: ChatAstSpec["Text"]): string;
+  handleText(node: ChatAstSpec["Text"]): string | Promise<string>;
 };

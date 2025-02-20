@@ -13,7 +13,7 @@ export const RoomScreen = () => {
     >
       <Stack>
         <TreeView treeApi={rootTreeApi} />
-        <ChatBox />
+        <ChatBox treeApi={rootTreeApi} />
       </Stack>
     </Box>
   );

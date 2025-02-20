@@ -20,7 +20,7 @@ export const play = async () => {
   }
 };
 
-export const playChat = () => {
+export const playChat = async () => {
   // const program = ChatLang.Program.parse("Hi @Joe /help");
   // if (program.status) {
   //   console.log("AST =>", JSON.stringify(program.value, null, 2));
@@ -33,7 +33,7 @@ export const playChat = () => {
   const ast = parseProgram(input);
   // console.log("Parsed Program AST:", JSON.stringify(ast, null, 2));
 
-  const output = evaluateProgram(ast, SimpleEvaluator);
+  const output = await evaluateProgram(ast, SimpleEvaluator);
   console.log("Evaluated Output =>", output);
 };
 
