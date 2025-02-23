@@ -1,5 +1,5 @@
 import { Box, Stack } from "@mui/material";
-import { TreeView } from "../common/tree/Tree";
+import { TreeView } from "../common/tree/TreeView";
 import { ChatBox } from "./ChatBox";
 import { rootTreeApi } from "./rootTreeApi";
 

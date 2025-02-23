@@ -1,6 +1,7 @@
 import { Errors } from "@mjt-engine/message";
 import { Daimons } from "../../daimon/Daimons";
-import type { TreeApi, TreeNode } from "../common/tree/Tree";
+import type { TreeApi } from "../common/tree/TreeApi";
+import type { TreeNode } from "../common/tree/TreeNode";
 
 
 export const loadDaimons: TreeApi["loadChildren"] = async (parentId, query) => {

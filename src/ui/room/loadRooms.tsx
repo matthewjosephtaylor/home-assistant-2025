@@ -2,7 +2,8 @@ import { Errors } from "@mjt-engine/message";
 import { ROOM_OBJECT_STORE, type Room } from "@mjt-services/daimon-common-2025";
 import { Datas } from "@mjt-services/data-common-2025";
 import { getConnection } from "../../connection/Connections";
-import type { TreeApi, TreeNode } from "../common/tree/Tree";
+import type { TreeApi } from "../common/tree/TreeApi";
+import type { TreeNode } from "../common/tree/TreeNode";
 import { isEmpty, isUndefined } from "@mjt-engine/object";
 
 export const loadRooms: TreeApi["loadChildren"] = async (

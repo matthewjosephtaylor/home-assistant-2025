@@ -22,10 +22,11 @@ import type { ChatAstSpec } from "../../chatlang/ChatAstSpec";
 import type { ChatEvaluator } from "../../chatlang/ChatEvaluator";
 import { ChatLangs } from "../../chatlang/ChatLangs";
 import { getConnection } from "../../connection/Connections";
-import type { TreeApi } from "../common/tree/Tree";
+import type { TreeApi } from "../common/tree/TreeApi";
 
 export const nameToDaimons = async (name: string) => {
   const query = `values(@) | [?contains(chara.data.name, '${name}')]`;
+  // const query = `values(@) | [?contains(data.name, '${name}')]`;
   return Datas.search(await getConnection())({
     from: DAIMON_OBJECT_STORE,
     query: query,

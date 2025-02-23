@@ -3,7 +3,8 @@ import { Datas, Ids } from "@mjt-services/data-common-2025";
 import { Box, Button, TextField } from "@mui/material";
 import React from "react";
 import { getConnection } from "../../connection/Connections";
-import { type TreeApi, type TreeNode } from "../common/tree/Tree";
+import { type TreeApi } from "../common/tree/TreeApi";
+import { type TreeNode } from "../common/tree/TreeNode";
 import { loadDaimons } from "./loadDaimons";
 import { loadRooms } from "./loadRooms";
 

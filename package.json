@@ -22,7 +22,7 @@
     "eslint-plugin-prettier": "^5.2.3",
     "eslint-plugin-react": "^7.37.4",
     "eslint-plugin-react-hooks": "^5.1.0",
-    "prettier": "^3.5.1",
+    "prettier": "^3.5.2",
     "sass-embedded": "^1.85.0"
   },
   "peerDependencies": {
@@ -51,7 +51,7 @@
     "@types/react": "^19.0.10",
     "@types/react-dom": "^19.0.4",
     "@zxing/library": "^0.21.3",
-    "eslint": "^9.20.1",
+    "eslint": "^9.21.0",
     "framer-motion": "^11.18.2",
     "gh-pages": "^6.3.0",
     "immer": "^10.1.1",
