@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from "react";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
@@ -11,7 +12,6 @@ import {
   ListItemText,
   TextField,
 } from "@mui/material";
-import React, { useState } from "react";
 import type { TreeApi } from "./TreeApi";
 import { useTreeNodes } from "./useTreeNodes";
 
@@ -33,29 +33,18 @@ export const RecursiveNode: React.FC<{
   const currentParentId = parentId ?? "root";
 
   const [search, setSearch] = useState("");
-  // const [children, setChildren] = useState<TreeNode[]>([]);
   const [selectedChildId, setSelectedChildId] = useState<string | null>(null);
   const [hoveredId, setHoveredId] = useState<string | null>(null);
+  const [noteContent, setNoteContent] = useState<React.ReactNode>(null);
   const children = useTreeNodes({ treeApi, parentId, search });
+
+  useEffect(() => {
+    setNoteContent(treeApi.renderNoteContent(currentParentId));
+  }, [currentParentId, treeApi]);
 
   if (selectedChildId && !children.some((n) => n.id === selectedChildId)) {
     setSelectedChildId(null);
   }
-  // Load children whenever parentId or search changes
-  // useEffect(() => {
-  //   treeApi
-  //     .loadChildren(parentId, search)
-  //     .then((result) => {
-  //       setChildren(result);
-  //       // If a previously selected child no longer exists, clear it
-  //       if (selectedChildId && !result.some((n) => n.id === selectedChildId)) {
-  //         setSelectedChildId(null);
-  //       }
-  //     })
-  //     .catch(() => {
-  //       setChildren([]);
-  //     });
-  // }, [parentId, search, treeApi]);
 
   // Handle node deletion
   const handleDelete = async (nodeId: string) => {
@@ -154,9 +143,7 @@ export const RecursiveNode: React.FC<{
             onMouseEnter={() => setHoveredId("NOTE-" + currentParentId)}
             onMouseLeave={() => setHoveredId(null)}
           >
-            <ListItemText
-              primary={treeApi.renderNoteContent(currentParentId)}
-            />
+            <ListItemText primary={noteContent} />
           </ListItemButton>
         </List>
       </Box>

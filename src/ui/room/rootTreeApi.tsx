@@ -1,10 +1,11 @@
-import { ROOM_OBJECT_STORE, type Room } from "@mjt-services/daimon-common-2025";
+import { ROOM_OBJECT_STORE } from "@mjt-services/daimon-common-2025";
 import { Datas, Ids } from "@mjt-services/data-common-2025";
 import { Box, Button, TextField } from "@mui/material";
 import React from "react";
 import { getConnection } from "../../connection/Connections";
 import { type TreeApi } from "../common/tree/TreeApi";
 import { type TreeNode } from "../common/tree/TreeNode";
+import { addRoomTextContent } from "./addRoomTextContent";
 import { loadDaimons } from "./loadDaimons";
 import { loadRooms } from "./loadRooms";
 
@@ -41,19 +42,12 @@ export const rootTreeApi: TreeApi = {
   addChild: async function (parentId, data): Promise<TreeNode> {
     console.log("parentId", parentId);
     console.log("data", data);
-    const id = Ids.fromObjectStore(ROOM_OBJECT_STORE);
-    console.log("id", id);
     const realizedParentId = parentId === "rooms" ? undefined : parentId;
-    const resp = await Datas.put(await getConnection())({
-      objectStore: ROOM_OBJECT_STORE,
-      value: {
-        id,
-        parentId: realizedParentId,
-        content: data.label,
-      } as Partial<Room>,
+    const id = await addRoomTextContent({
+      text: data.label,
+      parentId: realizedParentId,
     });
-    console.log("resp", resp);
-    return { id: resp, label: data.label };
+    return { id, label: data.label };
   },
   removeNode: async function (nodeId: string): Promise<void> {
     Datas.remove(await getConnection())({
@@ -76,12 +70,37 @@ export const rootTreeApi: TreeApi = {
 
   // Render note content for each parentId (a React component):
   renderNoteContent: (parentId) => (
-    <div style={{ fontStyle: "italic", width: "100%" }}>
+    <Box
+      sx={{
+        fontStyle: "italic",
+        width: "100%",
+        padding: 2,
+        borderRadius: 1,
+        backgroundColor: (theme) =>
+          parentId === activeNoteParentId
+            ? theme.palette.primary.main
+            : theme.palette.grey[300],
+        color: (theme) =>
+          parentId === activeNoteParentId ? "red" : theme.palette.text.primary,
+        border: (theme) =>
+          parentId === activeNoteParentId
+            ? `2px solid ${theme.palette.primary.dark}`
+            : `1px solid ${theme.palette.grey[400]}`,
+        boxShadow: (theme) =>
+          parentId === activeNoteParentId
+            ? `0 0 10px ${theme.palette.primary.dark}`
+            : "none",
+      }}
+    >
       {/* Example: show dynamic text or a text field */}
-      This is the note area for <b>{parentId}</b>.
+      This is the note area for{" "}
+      <b>
+        {parentId} selected: {parentId === activeNoteParentId ? "yes" : "no"}
+      </b>
+      .
       <br />
       {/* Could add your own text input, rich editor, etc. */}
-    </div>
+    </Box>
   ),
 
   getEditorForm: ({ parentId, nodeId, mode, onCancel, onOk }) => {
