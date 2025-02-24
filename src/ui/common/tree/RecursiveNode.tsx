@@ -11,68 +11,9 @@ import {
   ListItemText,
   TextField,
 } from "@mui/material";
-import React, { useEffect, useState } from "react";
-import type { TreeNode } from "./TreeNode";
+import React, { useState } from "react";
 import type { TreeApi } from "./TreeApi";
-import { Messages, parseSubject } from "@mjt-engine/message";
-import type { DATA_EVENT_MAP } from "@mjt-services/data-common-2025";
-import { getConnection } from "../../../connection/Connections";
-import { useConnection } from "../../../connection/useConnection";
-
-export const useTreeNodes = ({
-  treeApi,
-  parentId,
-  search,
-}: {
-  treeApi: TreeApi;
-  parentId?: string;
-  search: string;
-}): TreeNode[] => {
-  const connectionInstance = useConnection();
-  const [children, setChildren] = useState<TreeNode[]>([]);
-
-  const realizeChildren = async (
-    parentId: string | undefined,
-    search: string
-  ) => {
-    return treeApi.loadChildren(parentId, search);
-  };
-  useEffect(() => {
-    const abortController = new AbortController();
-    if (!connectionInstance) {
-      return;
-    }
-    Messages.connectEventListenerToSubjectRoot<
-      "update",
-      typeof DATA_EVENT_MAP,
-      Record<string, string>
-    >({
-      connection: connectionInstance.connection,
-      subjectRoot: "update",
-      signal: abortController.signal,
-      listener: async (event) => {
-        console.log(`update event for ${parentId}`, event);
-        const { root, subpath } = Messages.parseSubject(event.subject);
-        console.log("root", root);
-        console.log("subpath", subpath);
-        if (subpath !== parentId) {
-          return;
-        }
-        const children = await realizeChildren(subpath, search);
-        setChildren(children);
-      },
-    });
-    realizeChildren(parentId, search).then((result) => {
-      setChildren(result);
-    });
-    return () => {
-      abortController.abort();
-    };
-  }, [connectionInstance, parentId, search, treeApi]);
-
-  console.log("useTreeNodes: children", children);
-  return children;
-};
+import { useTreeNodes } from "./useTreeNodes";
 
 /**
  * A RecursiveNode that lists:
