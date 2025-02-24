@@ -1,10 +1,15 @@
-import { ROOM_OBJECT_STORE, type Content, CONTENT_OBJECT_STORE, type Room } from "@mjt-services/daimon-common-2025";
+import {
+  ROOM_OBJECT_STORE,
+  type Content,
+  CONTENT_OBJECT_STORE,
+  type Room,
+} from "@mjt-services/daimon-common-2025";
 import { Ids, Datas } from "@mjt-services/data-common-2025";
 import { getConnection } from "../../connection/Connections";
 
-
 export const addRoomTextContent = async ({
-  text, parentId,
+  text,
+  parentId,
 }: {
   parentId?: string;
   text: string;
@@ -13,7 +18,7 @@ export const addRoomTextContent = async ({
   const content: Content = {
     id: Ids.fromObjectStore(CONTENT_OBJECT_STORE),
     contentType: "plain/text",
-    content: text,
+    value: text,
     createdAt: Date.now(),
   };
   await Datas.put(await getConnection())({

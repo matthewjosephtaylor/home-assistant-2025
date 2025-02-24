@@ -38,7 +38,7 @@ export const loadRooms: TreeApi["loadChildren"] = async (
 
         return {
           id: roomNode.id,
-          label: content?.content || "<missing>",
+          label: content?.value || "<missing>",
         } as TreeNode;
       })
     );
