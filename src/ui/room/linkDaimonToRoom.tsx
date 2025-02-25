@@ -1,6 +1,6 @@
 import { Datas, LINK_OBJECT_STORE, Ids } from "@mjt-services/data-common-2025";
 import { getConnection } from "../../connection/Connections";
-import type { RoomDaimonLink } from "./RoomDaimonLink";
+import type { RoomDaimonLink } from "@mjt-services/daimon-common-2025";
 
 
 export const linkDaimonToRoom = async ({

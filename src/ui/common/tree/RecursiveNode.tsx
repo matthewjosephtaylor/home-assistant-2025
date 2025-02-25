@@ -4,6 +4,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import {
   Box,
+  Button,
   Divider,
   IconButton,
   List,
@@ -48,13 +49,7 @@ export const RecursiveNode: React.FC<{
 
   // Handle node deletion
   const handleDelete = async (nodeId: string) => {
-    try {
-      await treeApi.removeNode(nodeId);
-      // Force a refresh by nudging search
-      setSearch((prev) => prev + " ");
-    } catch (err) {
-      console.error("Failed to remove node:", err);
-    }
+    await treeApi.removeNode(nodeId);
   };
 
   const handleSelectNote = () => {
@@ -77,6 +72,7 @@ export const RecursiveNode: React.FC<{
           fullWidth
           sx={{ mb: 2 }}
         />
+        <Button onClick={() => {}}>Clear</Button>
         <List
           sx={{
             bgcolor: "background.paper",
