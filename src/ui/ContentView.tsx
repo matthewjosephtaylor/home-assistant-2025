@@ -1,43 +1,35 @@
-import { Datas } from "@mjt-services/data-common-2025";
-import { useEffect, useState } from "react";
-import { getConnection } from "../connection/Connections";
-import type { Content } from "@mjt-services/daimon-common-2025";
 import { isUndefined } from "@mjt-engine/object";
-
-export const useData = <T extends object>({ id }: { id?: string }) => {
-  const [data, setData] = useState<T | undefined>(undefined);
-
-  const update = async (id?: string) => {
-    if (isUndefined(id)) {
-      setData(undefined);
-      return;
-    }
-    const result = await Datas.get(await getConnection())<T>({ key: id });
-    setData(result);
-  };
-
-  useEffect(() => {
-    update(id);
-  }, [id]);
-
-  return data;
-};
+import type { Content } from "@mjt-services/daimon-common-2025";
+import { Box, type BoxProps } from "@mui/system";
+import { useData } from "../state/useData";
+import { ContentImage } from "./ContentImage";
+import type { ImgHTMLAttributes } from "react";
 
 export const ContentView = ({
   contentId,
+  imgProps,
+  ...rest
 }: {
   contentId: string | undefined;
-}) => {
+  imgProps?: Omit<ImgHTMLAttributes<HTMLImageElement>, "content">;
+} & (BoxProps | ImgHTMLAttributes<HTMLImageElement>)) => {
   const content = useData<Content>({ id: contentId });
   if (isUndefined(content)) {
-    return <div>Loading...</div>;
+    return <Box {...rest}>Loading...</Box>;
   }
   if (typeof content.value === "string") {
-    return <>{content.value}</>;
+    return <Box {...rest}>{content.value}</Box>;
+  }
+  if (content.contentType.startsWith("image")) {
+    return (
+      <Box {...rest}>
+        <ContentImage content={content} {...imgProps} />;
+      </Box>
+    );
   }
   return (
-    <>
+    <Box {...rest}>
       type:{content.contentType} creator:{content.creatorId}
-    </>
+    </Box>
   );
 };
