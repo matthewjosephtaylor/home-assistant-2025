@@ -88,8 +88,8 @@ export const RecursiveNode: React.FC<{
                 onMouseEnter={() => setHoveredId(child.id)}
                 onMouseLeave={() => setHoveredId(null)}
               >
-                {child.icon && <ListItemIcon>{child.icon}</ListItemIcon>}
-                <ListItemText primary={child.label} />
+                {child.content}
+                {/* <ListItemText primary={child.label} /> */}
                 {hoveredId === child.id && (
                   <Box display="flex" flexDirection="row" sx={{ ml: 1 }}>
                     {/* Edit */}

@@ -10,6 +10,7 @@ import { getConnection } from "../../connection/Connections";
 import type { TreeApi } from "../common/tree/TreeApi";
 import type { TreeNode } from "../common/tree/TreeNode";
 import { isEmpty, isUndefined } from "@mjt-engine/object";
+import { ContentView } from "../ContentView";
 
 export const loadRooms: TreeApi["loadChildren"] = async (
   parentId,
@@ -39,6 +40,7 @@ export const loadRooms: TreeApi["loadChildren"] = async (
         return {
           id: roomNode.id,
           label: content?.value || "<missing>",
+          content: <ContentView contentId={roomNode.contentId} />,
         } as TreeNode;
       })
     );

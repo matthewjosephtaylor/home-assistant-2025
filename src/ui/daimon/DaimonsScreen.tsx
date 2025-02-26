@@ -1,18 +1,34 @@
 import { useEffect, useState } from "react";
 import { GenericCrud, type CrudSchema } from "../crud/GenericCrud";
 
+import { Errors } from "@mjt-engine/message";
 import {
   DAIMON_OBJECT_STORE,
   DaimonCharaCard,
   type Daimon,
 } from "@mjt-services/daimon-common-2025";
-import { getConnection } from "../../connection/Connections";
-import { Errors } from "@mjt-engine/message";
-import { listDaimons } from "../../daimon/listDaimons";
 import { Datas, Ids } from "@mjt-services/data-common-2025";
+import { getConnection } from "../../connection/Connections";
+import { listDaimons } from "../../daimon/listDaimons";
+import { ContentView } from "../ContentView";
+import { isUndefined } from "@mjt-engine/object";
+
+export const ImageUpdateContentView = ({
+  contentId,
+  onChange,
+}: {
+  contentId: string | undefined;
+
+  onChange?: (newValue: string) => void;
+}) => {
+  if (isUndefined(contentId)) {
+    return <div>Upload button go here</div>;
+  }
+  return <ContentView contentId={contentId} />;
+};
 
 export const DaimonsScreen = () => {
-  type DaimonCrud = DaimonCharaCard["data"] & { id: string };
+  type DaimonCrud = DaimonCharaCard["data"] & { id: string; image?: string };
   const schema: CrudSchema<DaimonCrud> = {
     id: { label: "ID" },
     name: {
@@ -20,6 +36,16 @@ export const DaimonsScreen = () => {
     },
     description: {
       label: "Description",
+    },
+    image: {
+      label: "Image",
+      renderEditor: (value, onChange) => {
+        return <ImageUpdateContentView contentId={value} onChange={onChange} />;
+      },
+      renderCell: (contentId) => {
+        console.log("Image contentId", contentId);
+        return <ImageUpdateContentView contentId={contentId} />;
+      },
     },
   };
   const [daimonCruds, setDaimonCruds] = useState<DaimonCrud[]>([]);

@@ -8,6 +8,7 @@ import { type TreeNode } from "../common/tree/TreeNode";
 import { addRoomTextContent } from "./addRoomTextContent";
 import { loadDaimons } from "./loadDaimons";
 import { loadRooms } from "./loadRooms";
+import { ContentView } from "../ContentView";
 
 let activeNoteParentId: string | undefined = undefined;
 
@@ -29,13 +30,13 @@ export const rootTreeApi: TreeApi = {
       return [
         {
           id: "daimons",
-          label: "Daimons",
+          content: <>Daimons</>,
         },
         {
           id: "rooms",
-          label: "Rooms",
+          content: <>Rooms</>,
         },
-      ];
+      ] as TreeNode[];
     }
     return [];
   },
@@ -47,7 +48,7 @@ export const rootTreeApi: TreeApi = {
       text: data.label,
       parentId: realizedParentId,
     });
-    return { id, label: data.label };
+    return { id, content: <ContentView contentId={id} /> };
   },
   removeNode: async function (nodeId: string): Promise<void> {
     Datas.remove(await getConnection())({
