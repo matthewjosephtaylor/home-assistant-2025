@@ -90,7 +90,7 @@ export const DaimonsScreen = () => {
         return (
           <ContentView
             contentId={contentId}
-            imgProps={{ style: { maxHeight: "2em" } }}
+            imgProps={{ style: { maxHeight: "4em" } }}
           />
         );
       },
