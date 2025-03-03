@@ -1,4 +1,5 @@
 import { Errors } from "@mjt-engine/message";
+import { isEmpty, isUndefined } from "@mjt-engine/object";
 import {
   CONTENT_OBJECT_STORE,
   DAIMON_OBJECT_STORE,
@@ -8,14 +9,13 @@ import {
   type Room,
 } from "@mjt-services/daimon-common-2025";
 import { Datas } from "@mjt-services/data-common-2025";
+import { Stack, type StackProps } from "@mui/system";
+import { useEffect, useState } from "react";
 import { getConnection } from "../../connection/Connections";
 import type { TreeApi } from "../common/tree/TreeApi";
 import type { TreeNode } from "../common/tree/TreeNode";
-import { isEmpty, isUndefined } from "@mjt-engine/object";
-import { ContentView } from "../ContentView";
-import { Box, Stack, type BoxProps, type StackProps } from "@mui/system";
-import { useEffect, useState, type ReactNode } from "react";
 import { ContentImage } from "../ContentImage";
+import { ContentView } from "../ContentView";
 
 export const loadRooms: TreeApi["loadChildren"] = async (
   parentId,
@@ -45,14 +45,12 @@ export const loadRooms: TreeApi["loadChildren"] = async (
         return {
           id: room.id,
           label: content?.value || "<missing>",
-          // content: <ContentView contentId={roomNode.contentId} />,
           content: <RoomContentView room={room} />,
         } as TreeNode;
       })
     );
     return treeNodes;
   } catch (error) {
-    // console.log("error", error);
     console.log(Errors.errorToText(error));
     throw error;
   }
