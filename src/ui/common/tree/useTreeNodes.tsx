@@ -5,9 +5,10 @@ import { useConnection } from "../../../connection/useConnection";
 import type { TreeApi } from "./TreeApi";
 import type { TreeNode } from "./TreeNode";
 
-
 export const useTreeNodes = ({
-  treeApi, parentId, search,
+  treeApi,
+  parentId,
+  search,
 }: {
   treeApi: TreeApi;
   parentId?: string;

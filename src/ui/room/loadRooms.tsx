@@ -74,7 +74,6 @@ export const RoomContentView = ({
         objectStore: DAIMON_OBJECT_STORE,
         key: roomContent.creatorId,
       });
-      console.log("daimon", daimon);
       if (isUndefined(daimon?.chara.data.extensions?.avatar)) {
         return;
       }
