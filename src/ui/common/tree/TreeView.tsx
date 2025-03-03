@@ -1,9 +1,11 @@
 import {
+  Box,
   Button,
   Dialog,
   DialogActions,
   DialogContent,
   DialogTitle,
+  Stack,
 } from "@mui/material";
 import React, { useState } from "react";
 import { RecursiveNode } from "./RecursiveNode";
@@ -56,7 +58,7 @@ export const TreeView: React.FC<{ treeApi: TreeApi }> = ({ treeApi }) => {
   });
 
   return (
-    <div>
+    <Stack sx={{ margin: "2em" }}>
       {/* Top-level RecursiveNode (no parentId => 'root') */}
       <RecursiveNode
         parentId={undefined}
@@ -91,6 +93,6 @@ export const TreeView: React.FC<{ treeApi: TreeApi }> = ({ treeApi }) => {
           </Button>
         </DialogActions>
       </Dialog>
-    </div>
+    </Stack>
   );
 };

@@ -1,75 +1,51 @@
-import { Divider, List, Box } from "@mui/material";
-import React from "react";
+import { Divider, List, type ListProps } from "@mui/material";
 import { NodeItem } from "./NodeItem";
-import { NoteItem } from "./NoteItem";
+import { isDefined, toMany } from "@mjt-engine/object";
+import type { TreeNode } from "./TreeNode";
 
-export const NodeList: React.FC<{
-  children: any[];
+export const NodeList = ({
+  children,
+  selectedChildId,
+  setSelectedChildId,
+  onOpenEditor,
+  handleDelete,
+  ...rest
+}: {
+  children: TreeNode[];
   selectedChildId: string | null;
   setSelectedChildId: (id: string | null) => void;
-  hoveredId: string | null;
-  setHoveredId: (id: string | null) => void;
   onOpenEditor: (params: {
     parentId?: string;
     nodeId?: string;
     mode: "add" | "edit";
   }) => void;
   handleDelete: (nodeId: string) => void;
-  isNoteSelected: boolean;
-  handleSelectNote: () => void;
-  noteContent: React.ReactNode;
-  currentParentId: string;
-}> = ({
-  children,
-  selectedChildId,
-  setSelectedChildId,
-  hoveredId,
-  setHoveredId,
-  onOpenEditor,
-  handleDelete,
-  isNoteSelected,
-  handleSelectNote,
-  noteContent,
-  currentParentId,
-}) => (
-  <Box
+} & Omit<ListProps, "children">) => (
+  <List
     sx={{
-      display: "flex",
-      flexDirection: "column",
-      flexGrow: 1,
-      overflow: "hidden",
+      bgcolor: "background.paper",
+      border: (theme) => `1px solid ${theme.palette.divider}`,
+      borderRadius: 1,
+      height: "80vh",
+      // height: "50vh", // Use full height of the parent container
+      overflow: "auto",
     }}
+    {...rest}
   >
-    <List
-      sx={{
-        bgcolor: "background.paper",
-        border: (theme) => `1px solid ${theme.palette.divider}`,
-        borderRadius: 1,
-        flexGrow: 1,
-        overflowY: "auto",
-      }}
-    >
-      {children.map((child) => (
+    {toMany(children)
+      .filter(isDefined)
+      .map((child) => (
         <NodeItem
           key={child.id}
           child={child}
           selectedChildId={selectedChildId}
           setSelectedChildId={setSelectedChildId}
-          hoveredId={hoveredId}
-          setHoveredId={setHoveredId}
+          // hoveredId={hoveredId}
+          // setHoveredId={setHoveredId}
           onOpenEditor={onOpenEditor}
           handleDelete={handleDelete}
         />
       ))}
-      {children.length > 0 && <Divider component="li" />}
-    </List>
-    <NoteItem
-      isNoteSelected={isNoteSelected}
-      handleSelectNote={handleSelectNote}
-      noteContent={noteContent}
-      currentParentId={currentParentId}
-      hoveredId={hoveredId}
-      setHoveredId={setHoveredId}
-    />
-  </Box>
+    {children.length > 0 && <Divider component="li" />}
+  </List>
 );

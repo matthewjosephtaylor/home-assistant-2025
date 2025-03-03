@@ -1,15 +1,12 @@
-import AddCircleIcon from "@mui/icons-material/AddCircle";
-import DeleteIcon from "@mui/icons-material/Delete";
-import EditIcon from "@mui/icons-material/Edit";
-import { Box, Divider, IconButton, ListItemButton } from "@mui/material";
+import { Box, Divider, ListItemButton, Stack } from "@mui/material";
 import React from "react";
+import type { TreeNode } from "./TreeNode";
+import { NodeItemButtons } from "./NodeItemButtons";
 
 export const NodeItem: React.FC<{
-  child: any;
+  child: TreeNode;
   selectedChildId: string | null;
   setSelectedChildId: (id: string | null) => void;
-  hoveredId: string | null;
-  setHoveredId: (id: string | null) => void;
   onOpenEditor: (params: {
     parentId?: string;
     nodeId?: string;
@@ -20,51 +17,38 @@ export const NodeItem: React.FC<{
   child,
   selectedChildId,
   setSelectedChildId,
-  hoveredId,
-  setHoveredId,
   onOpenEditor,
   handleDelete,
-}) => (
-  <React.Fragment key={child.id}>
-    <ListItemButton
-      selected={selectedChildId === child.id}
-      onClick={() => setSelectedChildId(child.id)}
-      onMouseEnter={() => setHoveredId(child.id)}
-      onMouseLeave={() => setHoveredId(null)}
-    >
-      {child.content}
-      {hoveredId === child.id && (
-        <Box display="flex" flexDirection="row" sx={{ ml: 1 }}>
-          <IconButton
-            size="small"
-            onClick={(e) => {
-              e.stopPropagation();
-              onOpenEditor({ nodeId: child.id, mode: "edit" });
-            }}
-          >
-            <EditIcon fontSize="small" />
-          </IconButton>
-          <IconButton
-            size="small"
-            onClick={(e) => {
-              e.stopPropagation();
-              onOpenEditor({ parentId: child.id, mode: "add" });
-            }}
-          >
-            <AddCircleIcon fontSize="small" />
-          </IconButton>
-          <IconButton
-            size="small"
-            onClick={(e) => {
-              e.stopPropagation();
-              handleDelete(child.id);
-            }}
-          >
-            <DeleteIcon fontSize="small" />
-          </IconButton>
-        </Box>
-      )}
-    </ListItemButton>
-    <Divider component="li" />
-  </React.Fragment>
-);
+}) => {
+  const [hovered, setHovered] = React.useState(false);
+  return (
+    <React.Fragment key={child.id}>
+      <ListItemButton
+        selected={selectedChildId === child.id}
+        onClick={() =>
+          child.id === selectedChildId
+            ? setSelectedChildId(null)
+            : setSelectedChildId(child.id)
+        }
+        onMouseEnter={() => setHovered(true)}
+        onMouseLeave={() => setHovered(false)}
+      >
+        <Stack
+          direction={"row"}
+          justifyContent="space-between"
+          alignItems="center"
+          gap={"1ch"}
+        >
+          {child.content}
+          <NodeItemButtons
+            childId={child.id}
+            onOpenEditor={onOpenEditor}
+            handleDelete={handleDelete}
+            visible={hovered}
+          />
+        </Stack>
+      </ListItemButton>
+      <Divider component="li" />
+    </React.Fragment>
+  );
+};

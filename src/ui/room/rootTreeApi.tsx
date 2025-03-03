@@ -1,6 +1,6 @@
 import { ROOM_OBJECT_STORE } from "@mjt-services/daimon-common-2025";
 import { Datas, Ids } from "@mjt-services/data-common-2025";
-import { Box, Button, TextField } from "@mui/material";
+import { Box, Button, Divider, Stack, TextField } from "@mui/material";
 import React from "react";
 import { getConnection } from "../../connection/Connections";
 import { type TreeApi } from "../common/tree/TreeApi";
@@ -9,8 +9,7 @@ import { addRoomTextContent } from "./addRoomTextContent";
 import { loadDaimons } from "./loadDaimons";
 import { loadRooms } from "./loadRooms";
 import { ContentView } from "../ContentView";
-
-let activeNoteParentId: string | undefined = undefined;
+import { useActiveNoteStore } from "./useActiveNoteStore";
 
 export const rootTreeApi: TreeApi = {
   loadChildren: async (parentId, query) => {
@@ -61,48 +60,35 @@ export const rootTreeApi: TreeApi = {
     throw new Error("Function not implemented.");
   },
   // Handle the currently active note:
-  getActiveNoteParentId: () => activeNoteParentId,
+  getActiveNoteParentId: () => useActiveNoteStore.getState().activeNoteParentId,
   setActiveNoteParentId: (pid) => {
-    activeNoteParentId = pid;
-    console.log("activeNoteParentId", activeNoteParentId);
+    useActiveNoteStore.getState().setActiveNoteParentId(pid);
+    console.log("activeNoteParentId", pid);
     // If you want to trigger a re-render in your app, put this in React state,
     // or if you are using an external store, update it there.
   },
 
   // Render note content for each parentId (a React component):
-  renderNoteContent: (parentId) => (
-    <Box
-      sx={{
-        fontStyle: "italic",
-        width: "100%",
-        padding: 2,
-        borderRadius: 1,
-        backgroundColor: (theme) =>
-          parentId === activeNoteParentId
-            ? theme.palette.primary.main
-            : theme.palette.grey[300],
-        color: (theme) =>
-          parentId === activeNoteParentId ? "red" : theme.palette.text.primary,
-        border: (theme) =>
-          parentId === activeNoteParentId
-            ? `2px solid ${theme.palette.primary.dark}`
-            : `1px solid ${theme.palette.grey[400]}`,
-        boxShadow: (theme) =>
-          parentId === activeNoteParentId
-            ? `0 0 10px ${theme.palette.primary.dark}`
-            : "none",
-      }}
-    >
-      {/* Example: show dynamic text or a text field */}
-      This is the note area for{" "}
-      <b>
-        {parentId} selected: {parentId === activeNoteParentId ? "yes" : "no"}
-      </b>
-      .
-      <br />
-      {/* Could add your own text input, rich editor, etc. */}
-    </Box>
-  ),
+  renderNoteContent: (parentId) => {
+    const activeNoteParentId = useActiveNoteStore(
+      (state) => state.activeNoteParentId
+    );
+    return (
+      <Stack
+        flexShrink={1}
+        sx={{
+          height: "0.3em",
+          borderRadius: 1,
+          backgroundColor: (theme) =>
+            parentId === activeNoteParentId
+              ? theme.palette.primary.dark
+              : theme.palette.grey[100],
+        }}
+      >
+        <Divider variant="fullWidth" />
+      </Stack>
+    );
+  },
 
   getEditorForm: ({ parentId, nodeId, mode, onCancel, onOk }) => {
     // If editing, fetch the node details (e.g., from your data store).

@@ -1,12 +1,13 @@
 import { ROOM_OBJECT_STORE } from "@mjt-services/daimon-common-2025";
 import { Datas } from "@mjt-services/data-common-2025";
-import { Box, Button } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import { Box, Button, Stack } from "@mui/material";
+import React, { useEffect, useState, useMemo } from "react";
 import { getConnection } from "../../../connection/Connections";
 import { NodeList } from "./NodeList";
 import { SearchBar } from "./SearchBar";
 import type { TreeApi } from "./TreeApi";
 import { useTreeNodes } from "./useTreeNodes";
+import { NoteItem } from "./NoteItem";
 
 export const RecursiveNode = ({
   parentId,
@@ -24,13 +25,9 @@ export const RecursiveNode = ({
   const currentParentId = parentId ?? "root";
   const [search, setSearch] = useState("");
   const [selectedChildId, setSelectedChildId] = useState<string | null>(null);
-  const [hoveredId, setHoveredId] = useState<string | null>(null);
-  const [noteContent, setNoteContent] = useState<React.ReactNode>(null);
   const children = useTreeNodes({ treeApi, parentId, search });
 
-  useEffect(() => {
-    setNoteContent(treeApi.renderNoteContent(currentParentId));
-  }, [currentParentId, treeApi]);
+  const noteContent = treeApi.renderNoteContent(currentParentId);
 
   if (selectedChildId && !children.some((n) => n.id === selectedChildId)) {
     setSelectedChildId(null);
@@ -47,35 +44,30 @@ export const RecursiveNode = ({
   const isNoteSelected = treeApi.getActiveNoteParentId() === currentParentId;
 
   return (
-    <Box display="flex" flexDirection="row" alignItems="flex-start" gap={2}>
-      <Box sx={{ minWidth: 240 }}>
+    <Stack
+      direction="row"
+      sx={{
+        alignItems: "flex-start",
+        gap: 2,
+        height: "100%",
+      }}
+    >
+      <Stack sx={{ minWidth: "20ch", height: "100%" }}>
         <SearchBar search={search} setSearch={setSearch} />
-        <Button
-          onClick={async () => {
-            const children = await treeApi.loadChildren(currentParentId, "");
-            const ids = children.map((child) => child.id);
-            Datas.remove(await getConnection())({
-              objectStore: ROOM_OBJECT_STORE,
-              query: ids,
-            });
-          }}
-        >
-          Clear
-        </Button>
         <NodeList
           children={children}
           selectedChildId={selectedChildId}
           setSelectedChildId={setSelectedChildId}
-          hoveredId={hoveredId}
-          setHoveredId={setHoveredId}
           onOpenEditor={onOpenEditor}
           handleDelete={handleDelete}
-          isNoteSelected={isNoteSelected}
-          handleSelectNote={handleSelectNote}
-          noteContent={noteContent}
-          currentParentId={currentParentId}
         />
-      </Box>
+        <NoteItem
+          sx={{ backgroundColor: isNoteSelected ? "red" : "black" }}
+          selected={isNoteSelected}
+          onClick={handleSelectNote}
+          value={noteContent}
+        />
+      </Stack>
       {selectedChildId && (
         <RecursiveNode
           parentId={selectedChildId}
@@ -83,6 +75,6 @@ export const RecursiveNode = ({
           onOpenEditor={onOpenEditor}
         />
       )}
-    </Box>
+    </Stack>
   );
 };

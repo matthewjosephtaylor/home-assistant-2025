@@ -15,6 +15,7 @@ import { getConnection } from "../../connection/Connections";
 import { listDaimons } from "../../daimon/listDaimons";
 import { FileUpload } from "../common/FileUpload";
 import { ContentView } from "../ContentView";
+import { Box } from "@mui/system";
 
 export const fileToContentId = async (file: File, creatorId?: string) => {
   const ab = await file.arrayBuffer();
@@ -108,7 +109,7 @@ export const DaimonsScreen = () => {
     });
   }, []);
   return (
-    <>
+    <Box>
       Daimon section
       <GenericCrud
         items={daimonCruds}
@@ -179,6 +180,6 @@ export const DaimonsScreen = () => {
           });
         }}
       />
-    </>
+    </Box>
   );
 };
