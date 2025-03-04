@@ -20,6 +20,7 @@ export const addRoomTextContent = async ({
     contentType: "plain/text",
     value: text,
     createdAt: Date.now(),
+    finalized: true,
   };
   await Datas.put(await getConnection())({
     value: content,

@@ -1,51 +1,32 @@
-import { CssBaseline, ThemeProvider, createTheme, GlobalStyles } from "@mui/material";
+import { CssBaseline, ThemeProvider } from "@mui/material";
 import { Box } from "@mui/system";
-import TopMenu from "./ui/TopMenu";
+import { useEffect } from "react";
+import { darkTheme } from "./darkTheme";
+import { ErrorBoundary } from "./ErrorBoundary";
+import { globalStyles } from "./globalStyles";
 import { KioskScreen } from "./kiosk/KioskScreen";
 import { SCREENS } from "./SCREENS";
 import { useScreen } from "./state/useScreen";
-import { ErrorBoundary } from "./ErrorBoundary";
-
-const darkTheme = createTheme({
-  palette: {
-    mode: "dark",
-  },
-});
-
-const globalStyles = (
-  <GlobalStyles
-    styles={{
-      "::-webkit-scrollbar": {
-        width: "12px",
-      },
-      "::-webkit-scrollbar-track": {
-        background: "#2c2c2c",
-      },
-      "::-webkit-scrollbar-thumb": {
-        background: "#888",
-        borderRadius: "10px",
-      },
-      "::-webkit-scrollbar-thumb:hover": {
-        background: "#555",
-      },
-      "::-webkit-scrollbar-corner": {
-        background: "#2c2c2c",
-      },
-      "html, body, #root": {
-        height: "100%",
-      },
-      "*": {
-        scrollbarColor: "#888 #2c2c2c",
-        scrollbarWidth: "thin",
-      },
-    }}
-  />
-);
+import TopMenu from "./ui/TopMenu";
+import { onEscape } from "./onEscape";
 
 export const App = () => {
   const screen = useScreen();
-  console.log("screen", screen);
   const screenComponent = screen ? SCREENS[screen] : <KioskScreen />;
+
+  useEffect(() => {
+    const handleEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        onEscape();
+      }
+    };
+
+    document.addEventListener("keydown", handleEscape);
+    return () => {
+      document.removeEventListener("keydown", handleEscape);
+    };
+  }, []);
+
   return (
     <ThemeProvider theme={darkTheme}>
       <CssBaseline />

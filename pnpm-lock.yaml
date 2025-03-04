@@ -31,7 +31,7 @@ importers:
         version: https://codeload.github.com/mjt-engine/idb/tar.gz/a3e4630b47e06ed3c3b744e25177cf96e8061c90
       '@mjt-engine/message':
         specifier: github:mjt-engine/message
-        version: https://codeload.github.com/mjt-engine/message/tar.gz/1611eb40575b4ffc1e7daf387336d4c1027cd034(nats.ws@1.29.2)
+        version: https://codeload.github.com/mjt-engine/message/tar.gz/c1466d7244409b4caa3e6130249cc84327864f49(nats.ws@1.29.2)
       '@mjt-engine/object':
         specifier: github:mjt-engine/object
         version: https://codeload.github.com/mjt-engine/object/tar.gz/75263a186b55c31764efb3a1bc075285f971946b
@@ -40,7 +40,7 @@ importers:
         version: https://codeload.github.com/mjt-services/asr-common-2025/tar.gz/54964348b27b2cf51132a587ba936830b025d5f5
       '@mjt-services/daimon-common-2025':
         specifier: github:mjt-services/daimon-common-2025
-        version: https://codeload.github.com/mjt-services/daimon-common-2025/tar.gz/7efd9fe1ce2652a4089fae032fd4bd167e57e76f(nats.ws@1.29.2)
+        version: https://codeload.github.com/mjt-services/daimon-common-2025/tar.gz/32971b1b73d252775645de778a768952237e69eb(nats.ws@1.29.2)
       '@mjt-services/data-common-2025':
         specifier: github:mjt-services/data-common-2025
         version: https://codeload.github.com/mjt-services/data-common-2025/tar.gz/f09e3286c04111976d2df2f015a828ecbf302aeb(nats.ws@1.29.2)
@@ -191,11 +191,11 @@ packages:
     resolution: {integrity: sha512-Y3IR1cRnOxOCDvMmNiym7XpXQ93iGDDPHx+Zj+NM+rg0fBaShfQLkg+hKPaZCEvg5N/LeCo4+Rj/i3FuJsIQaw==}
     engines: {node: '>=6.9.0'}
 
-  '@babylonjs/core@7.51.2':
-    resolution: {integrity: sha512-ZNlojZIGV87GkxWr+28lfe8flCvzGqDBQKelSWd2/sR3gou83D/RSoScecVlmy79mDPZCM2/4udXVJt1xpF0yw==}
+  '@babylonjs/core@7.51.3':
+    resolution: {integrity: sha512-1ZFICFmlZrCUJcRMsg5m3/fhrl96FefRPhMLtb7e2GthzpmixUA83YFbToohb+uIlSEwXZgsl/A4ctbi8H893w==}
 
-  '@babylonjs/loaders@7.51.2':
-    resolution: {integrity: sha512-9YsacDtrZcDIn6dTmwq6dmMjDCmOOMPdr1sUhYiLnFhrcmpTxZ62aCsWFfoeCpZzODOy+G9/zjWo6iRLNqREug==}
+  '@babylonjs/loaders@7.51.3':
+    resolution: {integrity: sha512-6MGLIEmFLxUPs4oyoEF8diU4rNUjMIUwL3v4Hn3uBsbp9O1uUmX/baZNRXoqSG+quffmbEmY1aGofW0DhGiTaQ==}
     peerDependencies:
       '@babylonjs/core': ^7.0.0
       babylonjs-gltf2interface: ^7.0.0
@@ -661,9 +661,9 @@ packages:
     resolution: {tarball: https://codeload.github.com/mjt-engine/idb/tar.gz/a3e4630b47e06ed3c3b744e25177cf96e8061c90}
     version: 2025.1.19-1221
 
-  '@mjt-engine/message@https://codeload.github.com/mjt-engine/message/tar.gz/1611eb40575b4ffc1e7daf387336d4c1027cd034':
-    resolution: {tarball: https://codeload.github.com/mjt-engine/message/tar.gz/1611eb40575b4ffc1e7daf387336d4c1027cd034}
-    version: 2025.2.23-1330
+  '@mjt-engine/message@https://codeload.github.com/mjt-engine/message/tar.gz/c1466d7244409b4caa3e6130249cc84327864f49':
+    resolution: {tarball: https://codeload.github.com/mjt-engine/message/tar.gz/c1466d7244409b4caa3e6130249cc84327864f49}
+    version: 2025.3.4-1206
     peerDependencies:
       nats.ws: ^1.27.0
 
@@ -675,9 +675,9 @@ packages:
     resolution: {tarball: https://codeload.github.com/mjt-services/asr-common-2025/tar.gz/54964348b27b2cf51132a587ba936830b025d5f5}
     version: 2025.1.13-1207
 
-  '@mjt-services/daimon-common-2025@https://codeload.github.com/mjt-services/daimon-common-2025/tar.gz/7efd9fe1ce2652a4089fae032fd4bd167e57e76f':
-    resolution: {tarball: https://codeload.github.com/mjt-services/daimon-common-2025/tar.gz/7efd9fe1ce2652a4089fae032fd4bd167e57e76f}
-    version: 2025.2.25-1229
+  '@mjt-services/daimon-common-2025@https://codeload.github.com/mjt-services/daimon-common-2025/tar.gz/32971b1b73d252775645de778a768952237e69eb':
+    resolution: {tarball: https://codeload.github.com/mjt-services/daimon-common-2025/tar.gz/32971b1b73d252775645de778a768952237e69eb}
+    version: 2025.3.4-1212
 
   '@mjt-services/data-common-2025@https://codeload.github.com/mjt-services/data-common-2025/tar.gz/f09e3286c04111976d2df2f015a828ecbf302aeb':
     resolution: {tarball: https://codeload.github.com/mjt-services/data-common-2025/tar.gz/f09e3286c04111976d2df2f015a828ecbf302aeb}
@@ -2944,11 +2944,11 @@ snapshots:
       '@babel/helper-string-parser': 7.25.9
       '@babel/helper-validator-identifier': 7.25.9
 
-  '@babylonjs/core@7.51.2': {}
+  '@babylonjs/core@7.51.3': {}
 
-  '@babylonjs/loaders@7.51.2(@babylonjs/core@7.51.2)(babylonjs-gltf2interface@7.42.0)':
+  '@babylonjs/loaders@7.51.3(@babylonjs/core@7.51.3)(babylonjs-gltf2interface@7.42.0)':
     dependencies:
-      '@babylonjs/core': 7.51.2
+      '@babylonjs/core': 7.51.3
       babylonjs-gltf2interface: 7.42.0
 
   '@bufbuild/protobuf@2.2.3': {}
@@ -3296,7 +3296,7 @@ snapshots:
       '@mjt-engine/byte': https://codeload.github.com/mjt-engine/byte/tar.gz/472e6b25258a1d694808e214d3a41e07f7d8504f
       '@mjt-engine/object': https://codeload.github.com/mjt-engine/object/tar.gz/75263a186b55c31764efb3a1bc075285f971946b
 
-  '@mjt-engine/message@https://codeload.github.com/mjt-engine/message/tar.gz/1611eb40575b4ffc1e7daf387336d4c1027cd034(nats.ws@1.29.2)':
+  '@mjt-engine/message@https://codeload.github.com/mjt-engine/message/tar.gz/c1466d7244409b4caa3e6130249cc84327864f49(nats.ws@1.29.2)':
     dependencies:
       '@mjt-engine/byte': https://codeload.github.com/mjt-engine/byte/tar.gz/472e6b25258a1d694808e214d3a41e07f7d8504f
       '@mjt-engine/object': https://codeload.github.com/mjt-engine/object/tar.gz/75263a186b55c31764efb3a1bc075285f971946b
@@ -3311,15 +3311,16 @@ snapshots:
     dependencies:
       '@mjt-engine/object': https://codeload.github.com/mjt-engine/object/tar.gz/75263a186b55c31764efb3a1bc075285f971946b
 
-  '@mjt-services/daimon-common-2025@https://codeload.github.com/mjt-services/daimon-common-2025/tar.gz/7efd9fe1ce2652a4089fae032fd4bd167e57e76f(nats.ws@1.29.2)':
+  '@mjt-services/daimon-common-2025@https://codeload.github.com/mjt-services/daimon-common-2025/tar.gz/32971b1b73d252775645de778a768952237e69eb(nats.ws@1.29.2)':
     dependencies:
+      '@mjt-engine/message': https://codeload.github.com/mjt-engine/message/tar.gz/c1466d7244409b4caa3e6130249cc84327864f49(nats.ws@1.29.2)
       '@mjt-services/data-common-2025': https://codeload.github.com/mjt-services/data-common-2025/tar.gz/f09e3286c04111976d2df2f015a828ecbf302aeb(nats.ws@1.29.2)
     transitivePeerDependencies:
       - nats.ws
 
   '@mjt-services/data-common-2025@https://codeload.github.com/mjt-services/data-common-2025/tar.gz/f09e3286c04111976d2df2f015a828ecbf302aeb(nats.ws@1.29.2)':
     dependencies:
-      '@mjt-engine/message': https://codeload.github.com/mjt-engine/message/tar.gz/1611eb40575b4ffc1e7daf387336d4c1027cd034(nats.ws@1.29.2)
+      '@mjt-engine/message': https://codeload.github.com/mjt-engine/message/tar.gz/c1466d7244409b4caa3e6130249cc84327864f49(nats.ws@1.29.2)
       '@mjt-engine/object': https://codeload.github.com/mjt-engine/object/tar.gz/75263a186b55c31764efb3a1bc075285f971946b
     transitivePeerDependencies:
       - nats.ws
@@ -3330,15 +3331,15 @@ snapshots:
 
   '@mjtdev/avatar-3d@https://codeload.github.com/matthewjosephtaylor/avatar-3d/tar.gz/dea747a34d3fc2ea71c4d807710b1baccee5a463(@emotion/is-prop-valid@1.3.1)(@types/node@22.13.9)(@types/react@19.0.10)(babylonjs-gltf2interface@7.42.0)(nats.ws@1.29.2)(react-dom@19.0.0(react@19.0.0))(react-router-dom@6.28.1(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(react@19.0.0)(rollup@4.34.9)(sass-embedded@1.85.1)':
     dependencies:
-      '@babylonjs/core': 7.51.2
-      '@babylonjs/loaders': 7.51.2(@babylonjs/core@7.51.2)(babylonjs-gltf2interface@7.42.0)
+      '@babylonjs/core': 7.51.3
+      '@babylonjs/loaders': 7.51.3(@babylonjs/core@7.51.3)(babylonjs-gltf2interface@7.42.0)
       '@emotion/react': 11.14.0(@types/react@19.0.10)(react@19.0.0)
       '@emotion/styled': 11.14.0(@emotion/react@11.14.0(@types/react@19.0.10)(react@19.0.0))(@types/react@19.0.10)(react@19.0.0)
       '@mjtdev/engine': https://codeload.github.com/matthewjosephtaylor/mjtdev-engine/tar.gz/bfee937b329f6b09376bbee52cf1875cbf17e7c0(nats.ws@1.29.2)
       '@mui/material': 6.4.6(@emotion/react@11.14.0(@types/react@19.0.10)(react@19.0.0))(@emotion/styled@11.14.0(@emotion/react@11.14.0(@types/react@19.0.10)(react@19.0.0))(@types/react@19.0.10)(react@19.0.0))(@types/react@19.0.10)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       '@mui/system': 6.4.6(@emotion/react@11.14.0(@types/react@19.0.10)(react@19.0.0))(@emotion/styled@11.14.0(@emotion/react@11.14.0(@types/react@19.0.10)(react@19.0.0))(@types/react@19.0.10)(react@19.0.0))(@types/react@19.0.10)(react@19.0.0)
       '@pixiv/three-vrm': 3.3.4(three@0.169.0)
-      babylon-vrm-loader: 2.0.0(@babylonjs/core@7.51.2)(@babylonjs/loaders@7.51.2(@babylonjs/core@7.51.2)(babylonjs-gltf2interface@7.42.0))
+      babylon-vrm-loader: 2.0.0(@babylonjs/core@7.51.3)(@babylonjs/loaders@7.51.3(@babylonjs/core@7.51.3)(babylonjs-gltf2interface@7.42.0))
       eslint: 9.21.0
       framer-motion: 11.18.2(@emotion/is-prop-valid@1.3.1)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       immer: 10.1.1
@@ -3934,15 +3935,15 @@ snapshots:
       cosmiconfig: 7.1.0
       resolve: 1.22.10
 
-  babylon-mtoon-material@5.1.1(@babylonjs/core@7.51.2):
+  babylon-mtoon-material@5.1.1(@babylonjs/core@7.51.3):
     dependencies:
-      '@babylonjs/core': 7.51.2
+      '@babylonjs/core': 7.51.3
 
-  babylon-vrm-loader@2.0.0(@babylonjs/core@7.51.2)(@babylonjs/loaders@7.51.2(@babylonjs/core@7.51.2)(babylonjs-gltf2interface@7.42.0)):
+  babylon-vrm-loader@2.0.0(@babylonjs/core@7.51.3)(@babylonjs/loaders@7.51.3(@babylonjs/core@7.51.3)(babylonjs-gltf2interface@7.42.0)):
     dependencies:
-      '@babylonjs/core': 7.51.2
-      '@babylonjs/loaders': 7.51.2(@babylonjs/core@7.51.2)(babylonjs-gltf2interface@7.42.0)
-      babylon-mtoon-material: 5.1.1(@babylonjs/core@7.51.2)
+      '@babylonjs/core': 7.51.3
+      '@babylonjs/loaders': 7.51.3(@babylonjs/core@7.51.3)(babylonjs-gltf2interface@7.42.0)
+      babylon-mtoon-material: 5.1.1(@babylonjs/core@7.51.3)
 
   babylonjs-gltf2interface@7.42.0: {}
 

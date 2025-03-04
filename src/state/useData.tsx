@@ -44,11 +44,13 @@ export const useData = <T extends object>({ id }: { id?: string }) => {
         // console.log(`object_update: subject ${id}: ${id} `, subject);
         const { root, subpath } = Messages.parseSubject(subject);
         if (subpath !== id) {
-          console.log(`BAD object_update: subpath ${id}: ${subpath} `, subpath);
+          // console.log(`BAD object_update: subpath ${id}: ${subpath} `, subpath);
           return;
         }
-        console.log(`object_update for ${id}`, { root, subpath });
-        console.log(`object_update: detail: ${id} `, detail);
+        // console.log(`object_update for ${id}`, { root, subpath });
+        // console.log(`object_update: detail: ${id} `, detail);
+
+        setData(detail as T);
         // const children = await realizeChildren(subpath, search);
         // setChildren(children);
       },

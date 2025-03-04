@@ -23,10 +23,7 @@ export const createConnection = async () => {
     server: GLOBALS.mqUrl,
     options: {
       log: (message, ...extra) => {
-        console.log(Errors.errorToText(message));
-        console.log(message, extra);
-        // console.log(message);
-        // console.log(extra);
+        console.log(Errors.errorToText(message), extra);
       },
     },
     token: config?.authToken,

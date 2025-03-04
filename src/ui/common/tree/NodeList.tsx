@@ -2,7 +2,7 @@ import { Divider, List, type ListProps } from "@mui/material";
 import { NodeItem } from "./NodeItem";
 import { isDefined, toMany } from "@mjt-engine/object";
 import type { TreeNode } from "./TreeNode";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useLayoutEffect } from "react";
 
 export const NodeList = ({
   children,
@@ -24,10 +24,26 @@ export const NodeList = ({
 } & Omit<ListProps, "children">) => {
   const listRef = useRef<HTMLUListElement>(null);
 
-  useEffect(() => {
-    if (listRef.current) {
-      listRef.current.scrollTop = listRef.current.scrollHeight;
-    }
+  useLayoutEffect(() => {
+    const listElement = listRef.current;
+    if (!listElement) return;
+
+    const handleScrollToBottom = () => {
+      listElement.scrollTop = listElement.scrollHeight;
+    };
+
+    handleScrollToBottom(); // Scroll to bottom on initial render
+
+    const mutationObserver = new MutationObserver(handleScrollToBottom);
+    mutationObserver.observe(listElement, { childList: true });
+
+    const resizeObserver = new ResizeObserver(handleScrollToBottom);
+    Array.from(listElement.children).forEach((child) => resizeObserver.observe(child));
+
+    return () => {
+      mutationObserver.disconnect();
+      resizeObserver.disconnect();
+    };
   }, [children]);
 
   return (
