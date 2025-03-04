@@ -2,7 +2,7 @@ import { useEffect, useState, type ReactNode } from "react";
 import { GenericCrud, type CrudSchema } from "../crud/GenericCrud";
 
 import { Errors } from "@mjt-engine/message";
-import { isUndefined } from "@mjt-engine/object";
+import { isEmpty, isUndefined } from "@mjt-engine/object";
 import {
   CONTENT_OBJECT_STORE,
   DAIMON_OBJECT_STORE,
@@ -73,7 +73,11 @@ export const ImageUpdateContentView = ({
 };
 
 export const DaimonsScreen = () => {
-  type DaimonCrud = DaimonCharaCard["data"] & { id: string; image?: string };
+  type DaimonCrud = DaimonCharaCard["data"] & {
+    id: string;
+    image?: string;
+    model?: string;
+  };
   const schema: CrudSchema<DaimonCrud> = {
     id: { label: "ID" },
     name: {
@@ -81,6 +85,9 @@ export const DaimonsScreen = () => {
     },
     description: {
       label: "Description",
+    },
+    model: {
+      label: "Model",
     },
     image: {
       label: "Image",
@@ -103,6 +110,7 @@ export const DaimonsScreen = () => {
       const daimonCruds: DaimonCrud[] = daimons.map((daimon) => ({
         id: daimon.id,
         image: daimon.chara.data.extensions?.avatar,
+        model: daimon.chara.data.extensions?.llm,
         ...daimon.chara.data,
       }));
       setDaimonCruds(daimonCruds);
@@ -117,13 +125,17 @@ export const DaimonsScreen = () => {
         onUpdate={async (item, index) => {
           console.log("Updated item", item, "at index", index);
           const con = await getConnection();
-          const { id, image, ...rest } = item;
+          const { id, image, model, ...rest } = item;
           const daimon: Daimon = {
             id,
             chara: {
               data: {
                 ...rest,
-                extensions: { ...(rest.extensions ?? {}), avatar: image },
+                extensions: {
+                  ...(rest.extensions ?? {}),
+                  avatar: image,
+                  llm: isEmpty(model) ? undefined : model,
+                },
               },
               spec: "chara_card_v2",
               spec_version: "2",
@@ -141,7 +153,7 @@ export const DaimonsScreen = () => {
         onCreate={async (item) => {
           console.log("Created item", item);
           const con = await getConnection();
-          const { id: _id, image, ...rest } = item;
+          const { id: _id, image, model, ...rest } = item;
           try {
             const id = Ids.fromObjectStore(DAIMON_OBJECT_STORE);
             const daimon: Daimon = {
@@ -149,7 +161,11 @@ export const DaimonsScreen = () => {
               chara: {
                 data: {
                   ...rest,
-                  extensions: { ...(item.extensions ?? {}), avatar: image },
+                  extensions: {
+                    ...(item.extensions ?? {}),
+                    avatar: image,
+                    llm: isEmpty(model) ? undefined : model,
+                  },
                 },
                 spec: "chara_card_v2",
                 spec_version: "2",
