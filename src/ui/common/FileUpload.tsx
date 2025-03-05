@@ -9,8 +9,8 @@ export const FileUpload = ({
   renderFile,
   placeholder,
 }: {
-  onChange: (file?: File) => void;
-  renderFile: (file: File) => ReactNode;
+  onChange?: (file?: File) => void;
+  renderFile?: (file: File) => ReactNode;
   placeholder?: ReactNode;
 }) => {
   const [file, setFile] = useState<File | undefined>(undefined);
@@ -19,7 +19,7 @@ export const FileUpload = ({
     if (acceptedFiles.length > 0) {
       const newFile = acceptedFiles[0];
       setFile(newFile);
-      onChange(newFile);
+      onChange?.(newFile);
     }
   };
 
@@ -49,12 +49,12 @@ export const FileUpload = ({
 
       {file ? (
         <>
-          {renderFile(file)}
+          {renderFile?.(file)}
           <IconButton
             onClick={(e) => {
               e.stopPropagation();
               setFile(undefined);
-              onChange(undefined);
+              onChange?.(undefined);
             }}
             sx={{
               position: "absolute",

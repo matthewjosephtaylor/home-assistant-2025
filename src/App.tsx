@@ -9,12 +9,19 @@ import { SCREENS } from "./SCREENS";
 import { useScreen } from "./state/useScreen";
 import TopMenu from "./ui/TopMenu";
 import { onEscape } from "./onEscape";
+import { Idbs } from "@mjt-engine/idb";
+import { AppConfig } from "./AppConfig";
+import { useAppState } from "./state/AppState";
 
 export const App = () => {
   const screen = useScreen();
   const screenComponent = screen ? SCREENS[screen] : <KioskScreen />;
 
   useEffect(() => {
+    Idbs.get(AppConfig, "config").then((config) => {
+      useAppState.getState().setUserDaimonId(config?.userDaimonId);
+    });
+
     const handleEscape = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
         onEscape();

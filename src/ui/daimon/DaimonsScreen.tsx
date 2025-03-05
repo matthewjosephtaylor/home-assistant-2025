@@ -1,82 +1,33 @@
-import { useEffect, useState, type ReactNode } from "react";
+import { useEffect, useState } from "react";
 import { GenericCrud, type CrudSchema } from "../crud/GenericCrud";
 
+import { Idbs } from "@mjt-engine/idb";
 import { Errors } from "@mjt-engine/message";
 import { isEmpty, isUndefined } from "@mjt-engine/object";
 import {
-  CONTENT_OBJECT_STORE,
   DAIMON_OBJECT_STORE,
   DaimonCharaCard,
-  type Content,
   type Daimon,
 } from "@mjt-services/daimon-common-2025";
 import { Datas, Ids } from "@mjt-services/data-common-2025";
+import { Stack } from "@mui/system";
+import { AppConfig } from "../../AppConfig";
 import { getConnection } from "../../connection/Connections";
 import { listDaimons } from "../../daimon/listDaimons";
+import { useAppState } from "../../state/AppState";
 import { FileUpload } from "../common/FileUpload";
 import { ContentView } from "../ContentView";
-import { Box } from "@mui/system";
-
-export const fileToContentId = async (file: File, creatorId?: string) => {
-  const ab = await file.arrayBuffer();
-  const content: Content = {
-    id: Ids.fromObjectStore(CONTENT_OBJECT_STORE),
-    contentType: file.type ?? "application/octet-stream",
-    value: ab,
-    createdAt: Date.now(),
-    creatorId,
-    finalized: true,
-  };
-  await Datas.put(await getConnection())({
-    value: content,
-  });
-  return content.id;
-};
-
-export const ImageUpdateContentView = ({
-  contentId,
-  onChange,
-}: {
-  contentId: string | undefined;
-  onChange?: (newValue: string) => void;
-}) => {
-  if (isUndefined(contentId)) {
-    // return <div>Upload button go here</div>;
-    return (
-      <FileUpload
-        onChange={async function (file): Promise<void> {
-          console.log("File uploaded", file);
-          if (isUndefined(file)) {
-            return;
-          }
-          const contentId = await fileToContentId(file);
-          console.log("Content ID", contentId);
-          onChange?.(contentId);
-        }}
-        renderFile={function (file: File): ReactNode {
-          return (
-            <ContentView
-              contentId={contentId}
-              imgProps={{ style: { maxHeight: "8em" } }}
-            />
-          );
-        }}
-      />
-    );
-  }
-  return (
-    <ContentView
-      contentId={contentId}
-      imgProps={{ style: { maxHeight: "8em" } }}
-    />
-  );
-};
+import { ImageUpdateContentView } from "./ImageUpdateContentView";
+import { bytesToDecodedPng } from "../../png/decodePng";
+import { bytesToDaimon } from "../../png/bytesToDaimon";
 
 export const DaimonsScreen = () => {
+  const { userDaimonId, setUserDaimonId } = useAppState();
   type DaimonCrud = DaimonCharaCard["data"] & {
     id: string;
     image?: string;
     model?: string;
+    isUser?: boolean;
   };
   const schema: CrudSchema<DaimonCrud> = {
     id: { label: "ID" },
@@ -89,6 +40,7 @@ export const DaimonsScreen = () => {
     model: {
       label: "Model",
     },
+
     image: {
       label: "Image",
       renderEditor: (value, onChange) => {
@@ -103,29 +55,68 @@ export const DaimonsScreen = () => {
         );
       },
     },
+    isUser: {
+      label: "User",
+      renderCell: (value) => {
+        return value ? "Yes" : "No";
+      },
+      renderEditor: (value, onChange) => {
+        return (
+          <input
+            type="checkbox"
+            checked={value ?? false}
+            onChange={(event) => {
+              onChange(event.target.checked);
+            }}
+          />
+        );
+      },
+    },
   };
   const [daimonCruds, setDaimonCruds] = useState<DaimonCrud[]>([]);
-  useEffect(() => {
+  const updateDaimons = () => {
     listDaimons().then((daimons) => {
       const daimonCruds: DaimonCrud[] = daimons.map((daimon) => ({
         id: daimon.id,
+        isUser: daimon.id === userDaimonId,
         image: daimon.chara.data.extensions?.avatar,
         model: daimon.chara.data.extensions?.llm,
         ...daimon.chara.data,
       }));
       setDaimonCruds(daimonCruds);
     });
-  }, []);
+  };
+  useEffect(() => {
+    updateDaimons();
+  }, [userDaimonId]);
   return (
-    <Box>
-      Daimon section
+    <Stack alignContent={"center"} spacing={"2em"} padding={"2em"}>
+      <Stack justifyContent={"center"} direction={"row"}>
+        <FileUpload
+          onChange={async (file) => {
+            console.log("File uploaded", file);
+            if (isUndefined(file)) {
+              return;
+            }
+            const daimon = await bytesToDaimon(file);
+            console.log(daimon);
+            updateDaimons();
+          }}
+        />
+      </Stack>
       <GenericCrud
         items={daimonCruds}
         schema={schema}
         onUpdate={async (item, index) => {
           console.log("Updated item", item, "at index", index);
           const con = await getConnection();
-          const { id, image, model, ...rest } = item;
+          const { id, image, model, isUser, ...rest } = item;
+          if (isUser) {
+            setUserDaimonId(id);
+            Idbs.update(AppConfig, "config", (cur) => {
+              return { ...cur, userDaimonId: id };
+            });
+          }
           const daimon: Daimon = {
             id,
             chara: {
@@ -153,7 +144,7 @@ export const DaimonsScreen = () => {
         onCreate={async (item) => {
           console.log("Created item", item);
           const con = await getConnection();
-          const { id: _id, image, model, ...rest } = item;
+          const { id: _id, image, model, isUser, ...rest } = item;
           try {
             const id = Ids.fromObjectStore(DAIMON_OBJECT_STORE);
             const daimon: Daimon = {
@@ -196,6 +187,6 @@ export const DaimonsScreen = () => {
           });
         }}
       />
-    </Box>
+    </Stack>
   );
 };

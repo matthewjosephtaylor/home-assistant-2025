@@ -20,6 +20,9 @@ importers:
       '@emotion/styled':
         specifier: ^11.14.0
         version: 11.14.0(@emotion/react@11.14.0(@types/react@19.0.10)(react@19.0.0))(@types/react@19.0.10)(react@19.0.0)
+      '@lunapaint/png-codec':
+        specifier: ^0.2.0
+        version: 0.2.0
       '@mjt-engine/assert':
         specifier: github:mjt-engine/assert
         version: https://codeload.github.com/mjt-engine/assert/tar.gz/58b808f45ca8a23cd7d613e75ba9e76c5fb70e55
@@ -54,23 +57,14 @@ importers:
         specifier: github:matthewjosephtaylor/vad-2025
         version: https://codeload.github.com/matthewjosephtaylor/vad-2025/tar.gz/8d930278bf9005524b278c99532fd3aac549114e(@types/node@22.13.9)(@types/react@19.0.10)(react-dom@19.0.0(react@19.0.0))(react-router-dom@6.28.1(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(react@19.0.0)(rollup@4.34.9)(sass-embedded@1.85.1)(typescript@5.8.2)
       '@mui/icons-material':
-        specifier: ^6.4.6
-        version: 6.4.6(@mui/material@6.4.6(@emotion/react@11.14.0(@types/react@19.0.10)(react@19.0.0))(@emotion/styled@11.14.0(@emotion/react@11.14.0(@types/react@19.0.10)(react@19.0.0))(@types/react@19.0.10)(react@19.0.0))(@types/react@19.0.10)(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(@types/react@19.0.10)(react@19.0.0)
+        specifier: ^6.4.7
+        version: 6.4.7(@mui/material@6.4.7(@emotion/react@11.14.0(@types/react@19.0.10)(react@19.0.0))(@emotion/styled@11.14.0(@emotion/react@11.14.0(@types/react@19.0.10)(react@19.0.0))(@types/react@19.0.10)(react@19.0.0))(@types/react@19.0.10)(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(@types/react@19.0.10)(react@19.0.0)
       '@mui/material':
-        specifier: ^6.4.6
-        version: 6.4.6(@emotion/react@11.14.0(@types/react@19.0.10)(react@19.0.0))(@emotion/styled@11.14.0(@emotion/react@11.14.0(@types/react@19.0.10)(react@19.0.0))(@types/react@19.0.10)(react@19.0.0))(@types/react@19.0.10)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
+        specifier: ^6.4.7
+        version: 6.4.7(@emotion/react@11.14.0(@types/react@19.0.10)(react@19.0.0))(@emotion/styled@11.14.0(@emotion/react@11.14.0(@types/react@19.0.10)(react@19.0.0))(@types/react@19.0.10)(react@19.0.0))(@types/react@19.0.10)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       '@mui/system':
-        specifier: ^6.4.6
-        version: 6.4.6(@emotion/react@11.14.0(@types/react@19.0.10)(react@19.0.0))(@emotion/styled@11.14.0(@emotion/react@11.14.0(@types/react@19.0.10)(react@19.0.0))(@types/react@19.0.10)(react@19.0.0))(@types/react@19.0.10)(react@19.0.0)
-      '@types/parsimmon':
-        specifier: ^1.10.9
-        version: 1.10.9
-      '@types/react':
-        specifier: ^19.0.10
-        version: 19.0.10
-      '@types/react-dom':
-        specifier: ^19.0.4
-        version: 19.0.4(@types/react@19.0.10)
+        specifier: ^6.4.7
+        version: 6.4.7(@emotion/react@11.14.0(@types/react@19.0.10)(react@19.0.0))(@emotion/styled@11.14.0(@emotion/react@11.14.0(@types/react@19.0.10)(react@19.0.0))(@types/react@19.0.10)(react@19.0.0))(@types/react@19.0.10)(react@19.0.0)
       '@zxing/library':
         specifier: ^0.21.3
         version: 0.21.3
@@ -80,9 +74,6 @@ importers:
       framer-motion:
         specifier: ^11.18.2
         version: 11.18.2(@emotion/is-prop-valid@1.3.1)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
-      gh-pages:
-        specifier: ^6.3.0
-        version: 6.3.0
       immer:
         specifier: ^10.1.1
         version: 10.1.1
@@ -104,9 +95,6 @@ importers:
       typescript:
         specifier: ^5.7.2
         version: 5.8.2
-      vite:
-        specifier: ^6.2.0
-        version: 6.2.0(@types/node@22.13.9)(sass-embedded@1.85.1)
       zustand:
         specifier: ^5.0.3
         version: 5.0.3(@types/react@19.0.10)(immer@10.1.1)(react@19.0.0)
@@ -114,9 +102,21 @@ importers:
       '@types/bun':
         specifier: latest
         version: 1.2.4
+      '@types/parsimmon':
+        specifier: ^1.10.9
+        version: 1.10.9
+      '@types/pngjs':
+        specifier: ^6.0.5
+        version: 6.0.5
       '@types/qrcode':
         specifier: ^1.5.5
         version: 1.5.5
+      '@types/react':
+        specifier: ^19.0.10
+        version: 19.0.10
+      '@types/react-dom':
+        specifier: ^19.0.4
+        version: 19.0.4(@types/react@19.0.10)
       '@typescript-eslint/eslint-plugin':
         specifier: ^8.26.0
         version: 8.26.0(@typescript-eslint/parser@8.26.0(eslint@9.21.0)(typescript@5.8.2))(eslint@9.21.0)(typescript@5.8.2)
@@ -141,12 +141,18 @@ importers:
       eslint-plugin-react-hooks:
         specifier: ^5.2.0
         version: 5.2.0(eslint@9.21.0)
+      gh-pages:
+        specifier: ^6.3.0
+        version: 6.3.0
       prettier:
         specifier: ^3.5.3
         version: 3.5.3
       sass-embedded:
         specifier: ^1.85.1
         version: 1.85.1
+      vite:
+        specifier: ^6.2.0
+        version: 6.2.0(@types/node@22.13.9)(sass-embedded@1.85.1)
 
 packages:
 
@@ -649,6 +655,9 @@ packages:
   '@jridgewell/trace-mapping@0.3.25':
     resolution: {integrity: sha512-vNk6aEwybGtawWmy/PzwnGDOjCkLWSD2wqvjGGAgOAwCGWySYXfYoxt00IJkTF+8Lb57DwOb3Aa0o9CApepiYQ==}
 
+  '@lunapaint/png-codec@0.2.0':
+    resolution: {integrity: sha512-S2Fk8+I27j8ZL585PlEK9hhljZcp6j+JWB5ZHAeePdufJMYHxXD2zlatLRaiy5riXRFqkCi/gong7yP9kSsEZg==}
+
   '@mjt-engine/assert@https://codeload.github.com/mjt-engine/assert/tar.gz/58b808f45ca8a23cd7d613e75ba9e76c5fb70e55':
     resolution: {tarball: https://codeload.github.com/mjt-engine/assert/tar.gz/58b808f45ca8a23cd7d613e75ba9e76c5fb70e55}
     version: 2025.1.19-1221
@@ -762,27 +771,27 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@mui/core-downloads-tracker@6.4.6':
-    resolution: {integrity: sha512-rho5Q4IscbrVmK9rCrLTJmjLjfH6m/NcqKr/mchvck0EIXlyYUB9+Z0oVmkt/+Mben43LMRYBH8q/Uzxj/c4Vw==}
+  '@mui/core-downloads-tracker@6.4.7':
+    resolution: {integrity: sha512-XjJrKFNt9zAKvcnoIIBquXyFyhfrHYuttqMsoDS7lM7VwufYG4fAPw4kINjBFg++fqXM2BNAuWR9J7XVIuKIKg==}
 
-  '@mui/icons-material@6.4.6':
-    resolution: {integrity: sha512-rGJBvIQQbQAlyKYljHQ8wAQS/K2/uYwvemcpygnAmCizmCI4zSF9HQPuiG8Ql4YLZ6V/uKjA3WHIYmF/8sV+pQ==}
+  '@mui/icons-material@6.4.7':
+    resolution: {integrity: sha512-Rk8cs9ufQoLBw582Rdqq7fnSXXZTqhYRbpe1Y5SAz9lJKZP3CIdrj0PfG8HJLGw1hrsHFN/rkkm70IDzhJsG1g==}
     engines: {node: '>=14.0.0'}
     peerDependencies:
-      '@mui/material': ^6.4.6
+      '@mui/material': ^6.4.7
       '@types/react': ^17.0.0 || ^18.0.0 || ^19.0.0
       react: ^17.0.0 || ^18.0.0 || ^19.0.0
     peerDependenciesMeta:
       '@types/react':
         optional: true
 
-  '@mui/material@6.4.6':
-    resolution: {integrity: sha512-6UyAju+DBOdMogfYmLiT3Nu7RgliorimNBny1pN/acOjc+THNFVE7hlxLyn3RDONoZJNDi/8vO4AQQr6dLAXqA==}
+  '@mui/material@6.4.7':
+    resolution: {integrity: sha512-K65StXUeGAtFJ4ikvHKtmDCO5Ab7g0FZUu2J5VpoKD+O6Y3CjLYzRi+TMlI3kaL4CL158+FccMoOd/eaddmeRQ==}
     engines: {node: '>=14.0.0'}
     peerDependencies:
       '@emotion/react': ^11.5.0
       '@emotion/styled': ^11.3.0
-      '@mui/material-pigment-css': ^6.4.6
+      '@mui/material-pigment-css': ^6.4.7
       '@types/react': ^17.0.0 || ^18.0.0 || ^19.0.0
       react: ^17.0.0 || ^18.0.0 || ^19.0.0
       react-dom: ^17.0.0 || ^18.0.0 || ^19.0.0
@@ -819,8 +828,8 @@ packages:
       '@emotion/styled':
         optional: true
 
-  '@mui/system@6.4.6':
-    resolution: {integrity: sha512-FQjWwPec7pMTtB/jw5f9eyLynKFZ6/Ej9vhm5kGdtmts1z5b7Vyn3Rz6kasfYm1j2TfrfGnSXRvvtwVWxjpz6g==}
+  '@mui/system@6.4.7':
+    resolution: {integrity: sha512-7wwc4++Ak6tGIooEVA9AY7FhH2p9fvBMORT4vNLMAysH3Yus/9B9RYMbrn3ANgsOyvT3Z7nE+SP8/+3FimQmcg==}
     engines: {node: '>=14.0.0'}
     peerDependencies:
       '@emotion/react': ^11.5.0
@@ -865,61 +874,61 @@ packages:
     resolution: {integrity: sha512-oGB+UxlgWcgQkgwo8GcEGwemoTFt3FIO9ababBmaGwXIoBKZ+GTy0pP185beGg7Llih/NSHSV2XAs1lnznocSg==}
     engines: {node: '>= 8'}
 
-  '@pixiv/three-vrm-core@3.3.4':
-    resolution: {integrity: sha512-n+CIGoK91tRDr0j0fqdjRbmV3LTTUztSu7Qqk3FHef8elnZlxPqlfqjvrt17ucgTOstszoYefYlwyL1L+eaRug==}
+  '@pixiv/three-vrm-core@3.3.5':
+    resolution: {integrity: sha512-74eDzLtdOOc8S4NnL+W8ooV7RFTvGBKna7UbxESmpKSt1ar9dQcK98xd+Jp68yDVOlhF6slNRBrzgkmjzsHdww==}
     peerDependencies:
       three: '>=0.137'
 
-  '@pixiv/three-vrm-materials-hdr-emissive-multiplier@3.3.4':
-    resolution: {integrity: sha512-IARBJuOdG7DpiHxko3pkcnySQOK5Rat3XpdTfsKj0gEZpgYeLkIG86Tc37l3p7/Si34XRUcs5hgp1z6QCCNi+w==}
+  '@pixiv/three-vrm-materials-hdr-emissive-multiplier@3.3.5':
+    resolution: {integrity: sha512-Pgn2mgemo1/UB5appJbxzOKvt6oBBNgIyE3+2a8kGpc1UnK6UzydaQpgJYHPauZF09vBBTY2/xLa9/LeIwOtCw==}
     peerDependencies:
       three: '>=0.137'
 
-  '@pixiv/three-vrm-materials-mtoon@3.3.4':
-    resolution: {integrity: sha512-lSOEkphxpZ8JpcCXSTX1ZCFn1fYSPNUwpMLocsyJUl5WKK7On5Y1mqCMyKeCdx58+1TF/Mh478Pwyp4a5ltKWg==}
+  '@pixiv/three-vrm-materials-mtoon@3.3.5':
+    resolution: {integrity: sha512-c+m1m1f9vQdVINhJWhZobOLhVWzxVAmASAw65chOghxnPqCCihZ8hBBneUaUjDjwrCp9IP2iWUIk4DA06ZSC1A==}
     peerDependencies:
       three: '>=0.137'
 
-  '@pixiv/three-vrm-materials-v0compat@3.3.4':
-    resolution: {integrity: sha512-Sx+J8RivdGnLwtYcdrVSGRzq/f5stNzHpSyE2fRiZOD4iwGCCxHGRniA0JusGNtOVl2K62IRFpGzoy9mSS/yUg==}
+  '@pixiv/three-vrm-materials-v0compat@3.3.5':
+    resolution: {integrity: sha512-NuEcacSdR5i3rT/0DClSB6b0ZXOwQ8uQvu/ddJPceWP4Lz/oMC6b0W2zD5mhrhVnk5G+E28L1EDQRVzrZyOf+g==}
     peerDependencies:
       three: '>=0.137'
 
-  '@pixiv/three-vrm-node-constraint@3.3.4':
-    resolution: {integrity: sha512-oMKnWQuGplPSrBPkcVVAYTlnboMHly3SbyfW5ur+2Gzee0svj9Pf/lfWsinzmtElkihsCdrwsTWi8imV9KBoeg==}
+  '@pixiv/three-vrm-node-constraint@3.3.5':
+    resolution: {integrity: sha512-y39n23zSf7MLQK7R4m7RGiOxzYw/gV2HcpHgGpVnJ0M1mAEKz7inByS416k3N/5Z1crS9D3A9nrpChUbP5s9kA==}
     peerDependencies:
       three: '>=0.137'
 
-  '@pixiv/three-vrm-springbone@3.3.4':
-    resolution: {integrity: sha512-9iQWVcLixsXWmgEsCoLeuKvjuRSM8/rqI1VsCvpeG4ILn/uW3yhqV3B+CPy/2X/f//qv9sRUiFu5YIOTAFFTnA==}
+  '@pixiv/three-vrm-springbone@3.3.5':
+    resolution: {integrity: sha512-xRvQfd9nV+qBmiYVIar/OhTmZCJkSh/jovGOdoQfuIpZjXzGl+4NClHkqrEp2bxUVxB4Wg5CTdD2njELy88Mxg==}
     peerDependencies:
       three: '>=0.137'
 
-  '@pixiv/three-vrm@3.3.4':
-    resolution: {integrity: sha512-9i4JaVVXvs/FvMfrBDvHiHXejX6w1BsdYPpWKMBFHazHwQN5yFP7vUObKz6UPjivw+QVwIHfbKu+FqQsAMM41Q==}
+  '@pixiv/three-vrm@3.3.5':
+    resolution: {integrity: sha512-quz7wqa5rdrw/BQ39HLkmv44PiY+HKOV7bm60pRGmwIZz+VxbHOtMWTtJHQHibKDKuTIP160tJ2WnhfdI7Wk6A==}
     peerDependencies:
       three: '>=0.137'
 
-  '@pixiv/types-vrm-0.0@3.3.4':
-    resolution: {integrity: sha512-/mV5HviKPJitvJSOcVkOuOBJpAvpGDEOP5xUiUNm3JGfBJvf4Z4LI+LhVKizcAXrdk/+b5Zyiidh7fcu25CdRw==}
+  '@pixiv/types-vrm-0.0@3.3.5':
+    resolution: {integrity: sha512-3lYxo4htpn0qGMvf8ihrSgm6ChnTQe8UimZ8zBgcd3SEsxsqsCUoRj26u9un4OWYs5wTJzY5vrKXJDjx79gw3w==}
 
-  '@pixiv/types-vrmc-materials-hdr-emissive-multiplier-1.0@3.3.4':
-    resolution: {integrity: sha512-BbTu4O+DFT4/Vr8G0p7cZ1aTN072S5oFZO7cun8xNDh/sL3oLq1yX/NmXgp7ahPnkaGmDAIVtFugZwjHg2k90w==}
+  '@pixiv/types-vrmc-materials-hdr-emissive-multiplier-1.0@3.3.5':
+    resolution: {integrity: sha512-NWbOV0EE3KC7MaqYbjF0Wh4IrmbWF361lXDckeR/BdV3Dk9roLvVPy/lT1Zwj6LZP8SHUE389zue+K6LBvULbw==}
 
-  '@pixiv/types-vrmc-materials-mtoon-1.0@3.3.4':
-    resolution: {integrity: sha512-/gxxeYHBpuj6YEWl3W9bQF0qFVj7kXbSDPIWSfMTrryupIC4SuRIjPvacU3n/cKuRRIngFeTGqFMhG64dilx5g==}
+  '@pixiv/types-vrmc-materials-mtoon-1.0@3.3.5':
+    resolution: {integrity: sha512-tayLzbVxLhb8eRBsQFh3X2Y5+UUGO9sNzZmPV8Xka5+Isgi1iksj6FNhYKUjoQj686xqeenDQ3XVS9c0A8u0zA==}
 
-  '@pixiv/types-vrmc-node-constraint-1.0@3.3.4':
-    resolution: {integrity: sha512-+Z/c+VmvaWdKmeKubg41Ovf/Hb+yemPfBCaID/kyQSANW+ZcykiRfP/qC4/6uuUf2IrmdzCa2p8y9pramRtQkw==}
+  '@pixiv/types-vrmc-node-constraint-1.0@3.3.5':
+    resolution: {integrity: sha512-gXF8NQUCxXyWCDAjq0z2ojput0fF1DyM1CzhoDrR0sYEpEdmPVDnVTE5iC6kVOPQMXJkxM8qU9UFub4KdC4rmw==}
 
-  '@pixiv/types-vrmc-springbone-1.0@3.3.4':
-    resolution: {integrity: sha512-tkkcZqS0OxKA90fHLNt9lwunpdmGat/ce8H6n5lrvjpCC6qlCvB4S/BsjSKSV3u5PMmkKYjrrk7dpvoWnMsSLg==}
+  '@pixiv/types-vrmc-springbone-1.0@3.3.5':
+    resolution: {integrity: sha512-9aEZTDKnQgG8nWQkgRDKhlwlxA3Mr/QVlPID6lOd1c1ts7tRpntsmstHFHE8C9tmICRLjiYMkKwqw2wAAvOVkQ==}
 
-  '@pixiv/types-vrmc-springbone-extended-collider-1.0@3.3.4':
-    resolution: {integrity: sha512-45VuCCCXaZdiDL4Bh0fJuVoDa0amqCoElT+bi9H8IHujoWUQO8Mu65IxhNSLIuWkSKZsJ4UkY1a20K87/cUCkQ==}
+  '@pixiv/types-vrmc-springbone-extended-collider-1.0@3.3.5':
+    resolution: {integrity: sha512-9EBinP6yrwbIB5EOHlqugeNPgEdkdKoUZOO160m/Jz9G8Su4M5YX6W1X4KWbQ7vlEQuWi3dJginBxCfHwLbyJg==}
 
-  '@pixiv/types-vrmc-vrm-1.0@3.3.4':
-    resolution: {integrity: sha512-Pc21xhkyiFg5pOR18OJnUoRt7Ld10kitpMtClechXiMudgbcZl+XSb/zpk0FspZlbyj7LXppPrlEiIHOn0uAHA==}
+  '@pixiv/types-vrmc-vrm-1.0@3.3.5':
+    resolution: {integrity: sha512-pNhNSbe8IAaj44ckESK1xjWPeCm7cqnXKEsslMY9EZPYFysMWBYSES9CWzwfJvxyyjsmZpybqN8vOUWot3QXlQ==}
 
   '@pkgr/core@0.1.1':
     resolution: {integrity: sha512-cq8o4cWH0ibXh9VGi5P20Tu9XF/0fFXl9EUinr9QfTM7a7p0oTA4iJRCQWppXR1Pg8dSM0UCItCkPwsk9qWWYA==}
@@ -1108,6 +1117,9 @@ packages:
   '@types/parsimmon@1.10.9':
     resolution: {integrity: sha512-O2M2x1w+m7gWLen8i5DOy6tWRnbRcsW6Pke3j3HAsJUrPb4g0MgjksIUm2aqUtCYxy7Qjr3CzjjwQBzhiGn46A==}
 
+  '@types/pngjs@6.0.5':
+    resolution: {integrity: sha512-0k5eKfrA83JOZPppLtS2C7OUtyNAl2wKNxfyYl9Q5g9lPkgBl/9hNyAu6HuEH2J4XmIv2znEpkDd0SaZVxW6iQ==}
+
   '@types/prop-types@15.7.14':
     resolution: {integrity: sha512-gNMvNH49DJ7OJYv+KAKn0Xp45p8PLl6zo2YnvDIbTd4J6MER2BmWN49TG7n9LvkyihINxeKW8+3bfS2yDC9dzQ==}
 
@@ -1192,8 +1204,8 @@ packages:
     peerDependencies:
       acorn: ^6.0.0 || ^7.0.0 || ^8.0.0
 
-  acorn@8.14.0:
-    resolution: {integrity: sha512-cl669nCJTZBsL97OF4kUQm5g5hC2uihk0NxY3WENAC0TYdILVkAyHymAntgxGkl7K+t0cXIrH5siy5S4XkFycA==}
+  acorn@8.14.1:
+    resolution: {integrity: sha512-OvQ/2pUDKmgfCg++xsTX1wGxfTaszcHVcTctW4UJB4hibJx2HXxxO5UmVgyjMa+ZDsiaf5wWLXYpRWMmBI0QHg==}
     engines: {node: '>=0.4.0'}
     hasBin: true
 
@@ -1269,8 +1281,8 @@ packages:
     resolution: {integrity: sha512-wvUjBtSGN7+7SjNpq/9M2Tg350UZD3q62IFZLbRAR1bSMlCo1ZaeW+BJ+D090e4hIIZLBcTDWe4Mh4jvUDajzQ==}
     engines: {node: '>= 0.4'}
 
-  axe-core@4.10.2:
-    resolution: {integrity: sha512-RE3mdQ7P3FRSe7eqCWoeQ/Z9QXrtniSjp1wUjt5nRC3WIpz5rSCve6o3fsZ2aCpJtrZjSZgjwXAoTO5k4tEI0w==}
+  axe-core@4.10.3:
+    resolution: {integrity: sha512-Xm7bpRXnDSX2YE2YFfBk2FnF0ep6tmG7xPh8iHee8MIcrgq762Nkce856dYtJYLkuIoYZvGfTs/PbZhideTcEg==}
     engines: {node: '>=4'}
 
   axobject-query@4.1.0:
@@ -2217,6 +2229,9 @@ packages:
   p-try@2.2.0:
     resolution: {integrity: sha512-R4nPAVTAU0B9D35/Gk3uJf/7XYbQcyohSKdvAxIRSNghFl4e71hVoGnBNQz9cWaXxO2I10KTC+3jMdvvoKw6dQ==}
     engines: {node: '>=6'}
+
+  pako@2.1.0:
+    resolution: {integrity: sha512-w+eufiZ1WuJYgPXbV/PO3NCMEc3xqylkKHzp8bxp1uW4qaSNQUkwmLLEc3kKsfz8lpV1F8Ht3U1Cm+9Srog2ug==}
 
   parent-module@1.0.1:
     resolution: {integrity: sha512-GQ2EWRpQV8/o+Aw8YqtfZZPfNRWZYkbidE9k5rpl/hC3vtHHBfGm2Ifi6qWV+coDGkrUKZAxE3Lot5kcsRlh+g==}
@@ -3284,6 +3299,10 @@ snapshots:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.5.0
 
+  '@lunapaint/png-codec@0.2.0':
+    dependencies:
+      pako: 2.1.0
+
   '@mjt-engine/assert@https://codeload.github.com/mjt-engine/assert/tar.gz/58b808f45ca8a23cd7d613e75ba9e76c5fb70e55': {}
 
   '@mjt-engine/byte@https://codeload.github.com/mjt-engine/byte/tar.gz/472e6b25258a1d694808e214d3a41e07f7d8504f':
@@ -3336,9 +3355,9 @@ snapshots:
       '@emotion/react': 11.14.0(@types/react@19.0.10)(react@19.0.0)
       '@emotion/styled': 11.14.0(@emotion/react@11.14.0(@types/react@19.0.10)(react@19.0.0))(@types/react@19.0.10)(react@19.0.0)
       '@mjtdev/engine': https://codeload.github.com/matthewjosephtaylor/mjtdev-engine/tar.gz/bfee937b329f6b09376bbee52cf1875cbf17e7c0(nats.ws@1.29.2)
-      '@mui/material': 6.4.6(@emotion/react@11.14.0(@types/react@19.0.10)(react@19.0.0))(@emotion/styled@11.14.0(@emotion/react@11.14.0(@types/react@19.0.10)(react@19.0.0))(@types/react@19.0.10)(react@19.0.0))(@types/react@19.0.10)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
-      '@mui/system': 6.4.6(@emotion/react@11.14.0(@types/react@19.0.10)(react@19.0.0))(@emotion/styled@11.14.0(@emotion/react@11.14.0(@types/react@19.0.10)(react@19.0.0))(@types/react@19.0.10)(react@19.0.0))(@types/react@19.0.10)(react@19.0.0)
-      '@pixiv/three-vrm': 3.3.4(three@0.169.0)
+      '@mui/material': 6.4.7(@emotion/react@11.14.0(@types/react@19.0.10)(react@19.0.0))(@emotion/styled@11.14.0(@emotion/react@11.14.0(@types/react@19.0.10)(react@19.0.0))(@types/react@19.0.10)(react@19.0.0))(@types/react@19.0.10)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
+      '@mui/system': 6.4.7(@emotion/react@11.14.0(@types/react@19.0.10)(react@19.0.0))(@emotion/styled@11.14.0(@emotion/react@11.14.0(@types/react@19.0.10)(react@19.0.0))(@types/react@19.0.10)(react@19.0.0))(@types/react@19.0.10)(react@19.0.0)
+      '@pixiv/three-vrm': 3.3.5(three@0.169.0)
       babylon-vrm-loader: 2.0.0(@babylonjs/core@7.51.3)(@babylonjs/loaders@7.51.3(@babylonjs/core@7.51.3)(babylonjs-gltf2interface@7.42.0))
       eslint: 9.21.0
       framer-motion: 11.18.2(@emotion/is-prop-valid@1.3.1)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
@@ -3377,8 +3396,8 @@ snapshots:
     dependencies:
       '@emotion/react': 11.14.0(@types/react@19.0.10)(react@19.0.0)
       '@emotion/styled': 11.14.0(@emotion/react@11.14.0(@types/react@19.0.10)(react@19.0.0))(@types/react@19.0.10)(react@19.0.0)
-      '@mui/material': 6.4.6(@emotion/react@11.14.0(@types/react@19.0.10)(react@19.0.0))(@emotion/styled@11.14.0(@emotion/react@11.14.0(@types/react@19.0.10)(react@19.0.0))(@types/react@19.0.10)(react@19.0.0))(@types/react@19.0.10)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
-      '@mui/system': 6.4.6(@emotion/react@11.14.0(@types/react@19.0.10)(react@19.0.0))(@emotion/styled@11.14.0(@emotion/react@11.14.0(@types/react@19.0.10)(react@19.0.0))(@types/react@19.0.10)(react@19.0.0))(@types/react@19.0.10)(react@19.0.0)
+      '@mui/material': 6.4.7(@emotion/react@11.14.0(@types/react@19.0.10)(react@19.0.0))(@emotion/styled@11.14.0(@emotion/react@11.14.0(@types/react@19.0.10)(react@19.0.0))(@types/react@19.0.10)(react@19.0.0))(@types/react@19.0.10)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
+      '@mui/system': 6.4.7(@emotion/react@11.14.0(@types/react@19.0.10)(react@19.0.0))(@emotion/styled@11.14.0(@emotion/react@11.14.0(@types/react@19.0.10)(react@19.0.0))(@types/react@19.0.10)(react@19.0.0))(@types/react@19.0.10)(react@19.0.0)
       '@ricky0123/vad-web': 0.0.22
       immer: 10.1.1
       meyda: 5.6.3(rollup@4.34.9)
@@ -3424,21 +3443,21 @@ snapshots:
   '@msgpackr-extract/msgpackr-extract-win32-x64@3.0.3':
     optional: true
 
-  '@mui/core-downloads-tracker@6.4.6': {}
+  '@mui/core-downloads-tracker@6.4.7': {}
 
-  '@mui/icons-material@6.4.6(@mui/material@6.4.6(@emotion/react@11.14.0(@types/react@19.0.10)(react@19.0.0))(@emotion/styled@11.14.0(@emotion/react@11.14.0(@types/react@19.0.10)(react@19.0.0))(@types/react@19.0.10)(react@19.0.0))(@types/react@19.0.10)(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(@types/react@19.0.10)(react@19.0.0)':
+  '@mui/icons-material@6.4.7(@mui/material@6.4.7(@emotion/react@11.14.0(@types/react@19.0.10)(react@19.0.0))(@emotion/styled@11.14.0(@emotion/react@11.14.0(@types/react@19.0.10)(react@19.0.0))(@types/react@19.0.10)(react@19.0.0))(@types/react@19.0.10)(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(@types/react@19.0.10)(react@19.0.0)':
     dependencies:
       '@babel/runtime': 7.26.9
-      '@mui/material': 6.4.6(@emotion/react@11.14.0(@types/react@19.0.10)(react@19.0.0))(@emotion/styled@11.14.0(@emotion/react@11.14.0(@types/react@19.0.10)(react@19.0.0))(@types/react@19.0.10)(react@19.0.0))(@types/react@19.0.10)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
+      '@mui/material': 6.4.7(@emotion/react@11.14.0(@types/react@19.0.10)(react@19.0.0))(@emotion/styled@11.14.0(@emotion/react@11.14.0(@types/react@19.0.10)(react@19.0.0))(@types/react@19.0.10)(react@19.0.0))(@types/react@19.0.10)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       react: 19.0.0
     optionalDependencies:
       '@types/react': 19.0.10
 
-  '@mui/material@6.4.6(@emotion/react@11.14.0(@types/react@19.0.10)(react@19.0.0))(@emotion/styled@11.14.0(@emotion/react@11.14.0(@types/react@19.0.10)(react@19.0.0))(@types/react@19.0.10)(react@19.0.0))(@types/react@19.0.10)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)':
+  '@mui/material@6.4.7(@emotion/react@11.14.0(@types/react@19.0.10)(react@19.0.0))(@emotion/styled@11.14.0(@emotion/react@11.14.0(@types/react@19.0.10)(react@19.0.0))(@types/react@19.0.10)(react@19.0.0))(@types/react@19.0.10)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)':
     dependencies:
       '@babel/runtime': 7.26.9
-      '@mui/core-downloads-tracker': 6.4.6
-      '@mui/system': 6.4.6(@emotion/react@11.14.0(@types/react@19.0.10)(react@19.0.0))(@emotion/styled@11.14.0(@emotion/react@11.14.0(@types/react@19.0.10)(react@19.0.0))(@types/react@19.0.10)(react@19.0.0))(@types/react@19.0.10)(react@19.0.0)
+      '@mui/core-downloads-tracker': 6.4.7
+      '@mui/system': 6.4.7(@emotion/react@11.14.0(@types/react@19.0.10)(react@19.0.0))(@emotion/styled@11.14.0(@emotion/react@11.14.0(@types/react@19.0.10)(react@19.0.0))(@types/react@19.0.10)(react@19.0.0))(@types/react@19.0.10)(react@19.0.0)
       '@mui/types': 7.2.21(@types/react@19.0.10)
       '@mui/utils': 6.4.6(@types/react@19.0.10)(react@19.0.0)
       '@popperjs/core': 2.11.8
@@ -3477,7 +3496,7 @@ snapshots:
       '@emotion/react': 11.14.0(@types/react@19.0.10)(react@19.0.0)
       '@emotion/styled': 11.14.0(@emotion/react@11.14.0(@types/react@19.0.10)(react@19.0.0))(@types/react@19.0.10)(react@19.0.0)
 
-  '@mui/system@6.4.6(@emotion/react@11.14.0(@types/react@19.0.10)(react@19.0.0))(@emotion/styled@11.14.0(@emotion/react@11.14.0(@types/react@19.0.10)(react@19.0.0))(@types/react@19.0.10)(react@19.0.0))(@types/react@19.0.10)(react@19.0.0)':
+  '@mui/system@6.4.7(@emotion/react@11.14.0(@types/react@19.0.10)(react@19.0.0))(@emotion/styled@11.14.0(@emotion/react@11.14.0(@types/react@19.0.10)(react@19.0.0))(@types/react@19.0.10)(react@19.0.0))(@types/react@19.0.10)(react@19.0.0)':
     dependencies:
       '@babel/runtime': 7.26.9
       '@mui/private-theming': 6.4.6(@types/react@19.0.10)(react@19.0.0)
@@ -3521,64 +3540,64 @@ snapshots:
       '@nodelib/fs.scandir': 2.1.5
       fastq: 1.19.1
 
-  '@pixiv/three-vrm-core@3.3.4(three@0.169.0)':
+  '@pixiv/three-vrm-core@3.3.5(three@0.169.0)':
     dependencies:
-      '@pixiv/types-vrm-0.0': 3.3.4
-      '@pixiv/types-vrmc-vrm-1.0': 3.3.4
+      '@pixiv/types-vrm-0.0': 3.3.5
+      '@pixiv/types-vrmc-vrm-1.0': 3.3.5
       three: 0.169.0
 
-  '@pixiv/three-vrm-materials-hdr-emissive-multiplier@3.3.4(three@0.169.0)':
+  '@pixiv/three-vrm-materials-hdr-emissive-multiplier@3.3.5(three@0.169.0)':
     dependencies:
-      '@pixiv/types-vrmc-materials-hdr-emissive-multiplier-1.0': 3.3.4
+      '@pixiv/types-vrmc-materials-hdr-emissive-multiplier-1.0': 3.3.5
       three: 0.169.0
 
-  '@pixiv/three-vrm-materials-mtoon@3.3.4(three@0.169.0)':
+  '@pixiv/three-vrm-materials-mtoon@3.3.5(three@0.169.0)':
     dependencies:
-      '@pixiv/types-vrm-0.0': 3.3.4
-      '@pixiv/types-vrmc-materials-mtoon-1.0': 3.3.4
+      '@pixiv/types-vrm-0.0': 3.3.5
+      '@pixiv/types-vrmc-materials-mtoon-1.0': 3.3.5
       three: 0.169.0
 
-  '@pixiv/three-vrm-materials-v0compat@3.3.4(three@0.169.0)':
+  '@pixiv/three-vrm-materials-v0compat@3.3.5(three@0.169.0)':
     dependencies:
-      '@pixiv/types-vrm-0.0': 3.3.4
-      '@pixiv/types-vrmc-materials-mtoon-1.0': 3.3.4
+      '@pixiv/types-vrm-0.0': 3.3.5
+      '@pixiv/types-vrmc-materials-mtoon-1.0': 3.3.5
       three: 0.169.0
 
-  '@pixiv/three-vrm-node-constraint@3.3.4(three@0.169.0)':
+  '@pixiv/three-vrm-node-constraint@3.3.5(three@0.169.0)':
     dependencies:
-      '@pixiv/types-vrmc-node-constraint-1.0': 3.3.4
+      '@pixiv/types-vrmc-node-constraint-1.0': 3.3.5
       three: 0.169.0
 
-  '@pixiv/three-vrm-springbone@3.3.4(three@0.169.0)':
+  '@pixiv/three-vrm-springbone@3.3.5(three@0.169.0)':
     dependencies:
-      '@pixiv/types-vrm-0.0': 3.3.4
-      '@pixiv/types-vrmc-springbone-1.0': 3.3.4
-      '@pixiv/types-vrmc-springbone-extended-collider-1.0': 3.3.4
+      '@pixiv/types-vrm-0.0': 3.3.5
+      '@pixiv/types-vrmc-springbone-1.0': 3.3.5
+      '@pixiv/types-vrmc-springbone-extended-collider-1.0': 3.3.5
       three: 0.169.0
 
-  '@pixiv/three-vrm@3.3.4(three@0.169.0)':
+  '@pixiv/three-vrm@3.3.5(three@0.169.0)':
     dependencies:
-      '@pixiv/three-vrm-core': 3.3.4(three@0.169.0)
-      '@pixiv/three-vrm-materials-hdr-emissive-multiplier': 3.3.4(three@0.169.0)
-      '@pixiv/three-vrm-materials-mtoon': 3.3.4(three@0.169.0)
-      '@pixiv/three-vrm-materials-v0compat': 3.3.4(three@0.169.0)
-      '@pixiv/three-vrm-node-constraint': 3.3.4(three@0.169.0)
-      '@pixiv/three-vrm-springbone': 3.3.4(three@0.169.0)
+      '@pixiv/three-vrm-core': 3.3.5(three@0.169.0)
+      '@pixiv/three-vrm-materials-hdr-emissive-multiplier': 3.3.5(three@0.169.0)
+      '@pixiv/three-vrm-materials-mtoon': 3.3.5(three@0.169.0)
+      '@pixiv/three-vrm-materials-v0compat': 3.3.5(three@0.169.0)
+      '@pixiv/three-vrm-node-constraint': 3.3.5(three@0.169.0)
+      '@pixiv/three-vrm-springbone': 3.3.5(three@0.169.0)
       three: 0.169.0
 
-  '@pixiv/types-vrm-0.0@3.3.4': {}
+  '@pixiv/types-vrm-0.0@3.3.5': {}
 
-  '@pixiv/types-vrmc-materials-hdr-emissive-multiplier-1.0@3.3.4': {}
+  '@pixiv/types-vrmc-materials-hdr-emissive-multiplier-1.0@3.3.5': {}
 
-  '@pixiv/types-vrmc-materials-mtoon-1.0@3.3.4': {}
+  '@pixiv/types-vrmc-materials-mtoon-1.0@3.3.5': {}
 
-  '@pixiv/types-vrmc-node-constraint-1.0@3.3.4': {}
+  '@pixiv/types-vrmc-node-constraint-1.0@3.3.5': {}
 
-  '@pixiv/types-vrmc-springbone-1.0@3.3.4': {}
+  '@pixiv/types-vrmc-springbone-1.0@3.3.5': {}
 
-  '@pixiv/types-vrmc-springbone-extended-collider-1.0@3.3.4': {}
+  '@pixiv/types-vrmc-springbone-extended-collider-1.0@3.3.5': {}
 
-  '@pixiv/types-vrmc-vrm-1.0@3.3.4': {}
+  '@pixiv/types-vrmc-vrm-1.0@3.3.5': {}
 
   '@pkgr/core@0.1.1': {}
 
@@ -3712,6 +3731,10 @@ snapshots:
 
   '@types/parsimmon@1.10.9': {}
 
+  '@types/pngjs@6.0.5':
+    dependencies:
+      '@types/node': 22.13.9
+
   '@types/prop-types@15.7.14': {}
 
   '@types/qrcode@1.5.5':
@@ -3822,11 +3845,11 @@ snapshots:
   '@zxing/text-encoding@0.9.0':
     optional: true
 
-  acorn-jsx@5.3.2(acorn@8.14.0):
+  acorn-jsx@5.3.2(acorn@8.14.1):
     dependencies:
-      acorn: 8.14.0
+      acorn: 8.14.1
 
-  acorn@8.14.0: {}
+  acorn@8.14.1: {}
 
   ajv@6.12.6:
     dependencies:
@@ -3923,7 +3946,7 @@ snapshots:
     dependencies:
       possible-typed-array-names: 1.1.0
 
-  axe-core@4.10.2: {}
+  axe-core@4.10.3: {}
 
   axobject-query@4.1.0: {}
 
@@ -4349,7 +4372,7 @@ snapshots:
       array-includes: 3.1.8
       array.prototype.flatmap: 1.3.3
       ast-types-flow: 0.0.8
-      axe-core: 4.10.2
+      axe-core: 4.10.3
       axobject-query: 4.1.0
       damerau-levenshtein: 1.0.8
       emoji-regex: 9.2.2
@@ -4447,8 +4470,8 @@ snapshots:
 
   espree@10.3.0:
     dependencies:
-      acorn: 8.14.0
-      acorn-jsx: 5.3.2(acorn@8.14.0)
+      acorn: 8.14.1
+      acorn-jsx: 5.3.2(acorn@8.14.1)
       eslint-visitor-keys: 4.2.0
 
   esquery@1.6.0:
@@ -5059,6 +5082,8 @@ snapshots:
       p-limit: 3.1.0
 
   p-try@2.2.0: {}
+
+  pako@2.1.0: {}
 
   parent-module@1.0.1:
     dependencies:
