@@ -14,12 +14,11 @@ import { Stack } from "@mui/system";
 import { AppConfig } from "../../AppConfig";
 import { getConnection } from "../../connection/Connections";
 import { listDaimons } from "../../daimon/listDaimons";
+import { bytesToDaimon } from "../../png/bytesToDaimon";
 import { useAppState } from "../../state/AppState";
 import { FileUpload } from "../common/FileUpload";
 import { ContentView } from "../ContentView";
 import { ImageUpdateContentView } from "./ImageUpdateContentView";
-import { bytesToDecodedPng } from "../../png/decodePng";
-import { bytesToDaimon } from "../../png/bytesToDaimon";
 
 export const DaimonsScreen = () => {
   const { userDaimonId, setUserDaimonId } = useAppState();
@@ -76,6 +75,7 @@ export const DaimonsScreen = () => {
   const [daimonCruds, setDaimonCruds] = useState<DaimonCrud[]>([]);
   const updateDaimons = () => {
     listDaimons().then((daimons) => {
+      console.log("daimons", daimons);
       const daimonCruds: DaimonCrud[] = daimons.map((daimon) => ({
         id: daimon.id,
         isUser: daimon.id === userDaimonId,
@@ -125,6 +125,7 @@ export const DaimonsScreen = () => {
                 extensions: {
                   ...(rest.extensions ?? {}),
                   avatar: image,
+                  isUser,
                   llm: isEmpty(model) ? undefined : model,
                 },
               },
@@ -155,6 +156,7 @@ export const DaimonsScreen = () => {
                   extensions: {
                     ...(item.extensions ?? {}),
                     avatar: image,
+                    isUser,
                     llm: isEmpty(model) ? undefined : model,
                   },
                 },
