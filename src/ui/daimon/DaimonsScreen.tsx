@@ -3,7 +3,7 @@ import { GenericCrud, type CrudSchema } from "../crud/GenericCrud";
 
 import { Idbs } from "@mjt-engine/idb";
 import { Errors } from "@mjt-engine/message";
-import { isEmpty, isUndefined } from "@mjt-engine/object";
+import { isDefined, isEmpty, isUndefined, safe } from "@mjt-engine/object";
 import {
   DAIMON_OBJECT_STORE,
   DaimonCharaCard,
@@ -80,13 +80,16 @@ export const DaimonsScreen = () => {
   const updateDaimons = () => {
     listDaimons().then((daimons) => {
       console.log("daimons", daimons);
-      const daimonCruds: DaimonCrud[] = daimons.map((daimon) => ({
-        id: daimon.id,
-        isUser: daimon.id === userDaimonId,
-        image: daimon.chara.data.extensions?.avatar,
-        model: daimon.chara.data.extensions?.llm,
-        ...daimon.chara.data,
-      }));
+      const daimonCruds: DaimonCrud[] = daimons.map(
+        (daimon) =>
+          ({
+            id: daimon.id,
+            isUser: daimon.id === userDaimonId,
+            image: daimon.chara.data.extensions?.avatar,
+            model: daimon.chara.data.extensions?.llm,
+            ...daimon.chara.data,
+          }) satisfies DaimonCrud
+      );
       setDaimonCruds(daimonCruds);
     });
   };

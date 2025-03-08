@@ -17,6 +17,7 @@ import {
 } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import DeleteIcon from "@mui/icons-material/Delete";
+import EditIcon from "@mui/icons-material/Edit";
 
 // A generic schema that (for each property K in T) optionally defines:
 // 1) a label (e.g. column header or field label),
@@ -50,8 +51,10 @@ export function GenericCrud<T extends object>({
 }) {
   const [open, setOpen] = useState(false);
   const [deleteOpen, setDeleteOpen] = useState(false);
+  const [jsonOpen, setJsonOpen] = useState(false);
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
   const [draft, setDraft] = useState<Partial<T>>({});
+  const [jsonDraft, setJsonDraft] = useState<string>("");
 
   // Open the dialog for the given item index
   const handleRowClick = (index: number) => {
@@ -99,6 +102,26 @@ export function GenericCrud<T extends object>({
       onDelete(selectedIndex);
     }
     setDeleteOpen(false);
+  };
+
+  // Open the JSON editor dialog
+  const handleJsonClick = (index: number) => {
+    setSelectedIndex(index);
+    setJsonDraft(JSON.stringify(items[index], null, 2));
+    setJsonOpen(true);
+  };
+
+  // Save the edited JSON
+  const handleJsonSave = () => {
+    try {
+      const updatedItem = JSON.parse(jsonDraft);
+      if (onUpdate && selectedIndex !== null) {
+        onUpdate(updatedItem, selectedIndex);
+      }
+      setJsonOpen(false);
+    } catch (error) {
+      alert("Invalid JSON format");
+    }
   };
 
   // Render a generic table cell
@@ -163,6 +186,7 @@ export function GenericCrud<T extends object>({
         <TextField
           type="text"
           fullWidth
+          multiline
           value={(value ?? "") as string}
           onChange={(e) => handleChange(key, e.target.value as T[typeof key])}
         />
@@ -213,6 +237,15 @@ export function GenericCrud<T extends object>({
                   }}
                 >
                   <DeleteIcon />
+                </IconButton>
+                <IconButton
+                  color="default"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleJsonClick(rowIndex);
+                  }}
+                >
+                  <EditIcon />
                 </IconButton>
               </TableCell>
             </TableRow>
@@ -269,6 +302,32 @@ export function GenericCrud<T extends object>({
             color="secondary"
           >
             Delete
+          </Button>
+        </DialogActions>
+      </Dialog>
+
+      {/* JSON Editor Dialog */}
+      <Dialog
+        open={jsonOpen}
+        onClose={() => setJsonOpen(false)}
+        fullWidth
+        maxWidth="sm"
+        disableRestoreFocus
+      >
+        <DialogTitle>Edit JSON</DialogTitle>
+        <DialogContent dividers>
+          <TextField
+            fullWidth
+            multiline
+            minRows={10}
+            value={jsonDraft}
+            onChange={(e) => setJsonDraft(e.target.value)}
+          />
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => setJsonOpen(false)}>Cancel</Button>
+          <Button onClick={handleJsonSave} variant="contained" color="primary">
+            Save
           </Button>
         </DialogActions>
       </Dialog>
