@@ -2,6 +2,7 @@ import { Stack } from "@mui/material";
 import { TreeView } from "../common/tree/TreeView";
 import { ChatBox } from "./ChatBox";
 import { rootTreeApi } from "./rootTreeApi";
+import ContextMenu from "../common/ContextMenu";
 
 export const RoomScreen = () => {
   return (
@@ -11,7 +12,9 @@ export const RoomScreen = () => {
         height: "99.9vh",
       }}
     >
-      <TreeView treeApi={rootTreeApi} />
+      <ContextMenu actions={{ foo: () => console.log("foo") }}>
+        <TreeView treeApi={rootTreeApi} />
+      </ContextMenu>
       <ChatBox treeApi={rootTreeApi} />
     </Stack>
   );

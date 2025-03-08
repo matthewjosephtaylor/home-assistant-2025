@@ -23,7 +23,7 @@ export const ContentView = ({
   if (content.contentType.startsWith("image")) {
     return (
       <Box {...rest}>
-        <ContentImage content={content} {...imgProps} />;
+        <ContentImage content={content} {...imgProps} />
       </Box>
     );
   }

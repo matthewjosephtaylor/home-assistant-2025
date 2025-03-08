@@ -8,7 +8,8 @@ type AppState = {
   setUserDaimonId: (daimonId?: string) => void;
   setMqUrl: (url: string) => void;
   setAiTextOutput: (text: string) => void;
-  getHashFromUrl: () => keyof typeof SCREENS;
+  getUrlHash: () => keyof typeof SCREENS;
+  setUrlHash: (hash: keyof typeof SCREENS) => void;
 };
 
 export const useAppState = create<AppState>((set) => ({
@@ -18,8 +19,11 @@ export const useAppState = create<AppState>((set) => ({
   setMqUrl: (url) => set({ mqUrl: url }),
   setAiTextOutput: (text) => set({ aiTextOutput: text }),
   setUserDaimonId: (daimon) => set({ userDaimonId: daimon }),
-  getHashFromUrl: () => {
+  getUrlHash: () => {
     const hash = window.location.hash;
     return hash ? hash.substring(1) : "kiosk";
+  },
+  setUrlHash: (hash) => {
+    window.location.hash = hash;
   },
 }));

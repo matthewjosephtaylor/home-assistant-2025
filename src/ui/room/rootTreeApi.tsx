@@ -5,7 +5,7 @@ import React from "react";
 import { getConnection } from "../../connection/Connections";
 import { type TreeApi } from "../common/tree/TreeApi";
 import { type TreeNode } from "../common/tree/TreeNode";
-import { addRoomTextContent } from "./addRoomTextContent";
+import { addUserRoomTextContent } from "./addUserRoomTextContent";
 import { loadDaimons } from "./loadDaimons";
 import { loadRooms } from "./loadRooms";
 import { ContentView } from "../ContentView";
@@ -43,7 +43,7 @@ export const rootTreeApi: TreeApi = {
     console.log("parentId", parentId);
     console.log("data", data);
     const realizedParentId = parentId === "rooms" ? undefined : parentId;
-    const id = await addRoomTextContent({
+    const id = await addUserRoomTextContent({
       text: data.label,
       parentId: realizedParentId,
     });

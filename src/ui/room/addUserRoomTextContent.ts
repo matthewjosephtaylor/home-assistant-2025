@@ -4,18 +4,20 @@ import {
   CONTENT_OBJECT_STORE,
   type Room,
 } from "@mjt-services/daimon-common-2025";
-import { Ids, Datas } from "@mjt-services/data-common-2025";
+import {
+  Ids,
+  Datas,
+} from "@mjt-services/data-common-2025";
 import { getConnection } from "../../connection/Connections";
 import { useAppState } from "../../state/AppState";
 
-export const addRoomTextContent = async ({
+export const addUserRoomTextContent = async ({
   text,
   parentId,
 }: {
   parentId?: string;
   text: string;
 }) => {
-  const id = Ids.fromObjectStore(ROOM_OBJECT_STORE);
   const { userDaimonId } = useAppState.getState();
   const content: Content = {
     id: Ids.fromObjectStore(CONTENT_OBJECT_STORE),
@@ -28,13 +30,14 @@ export const addRoomTextContent = async ({
   await Datas.put(await getConnection())({
     value: content,
   });
-  await Datas.put(await getConnection())({
-    objectStore: ROOM_OBJECT_STORE,
+  const roomId = await Datas.put(await getConnection())({
     value: {
-      id,
+      id: Ids.fromObjectStore(ROOM_OBJECT_STORE),
       parentId,
       contentId: content.id,
     } as Partial<Room>,
   });
-  return id;
+  return roomId;
 };
+
+

@@ -16,9 +16,11 @@ import { getConnection } from "../../connection/Connections";
 import { listDaimons } from "../../daimon/listDaimons";
 import { bytesToDaimon } from "../../png/bytesToDaimon";
 import { useAppState } from "../../state/AppState";
+import ContextMenu from "../common/ContextMenu";
 import { FileUpload } from "../common/FileUpload";
 import { ContentView } from "../ContentView";
 import { ImageUpdateContentView } from "./ImageUpdateContentView";
+import { startChatWith } from "./startChatWith";
 
 export const DaimonsScreen = () => {
   const { userDaimonId, setUserDaimonId } = useAppState();
@@ -29,6 +31,22 @@ export const DaimonsScreen = () => {
     isUser?: boolean;
   };
   const schema: CrudSchema<DaimonCrud> = {
+    image: {
+      label: "Image",
+      renderEditor: (value, onChange) => {
+        return <ImageUpdateContentView contentId={value} onChange={onChange} />;
+      },
+      renderCell: (contentId, item) => {
+        return (
+          <ContextMenu actions={{ Chat: () => startChatWith(item.id) }}>
+            <ContentView
+              contentId={contentId}
+              imgProps={{ style: { maxHeight: "4em" } }}
+            />
+          </ContextMenu>
+        );
+      },
+    },
     id: { label: "ID" },
     name: {
       label: "Name",
@@ -40,20 +58,6 @@ export const DaimonsScreen = () => {
       label: "Model",
     },
 
-    image: {
-      label: "Image",
-      renderEditor: (value, onChange) => {
-        return <ImageUpdateContentView contentId={value} onChange={onChange} />;
-      },
-      renderCell: (contentId) => {
-        return (
-          <ContentView
-            contentId={contentId}
-            imgProps={{ style: { maxHeight: "4em" } }}
-          />
-        );
-      },
-    },
     isUser: {
       label: "User",
       renderCell: (value) => {
