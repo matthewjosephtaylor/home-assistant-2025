@@ -1,7 +1,7 @@
 import { Stack } from "@mui/material";
 import { TreeView } from "../common/tree/TreeView";
 import { ChatBox } from "./ChatBox";
-import { rootTreeApi } from "./rootTreeApi";
+import { rootTreeApi } from "./root-tree/rootTreeApi";
 import ContextMenu from "../common/ContextMenu";
 
 export const RoomScreen = () => {

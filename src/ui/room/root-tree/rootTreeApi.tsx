@@ -1,47 +1,19 @@
 import { ROOM_OBJECT_STORE } from "@mjt-services/daimon-common-2025";
-import { Datas, Ids } from "@mjt-services/data-common-2025";
-import { Box, Button, Divider, Stack, TextField } from "@mui/material";
+import { Datas } from "@mjt-services/data-common-2025";
+import { Box, Button, TextField } from "@mui/material";
 import React from "react";
-import { getConnection } from "../../connection/Connections";
-import { type TreeApi } from "../common/tree/TreeApi";
-import { type TreeNode } from "../common/tree/TreeNode";
-import { addUserRoomTextContent } from "./addUserRoomTextContent";
-import { loadDaimons } from "./loadDaimons";
-import { loadRooms } from "./loadRooms";
-import { ContentView } from "../ContentView";
-import { useActiveNoteStore } from "./useActiveNoteStore";
+import { getConnection } from "../../../connection/Connections";
+import { useAppState } from "../../../state/AppState";
+import { type TreeApi } from "../../common/tree/TreeApi";
+import { type TreeNode } from "../../common/tree/TreeNode";
+import { ContentView } from "../../ContentView";
+import { addUserRoomTextContent } from "../addUserRoomTextContent";
+import { NoteContent } from "./NoteContent";
+import { loadRootTreeChildren } from "./loadRootTreeChildren";
 
 export const rootTreeApi: TreeApi = {
-  loadChildren: async (parentId, query) => {
-    if (parentId === "daimons") {
-      return loadDaimons(parentId, query);
-    }
-    if (parentId === "rooms") {
-      return loadRooms(parentId, query);
-    }
-    const parsedId = parentId ? Ids.parse(parentId) : undefined;
-    if (parsedId) {
-      if (parsedId.type === ROOM_OBJECT_STORE.store) {
-        return loadRooms(parentId, `values(@)[?parentId == '${parentId}']`);
-      }
-    }
-    if (!parentId) {
-      return [
-        {
-          id: "daimons",
-          content: <>Daimons</>,
-        },
-        {
-          id: "rooms",
-          content: <>Rooms</>,
-        },
-      ] as TreeNode[];
-    }
-    return [];
-  },
+  loadChildren: loadRootTreeChildren,
   addChild: async function (parentId, data): Promise<TreeNode> {
-    console.log("parentId", parentId);
-    console.log("data", data);
     const realizedParentId = parentId === "rooms" ? undefined : parentId;
     const id = await addUserRoomTextContent({
       text: data.label,
@@ -59,35 +31,14 @@ export const rootTreeApi: TreeApi = {
   updateNode: function (nodeId: string, data: any): Promise<TreeNode> {
     throw new Error("Function not implemented.");
   },
-  // Handle the currently active note:
-  getActiveNoteParentId: () => useActiveNoteStore.getState().activeNoteParentId,
+  getActiveNoteParentId: () => useAppState.getState().activeNoteParentId,
   setActiveNoteParentId: (pid) => {
-    useActiveNoteStore.getState().setActiveNoteParentId(pid);
-    console.log("activeNoteParentId", pid);
-    // If you want to trigger a re-render in your app, put this in React state,
-    // or if you are using an external store, update it there.
+    useAppState.getState().setActiveNoteParentId(pid);
   },
 
   // Render note content for each parentId (a React component):
   renderNoteContent: (parentId) => {
-    const activeNoteParentId = useActiveNoteStore(
-      (state) => state.activeNoteParentId
-    );
-    return (
-      <Stack
-        flexShrink={1}
-        sx={{
-          height: "0.3em",
-          borderRadius: 1,
-          backgroundColor: (theme) =>
-            parentId === activeNoteParentId
-              ? theme.palette.primary.dark
-              : theme.palette.grey[100],
-        }}
-      >
-        <Divider variant="fullWidth" />
-      </Stack>
-    );
+    return <NoteContent parentId={parentId} />;
   },
 
   getEditorForm: ({ parentId, nodeId, mode, onCancel, onOk }) => {

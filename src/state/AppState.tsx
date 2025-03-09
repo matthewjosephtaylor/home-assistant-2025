@@ -10,6 +10,8 @@ type AppState = {
   setAiTextOutput: (text: string) => void;
   getUrlHash: () => keyof typeof SCREENS;
   setUrlHash: (hash: keyof typeof SCREENS) => void;
+  activeNoteParentId: string | undefined;
+  setActiveNoteParentId: (id: string | undefined) => void;
 };
 
 export const useAppState = create<AppState>((set) => ({
@@ -21,9 +23,11 @@ export const useAppState = create<AppState>((set) => ({
   setUserDaimonId: (daimon) => set({ userDaimonId: daimon }),
   getUrlHash: () => {
     const hash = window.location.hash;
-    return hash ? hash.substring(1) : "kiosk";
+    return hash ? (hash.substring(1) as keyof typeof SCREENS) : "kiosk";
   },
   setUrlHash: (hash) => {
     window.location.hash = hash;
   },
+  activeNoteParentId: undefined,
+  setActiveNoteParentId: (id) => set({ activeNoteParentId: id }),
 }));

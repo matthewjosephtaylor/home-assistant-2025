@@ -13,7 +13,7 @@ export const ContentView = ({
   contentId: string | undefined;
   imgProps?: Omit<ImgHTMLAttributes<HTMLImageElement>, "content">;
 } & (BoxProps | ImgHTMLAttributes<HTMLImageElement>)) => {
-  const content = useData<Content>({ id: contentId });
+  const content = useData<Content>(contentId);
   if (isUndefined(content)) {
     return <Box {...rest}>Loading...</Box>;
   }

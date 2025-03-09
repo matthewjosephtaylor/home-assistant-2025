@@ -1,20 +1,20 @@
+import { Messages } from "@mjt-engine/message";
 import { isUndefined } from "@mjt-engine/object";
 import {
   Datas,
-  search,
+  Ids,
   type DATA_EVENT_MAP,
 } from "@mjt-services/data-common-2025";
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { getConnection } from "../connection/Connections";
 import { useConnection } from "../connection/useConnection";
-import { Messages } from "@mjt-engine/message";
 
-export const useData = <T extends object>({ id }: { id?: string }) => {
+export const useData = <T extends object>(id?: string) => {
   const connectionInstance = useConnection();
   const [data, setData] = useState<T | undefined>(undefined);
 
   const update = async (id?: string) => {
-    if (isUndefined(id)) {
+    if (isUndefined(id) || isUndefined(Ids.parse(id))) {
       setData(undefined);
       return;
     }
@@ -41,23 +41,14 @@ export const useData = <T extends object>({ id }: { id?: string }) => {
       signal: abortController.signal,
       listener: async (event) => {
         const { subject, detail } = event;
-        // console.log(`object_update: subject ${id}: ${id} `, subject);
         const { root, subpath } = Messages.parseSubject(subject);
         if (subpath !== id) {
-          // console.log(`BAD object_update: subpath ${id}: ${subpath} `, subpath);
           return;
         }
-        // console.log(`object_update for ${id}`, { root, subpath });
-        // console.log(`object_update: detail: ${id} `, detail);
 
         setData(detail as T);
-        // const children = await realizeChildren(subpath, search);
-        // setChildren(children);
       },
     });
-    // realizeChildren(parentId, search).then((result) => {
-    //   setChildren(result);
-    // });
     return () => {
       abortController.abort();
     };
