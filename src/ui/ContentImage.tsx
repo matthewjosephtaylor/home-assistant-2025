@@ -8,7 +8,15 @@ export const CONTENT_IMAGE_CACHE = Caches.create<string>();
 export const getBlobUrl = (content: Content) => {
   const blob = Bytes.toBlob(content.value as ByteLike, content.contentType);
   return CONTENT_IMAGE_CACHE.get(content.id, () => {
-    return URL.createObjectURL(blob);
+    const url = URL.createObjectURL(blob);
+    setTimeout(
+      () => {
+        CONTENT_IMAGE_CACHE.delete(content.id);
+        URL.revokeObjectURL(url);
+      },
+      60 * 10 * 1000
+    );
+    return url;
   });
 };
 

@@ -14,7 +14,7 @@ import { SimpleEvaluator } from "./chatlang/SimpleEvaluator";
 
 export const play = async () => {
   try {
-    await playChat();
+    // await playChat();
   } catch (error) {
     console.error(error);
   }

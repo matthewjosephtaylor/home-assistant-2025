@@ -20,6 +20,7 @@ export const handleTextEntry = async ({
   text: string;
   treeApi: TreeApi;
 }) => {
+  console.log("handleTextEntry", text);
   const out = await ChatLangs.interpretText(
     text,
     TEXT_ENTRY_EVALUATOR(treeApi)

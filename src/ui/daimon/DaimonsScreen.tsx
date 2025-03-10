@@ -1,12 +1,11 @@
 import { useEffect, useState } from "react";
-import { GenericCrud, type CrudSchema } from "../crud/GenericCrud";
+import { GenericCrud } from "../crud/GenericCrud";
 
 import { Idbs } from "@mjt-engine/idb";
 import { Errors } from "@mjt-engine/message";
-import { isDefined, isEmpty, isUndefined, safe } from "@mjt-engine/object";
+import { isEmpty, isUndefined } from "@mjt-engine/object";
 import {
   DAIMON_OBJECT_STORE,
-  DaimonCharaCard,
   type Daimon,
 } from "@mjt-services/daimon-common-2025";
 import { Datas, Ids } from "@mjt-services/data-common-2025";
@@ -16,66 +15,13 @@ import { getConnection } from "../../connection/Connections";
 import { listDaimons } from "../../daimon/listDaimons";
 import { bytesToDaimon } from "../../png/bytesToDaimon";
 import { useAppState } from "../../state/AppState";
-import ContextMenu from "../common/ContextMenu";
 import { FileUpload } from "../common/FileUpload";
-import { ContentView } from "../ContentView";
-import { ImageUpdateContentView } from "./ImageUpdateContentView";
-import { startChatWith } from "./startChatWith";
+import { DAIMON_CRUD_SCHEMA } from "./DAIMON_CRUD_SCHEMA";
+import type { DaimonCrud } from "./DaimonCrud";
+import { ImportCharaJson } from "./ImportCharaCard";
 
 export const DaimonsScreen = () => {
   const { userDaimonId, setUserDaimonId } = useAppState();
-  type DaimonCrud = DaimonCharaCard["data"] & {
-    id: string;
-    image?: string;
-    model?: string;
-    isUser?: boolean;
-  };
-  const schema: CrudSchema<DaimonCrud> = {
-    image: {
-      label: "Image",
-      renderEditor: (value, onChange) => {
-        return <ImageUpdateContentView contentId={value} onChange={onChange} />;
-      },
-      renderCell: (contentId, item) => {
-        return (
-          <ContextMenu actions={{ Chat: () => startChatWith(item.id) }}>
-            <ContentView
-              contentId={contentId}
-              imgProps={{ style: { maxHeight: "4em" } }}
-            />
-          </ContextMenu>
-        );
-      },
-    },
-    id: { label: "ID" },
-    name: {
-      label: "Name",
-    },
-    description: {
-      label: "Description",
-    },
-    model: {
-      label: "Model",
-    },
-
-    isUser: {
-      label: "User",
-      renderCell: (value) => {
-        return value ? "Yes" : "No";
-      },
-      renderEditor: (value, onChange) => {
-        return (
-          <input
-            type="checkbox"
-            checked={value ?? false}
-            onChange={(event) => {
-              onChange(event.target.checked);
-            }}
-          />
-        );
-      },
-    },
-  };
   const [daimonCruds, setDaimonCruds] = useState<DaimonCrud[]>([]);
   const updateDaimons = () => {
     listDaimons().then((daimons) => {
@@ -98,7 +44,7 @@ export const DaimonsScreen = () => {
   }, [userDaimonId]);
   return (
     <Stack alignContent={"center"} spacing={"2em"} padding={"2em"}>
-      <Stack justifyContent={"center"} direction={"row"}>
+      <Stack justifyContent={"center"} direction={"row"} gap={"5em"}>
         <FileUpload
           onChange={async (file) => {
             console.log("File uploaded", file);
@@ -110,12 +56,12 @@ export const DaimonsScreen = () => {
             updateDaimons();
           }}
         />
+        <ImportCharaJson onImport={() => updateDaimons()} />
       </Stack>
       <GenericCrud
         items={daimonCruds}
-        schema={schema}
+        schema={DAIMON_CRUD_SCHEMA}
         onUpdate={async (item, index) => {
-          console.log("Updated item", item, "at index", index);
           const con = await getConnection();
           const { id, image, model, isUser, ...rest } = item;
           if (isUser) {

@@ -12,7 +12,6 @@
     "publish": "pnpm run build && pnpm run pages && pnpm run changelog-version"
   },
   "devDependencies": {
-    "@types/bun": "latest",
     "@types/parsimmon": "^1.10.9",
     "@types/pngjs": "^6.0.5",
     "@types/qrcode": "^1.5.5",
@@ -49,6 +48,7 @@
     "@mjt-services/asr-common-2025": "github:mjt-services/asr-common-2025",
     "@mjt-services/daimon-common-2025": "github:mjt-services/daimon-common-2025",
     "@mjt-services/data-common-2025": "github:mjt-services/data-common-2025",
+    "@mjt-services/imagegen-common-2025": "github:mjt-services/imagegen-common-2025",
     "@mjt-services/textgen-common-2025": "github:mjt-services/textgen-common-2025",
     "@mjtdev/avatar-3d": "github:matthewjosephtaylor/avatar-3d",
     "@mjtdev/vad-2025": "github:matthewjosephtaylor/vad-2025",
@@ -58,12 +58,15 @@
     "@zxing/library": "^0.21.3",
     "eslint": "^9.22.0",
     "framer-motion": "^11.18.2",
+    "html-react-parser": "^5.2.2",
     "immer": "^10.1.1",
     "parsimmon": "^1.18.1",
     "qrcode": "^1.5.4",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-dropzone": "^14.3.8",
+    "react-markdown": "^10.1.0",
+    "remark-gfm": "^4.0.1",
     "zustand": "^5.0.3"
   }
 }

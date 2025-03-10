@@ -4,6 +4,7 @@ import { Box, type BoxProps } from "@mui/system";
 import { useData } from "../state/useData";
 import { ContentImage } from "./ContentImage";
 import type { ImgHTMLAttributes } from "react";
+import { MarkdownRenderer } from "./room/text-content-view/MarkdownRenderer";
 
 export const ContentView = ({
   contentId,
@@ -18,7 +19,14 @@ export const ContentView = ({
     return <Box {...rest}>Loading...</Box>;
   }
   if (typeof content.value === "string") {
-    return <Box {...rest}>{content.value}</Box>;
+    // return <Box {...rest}>{content.value}</Box>;
+    return (
+      <MarkdownRenderer
+        text={content.value}
+        isComplete={content.finalized}
+        {...rest}
+      />
+    );
   }
   if (content.contentType.startsWith("image")) {
     return (
