@@ -10,8 +10,8 @@ import { Datas } from "@mjt-services/data-common-2025";
 import { Stack, type StackProps } from "@mui/system";
 import { useEffect, useState } from "react";
 import { getConnection } from "../../connection/Connections";
-import { ContentImage } from "../ContentImage";
-import { ContentView } from "../ContentView";
+import { ContentImage } from "../content/ContentImage";
+import { ContentView } from "../content/ContentView";
 
 export const RoomContentView = ({
   room,

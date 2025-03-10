@@ -1,23 +1,36 @@
-import { Idbs } from "@mjt-engine/idb";
-import { Messages } from "@mjt-engine/message";
-import { Bytes } from "@mjt-engine/byte";
-import {
-  TextgenConnectionMap,
-  TEXTGEN_MODELS,
-} from "@mjt-services/textgen-common-2025";
-import { AppConfig } from "./AppConfig";
-import type { AsrConnectionMap } from "@mjt-services/asr-common-2025";
-import { ChatLang } from "./chatlang/ChatLang";
-import { parseProgram } from "./chatlang/parseProgram";
 import { evaluateProgram } from "./chatlang/evaluateProgram";
+import { parseProgram } from "./chatlang/parseProgram";
 import { SimpleEvaluator } from "./chatlang/SimpleEvaluator";
+import { getConnection } from "./connection/Connections";
 
 export const play = async () => {
   try {
     // await playChat();
+    await playImagegen();
   } catch (error) {
     console.error(error);
   }
+};
+
+export const playImagegen = async () => {
+  console.log("playImagegen");
+  const con = await getConnection();
+  con.requestMany({
+    onResponse: (response) => {
+      console.log("response", response);
+    },
+    subject: "imagegen.txt2img",
+    request: {
+      body: {
+        prompt: "A cat in a hat",
+        width: 512,
+        height: 512,
+        seed: 42,
+        cfg_scale: 7,
+        steps: 10,
+      },
+    },
+  });
 };
 
 export const playChat = async () => {

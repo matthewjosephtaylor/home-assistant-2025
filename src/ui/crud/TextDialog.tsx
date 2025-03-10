@@ -8,22 +8,19 @@ import {
   DialogActions,
 } from "@mui/material";
 
-interface TextDialogProps {
-  open: boolean;
-  value: string;
-  onClose: () => void;
-  onSave: (newValue: string) => void;
-  title?: string;
-}
-
-export const TextDialog: React.FC<TextDialogProps> = ({
+export const TextDialog = ({
   open,
   value,
   onClose,
   onSave,
   title = "Edit Text",
+}: {
+  open: boolean;
+  value: string;
+  onClose: () => void;
+  onSave: (value: string) => void;
+  title?: string;
 }) => {
-  console.log("TextDialog value", value);
   const [localValue, setLocalValue] = useState(value);
 
   const handleSave = () => {
@@ -34,7 +31,6 @@ export const TextDialog: React.FC<TextDialogProps> = ({
     setLocalValue(value); // reset localValue when value changes
   }, [value]);
 
-  console.log("TextDialog localValue", localValue);
   return (
     <Dialog open={open} onClose={onClose} fullWidth maxWidth="sm">
       <DialogTitle>{title}</DialogTitle>

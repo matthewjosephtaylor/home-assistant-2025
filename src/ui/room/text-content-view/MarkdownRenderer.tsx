@@ -3,8 +3,7 @@ import type { BoxProps } from "@mui/system";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { CopyBlock } from "./CopyBlock";
-import { isUndefined } from "@mjt-engine/object";
-import { Element } from "hast";
+import { elementToText } from "./elementToText";
 
 export const MarkdownRenderer = ({
   text,
@@ -64,26 +63,4 @@ export const MarkdownRenderer = ({
   );
 };
 
-export type HastElement = {
-  type: string;
-  value?: string;
-  children: unknown[];
-};
 
-export const elementToText = (element?: HastElement): string => {
-  if (isUndefined(element)) {
-    return "";
-  }
-  // if(element.children) {
-  //   return element.children.map((child) => elementToText(child)).join("");
-  // }
-  if (element.children) {
-    return element.children
-      .map((child) => elementToText(child as HastElement))
-      .join("");
-  }
-  if (element.type === "text") {
-    return element.value ?? "";
-  }
-  return "";
-};

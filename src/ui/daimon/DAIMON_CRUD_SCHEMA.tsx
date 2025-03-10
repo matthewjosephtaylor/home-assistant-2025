@@ -1,5 +1,5 @@
 import ContextMenu from "../common/ContextMenu";
-import { ContentView } from "../ContentView";
+import { ContentView } from "../content/ContentView";
 import type { CrudSchema } from "../crud/GenericCrud";
 import type { DaimonCrud } from "./DaimonCrud";
 import { ImageUpdateContentView } from "./ImageUpdateContentView";

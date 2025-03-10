@@ -10,7 +10,7 @@ import { getConnection } from "../../../connection/Connections";
 import { useAppState } from "../../../state/AppState";
 import { type TreeApi } from "../../common/tree/TreeApi";
 import { type TreeNode } from "../../common/tree/TreeNode";
-import { ContentView } from "../../ContentView";
+import { ContentView } from "../../content/ContentView";
 import { addUserRoomTextContent } from "../addUserRoomTextContent";
 import { NoteContent } from "./NoteContent";
 import { loadRootTreeChildren } from "./loadRootTreeChildren";

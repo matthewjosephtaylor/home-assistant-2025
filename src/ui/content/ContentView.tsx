@@ -1,25 +1,29 @@
 import { isUndefined } from "@mjt-engine/object";
 import type { Content } from "@mjt-services/daimon-common-2025";
 import { Box, type BoxProps } from "@mui/system";
-import { useData } from "../state/useData";
-import { ContentImage } from "./ContentImage";
 import type { ImgHTMLAttributes } from "react";
-import { MarkdownRenderer } from "./room/text-content-view/MarkdownRenderer";
+import { useData } from "../../state/useData";
+import { MarkdownRenderer } from "../room/text-content-view/MarkdownRenderer";
+import { GenContentImage } from "./GenContentImage";
 
 export const ContentView = ({
   contentId,
   imgProps,
+  onUpdate,
+  contentType,
   ...rest
 }: {
+  onUpdate?: (value: Content) => void;
   contentId: string | undefined;
+  contentType?: string;
   imgProps?: Omit<ImgHTMLAttributes<HTMLImageElement>, "content">;
 } & (BoxProps | ImgHTMLAttributes<HTMLImageElement>)) => {
   const content = useData<Content>(contentId);
-  if (isUndefined(content)) {
-    return <Box {...rest}>Loading...</Box>;
-  }
-  if (typeof content.value === "string") {
-    // return <Box {...rest}>{content.value}</Box>;
+  const realizedContentType = content?.contentType ?? contentType;
+  if (
+    realizedContentType?.startsWith("text") &&
+    typeof content?.value === "string"
+  ) {
     return (
       <MarkdownRenderer
         text={content.value}
@@ -28,16 +32,17 @@ export const ContentView = ({
       />
     );
   }
-  if (content.contentType.startsWith("image")) {
+  if (realizedContentType?.startsWith("image")) {
     return (
       <Box {...rest}>
-        <ContentImage content={content} {...imgProps} />
+        <GenContentImage content={content} onUpdate={onUpdate} {...imgProps} />
       </Box>
     );
   }
   return (
     <Box {...rest}>
-      type:{content.contentType} creator:{content.creatorId}
+      type:{content?.contentType ?? "undefined content"} creator:
+      {content?.creatorId ?? "undefined creator"}
     </Box>
   );
 };
