@@ -20,6 +20,14 @@ import { getConnection } from "../../connection/Connections";
 import { ContentImage } from "../content/ContentImage";
 import { ContentView } from "../content/ContentView";
 import { FileUpload } from "./FileUpload";
+import { AlternativePicker } from "./AlternativePicker";
+
+export const DEFAULT_IMAGEGEN_REQUEST: Partial<TextToImageRequest> = {
+  steps: 10,
+  width: 512,
+  height: 512,
+  cfg_scale: 7,
+};
 
 export const GenerateImageDialog = ({
   open,
@@ -27,20 +35,19 @@ export const GenerateImageDialog = ({
   onClose,
   onSave,
   title = "Generate Image",
+  defaultRequest = DEFAULT_IMAGEGEN_REQUEST,
 }: {
   open: boolean;
   value?: Content;
   onClose: () => void;
   onSave: (value: Content) => void;
   title?: string;
+  defaultRequest?: Partial<TextToImageRequest>;
 }) => {
-  console.log("GenerateImageDialog value", value);
   const [localValue, setLocalValue] = useState(value);
   const [request, setRequest] = useState<Partial<TextToImageRequest>>({
-    steps: 10,
-    width: 512,
-    height: 512,
-    cfg_scale: 7,
+    ...defaultRequest,
+    ...DEFAULT_IMAGEGEN_REQUEST,
     ...(value?.source ?? {}),
   });
   const handleSave = () => {
@@ -62,13 +69,11 @@ export const GenerateImageDialog = ({
   useEffect(() => {
     setLocalValue(value); // reset localValue when value changes
     setRequest({
-      steps: 10,
-      width: 512,
-      height: 512,
-      cfg_scale: 7,
+      ...defaultRequest,
+      ...DEFAULT_IMAGEGEN_REQUEST,
       ...(value?.source ?? {}),
     });
-  }, [value]);
+  }, [value, defaultRequest]);
   const generate = async () => {
     const con = await getConnection();
 
@@ -131,6 +136,50 @@ export const GenerateImageDialog = ({
             />
             <ContentImage content={localValue} style={{ maxHeight: "20em" }} />
           </Stack>
+          <AlternativePicker
+            onRemove={(index) => {
+              if (isUndefined(localValue)) {
+                return;
+              }
+              const updatedContent = {
+                ...localValue,
+                updatedAt: Date.now(),
+                alternatives: (localValue?.alternatives ?? []).filter(
+                  (_, i) => i !== index
+                ),
+              } satisfies Content;
+              setLocalValue(updatedContent);
+            }}
+            onPick={(alt) => {
+              if (isUndefined(localValue)) {
+                return;
+              }
+              const updatedContent = {
+                ...localValue,
+                contentType: alt.contentType,
+                value: alt.value,
+                updatedAt: Date.now(),
+                alternatives: [
+                  ...(localValue?.alternatives ?? []).filter(
+                    (a) => a.updatedAt !== alt.updatedAt
+                  ),
+                  { ...localValue, alternatives: [] },
+                ].filter(isDefined),
+              } satisfies Content;
+              setLocalValue(updatedContent);
+              if (isDefined(alt.source)) {
+                setRequest(alt.source);
+              }
+            }}
+            content={localValue}
+            sx={{
+              // maxHeight: "20em",
+              maxWidth: "100%",
+              overflow: "auto",
+            }}
+            direction={"row"}
+            spacing={"0.5em"}
+          />
           <TextField
             label="Prompt"
             value={request.prompt}
@@ -141,6 +190,18 @@ export const GenerateImageDialog = ({
             multiline
             variant="outlined"
             placeholder="Enter prompt here..."
+          />
+          <TextField
+            label="Negative Prompt"
+            color="secondary"
+            value={request.negative_prompt}
+            onChange={(e) =>
+              setRequest((cur) => ({ ...cur, negative_prompt: e.target.value }))
+            }
+            fullWidth
+            multiline
+            variant="outlined"
+            placeholder="Enter negative prompt here..."
           />
           <Box
             component={"form"}

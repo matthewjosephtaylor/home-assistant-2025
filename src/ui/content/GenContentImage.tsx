@@ -4,12 +4,15 @@ import { Box, IconButton } from "@mui/material";
 import { useState } from "react";
 import { GenerateImageDialog } from "../common/GenerateImageDialog";
 import { ContentImage } from "./ContentImage";
+import type { TextToImageRequest } from "@mjt-services/imagegen-common-2025";
 
 export const GenContentImage = ({
   onUpdate,
+  defaultRequest,
   ...rest
 }: {
   onUpdate?: (value: Content) => void;
+  defaultRequest?: Partial<TextToImageRequest>;
 } & Parameters<typeof ContentImage>[0]) => {
   const [isHovered, setIsHovered] = useState(false);
   const [open, setOpen] = useState(false);
@@ -37,7 +40,7 @@ export const GenContentImage = ({
             No Image
           </Box>
         )}
-        {isHovered && (
+        {onUpdate && isHovered && (
           <IconButton
             onClick={() => setOpen(true)}
             style={{
@@ -54,6 +57,7 @@ export const GenContentImage = ({
       <GenerateImageDialog
         open={open}
         value={rest.content}
+        defaultRequest={defaultRequest}
         onClose={() => setOpen(false)}
         onSave={async (value) => {
           onUpdate?.(value);

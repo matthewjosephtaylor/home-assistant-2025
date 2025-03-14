@@ -5,17 +5,20 @@ import type { ImgHTMLAttributes } from "react";
 import { useData } from "../../state/useData";
 import { MarkdownRenderer } from "../room/text-content-view/MarkdownRenderer";
 import { GenContentImage } from "./GenContentImage";
+import type { TextToImageRequest } from "@mjt-services/imagegen-common-2025";
 
 export const ContentView = ({
   contentId,
   imgProps,
   onUpdate,
   contentType,
+  defaultImagegenRequest,
   ...rest
 }: {
   onUpdate?: (value: Content) => void;
   contentId: string | undefined;
   contentType?: string;
+  defaultImagegenRequest?: Partial<TextToImageRequest>;
   imgProps?: Omit<ImgHTMLAttributes<HTMLImageElement>, "content">;
 } & (BoxProps | ImgHTMLAttributes<HTMLImageElement>)) => {
   const content = useData<Content>(contentId);
@@ -35,7 +38,12 @@ export const ContentView = ({
   if (realizedContentType?.startsWith("image")) {
     return (
       <Box {...rest}>
-        <GenContentImage content={content} onUpdate={onUpdate} {...imgProps} />
+        <GenContentImage
+          defaultRequest={defaultImagegenRequest}
+          content={content}
+          onUpdate={onUpdate}
+          {...imgProps}
+        />
       </Box>
     );
   }
