@@ -19,9 +19,7 @@ export const NoteContent = ({ parentId }: { parentId?: string }) => {
   const activeNoteParentId = useAppState((state) => state.activeNoteParentId);
   const [openNote, setOpenNote] = useState(false);
   const room = useData<Room>(parentId);
-  console.log("NoteContent room", room);
   const contextContent = useData<Content>(room?.contextId);
-  console.log("NoteContent contextContent", contextContent);
 
   return (
     <>

@@ -24,13 +24,16 @@ export const RecursiveNode = ({
 }) => {
   const currentParentId = parentId ?? "root";
   const [search, setSearch] = useState("");
-  const [selectedChildId, setSelectedChildId] = useState<string | null>(null);
+  const [selectedChildId, setSelectedChildId] = useState<
+    string | null | undefined
+  >(null);
   const children = useTreeNodes({ treeApi, parentId, search });
 
   const noteContent = treeApi.renderNoteContent(currentParentId);
 
   if (selectedChildId && !children.some((n) => n.id === selectedChildId)) {
     setSelectedChildId(null);
+    treeApi.setActiveNoteParentId(currentParentId);
   }
 
   const handleDelete = async (nodeId: string) => {

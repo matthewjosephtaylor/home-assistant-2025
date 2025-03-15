@@ -12,6 +12,8 @@ type AppState = {
   setUrlHash: (hash: keyof typeof SCREENS) => void;
   activeNoteParentId: string | undefined;
   setActiveNoteParentId: (id: string | undefined) => void;
+  abortController?: AbortController;
+  setAbortController: (abortController?: AbortController) => void;
 };
 
 export const useAppState = create<AppState>((set) => ({
@@ -30,4 +32,6 @@ export const useAppState = create<AppState>((set) => ({
   },
   activeNoteParentId: undefined,
   setActiveNoteParentId: (id) => set({ activeNoteParentId: id }),
+  abortController: undefined,
+  setAbortController: (abortController) => set({ abortController }),
 }));

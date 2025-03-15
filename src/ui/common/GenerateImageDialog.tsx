@@ -1,4 +1,4 @@
-import { isDefined, isUndefined } from "@mjt-engine/object";
+import { first, isDefined, isUndefined } from "@mjt-engine/object";
 import {
   CONTENT_OBJECT_STORE,
   type Content,
@@ -21,6 +21,7 @@ import { ContentImage } from "../content/ContentImage";
 import { ContentView } from "../content/ContentView";
 import { FileUpload } from "./FileUpload";
 import { AlternativePicker } from "./AlternativePicker";
+import { useAppState } from "../../state/AppState";
 
 export const DEFAULT_IMAGEGEN_REQUEST: Partial<TextToImageRequest> = {
   steps: 10,
@@ -44,6 +45,7 @@ export const GenerateImageDialog = ({
   title?: string;
   defaultRequest?: Partial<TextToImageRequest>;
 }) => {
+  const { abortController, setAbortController } = useAppState();
   const [localValue, setLocalValue] = useState(value);
   const [request, setRequest] = useState<Partial<TextToImageRequest>>({
     ...defaultRequest,
@@ -76,19 +78,35 @@ export const GenerateImageDialog = ({
   }, [value, defaultRequest]);
   const generate = async () => {
     const con = await getConnection();
+    const abortController = new AbortController();
+    setAbortController(abortController);
+    abortController.signal.addEventListener("abort", () => {
+      console.log("Got Abort signal!!!!");
+    });
 
     con.requestMany({
+      signal: abortController.signal,
+
       onResponse: (response) => {
         const updatedContent = {
           ...(localValue ?? {
             id: Ids.fromObjectStore(CONTENT_OBJECT_STORE),
             createdAt: Date.now(),
           }),
+          finalized: response.aborted ? true : response.finalized,
           contentType: "image/png",
-          value: response.images[0],
+          value: first(response.images),
           updatedAt: Date.now(),
           source: request,
+          progress: {
+            current: (response.progress ?? 0) * 100,
+            total: 100,
+            etaSeconds: response.etaSeconds,
+          },
         } satisfies Content;
+        if (updatedContent.finalized) {
+          setAbortController(undefined);
+        }
         setLocalValue(updatedContent);
       },
       subject: "imagegen.txt2img",
@@ -134,7 +152,14 @@ export const GenerateImageDialog = ({
                 );
               }}
             />
-            <ContentImage content={localValue} style={{ maxHeight: "20em" }} />
+            <ContentImage
+              onAbort={() => {
+                console.log("aborting");
+                abortController?.abort();
+              }}
+              content={localValue}
+              style={{ height: "20em" }}
+            />
           </Stack>
           <AlternativePicker
             onRemove={(index) => {

@@ -1,4 +1,4 @@
-import { Box, CircularProgress, Typography } from "@mui/material";
+import { Box, CircularProgress } from "@mui/material";
 import type { BoxProps } from "@mui/system";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
@@ -54,13 +54,8 @@ export const MarkdownRenderer = ({
           }}
         >
           <CircularProgress size={24} />
-          <Typography variant="caption" color="textSecondary">
-            Loading...
-          </Typography>
         </Box>
       )}
     </Box>
   );
 };
-
-

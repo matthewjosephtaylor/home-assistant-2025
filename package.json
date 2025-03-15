@@ -28,7 +28,7 @@
     "gh-pages": "^6.3.0",
     "prettier": "^3.5.3",
     "sass-embedded": "^1.85.1",
-    "vite": "^6.2.1"
+    "vite": "^6.2.2"
   },
   "peerDependencies": {
     "typescript": "^5.7.2"
@@ -42,6 +42,7 @@
     "@mjt-engine/assert": "github:mjt-engine/assert",
     "@mjt-engine/byte": "github:mjt-engine/byte",
     "@mjt-engine/cache": "github:mjt-engine/cache",
+    "@mjt-engine/color": "github:mjt-engine/color",
     "@mjt-engine/idb": "github:mjt-engine/idb",
     "@mjt-engine/message": "github:mjt-engine/message",
     "@mjt-engine/object": "github:mjt-engine/object",

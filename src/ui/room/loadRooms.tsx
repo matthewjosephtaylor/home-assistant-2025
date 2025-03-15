@@ -17,37 +17,32 @@ export const loadRooms: TreeApi["loadChildren"] = async (
   parentId,
   query = ""
 ) => {
-  try {
-    console.log("loadRoomNodes", { parentId, query });
-    const realizedQuery = isEmpty(query)
-      ? "values(@)[?!parentId || parentId == `null`]"
-      : query;
-    const rooms = (await Datas.search(await getConnection())({
-      from: ROOM_OBJECT_STORE,
-      query: realizedQuery.trim(),
-    })) as Room[];
-    console.log("rooms", rooms);
-    if (isUndefined(rooms)) {
-      return [];
-    }
-
-    const treeNodes: TreeNode[] = await Promise.all(
-      rooms.map(async (room) => {
-        const content = await Datas.get(await getConnection())<Content>({
-          objectStore: CONTENT_OBJECT_STORE,
-          key: room.contentId,
-        });
-
-        return {
-          id: room.id,
-          label: content?.value || "<missing>",
-          content: <RoomContentView room={room} />,
-        } as TreeNode;
-      })
-    );
-    return treeNodes;
-  } catch (error) {
-    console.log(Errors.errorToText(error));
-    throw error;
+  console.log(`loading :${parentId}`);
+  const realizedQuery = isEmpty(query)
+    ? "values(@)[?!parentId || parentId == `null`]"
+    : query;
+  const rooms = (await Datas.search(await getConnection())({
+    from: ROOM_OBJECT_STORE,
+    query: realizedQuery.trim(),
+  })) as Room[];
+  if (isUndefined(rooms)) {
+    return [];
   }
+
+  const treeNodes: TreeNode[] = await Promise.all(
+    rooms.map(async (room) => {
+      const content = await Datas.get(await getConnection())<Content>({
+        objectStore: CONTENT_OBJECT_STORE,
+        key: room.contentId,
+      });
+
+      return {
+        id: room.id,
+        parentId: room.parentId,
+        label: content?.value || "<missing>",
+        content: <RoomContentView room={room} />,
+      } as TreeNode;
+    })
+  );
+  return treeNodes;
 };

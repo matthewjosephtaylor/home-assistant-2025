@@ -20,6 +20,8 @@ export const startChatWith = async (daimonId: string) => {
   const roomLabelContentId = await putContent({
     value: `${daimon.chara.data.name ?? ""} ${new Date().toLocaleString()}`,
     contentType: "text/plain",
+    creatorId: daimonId,
+    finalized: true,
   });
   const roomId = await putRoom({ contentId: roomLabelContentId });
   const { userDaimonId, setUrlHash } = useAppState.getState();

@@ -39,8 +39,6 @@ export const RoomContentView = ({
         objectStore: CONTENT_OBJECT_STORE,
         key: daimon.chara.data.extensions?.avatar,
       });
-      // const content = await Datas.get(await getConnection())<Content>({
-      // const content = roomContent.value;
       setAvatar(avatar);
     })();
   }, [room]);

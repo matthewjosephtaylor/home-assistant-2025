@@ -1,12 +1,12 @@
-import { Box, Divider, ListItemButton, Stack } from "@mui/material";
+import { Divider, ListItemButton, Stack } from "@mui/material";
 import React from "react";
-import type { TreeNode } from "./TreeNode";
 import { NodeItemButtons } from "./NodeItemButtons";
+import type { TreeNode } from "./TreeNode";
 
 export const NodeItem: React.FC<{
   child: TreeNode;
-  selectedChildId: string | null;
-  setSelectedChildId: (id: string | null) => void;
+  selectedChildId: string | null | undefined;
+  setSelectedChildId: (id: string | null | undefined) => void;
   onOpenEditor: (params: {
     parentId?: string;
     nodeId?: string;
@@ -27,7 +27,7 @@ export const NodeItem: React.FC<{
         selected={selectedChildId === child.id}
         onClick={() =>
           child.id === selectedChildId
-            ? setSelectedChildId(null)
+            ? setSelectedChildId(child.parentId)
             : setSelectedChildId(child.id)
         }
         onMouseEnter={() => setHovered(true)}

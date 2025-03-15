@@ -1,8 +1,8 @@
-import { Divider, List, type ListProps } from "@mui/material";
-import { NodeItem } from "./NodeItem";
 import { isDefined, toMany } from "@mjt-engine/object";
+import { Divider, List, type ListProps } from "@mui/material";
+import { useLayoutEffect, useRef } from "react";
+import { NodeItem } from "./NodeItem";
 import type { TreeNode } from "./TreeNode";
-import { useEffect, useRef, useLayoutEffect } from "react";
 
 export const NodeList = ({
   children,
@@ -13,8 +13,8 @@ export const NodeList = ({
   ...rest
 }: {
   children: TreeNode[];
-  selectedChildId: string | null;
-  setSelectedChildId: (id: string | null) => void;
+  selectedChildId: string | undefined | null;
+  setSelectedChildId: (id: string | null | undefined) => void;
   onOpenEditor: (params: {
     parentId?: string;
     nodeId?: string;
@@ -38,7 +38,9 @@ export const NodeList = ({
     mutationObserver.observe(listElement, { childList: true });
 
     const resizeObserver = new ResizeObserver(handleScrollToBottom);
-    Array.from(listElement.children).forEach((child) => resizeObserver.observe(child));
+    Array.from(listElement.children).forEach((child) =>
+      resizeObserver.observe(child)
+    );
 
     return () => {
       mutationObserver.disconnect();

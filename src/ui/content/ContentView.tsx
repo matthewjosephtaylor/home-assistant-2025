@@ -6,6 +6,7 @@ import { useData } from "../../state/useData";
 import { MarkdownRenderer } from "../room/text-content-view/MarkdownRenderer";
 import { GenContentImage } from "./GenContentImage";
 import type { TextToImageRequest } from "@mjt-services/imagegen-common-2025";
+import type { ContentImage } from "./ContentImage";
 
 export const ContentView = ({
   contentId,
@@ -19,12 +20,12 @@ export const ContentView = ({
   contentId: string | undefined;
   contentType?: string;
   defaultImagegenRequest?: Partial<TextToImageRequest>;
-  imgProps?: Omit<ImgHTMLAttributes<HTMLImageElement>, "content">;
+  imgProps?: Parameters<typeof ContentImage>[0];
 } & (BoxProps | ImgHTMLAttributes<HTMLImageElement>)) => {
   const content = useData<Content>(contentId);
   const realizedContentType = content?.contentType ?? contentType;
   if (
-    realizedContentType?.startsWith("text") &&
+    // realizedContentType?.includes("text") &&
     typeof content?.value === "string"
   ) {
     return (

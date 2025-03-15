@@ -5,6 +5,7 @@ import type React from "react";
  */
 
 export type TreeNode = {
+  parentId?: string;
   id: string;
   content?: React.ReactNode;
 };
