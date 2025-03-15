@@ -1,8 +1,11 @@
 import { Divider, ListItemButton, Stack } from "@mui/material";
 import React from "react";
-import { NodeItemButtons } from "./NodeItemButtons";
+import ContextMenu from "../ContextMenu";
 import type { TreeNode } from "./TreeNode";
 
+import AddCircleIcon from "@mui/icons-material/AddCircle";
+import DeleteIcon from "@mui/icons-material/Delete";
+import EditIcon from "@mui/icons-material/Edit";
 export const NodeItem: React.FC<{
   child: TreeNode;
   selectedChildId: string | null | undefined;
@@ -33,20 +36,32 @@ export const NodeItem: React.FC<{
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
       >
-        <Stack
-          direction={"row"}
-          justifyContent="space-between"
-          alignItems="center"
-          gap={"1ch"}
+        <ContextMenu
+          actions={{
+            Edit: {
+              icon: <EditIcon />,
+              action: () => onOpenEditor({ nodeId: child.id, mode: "edit" }),
+            },
+            Add: {
+              icon: <AddCircleIcon />,
+              action: () => onOpenEditor({ parentId: child.id, mode: "add" }),
+            },
+
+            Delete: {
+              icon: <DeleteIcon />,
+              action: () => handleDelete(child.id),
+            },
+          }}
         >
-          {child.content}
-          <NodeItemButtons
-            childId={child.id}
-            onOpenEditor={onOpenEditor}
-            handleDelete={handleDelete}
-            visible={hovered}
-          />
-        </Stack>
+          <Stack
+            direction={"row"}
+            justifyContent="space-between"
+            alignItems="center"
+            gap={"1ch"}
+          >
+            {child.content}
+          </Stack>
+        </ContextMenu>
       </ListItemButton>
       <Divider component="li" />
     </React.Fragment>

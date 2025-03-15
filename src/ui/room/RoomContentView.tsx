@@ -44,10 +44,11 @@ export const RoomContentView = ({
   }, [room]);
 
   return (
-    <Stack direction={"row"} gap={"1ch"} {...rest}>
+    <Stack direction={"row"} gap={"2ch"} {...rest}>
       <ContentImage
+
         content={avatar}
-        style={{ height: "4em", width: "auto" }}
+        style={{ height: "4em", width: "auto", borderRadius: "50%" }}
       ></ContentImage>
       <ContentView contentId={room.contentId} />
     </Stack>

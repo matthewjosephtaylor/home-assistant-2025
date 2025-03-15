@@ -1,5 +1,7 @@
 import { create } from "zustand";
 import { SCREENS } from "../SCREENS";
+import type { TextEntry } from "../ui/room/TextEntry";
+import { isUndefined } from "@mjt-engine/object";
 
 type AppState = {
   mqUrl: string;
@@ -14,6 +16,10 @@ type AppState = {
   setActiveNoteParentId: (id: string | undefined) => void;
   abortController?: AbortController;
   setAbortController: (abortController?: AbortController) => void;
+  textEntryElement: HTMLInputElement | undefined;
+  setTextEntryElement: (
+    textEntryComponent: HTMLInputElement | undefined
+  ) => void;
 };
 
 export const useAppState = create<AppState>((set) => ({
@@ -34,4 +40,8 @@ export const useAppState = create<AppState>((set) => ({
   setActiveNoteParentId: (id) => set({ activeNoteParentId: id }),
   abortController: undefined,
   setAbortController: (abortController) => set({ abortController }),
+  textEntryElement: undefined,
+  setTextEntryElement: (textEntryElement) => set({ textEntryElement }),
 }));
+
+

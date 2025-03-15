@@ -4,19 +4,18 @@ import {
   type Room,
 } from "@mjt-services/daimon-common-2025";
 import { Datas } from "@mjt-services/data-common-2025";
-import { Box, Button, TextField } from "@mui/material";
 import React from "react";
 import { getConnection } from "../../../connection/Connections";
 import { useAppState } from "../../../state/AppState";
+import { useData } from "../../../state/useData";
+import { putContent } from "../../common/putContent";
 import { type TreeApi } from "../../common/tree/TreeApi";
 import { type TreeNode } from "../../common/tree/TreeNode";
 import { ContentView } from "../../content/ContentView";
+import { TextDialog } from "../../crud/TextDialog";
 import { addUserRoomTextContent } from "../addUserRoomTextContent";
 import { NoteContent } from "./NoteContent";
 import { loadRootTreeChildren } from "./loadRootTreeChildren";
-import { useData } from "../../../state/useData";
-import { TextDialog } from "../../crud/TextDialog";
-import { putContent } from "../../common/putContent";
 
 export const rootTreeApi: TreeApi = {
   loadChildren: loadRootTreeChildren,

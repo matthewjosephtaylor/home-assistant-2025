@@ -1,21 +1,29 @@
 import { Stack } from "@mui/material";
 import { TreeView } from "../common/tree/TreeView";
-import { ChatBox } from "./ChatBox";
 import { rootTreeApi } from "./root-tree/rootTreeApi";
-import ContextMenu from "../common/ContextMenu";
+import { TextEntry } from "./TextEntry";
+import { useRef, useLayoutEffect } from "react";
 
 export const RoomScreen = () => {
   return (
     <Stack
       sx={{
-        width: "100%",
+        marginLeft: "5ch",
+        marginRight: "5ch",
         height: "99.9vh",
       }}
     >
-      <ContextMenu actions={{ foo: () => console.log("foo") }}>
-        <TreeView treeApi={rootTreeApi} />
-      </ContextMenu>
-      <ChatBox treeApi={rootTreeApi} />
+      <TreeView
+        treeApi={rootTreeApi}
+        sx={{
+          height: "100%",
+          maxHeight: "calc(100vh - 7em)",
+          maxWidth: "calc(100vw - 10ch)",
+          overflowX: "auto",
+          overflowY: "hidden",
+        }}
+      />
+      <TextEntry treeApi={rootTreeApi} />
     </Stack>
   );
 };

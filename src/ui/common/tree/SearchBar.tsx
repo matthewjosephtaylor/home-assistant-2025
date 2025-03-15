@@ -1,10 +1,13 @@
-import { TextField } from "@mui/material";
-import type React from "react";
+import { TextField, InputAdornment, IconButton } from "@mui/material";
+import SearchIcon from "@mui/icons-material/Search";
 
-export const SearchBar: React.FC<{
+export const SearchBar = ({
+  search,
+  setSearch,
+}: {
   search: string;
   setSearch: (value: string) => void;
-}> = ({ search, setSearch }) => (
+}) => (
   <TextField
     variant="outlined"
     size="small"
@@ -12,6 +15,20 @@ export const SearchBar: React.FC<{
     value={search}
     onChange={(e) => setSearch(e.target.value)}
     fullWidth
-    sx={{ mb: 2 }}
+    // InputProps={{
+    //   endAdornment: (
+    //     <InputAdornment position="end">
+    //       <IconButton>
+    //         <SearchIcon />
+    //       </IconButton>
+    //     </InputAdornment>
+    //   ),
+    // }}
+    sx={{
+      marginTop: "1.8em",
+      "& .MuiOutlinedInput-root": {
+        borderRadius: "0.5em 0.5em 0 0", // Rounded top corners only
+      },
+    }}
   />
 );

@@ -3,6 +3,7 @@ import { Divider, List, type ListProps } from "@mui/material";
 import { useLayoutEffect, useRef } from "react";
 import { NodeItem } from "./NodeItem";
 import type { TreeNode } from "./TreeNode";
+import { Colors } from "@mjt-engine/color";
 
 export const NodeList = ({
   children,
@@ -52,10 +53,14 @@ export const NodeList = ({
     <List
       ref={listRef}
       sx={{
-        bgcolor: "background.paper",
+        backgroundColor: Colors.from("grey").darken(0.65).toString(),
+        // backgroundColor: "background.paper",
+        // bgcolor: "background.paper",
         border: (theme) => `1px solid ${theme.palette.divider}`,
-        borderRadius: 1,
-        height: "80vh",
+        // borderRadius: 1,
+        // borderRadius: "1em",
+        // height: "80vh",
+        height: "100%",
         overflow: "auto",
       }}
       {...rest}

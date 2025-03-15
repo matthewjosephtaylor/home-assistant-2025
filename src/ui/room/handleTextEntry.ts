@@ -42,11 +42,9 @@ export const handleTextEntry = async ({
   const activeRoomParent = (await Datas.get(await getConnection())({
     key: activeRoomParentId,
   })) as Room;
-  console.log("activeRoomParent", activeRoomParent);
   const activeRoomContent = (await Datas.get(await getConnection())({
     key: activeRoomParent.contentId,
   })) as Content;
-  console.log("activeRoomParentContent", activeRoomContent);
 
   // TODO perhaps the search on the daimon side wants to just assume this link instead of creating?
   if (isDefined(activeRoomContent.creatorId)) {
@@ -60,6 +58,4 @@ export const handleTextEntry = async ({
     text: out,
     parentId: activeRoomParentId,
   });
-
-  console.log("roomId", roomId);
 };

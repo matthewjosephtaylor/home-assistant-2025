@@ -10,13 +10,27 @@ export const CopyBlock = ({
   children: React.ReactNode;
 }) => {
   return (
-    <Box sx={{ position: "relative" }}>
+    <Box
+      sx={{
+        position: "relative",
+        "&:hover .copy-button": {
+          opacity: 1,
+        },
+      }}
+    >
       <IconButton
         onClick={(evt) => {
           evt.stopPropagation();
           navigator.clipboard.writeText(text);
         }}
-        sx={{ position: "absolute", top: 0, right: 0 }}
+        className="copy-button"
+        sx={{
+          position: "absolute",
+          top: 0,
+          right: 0,
+          opacity: 0,
+          transition: "opacity 0.3s",
+        }}
       >
         <ContentCopyIcon />
       </IconButton>

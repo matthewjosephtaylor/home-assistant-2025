@@ -1,13 +1,14 @@
 import {
-  Box,
   Button,
   Dialog,
   DialogActions,
   DialogContent,
   DialogTitle,
   Stack,
+  type StackProps,
 } from "@mui/material";
-import React, { useState } from "react";
+import { useLayoutEffect, useRef, useState } from "react";
+import { rootTreeApi } from "../../room/root-tree/rootTreeApi";
 import { RecursiveNode } from "./RecursiveNode";
 import { type TreeApi } from "./TreeApi";
 
@@ -16,12 +17,16 @@ import { type TreeApi } from "./TreeApi";
  * the editor dialog. We rely on treeApi.getActiveNoteParentId() / .setActiveNoteParentId().
  */
 
-export const TreeView: React.FC<{ treeApi: TreeApi }> = ({ treeApi }) => {
+export const TreeView = ({
+  treeApi,
+  ...rest
+}: { treeApi: TreeApi } & StackProps) => {
   // Editor dialog state
   const [editorOpen, setEditorOpen] = useState(false);
   const [editorMode, setEditorMode] = useState<"add" | "edit">("add");
   const [editorParentId, setEditorParentId] = useState<string | undefined>();
   const [editorNodeId, setEditorNodeId] = useState<string | undefined>();
+
 
   // Called by RecursiveNode to open the editor
   const handleOpenEditor = (params: {
@@ -58,7 +63,7 @@ export const TreeView: React.FC<{ treeApi: TreeApi }> = ({ treeApi }) => {
   });
 
   return (
-    <Stack sx={{ margin: "2em" }}>
+    <Stack {...rest}>
       {/* Top-level RecursiveNode (no parentId => 'root') */}
       <RecursiveNode
         parentId={undefined}

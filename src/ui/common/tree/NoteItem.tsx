@@ -1,4 +1,4 @@
-import { ListItemButton, ListItemText } from "@mui/material";
+import { Box, ListItemButton, ListItemText } from "@mui/material";
 import React from "react";
 
 export const NoteItem = ({
@@ -9,7 +9,8 @@ export const NoteItem = ({
 }: {
   value: React.ReactNode;
 } & Parameters<typeof ListItemButton>[0]) => (
-  <ListItemButton selected={selected} onClick={onClick} {...rest}>
-    <ListItemText primary={value} />
-  </ListItemButton>
+  <Box onClick={onClick}>{value}</Box>
+  // <ListItemButton selected={selected} onClick={onClick} {...rest}>
+  //   <ListItemText primary={value} />
+  // </ListItemButton>
 );

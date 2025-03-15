@@ -1,3 +1,4 @@
+import { Colors } from "@mjt-engine/color";
 import { GlobalStyles } from "@mui/material";
 
 export const globalStyles = (
@@ -20,11 +21,14 @@ export const globalStyles = (
         background: "#2c2c2c",
       },
       "html, body, #root": {
-        height: "100%",
+        // height: "100%",
       },
       "*": {
-        scrollbarColor: "#888 #2c2c2c",
-        scrollbarWidth: "thin",
+        // scrollbarColor: "#888 #2c2c2c",
+        // bar / gutter
+        margin: "0",
+        scrollbarColor: `${Colors.from("black").toString()} ${Colors.from("grey").darken(0.6).toString()}`,
+        scrollbarWidth: "thick",
       },
     }}
   />

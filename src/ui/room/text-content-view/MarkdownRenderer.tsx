@@ -8,42 +8,41 @@ import { elementToText } from "./elementToText";
 export const MarkdownRenderer = ({
   text,
   isComplete = true,
+  sx = {},
   ...rest
 }: {
   text: string;
   isComplete?: boolean;
 } & BoxProps) => {
   return (
-    <Box sx={{ position: "relative", padding: 2 }} {...rest}>
-      <Box
-        sx={{
-          wordWrap: "break-word",
-          overflowWrap: "break-word",
-          "& code": {
-            whiteSpace: "pre-wrap",
-            wordBreak: "break-word",
+    <Box
+      sx={{
+        wordWrap: "break-word",
+        overflowWrap: "break-word",
+        "& code": {
+          whiteSpace: "pre-wrap",
+          wordBreak: "break-word",
+        },
+        ...sx,
+      }}
+      {...rest}
+    >
+      <ReactMarkdown
+        remarkPlugins={[remarkGfm]}
+        components={{
+          code({ node, className, children, ...props }) {
+            return (
+              <CopyBlock text={elementToText(node)}>
+                <code className={className} {...props}>
+                  {children}
+                </code>
+              </CopyBlock>
+            );
           },
         }}
       >
-        <ReactMarkdown
-          remarkPlugins={[remarkGfm]}
-          components={{
-            code({ node, className, children, ...props }) {
-              console.log("node", node);
-              console.log("props", props);
-              return (
-                <CopyBlock text={elementToText(node)}>
-                  <code className={className} {...props}>
-                    {children}
-                  </code>
-                </CopyBlock>
-              );
-            },
-          }}
-        >
-          {text}
-        </ReactMarkdown>
-      </Box>
+        {text}
+      </ReactMarkdown>
       {!isComplete && (
         <Box
           sx={{

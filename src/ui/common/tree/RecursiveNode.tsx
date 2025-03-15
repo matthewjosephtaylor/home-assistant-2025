@@ -1,13 +1,11 @@
-import { ROOM_OBJECT_STORE } from "@mjt-services/daimon-common-2025";
-import { Datas } from "@mjt-services/data-common-2025";
-import { Box, Button, Stack } from "@mui/material";
-import React, { useEffect, useState, useMemo } from "react";
-import { getConnection } from "../../../connection/Connections";
+import { Stack } from "@mui/material";
+import { useState } from "react";
+import { focusTextEntry } from "../../../state/focusTextEntry";
 import { NodeList } from "./NodeList";
+import { NoteItem } from "./NoteItem";
 import { SearchBar } from "./SearchBar";
 import type { TreeApi } from "./TreeApi";
 import { useTreeNodes } from "./useTreeNodes";
-import { NoteItem } from "./NoteItem";
 
 export const RecursiveNode = ({
   parentId,
@@ -35,7 +33,6 @@ export const RecursiveNode = ({
     setSelectedChildId(null);
     treeApi.setActiveNoteParentId(currentParentId);
   }
-
   const handleDelete = async (nodeId: string) => {
     await treeApi.removeNode(nodeId);
   };
@@ -55,17 +52,25 @@ export const RecursiveNode = ({
         height: "100%",
       }}
     >
-      <Stack sx={{ minWidth: "20ch", height: "100%" }}>
+      <Stack
+        sx={{
+          // minWidth: "20ch",
+          height: "100%",
+        }}
+      >
         <SearchBar search={search} setSearch={setSearch} />
         <NodeList
           children={children}
           selectedChildId={selectedChildId}
-          setSelectedChildId={setSelectedChildId}
+          setSelectedChildId={(id) => {
+            focusTextEntry();
+            setSelectedChildId(id);
+          }}
           onOpenEditor={onOpenEditor}
           handleDelete={handleDelete}
         />
         <NoteItem
-          sx={{ backgroundColor: isNoteSelected ? "red" : "black" }}
+          // sx={{ backgroundColor: isNoteSelected ? "red" : "black" }}
           selected={isNoteSelected}
           onClick={handleSelectNote}
           value={noteContent}

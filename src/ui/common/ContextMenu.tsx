@@ -2,8 +2,16 @@ import React, { useState, MouseEvent } from "react";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import Typography from "@mui/material/Typography";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import ListItemText from "@mui/material/ListItemText";
 
-export type ContextMenuActions = Record<string, () => void>;
+export type ContextMenuActions = Record<string, (() => void) | ContextMenuItem>;
+
+export type ContextMenuItem = Partial<{
+  label: string;
+  icon: React.ReactNode;
+  action: () => void;
+}>;
 
 interface ContextMenuProps {
   actions: ContextMenuActions;
@@ -42,16 +50,29 @@ export const ContextMenu = ({ actions, children }: ContextMenuProps) => {
         }
         PaperProps={{ elevation: 3, sx: { borderRadius: 2 } }}
       >
-        {Object.entries(actions).map(([label, action]) => (
+        {Object.entries(actions).map(([label, item]) => (
           <MenuItem
             key={label}
             onClick={(evt) => {
               evt.stopPropagation();
-              action();
+              if (typeof item === "function") {
+                item();
+              } else if (item?.action) {
+                item.action();
+              }
               handleClose();
             }}
           >
-            <Typography variant="body2">{label}</Typography>
+            <ListItemText
+              primary={
+                typeof item !== "function" ? (item.label ?? label) : label
+              }
+            />
+            {typeof item !== "function" && item?.icon && (
+              <ListItemIcon sx={{ marginLeft: "3em" }}>
+                {item.icon}
+              </ListItemIcon>
+            )}
           </MenuItem>
         ))}
       </Menu>

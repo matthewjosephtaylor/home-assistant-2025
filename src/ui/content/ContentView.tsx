@@ -1,12 +1,11 @@
-import { isUndefined } from "@mjt-engine/object";
 import type { Content } from "@mjt-services/daimon-common-2025";
+import type { TextToImageRequest } from "@mjt-services/imagegen-common-2025";
 import { Box, type BoxProps } from "@mui/system";
 import type { ImgHTMLAttributes } from "react";
 import { useData } from "../../state/useData";
 import { MarkdownRenderer } from "../room/text-content-view/MarkdownRenderer";
-import { GenContentImage } from "./GenContentImage";
-import type { TextToImageRequest } from "@mjt-services/imagegen-common-2025";
 import type { ContentImage } from "./ContentImage";
+import { GenContentImage } from "./GenContentImage";
 
 export const ContentView = ({
   contentId,
