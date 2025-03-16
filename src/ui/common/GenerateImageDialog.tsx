@@ -1,4 +1,4 @@
-import { first, isDefined, isUndefined } from "@mjt-engine/object";
+import { isDefined, isUndefined } from "@mjt-engine/object";
 import {
   CONTENT_OBJECT_STORE,
   type Content,
@@ -16,12 +16,12 @@ import {
   TextField,
 } from "@mui/material";
 import { useEffect, useState, type ReactNode } from "react";
-import { getConnection } from "../../connection/Connections";
 import { ContentImage } from "../content/ContentImage";
 import { ContentView } from "../content/ContentView";
 import { FileUpload } from "./FileUpload";
 import { AlternativePicker } from "./AlternativePicker";
 import { useAppState } from "../../state/AppState";
+import { generateImage } from "../../image/generateImage";
 
 export const DEFAULT_IMAGEGEN_REQUEST: Partial<TextToImageRequest> = {
   steps: 10,
@@ -76,48 +76,6 @@ export const GenerateImageDialog = ({
       ...(value?.source ?? {}),
     });
   }, [value, defaultRequest]);
-  const generate = async () => {
-    const con = await getConnection();
-    const abortController = new AbortController();
-    setAbortController(abortController);
-    abortController.signal.addEventListener("abort", () => {
-      console.log("Got Abort signal!!!!");
-    });
-
-    con.requestMany({
-      signal: abortController.signal,
-
-      onResponse: (response) => {
-        const updatedContent = {
-          ...(localValue ?? {
-            id: Ids.fromObjectStore(CONTENT_OBJECT_STORE),
-            createdAt: Date.now(),
-          }),
-          finalized: response.aborted ? true : response.finalized,
-          contentType: "image/png",
-          value: first(response.images),
-          updatedAt: Date.now(),
-          source: request,
-          progress: {
-            current: (response.progress ?? 0) * 100,
-            total: 100,
-            etaSeconds: response.etaSeconds,
-          },
-        } satisfies Content;
-        if (updatedContent.finalized) {
-          setAbortController(undefined);
-        }
-        setLocalValue(updatedContent);
-      },
-      subject: "imagegen.txt2img",
-      request: {
-        body: {
-          prompt: request.prompt ?? "",
-          ...request,
-        },
-      },
-    });
-  };
 
   return (
     <Dialog open={open} onClose={onClose} fullWidth maxWidth="sm">
@@ -288,7 +246,13 @@ export const GenerateImageDialog = ({
           </Box>
           <Button
             onClick={() => {
-              generate();
+              generateImage({
+                draft: localValue,
+                request,
+                onUpdate: (content) => {
+                  setLocalValue(content);
+                },
+              });
             }}
           >
             Generate

@@ -1,4 +1,4 @@
-import ContextMenu from "../common/ContextMenu";
+import { ContextMenu } from "../common/ContextMenu";
 import { putContent } from "../common/putContent";
 import { ContentView } from "../content/ContentView";
 import type { CrudSchema } from "../crud/GenericCrud";

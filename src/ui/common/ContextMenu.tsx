@@ -4,6 +4,7 @@ import MenuItem from "@mui/material/MenuItem";
 import Typography from "@mui/material/Typography";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
+import { Box } from "@mui/system";
 
 export type ContextMenuActions = Record<string, (() => void) | ContextMenuItem>;
 
@@ -37,9 +38,10 @@ export const ContextMenu = ({ actions, children }: ContextMenuProps) => {
   };
 
   return (
-    <div onContextMenu={handleContextMenu} style={{ cursor: "context-menu" }}>
+    <Box onContextMenu={handleContextMenu} style={{ cursor: "context-menu" }}>
       {children}
       <Menu
+        sx={{ borderRadius: "1em" }}
         open={menuPosition !== null}
         onClose={handleClose}
         anchorReference="anchorPosition"
@@ -64,8 +66,11 @@ export const ContextMenu = ({ actions, children }: ContextMenuProps) => {
             }}
           >
             <ListItemText
+              sx={{ fontSize: "0.1rem" }}
               primary={
-                typeof item !== "function" ? (item.label ?? label) : label
+                <Typography variant="body2" sx={{ fontSize: "0.875rem" }}>
+                  {typeof item !== "function" ? (item.label ?? label) : label}
+                </Typography>
               }
             />
             {typeof item !== "function" && item?.icon && (
@@ -76,8 +81,6 @@ export const ContextMenu = ({ actions, children }: ContextMenuProps) => {
           </MenuItem>
         ))}
       </Menu>
-    </div>
+    </Box>
   );
 };
-
-export default ContextMenu;
