@@ -4,9 +4,15 @@ import { useAppState } from "../../state/AppState";
 
 export const askDaimon = async (
   query: string,
-  onUpdate?: (content: Partial<Content>) => void
+  options: Partial<{
+    onUpdate?: (content: Partial<Content>) => void;
+    assistantId: string;
+    roomId: string;
+    userId: string;
+  }> = {}
 ) => {
   const con = await getConnection();
+  const { assistantId, roomId, userId, onUpdate } = options;
   const { activeNoteParentId, userDaimonId } = useAppState.getState();
   return await new Promise<Partial<Content>>((resolve, reject) => {
     con.requestMany({
@@ -19,8 +25,9 @@ export const askDaimon = async (
       },
       request: {
         body: {
-          roomId: activeNoteParentId,
-          userId: userDaimonId,
+          roomId: roomId ?? activeNoteParentId,
+          userId: userId ?? userDaimonId,
+          assistantId,
           query,
         },
       },

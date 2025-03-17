@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { useConnection } from "../../../connection/useConnection";
 import type { TreeApi } from "./TreeApi";
 import type { TreeNode } from "./TreeNode";
+import { isDefined } from "@mjt-engine/object";
 
 export const useTreeNodes = ({
   treeApi,

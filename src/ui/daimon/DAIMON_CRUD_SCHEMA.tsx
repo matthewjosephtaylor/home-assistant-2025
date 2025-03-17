@@ -1,9 +1,8 @@
-import { ContextMenu } from "../common/ContextMenu";
 import { putContent } from "../common/putContent";
 import { ContentView } from "../content/ContentView";
 import type { CrudSchema } from "../crud/GenericCrud";
 import type { DaimonCrud } from "./DaimonCrud";
-import { startChatWith } from "./startChatWith";
+import { DaimonMenuAvatar } from "./DaimonMenuAvatar";
 
 export const DAIMON_CRUD_SCHEMA: CrudSchema<DaimonCrud> = {
   image: {
@@ -24,12 +23,10 @@ export const DAIMON_CRUD_SCHEMA: CrudSchema<DaimonCrud> = {
     },
     renderCell: (contentId, item) => {
       return (
-        <ContextMenu actions={{ Chat: () => startChatWith(item.id) }}>
-          <ContentView
-            contentId={contentId}
-            imgProps={{ style: { maxHeight: "4em" } }}
-          />
-        </ContextMenu>
+        <DaimonMenuAvatar
+          imageContentId={contentId}
+          daimonId={item.id}
+        ></DaimonMenuAvatar>
       );
     },
   },
@@ -39,6 +36,9 @@ export const DAIMON_CRUD_SCHEMA: CrudSchema<DaimonCrud> = {
   },
   description: {
     label: "Description",
+    renderCell: (value) => {
+      return value?.slice(0, 100);
+    },
   },
   model: {
     label: "Model",

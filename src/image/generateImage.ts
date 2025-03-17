@@ -49,7 +49,7 @@ export const generateImage = async ({
         };
         onUpdate?.(updatedContent);
         if (updatedContent.finalized) {
-          setAbortController(undefined);
+          // setAbortController(undefined);
           resolve(updatedContent);
         }
       },

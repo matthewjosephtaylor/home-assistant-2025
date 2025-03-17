@@ -46,7 +46,6 @@ export const RoomContentView = ({
   return (
     <Stack direction={"row"} gap={"2ch"} {...rest}>
       <ContentImage
-
         content={avatar}
         style={{ height: "4em", width: "auto", borderRadius: "50%" }}
       ></ContentImage>

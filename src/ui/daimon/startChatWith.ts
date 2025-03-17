@@ -1,11 +1,11 @@
 import { isDefined, isUndefined } from "@mjt-engine/object";
+import type { Daimon } from "@mjt-services/daimon-common-2025";
+import { Datas } from "@mjt-services/data-common-2025";
+import { getConnection } from "../../connection/Connections";
 import { useAppState } from "../../state/AppState";
 import { putContent } from "../common/putContent";
 import { putRoom } from "../common/putRoom";
 import { linkDaimonToRoom } from "../room/linkDaimonToRoom";
-import { Datas } from "@mjt-services/data-common-2025";
-import { getConnection } from "../../connection/Connections";
-import type { Daimon } from "@mjt-services/daimon-common-2025";
 
 export const startChatWith = async (daimonId: string) => {
   console.log("Start chat with", daimonId);
@@ -29,5 +29,5 @@ export const startChatWith = async (daimonId: string) => {
     await linkDaimonToRoom({ daimonId: userDaimonId, roomId });
   }
   await linkDaimonToRoom({ daimonId, roomId });
-  setUrlHash("room");
+  return roomId;
 };

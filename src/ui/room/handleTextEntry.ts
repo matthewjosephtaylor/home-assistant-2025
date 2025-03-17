@@ -1,17 +1,16 @@
 import { isDefined, isUndefined } from "@mjt-engine/object";
+import {
+  type Content,
+  type Room
+} from "@mjt-services/daimon-common-2025";
+import { Datas } from "@mjt-services/data-common-2025";
 import { ChatLangs } from "../../chatlang/ChatLangs";
+import { getConnection } from "../../connection/Connections";
+import { useAppState } from "../../state/AppState";
 import type { TreeApi } from "../common/tree/TreeApi";
 import { addUserRoomTextContent } from "./addUserRoomTextContent";
-import { TEXT_ENTRY_EVALUATOR } from "./TEXT_ENTRY_EVALUATOR";
 import { linkDaimonToRoom } from "./linkDaimonToRoom";
-import { useAppState } from "../../state/AppState";
-import { Datas } from "@mjt-services/data-common-2025";
-import {
-  ROOM_OBJECT_STORE,
-  type Content,
-  type Room,
-} from "@mjt-services/daimon-common-2025";
-import { getConnection } from "../../connection/Connections";
+import { TEXT_ENTRY_EVALUATOR } from "./TEXT_ENTRY_EVALUATOR";
 
 export const handleTextEntry = async ({
   text,

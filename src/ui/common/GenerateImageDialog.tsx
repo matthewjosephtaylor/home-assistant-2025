@@ -45,11 +45,11 @@ export const GenerateImageDialog = ({
   title?: string;
   defaultRequest?: Partial<TextToImageRequest>;
 }) => {
-  const { abortController, setAbortController } = useAppState();
+  const { abortController } = useAppState();
   const [localValue, setLocalValue] = useState(value);
   const [request, setRequest] = useState<Partial<TextToImageRequest>>({
-    ...defaultRequest,
     ...DEFAULT_IMAGEGEN_REQUEST,
+    ...defaultRequest,
     ...(value?.source ?? {}),
   });
   const handleSave = () => {
@@ -70,11 +70,11 @@ export const GenerateImageDialog = ({
   };
   useEffect(() => {
     setLocalValue(value); // reset localValue when value changes
-    setRequest({
-      ...defaultRequest,
-      ...DEFAULT_IMAGEGEN_REQUEST,
-      ...(value?.source ?? {}),
-    });
+    // setRequest({
+    //   ...DEFAULT_IMAGEGEN_REQUEST,
+    //   ...defaultRequest,
+    //   ...(value?.source ?? {}),
+    // });
   }, [value, defaultRequest]);
 
   return (
@@ -98,6 +98,8 @@ export const GenerateImageDialog = ({
                   value: arrayBuffer,
                   updatedAt: Date.now(),
                 } satisfies Content;
+
+                console.log("updatedContent", updatedContent);
                 setLocalValue(updatedContent);
               }}
               renderFile={function (file: File): ReactNode {

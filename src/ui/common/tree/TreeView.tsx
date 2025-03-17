@@ -27,7 +27,6 @@ export const TreeView = ({
   const [editorParentId, setEditorParentId] = useState<string | undefined>();
   const [editorNodeId, setEditorNodeId] = useState<string | undefined>();
 
-
   // Called by RecursiveNode to open the editor
   const handleOpenEditor = (params: {
     parentId?: string;
