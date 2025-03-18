@@ -1,4 +1,3 @@
-import { Errors } from "@mjt-engine/message";
 import { isEmpty, isUndefined } from "@mjt-engine/object";
 import {
   CONTENT_OBJECT_STORE,
@@ -8,15 +7,11 @@ import {
 } from "@mjt-services/daimon-common-2025";
 import { Datas } from "@mjt-services/data-common-2025";
 import { getConnection } from "../../connection/Connections";
-import type { TreeApi } from "../common/tree/TreeApi";
 import type { TreeNode } from "../common/tree/TreeNode";
 
 import { RoomContentView } from "./RoomContentView";
 
-export const loadRooms: TreeApi["loadChildren"] = async (
-  parentId,
-  query = ""
-) => {
+export const loadRooms = async (parentId: string | undefined, query = "") => {
   console.log(`loading :${parentId}`);
   const realizedQuery = isEmpty(query)
     ? "values(@)[?!parentId || parentId == `null`]"

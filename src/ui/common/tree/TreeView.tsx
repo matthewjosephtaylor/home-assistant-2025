@@ -7,23 +7,19 @@ import {
   Stack,
   type StackProps,
 } from "@mui/material";
-import { useLayoutEffect, useRef, useState } from "react";
-import { rootTreeApi } from "../../room/root-tree/rootTreeApi";
+import { useState } from "react";
+import { TreeEditorForm } from "../../room/root-tree/TreeEditorForm";
 import { RecursiveNode } from "./RecursiveNode";
-import { type TreeApi } from "./TreeApi";
 
 /**
  * The main TreeView component holds the top-level RecursiveNode and
  * the editor dialog. We rely on treeApi.getActiveNoteParentId() / .setActiveNoteParentId().
  */
 
-export const TreeView = ({
-  treeApi,
-  ...rest
-}: { treeApi: TreeApi } & StackProps) => {
+export const TreeView = ({ ...rest }: StackProps) => {
   // Editor dialog state
   const [editorOpen, setEditorOpen] = useState(false);
-  const [editorMode, setEditorMode] = useState<"add" | "edit">("add");
+  const [editorMode, setEditorMode] = useState<"edit">("edit");
   const [editorParentId, setEditorParentId] = useState<string | undefined>();
   const [editorNodeId, setEditorNodeId] = useState<string | undefined>();
 
@@ -31,7 +27,7 @@ export const TreeView = ({
   const handleOpenEditor = (params: {
     parentId?: string;
     nodeId?: string;
-    mode: "add" | "edit";
+    mode: "edit";
   }) => {
     setEditorParentId(params.parentId);
     setEditorNodeId(params.nodeId);
@@ -39,36 +35,32 @@ export const TreeView = ({
     setEditorOpen(true);
   };
 
-  // Get the form from the TreeApi
-  const editorForm = treeApi.getEditorForm({
-    parentId: editorParentId,
-    nodeId: editorNodeId,
-    mode: editorMode,
-    onCancel: () => setEditorOpen(false),
-    onOk: (formData: any) => {
-      // By default, let's handle add/update here
-      if (editorMode === "add" && editorParentId) {
-        treeApi
-          .addChild(editorParentId, formData)
-          .then(() => setEditorOpen(false));
-      } else if (editorMode === "edit" && editorNodeId) {
-        treeApi
-          .updateNode(editorNodeId, formData)
-          .then(() => setEditorOpen(false));
-      }
-      // Close
-      setEditorOpen(false);
-    },
-  });
+  // // Get the form from the TreeApi
+  // const editorForm = treeApi.getEditorForm({
+  //   parentId: editorParentId,
+  //   nodeId: editorNodeId,
+  //   mode: editorMode,
+  //   onCancel: () => setEditorOpen(false),
+  //   onOk: (formData: any) => {
+  //     // By default, let's handle add/update here
+  //     if (editorMode === "add" && editorParentId) {
+  //       treeApi
+  //         .addChild(editorParentId, formData)
+  //         .then(() => setEditorOpen(false));
+  //     } else if (editorMode === "edit" && editorNodeId) {
+  //       treeApi
+  //         .updateNode(editorNodeId, formData)
+  //         .then(() => setEditorOpen(false));
+  //     }
+  //     // Close
+  //     setEditorOpen(false);
+  //   },
+  // });
 
   return (
     <Stack {...rest}>
       {/* Top-level RecursiveNode (no parentId => 'root') */}
-      <RecursiveNode
-        parentId={undefined}
-        treeApi={treeApi}
-        onOpenEditor={handleOpenEditor}
-      />
+      <RecursiveNode parentId={undefined} onOpenEditor={handleOpenEditor} />
 
       {/* Editor dialog */}
       <Dialog
@@ -77,10 +69,14 @@ export const TreeView = ({
         fullWidth
         maxWidth="sm"
       >
-        <DialogTitle>
-          {editorMode === "add" ? "Add Child" : "Edit Node"}
-        </DialogTitle>
-        <DialogContent>{editorForm}</DialogContent>
+        <DialogTitle>{"Edit"}</DialogTitle>
+        <DialogContent>
+          <TreeEditorForm
+            open={editorOpen}
+            nodeId={editorNodeId}
+            onClose={() => setEditorOpen(false)}
+          />
+        </DialogContent>
         <DialogActions>
           <Button onClick={() => setEditorOpen(false)} color="inherit">
             Cancel

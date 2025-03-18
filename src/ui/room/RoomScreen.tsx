@@ -5,7 +5,6 @@ import { useState } from "react";
 import { useDatas } from "../../state/useDatas";
 import { TreeView } from "../common/tree/TreeView";
 import { DaimonMenuAvatar } from "../daimon/DaimonMenuAvatar";
-import { rootTreeApi } from "./root-tree/rootTreeApi";
 import { TextEntry } from "./TextEntry";
 
 export const RoomScreen = () => {
@@ -45,7 +44,6 @@ export const RoomScreen = () => {
         </Stack>
         <TreeView
           key={key}
-          treeApi={rootTreeApi}
           sx={{
             height: "100%",
             maxHeight: "calc(100vh - 7em)",
@@ -55,7 +53,7 @@ export const RoomScreen = () => {
           }}
         />
       </Stack>
-      <TextEntry treeApi={rootTreeApi} />
+      <TextEntry />
     </Stack>
   );
 };

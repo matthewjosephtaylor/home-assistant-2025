@@ -1,17 +1,19 @@
 import { Messages } from "@mjt-engine/message";
-import type { DATA_EVENT_MAP } from "@mjt-services/data-common-2025";
-import { useState, useEffect } from "react";
+import {
+  isChildObject,
+  type DATA_EVENT_MAP,
+} from "@mjt-services/data-common-2025";
+import { useEffect, useState } from "react";
 import { useConnection } from "../../../connection/useConnection";
-import type { TreeApi } from "./TreeApi";
+import { useAppState } from "../../../state/AppState";
+import { loadRootTreeChildren } from "../../room/root-tree/loadRootTreeChildren";
 import type { TreeNode } from "./TreeNode";
 import { isDefined } from "@mjt-engine/object";
 
 export const useTreeNodes = ({
-  treeApi,
   parentId,
   search,
 }: {
-  treeApi: TreeApi;
   parentId?: string;
   search: string;
 }): TreeNode[] => {
@@ -22,7 +24,8 @@ export const useTreeNodes = ({
     parentId: string | undefined,
     search: string
   ) => {
-    return treeApi.loadChildren(parentId, search);
+    useAppState.getState().setActiveNoteParentId(parentId);
+    return loadRootTreeChildren(parentId, search);
   };
   useEffect(() => {
     const abortController = new AbortController();
@@ -35,15 +38,24 @@ export const useTreeNodes = ({
       Record<string, string>
     >({
       connection: connectionInstance.connection,
-      subjectRoot: "update",
+      subjectRoot: isDefined(parentId) ? "child_update" : "object_update",
       signal: abortController.signal,
       listener: async (event) => {
-        const { root, subpath } = Messages.parseSubject(event.subject);
-        if (subpath !== parentId) {
-          return;
+        const { subject, detail } = event;
+        const { root, subpath } = Messages.parseSubject(subject);
+        if (isDefined(parentId)) {
+          if (subpath !== parentId) {
+            return;
+          }
+          const children = await realizeChildren(subpath, search);
+          setChildren(children);
+        } else {
+          // if (isChildObject(detail)) {
+          //   return;
+          // }
+          // const children = await realizeChildren(parentId, search);
+          // setChildren(children);
         }
-        const children = await realizeChildren(subpath, search);
-        setChildren(children);
       },
     });
     realizeChildren(parentId, search).then((result) => {
@@ -52,7 +64,7 @@ export const useTreeNodes = ({
     return () => {
       abortController.abort();
     };
-  }, [connectionInstance, parentId, search, treeApi]);
+  }, [connectionInstance, parentId, search]);
 
   return children;
 };

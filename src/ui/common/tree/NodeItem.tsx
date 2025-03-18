@@ -2,18 +2,17 @@ import { Divider, ListItemButton, Stack } from "@mui/material";
 import React from "react";
 import type { TreeNode } from "./TreeNode";
 
-import AddCircleIcon from "@mui/icons-material/AddCircle";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import { ContextMenu } from "../ContextMenu";
 export const NodeItem: React.FC<{
   child: TreeNode;
-  selectedChildId: string | null | undefined;
-  setSelectedChildId: (id: string | null | undefined) => void;
+  selectedChildId: string | undefined;
+  setSelectedChildId: (id: string | undefined) => void;
   onOpenEditor: (params: {
     parentId?: string;
     nodeId?: string;
-    mode: "add" | "edit";
+    mode: "edit";
   }) => void;
   handleDelete: (nodeId: string) => void;
 }> = ({
@@ -41,10 +40,6 @@ export const NodeItem: React.FC<{
             Edit: {
               icon: <EditIcon />,
               action: () => onOpenEditor({ nodeId: child.id, mode: "edit" }),
-            },
-            Add: {
-              icon: <AddCircleIcon />,
-              action: () => onOpenEditor({ parentId: child.id, mode: "add" }),
             },
 
             Delete: {

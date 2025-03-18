@@ -70,11 +70,11 @@ export const GenerateImageDialog = ({
   };
   useEffect(() => {
     setLocalValue(value); // reset localValue when value changes
-    // setRequest({
-    //   ...DEFAULT_IMAGEGEN_REQUEST,
-    //   ...defaultRequest,
-    //   ...(value?.source ?? {}),
-    // });
+    setRequest({
+      ...DEFAULT_IMAGEGEN_REQUEST,
+      ...defaultRequest,
+      ...(value?.source ?? {}),
+    });
   }, [value, defaultRequest]);
 
   return (

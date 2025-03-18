@@ -1,31 +1,19 @@
 import { isDefined, isUndefined } from "@mjt-engine/object";
-import {
-  type Content,
-  type Room
-} from "@mjt-services/daimon-common-2025";
+import { type Content, type Room } from "@mjt-services/daimon-common-2025";
 import { Datas } from "@mjt-services/data-common-2025";
 import { ChatLangs } from "../../chatlang/ChatLangs";
 import { getConnection } from "../../connection/Connections";
 import { useAppState } from "../../state/AppState";
-import type { TreeApi } from "../common/tree/TreeApi";
 import { addUserRoomTextContent } from "./addUserRoomTextContent";
 import { linkDaimonToRoom } from "./linkDaimonToRoom";
 import { TEXT_ENTRY_EVALUATOR } from "./TEXT_ENTRY_EVALUATOR";
 
-export const handleTextEntry = async ({
-  text,
-  treeApi,
-}: {
-  text: string;
-  treeApi: TreeApi;
-}) => {
+export const handleTextEntry = async ({ text }: { text: string }) => {
   console.log("handleTextEntry", text);
-  const out = await ChatLangs.interpretText(
-    text,
-    TEXT_ENTRY_EVALUATOR(treeApi)
-  );
+  const out = await ChatLangs.interpretText(text, TEXT_ENTRY_EVALUATOR());
   console.log("out", out);
-  const activeRoomParentId = treeApi.getActiveNoteParentId();
+  // const activeRoomParentId = treeApi.getActiveNoteParentId();
+  const activeRoomParentId = useAppState.getState().activeNoteParentId;
   if (isUndefined(activeRoomParentId)) {
     return;
   }

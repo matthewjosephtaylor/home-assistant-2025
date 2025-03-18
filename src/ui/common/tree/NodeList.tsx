@@ -1,9 +1,9 @@
+import { Colors } from "@mjt-engine/color";
 import { isDefined, toMany } from "@mjt-engine/object";
 import { Divider, List, type ListProps } from "@mui/material";
 import { useLayoutEffect, useRef } from "react";
 import { NodeItem } from "./NodeItem";
 import type { TreeNode } from "./TreeNode";
-import { Colors } from "@mjt-engine/color";
 
 export const NodeList = ({
   children,
@@ -14,12 +14,12 @@ export const NodeList = ({
   ...rest
 }: {
   children: TreeNode[];
-  selectedChildId: string | undefined | null;
-  setSelectedChildId: (id: string | null | undefined) => void;
+  selectedChildId: string | undefined;
+  setSelectedChildId: (id: string | undefined) => void;
   onOpenEditor: (params: {
     parentId?: string;
     nodeId?: string;
-    mode: "add" | "edit";
+    mode: "edit";
   }) => void;
   handleDelete: (nodeId: string) => void;
 } & Omit<ListProps, "children">) => {
