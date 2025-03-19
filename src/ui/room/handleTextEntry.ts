@@ -13,7 +13,7 @@ export const handleTextEntry = async ({ text }: { text: string }) => {
   const out = await ChatLangs.interpretText(text, TEXT_ENTRY_EVALUATOR());
   console.log("out", out);
   // const activeRoomParentId = treeApi.getActiveNoteParentId();
-  const activeRoomParentId = useAppState.getState().activeNoteParentId;
+  const activeRoomParentId = useAppState.getState().activeRoomId;
   if (isUndefined(activeRoomParentId)) {
     return;
   }

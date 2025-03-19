@@ -8,7 +8,6 @@ import { DaimonMenuAvatar } from "../daimon/DaimonMenuAvatar";
 import { TextEntry } from "./TextEntry";
 
 export const RoomScreen = () => {
-  const [key, setKey] = useState(crypto.randomUUID());
   const daimons = useDatas({ from: DAIMON_OBJECT_STORE });
   console.log("daimons", daimons);
   return (
@@ -30,12 +29,6 @@ export const RoomScreen = () => {
         >
           {daimons.map((daimon) => (
             <DaimonMenuAvatar
-              onUpdate={(roomId) => {
-                if (isUndefined(roomId)) {
-                  return;
-                }
-                setKey(crypto.randomUUID());
-              }}
               key={daimon.id}
               daimonId={daimon.id}
               imageContentId={daimon.chara.data.extensions?.avatar}
@@ -43,7 +36,6 @@ export const RoomScreen = () => {
           ))}
         </Stack>
         <TreeView
-          key={key}
           sx={{
             height: "100%",
             maxHeight: "calc(100vh - 7em)",

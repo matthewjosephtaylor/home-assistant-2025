@@ -18,7 +18,7 @@ import { Colors } from "@mjt-engine/color";
 
 export const NoteContent = ({ parentId }: { parentId?: string }) => {
   const ref = useRef<HTMLDivElement>(null);
-  const activeNoteParentId = useAppState((state) => state.activeNoteParentId);
+  const activeNoteParentId = useAppState((state) => state.activeRoomId);
   const [openNote, setOpenNote] = useState(false);
   const room = useData<Room>(parentId);
   const contextContent = useData<Content>(room?.contextId);

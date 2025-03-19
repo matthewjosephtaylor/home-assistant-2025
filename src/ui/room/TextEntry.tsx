@@ -157,7 +157,7 @@ export const TextEntry = forwardRef(({ ...rest }: TextFieldProps, ref) => {
           await putContent(value);
           await putRoom({
             contentId: value.id,
-            parentId: useAppState.getState().activeNoteParentId,
+            parentId: useAppState.getState().activeRoomId,
           });
           setOpenGenerateImage(false);
         }}

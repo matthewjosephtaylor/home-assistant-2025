@@ -1,15 +1,11 @@
-import {
-  Button,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogTitle,
-  Stack,
-  type StackProps,
-} from "@mui/material";
-import { useState } from "react";
+import { ROOM_OBJECT_STORE } from "@mjt-services/daimon-common-2025";
+import { Stack, type StackProps } from "@mui/material";
+import { useEffect, useState } from "react";
+import { useDatas } from "../../../state/useDatas";
 import { TreeEditorForm } from "../../room/root-tree/TreeEditorForm";
 import { RecursiveNode } from "./RecursiveNode";
+import { stableHash } from "stable-hash";
+import { Bytes } from "@mjt-engine/byte";
 
 /**
  * The main TreeView component holds the top-level RecursiveNode and
@@ -19,9 +15,20 @@ import { RecursiveNode } from "./RecursiveNode";
 export const TreeView = ({ ...rest }: StackProps) => {
   // Editor dialog state
   const [editorOpen, setEditorOpen] = useState(false);
-  const [editorMode, setEditorMode] = useState<"edit">("edit");
-  const [editorParentId, setEditorParentId] = useState<string | undefined>();
   const [editorNodeId, setEditorNodeId] = useState<string | undefined>();
+
+  const [key, setKey] = useState<string>();
+  const roots = useDatas({
+    from: ROOM_OBJECT_STORE,
+    query: "values(@)|[?parentId == null]",
+  });
+
+  useEffect(() => {
+    const stable = stableHash(roots);
+    Bytes.addressStringOf({ bytes: stable }).then((hash) => {
+      setKey(hash);
+    });
+  }, [roots]);
 
   // Called by RecursiveNode to open the editor
   const handleOpenEditor = (params: {
@@ -29,70 +36,23 @@ export const TreeView = ({ ...rest }: StackProps) => {
     nodeId?: string;
     mode: "edit";
   }) => {
-    setEditorParentId(params.parentId);
     setEditorNodeId(params.nodeId);
-    setEditorMode(params.mode);
     setEditorOpen(true);
   };
-
-  // // Get the form from the TreeApi
-  // const editorForm = treeApi.getEditorForm({
-  //   parentId: editorParentId,
-  //   nodeId: editorNodeId,
-  //   mode: editorMode,
-  //   onCancel: () => setEditorOpen(false),
-  //   onOk: (formData: any) => {
-  //     // By default, let's handle add/update here
-  //     if (editorMode === "add" && editorParentId) {
-  //       treeApi
-  //         .addChild(editorParentId, formData)
-  //         .then(() => setEditorOpen(false));
-  //     } else if (editorMode === "edit" && editorNodeId) {
-  //       treeApi
-  //         .updateNode(editorNodeId, formData)
-  //         .then(() => setEditorOpen(false));
-  //     }
-  //     // Close
-  //     setEditorOpen(false);
-  //   },
-  // });
+  console.log("key", key);
 
   return (
     <Stack {...rest}>
-      {/* Top-level RecursiveNode (no parentId => 'root') */}
-      <RecursiveNode parentId={undefined} onOpenEditor={handleOpenEditor} />
-
-      {/* Editor dialog */}
-      <Dialog
+      <RecursiveNode
+        key={key}
+        parentId={undefined}
+        onOpenEditor={handleOpenEditor}
+      />
+      <TreeEditorForm
         open={editorOpen}
+        nodeId={editorNodeId}
         onClose={() => setEditorOpen(false)}
-        fullWidth
-        maxWidth="sm"
-      >
-        <DialogTitle>{"Edit"}</DialogTitle>
-        <DialogContent>
-          <TreeEditorForm
-            open={editorOpen}
-            nodeId={editorNodeId}
-            onClose={() => setEditorOpen(false)}
-          />
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={() => setEditorOpen(false)} color="inherit">
-            Cancel
-          </Button>
-          <Button
-            onClick={() => {
-              // If your form doesn't have its own "OK" button,
-              // call the onOk callback or handle submission here.
-            }}
-            color="primary"
-            variant="contained"
-          >
-            OK
-          </Button>
-        </DialogActions>
-      </Dialog>
+      />
     </Stack>
   );
 };

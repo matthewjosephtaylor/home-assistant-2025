@@ -29,5 +29,6 @@ export const startChatWith = async (daimonId: string) => {
     await linkDaimonToRoom({ daimonId: userDaimonId, roomId });
   }
   await linkDaimonToRoom({ daimonId, roomId });
+  useAppState.getState().setActiveRoomId(roomId);
   return roomId;
 };

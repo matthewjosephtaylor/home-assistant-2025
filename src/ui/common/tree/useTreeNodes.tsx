@@ -24,7 +24,7 @@ export const useTreeNodes = ({
     parentId: string | undefined,
     search: string
   ) => {
-    useAppState.getState().setActiveNoteParentId(parentId);
+    useAppState.getState().setActiveRoomId(parentId);
     return loadRootTreeChildren(parentId, search);
   };
   useEffect(() => {

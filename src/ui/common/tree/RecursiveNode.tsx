@@ -22,15 +22,18 @@ export const RecursiveNode = ({
   }) => void;
 }) => {
   const [search, setSearch] = useState("");
+  const { activeRoomId, setActiveRoomId } = useAppState();
   const [selectedChildId, setSelectedChildId] = useState<string | undefined>();
   const children = useTreeNodes({ parentId, search });
-
-  const { setActiveNoteParentId } = useAppState();
 
   useEffect(() => {
     if (selectedChildId && !children.some((n) => n.id === selectedChildId)) {
       setSelectedChildId(undefined);
-      setActiveNoteParentId(parentId);
+      // setActiveNoteParentId(parentId);
+    }
+    if (activeRoomId && children.some((n) => n.id === activeRoomId)) {
+      setSelectedChildId(activeRoomId);
+      focusTextEntry();
     }
   }, [parentId, selectedChildId, children]);
 
@@ -42,7 +45,7 @@ export const RecursiveNode = ({
   };
 
   const handleSelectNote = () => {
-    setActiveNoteParentId(parentId);
+    setActiveRoomId(parentId);
   };
 
   return (
@@ -63,9 +66,10 @@ export const RecursiveNode = ({
         <SearchBar search={search} setSearch={setSearch} />
         <NodeList
           children={children}
-          selectedChildId={selectedChildId}
+          selectedChildId={activeRoomId}
           setSelectedChildId={(id) => {
             focusTextEntry();
+            setActiveRoomId(id);
             setSelectedChildId(id);
           }}
           onOpenEditor={onOpenEditor}

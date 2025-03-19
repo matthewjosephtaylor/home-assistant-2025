@@ -1,7 +1,5 @@
 import { create } from "zustand";
 import { SCREENS } from "../SCREENS";
-import type { TextEntry } from "../ui/room/TextEntry";
-import { isUndefined } from "@mjt-engine/object";
 
 type AppState = {
   mqUrl: string;
@@ -12,8 +10,8 @@ type AppState = {
   setAiTextOutput: (text: string) => void;
   getUrlHash: () => keyof typeof SCREENS;
   setUrlHash: (hash: keyof typeof SCREENS) => void;
-  activeNoteParentId: string | undefined;
-  setActiveNoteParentId: (id: string | undefined) => void;
+  activeRoomId: string | undefined;
+  setActiveRoomId: (id: string | undefined) => void;
   abortController?: AbortController;
   setAbortController: (abortController?: AbortController) => void;
   textEntryElement: HTMLInputElement | undefined;
@@ -36,12 +34,10 @@ export const useAppState = create<AppState>((set) => ({
   setUrlHash: (hash) => {
     window.location.hash = hash;
   },
-  activeNoteParentId: undefined,
-  setActiveNoteParentId: (id) => set({ activeNoteParentId: id }),
+  activeRoomId: undefined,
+  setActiveRoomId: (id) => set({ activeRoomId: id }),
   abortController: undefined,
   setAbortController: (abortController) => set({ abortController }),
   textEntryElement: undefined,
   setTextEntryElement: (textEntryElement) => set({ textEntryElement }),
 }));
-
-

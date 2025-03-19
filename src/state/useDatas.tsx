@@ -1,13 +1,18 @@
 import { Messages } from "@mjt-engine/message";
 import { isUndefined } from "@mjt-engine/object";
-import { type ObjectStore, Datas, type DATA_EVENT_MAP, Ids } from "@mjt-services/data-common-2025";
-import { useState, useEffect } from "react";
+import {
+  type DATA_EVENT_MAP,
+  type ObjectStore,
+  Datas,
+  Ids,
+} from "@mjt-services/data-common-2025";
+import { useEffect, useState } from "react";
 import { getConnection } from "../connection/Connections";
 import { useConnection } from "../connection/useConnection";
 
-
 export const useDatas = <T extends object>({
-  query = "values(@)", from,
+  query = "values(@)",
+  from,
 }: {
   query?: string;
   from: ObjectStore<T>;

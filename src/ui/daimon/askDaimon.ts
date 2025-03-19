@@ -13,7 +13,7 @@ export const askDaimon = async (
 ) => {
   const con = await getConnection();
   const { assistantId, roomId, userId, onUpdate } = options;
-  const { activeNoteParentId, userDaimonId } = useAppState.getState();
+  const { activeRoomId: activeNoteParentId, userDaimonId } = useAppState.getState();
   return await new Promise<Partial<Content>>((resolve, reject) => {
     con.requestMany({
       subject: "daimon.ask",

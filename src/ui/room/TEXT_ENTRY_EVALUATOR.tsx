@@ -12,7 +12,7 @@ export const TEXT_ENTRY_EVALUATOR = () =>
       const daimons = await nameToDaimons(node.value);
       console.log("daimons", daimons);
       // const roomId = treeApi.getActiveNoteParentId();
-      const roomId = useAppState.getState().activeNoteParentId;
+      const roomId = useAppState.getState().activeRoomId;
       console.log("room", roomId);
       if (daimons.length === 1 && roomId) {
         const link = await linkDaimonToRoom({
