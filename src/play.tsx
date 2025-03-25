@@ -5,33 +5,79 @@ import { getConnection } from "./connection/Connections";
 
 export const play = async () => {
   try {
-    // await playChat();
-    await playImagegen();
+    // await playWebclient();
+    await playTextgen();
   } catch (error) {
     console.error(error);
   }
 };
-
-export const playImagegen = async () => {
-  console.log("playImagegen");
+export const playTextgen = async () => {
+  console.log("playTextgen");
   const con = await getConnection();
   con.requestMany({
     onResponse: (response) => {
       console.log("response", response);
     },
-    subject: "imagegen.txt2img",
+    subject: "textgen.generate",
     request: {
       body: {
-        prompt: "A cat in a hat",
-        width: 512,
-        height: 512,
-        seed: 42,
-        cfg_scale: 7,
-        steps: 10,
+        // prompt: "tell me a joke about snow",
+        messages: [{ content: "tell me a joke about snow", role: "user" }],
+        model: "gemma3:1b",
+        stream: true,
+        // width: 512,
+        // height: 512,
+        // seed: 42,
+        // cfg_scale: 7,
+        // steps: 10,
       },
     },
   });
 };
+
+export const playWebclient = async () => {
+  console.log("playWebclient");
+  const con = await getConnection();
+  con.requestMany({
+    onResponse: (response) => {
+      console.log("response", response);
+    },
+    subject: "webclient.exec",
+    request: {
+      body: [
+        {
+          name: "open",
+          // params: "https://www.example.com"
+          params: "https://www.google.com/search?q=cute+cats",
+        },
+        { name: "markdown" },
+        { name: "screenshot" },
+        { name: "pdf" },
+      ],
+    },
+  });
+};
+
+// export const playImagegen = async () => {
+//   console.log("playImagegen");
+//   const con = await getConnection();
+//   con.requestMany({
+//     onResponse: (response) => {
+//       console.log("response", response);
+//     },
+//     subject: "imagegen.txt2img",
+//     request: {
+//       body: {
+//         prompt: "A cat in a hat",
+//         width: 512,
+//         height: 512,
+//         seed: 42,
+//         cfg_scale: 7,
+//         steps: 10,
+//       },
+//     },
+//   });
+// };
 
 export const playChat = async () => {
   // const program = ChatLang.Program.parse("Hi @Joe /help");

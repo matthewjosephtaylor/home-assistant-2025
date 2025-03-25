@@ -26,20 +26,20 @@ export const handleTextEntry = async ({ text }: { text: string }) => {
   }
 
   // if there is a parent room make sure to link the creator to the room
-  const activeRoomParent = (await Datas.get(await getConnection())({
-    key: activeRoomParentId,
-  })) as Room;
-  const activeRoomContent = (await Datas.get(await getConnection())({
-    key: activeRoomParent.contentId,
-  })) as Content;
+  // const activeRoomParent = (await Datas.get(await getConnection())({
+  //   key: activeRoomParentId,
+  // })) as Room;
+  // const activeRoomContent = (await Datas.get(await getConnection())({
+  //   key: activeRoomParent?.contentId,
+  // })) as Content;
 
   // TODO perhaps the search on the daimon side wants to just assume this link instead of creating?
-  if (isDefined(activeRoomContent.creatorId)) {
-    await linkDaimonToRoom({
-      daimonId: activeRoomContent.creatorId,
-      roomId: activeRoomParentId,
-    });
-  }
+  // if (isDefined(activeRoomContent?.creatorId)) {
+  //   await linkDaimonToRoom({
+  //     daimonId: activeRoomContent.creatorId,
+  //     roomId: activeRoomParentId,
+  //   });
+  // }
 
   const roomId = await addUserRoomTextContent({
     text: out,

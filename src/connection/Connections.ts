@@ -8,6 +8,7 @@ import { useConnection } from "./useConnection";
 import type { DaimonConnectionMap } from "@mjt-services/daimon-common-2025";
 import type { DataConnectionMap } from "@mjt-services/data-common-2025";
 import type { ImagegenConnectionMap } from "@mjt-services/imagegen-common-2025";
+import type { WebclientConnectionMap } from "@mjt-services/webclient-common-2025";
 
 export let _connection:
   | Awaited<ReturnType<typeof createConnection>>
@@ -20,7 +21,8 @@ export const createConnection = async () => {
       TextgenConnectionMap &
       DaimonConnectionMap &
       DataConnectionMap &
-      ImagegenConnectionMap
+      ImagegenConnectionMap &
+      WebclientConnectionMap
   >({
     server: GLOBALS.mqUrl,
     options: {

@@ -12,12 +12,16 @@ type AppState = {
   setUrlHash: (hash: keyof typeof SCREENS) => void;
   activeRoomId: string | undefined;
   setActiveRoomId: (id: string | undefined) => void;
+  selectedRoomIds: string[];
+  setSelectedRoomIds: (ids: string[]) => void;
   abortController?: AbortController;
   setAbortController: (abortController?: AbortController) => void;
   textEntryElement: HTMLInputElement | undefined;
   setTextEntryElement: (
     textEntryComponent: HTMLInputElement | undefined
   ) => void;
+  topRoomId?: string;
+  setTopRoomId: (id?: string) => void;
 };
 
 export const useAppState = create<AppState>((set) => ({
@@ -40,4 +44,8 @@ export const useAppState = create<AppState>((set) => ({
   setAbortController: (abortController) => set({ abortController }),
   textEntryElement: undefined,
   setTextEntryElement: (textEntryElement) => set({ textEntryElement }),
+  topRoomId: undefined,
+  setTopRoomId: (id) => set({ topRoomId: id }),
+  selectedRoomIds: [],
+  setSelectedRoomIds: (ids) => set({ selectedRoomIds: ids }),
 }));

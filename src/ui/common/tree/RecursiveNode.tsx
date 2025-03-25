@@ -22,7 +22,8 @@ export const RecursiveNode = ({
   }) => void;
 }) => {
   const [search, setSearch] = useState("");
-  const { activeRoomId, setActiveRoomId } = useAppState();
+  const { activeRoomId, setActiveRoomId, selectedRoomIds, setSelectedRoomIds } =
+    useAppState();
   const [selectedChildId, setSelectedChildId] = useState<string | undefined>();
   const children = useTreeNodes({ parentId, search });
 

@@ -1,15 +1,14 @@
-import { isUndefined } from "@mjt-engine/object";
 import { DAIMON_OBJECT_STORE } from "@mjt-services/daimon-common-2025";
 import { Stack } from "@mui/material";
-import { useState } from "react";
 import { useDatas } from "../../state/useDatas";
 import { TreeView } from "../common/tree/TreeView";
 import { DaimonMenuAvatar } from "../daimon/DaimonMenuAvatar";
 import { TextEntry } from "./TextEntry";
+import { useAppState } from "../../state/AppState";
 
 export const RoomScreen = () => {
   const daimons = useDatas({ from: DAIMON_OBJECT_STORE });
-  console.log("daimons", daimons);
+  const { topRoomId } = useAppState();
   return (
     <Stack
       sx={{
@@ -36,6 +35,7 @@ export const RoomScreen = () => {
           ))}
         </Stack>
         <TreeView
+          parentId={topRoomId}
           sx={{
             height: "100%",
             maxHeight: "calc(100vh - 7em)",

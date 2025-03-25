@@ -23,12 +23,22 @@ export const startChatWith = async (daimonId: string) => {
     creatorId: daimonId,
     finalized: true,
   });
-  const roomId = await putRoom({ contentId: roomLabelContentId });
+  const dmRoom = daimon.chara.data.extensions?.dmRoom;
+  if (isUndefined(dmRoom)) {
+    console.log("Daimon has a dmRoom", daimon);
+    throw new Error("Daimon has a no dmRoom");
+  }
+  const roomId = await putRoom({
+    parentId: dmRoom,
+    contentId: roomLabelContentId,
+  });
   const { userDaimonId, setUrlHash } = useAppState.getState();
   if (isDefined(userDaimonId)) {
     await linkDaimonToRoom({ daimonId: userDaimonId, roomId });
   }
   await linkDaimonToRoom({ daimonId, roomId });
+  useAppState.getState().setTopRoomId(dmRoom);
   useAppState.getState().setActiveRoomId(roomId);
+  setUrlHash("room");
   return roomId;
 };

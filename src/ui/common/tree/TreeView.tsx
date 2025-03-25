@@ -12,7 +12,10 @@ import { Bytes } from "@mjt-engine/byte";
  * the editor dialog. We rely on treeApi.getActiveNoteParentId() / .setActiveNoteParentId().
  */
 
-export const TreeView = ({ ...rest }: StackProps) => {
+export const TreeView = ({
+  parentId,
+  ...rest
+}: StackProps & { parentId?: string }) => {
   // Editor dialog state
   const [editorOpen, setEditorOpen] = useState(false);
   const [editorNodeId, setEditorNodeId] = useState<string | undefined>();
@@ -45,7 +48,7 @@ export const TreeView = ({ ...rest }: StackProps) => {
     <Stack {...rest}>
       <RecursiveNode
         key={key}
-        parentId={undefined}
+        parentId={parentId}
         onOpenEditor={handleOpenEditor}
       />
       <TreeEditorForm
