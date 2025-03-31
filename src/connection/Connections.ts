@@ -9,10 +9,9 @@ import type { DaimonConnectionMap } from "@mjt-services/daimon-common-2025";
 import type { DataConnectionMap } from "@mjt-services/data-common-2025";
 import type { ImagegenConnectionMap } from "@mjt-services/imagegen-common-2025";
 import type { WebclientConnectionMap } from "@mjt-services/webclient-common-2025";
+import { Caches } from "@mjt-engine/cache";
 
-export let _connection:
-  | Awaited<ReturnType<typeof createConnection>>
-  | undefined = undefined;
+const CONNECTION_CACHE = Caches.create<ReturnType<typeof createConnection>>();
 
 export const createConnection = async () => {
   const config = await Idbs.get(AppConfig, "config");
@@ -37,11 +36,10 @@ export const createConnection = async () => {
 };
 
 export const getConnection = async () => {
-  if (!_connection) {
-    _connection = await createConnection();
-  }
-  return _connection;
+  return CONNECTION_CACHE.get("connection", createConnection);
 };
+
+
 export const Connections = {
   getConnection,
   useConnection,

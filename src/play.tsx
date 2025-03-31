@@ -5,12 +5,53 @@ import { getConnection } from "./connection/Connections";
 
 export const play = async () => {
   try {
-    // await playWebclient();
-    await playTextgen();
+    await playEmbed();
   } catch (error) {
     console.error(error);
   }
 };
+
+export const playEmbed = async () => {
+  console.log("playEmbed");
+  const con = await getConnection();
+  const embed = await con.request({
+    subject: "embedding.generate",
+    request: {
+      body: {
+        prompt: "tell me a joke about snow",
+      },
+    },
+  });
+  console.log("embed", embed);
+  {
+    const result = await con.request({
+      subject: "vector.put",
+      request: {
+        body: {
+          point: {
+            id: crypto.randomUUID(),
+            vector: embed,
+            payload: { name: "test" },
+          },
+        },
+      },
+    });
+    console.log("put result", result);
+  }
+
+  {
+    const result = await con.request({
+      subject: "vector.search",
+      request: {
+        body: {
+          query: embed,
+        },
+      },
+    });
+    console.log("put result", result);
+  }
+};
+
 export const playTextgen = async () => {
   console.log("playTextgen");
   const con = await getConnection();

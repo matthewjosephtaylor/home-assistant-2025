@@ -7,6 +7,7 @@ import { useAppState } from "../../state/AppState";
 import { addUserRoomTextContent } from "./addUserRoomTextContent";
 import { linkDaimonToRoom } from "./linkDaimonToRoom";
 import { TEXT_ENTRY_EVALUATOR } from "./TEXT_ENTRY_EVALUATOR";
+import { Daimons } from "../../daimon/Daimons";
 
 export const handleTextEntry = async ({ text }: { text: string }) => {
   console.log("handleTextEntry", text);
@@ -24,6 +25,10 @@ export const handleTextEntry = async ({ text }: { text: string }) => {
       roomId: activeRoomParentId,
     });
   }
+
+  // get all the parent non-user daimons from above to link here
+
+  
 
   // if there is a parent room make sure to link the creator to the room
   // const activeRoomParent = (await Datas.get(await getConnection())({

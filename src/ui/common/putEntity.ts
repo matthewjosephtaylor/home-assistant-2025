@@ -7,6 +7,7 @@ import {
   Datas,
 } from "@mjt-services/data-common-2025";
 
+/** @deprecated */
 export const putEntity =
   <C extends DataConnectionMap>(con: MessageConnectionInstance<C>) =>
   <T extends Entity>(store: ObjectStore<T>) =>
