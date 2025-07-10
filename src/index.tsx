@@ -1,6 +1,6 @@
 import ReactDOM from "react-dom/client";
 import { App } from "./App";
-import { Errors } from "@mjt-engine/message";
+import { Errors } from "@mjt-engine/error";
 (() => {
   try {
     window.addEventListener("unhandledrejection", async (event) => {

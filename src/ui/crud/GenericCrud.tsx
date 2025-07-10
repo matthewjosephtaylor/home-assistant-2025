@@ -14,6 +14,7 @@ import {
   Checkbox,
   Toolbar,
   IconButton,
+  Typography,
 } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -208,7 +209,7 @@ export function GenericCrud<T extends object>({
         <TableHead>
           <TableRow>
             {columns.map((key) => (
-              <TableCell key={String(key)}>
+              <TableCell sx={{ textTransform: "capitalize" }} key={String(key)}>
                 {schema[key]?.label ?? String(key)}
               </TableCell>
             ))}
@@ -260,6 +261,7 @@ export function GenericCrud<T extends object>({
         fullWidth
         maxWidth="sm"
         disableRestoreFocus
+        slotProps={{ paper: { sx: { width: "80vw", maxWidth: "none" } } }}
       >
         <DialogTitle>
           {selectedIndex == null ? "Add Item" : "Edit Item"}
@@ -267,7 +269,12 @@ export function GenericCrud<T extends object>({
         <DialogContent dividers>
           {columns.map((key) => (
             <div key={String(key)} style={{ marginBottom: 16 }}>
-              <strong>{schema[key]?.label ?? String(key)}:</strong>
+              <Typography
+                fontWeight={"bold"}
+                sx={{ textTransform: "capitalize" }}
+              >
+                {schema[key]?.label ?? String(key)}
+              </Typography>
               <div style={{ marginTop: 8 }}>
                 {renderEditor(key, draft as T)}
               </div>

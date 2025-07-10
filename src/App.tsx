@@ -1,21 +1,21 @@
+import { Idbs } from "@mjt-engine/idb";
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import { Box } from "@mui/system";
 import { useEffect } from "react";
+import { AppConfig } from "./AppConfig";
 import { darkTheme } from "./darkTheme";
 import { ErrorBoundary } from "./ErrorBoundary";
 import { globalStyles } from "./globalStyles";
-import { KioskScreen } from "./kiosk/KioskScreen";
-import { SCREENS } from "./SCREENS";
-import { useScreen } from "./state/useScreen";
-import TopMenu from "./ui/TopMenu";
 import { onEscape } from "./onEscape";
-import { Idbs } from "@mjt-engine/idb";
-import { AppConfig } from "./AppConfig";
+import { SCREENS } from "./SCREENS";
 import { useAppState } from "./state/AppState";
+import { useScreen } from "./state/useScreen";
+import { RoomScreen } from "./ui/room/RoomScreen";
+import TopMenu from "./ui/TopMenu";
 
 export const App = () => {
   const screen = useScreen();
-  const screenComponent = screen ? SCREENS[screen] : <KioskScreen />;
+  const screenComponent = screen ? SCREENS[screen] : <RoomScreen />;
 
   useEffect(() => {
     Idbs.get(AppConfig, "config").then((config) => {

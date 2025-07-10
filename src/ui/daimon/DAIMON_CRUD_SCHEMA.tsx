@@ -6,7 +6,6 @@ import { DaimonMenuAvatar } from "./DaimonMenuAvatar";
 
 export const DAIMON_CRUD_SCHEMA: CrudSchema<DaimonCrud> = {
   image: {
-    label: "Image",
     renderEditor: (contentId, onChange, item) => {
       return (
         <ContentView
@@ -30,18 +29,49 @@ export const DAIMON_CRUD_SCHEMA: CrudSchema<DaimonCrud> = {
       );
     },
   },
-  id: { label: "ID" },
-  name: {
-    label: "Name",
-  },
+  id: { label: "ID", renderCell: (value) => value.slice(-8) },
+  name: {},
   description: {
-    label: "Description",
     renderCell: (value) => {
       return value?.slice(0, 100);
     },
   },
+  personality: {
+    renderCell: (value) => {
+      return value?.slice(0, 100);
+    },
+  },
+  scenario: {
+    renderCell: (value) => {
+      return value?.slice(0, 100);
+    },
+  },
+  first_mes: {
+    renderCell: (value) => {
+      return value?.slice(0, 100);
+    },
+  },
+  mes_example: {
+    renderCell: (value) => {
+      return value?.slice(0, 100);
+    },
+  },
+  system_prompt: {
+    renderCell: (value) => {
+      return value?.slice(0, 100);
+    },
+  },
+  creator_notes: {
+    renderCell: (value) => {
+      return value?.slice(0, 100);
+    },
+  },
+  creator: {},
   model: {
     label: "Model",
+    renderCell: (value) => {
+      return value ?? "";
+    },
   },
 
   isUser: {

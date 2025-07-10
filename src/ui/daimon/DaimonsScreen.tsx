@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { GenericCrud } from "../crud/GenericCrud";
 
 import { Idbs } from "@mjt-engine/idb";
-import { Errors } from "@mjt-engine/message";
+import { Errors } from "@mjt-engine/error";
 import { isEmpty, isUndefined } from "@mjt-engine/object";
 import {
   DAIMON_OBJECT_STORE,

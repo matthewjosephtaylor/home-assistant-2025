@@ -26,6 +26,10 @@ import { putRoom } from "../common/putRoom";
 import { askDaimon } from "../daimon/askDaimon";
 import { handleTextEntry } from "./handleTextEntry";
 
+import IMAGE_PROMPT from "./prompt.txt?raw";
+
+console.log("IMAGE_PROMPT", IMAGE_PROMPT);
+
 export const TextEntry = forwardRef(({ ...rest }: TextFieldProps, ref) => {
   const [message, setMessage] = useState("");
   const textFieldRef = useRef<HTMLInputElement>(null);
@@ -103,11 +107,17 @@ export const TextEntry = forwardRef(({ ...rest }: TextFieldProps, ref) => {
                     });
                     setOpenGenerateImage(true);
                     const imageGenPrompt = await askDaimon(
-                      // "use short keywords, and other image generation prompt techniques. Give a brief description of the current state of the scene as an image generation prompt with no propernames and no quotes. start with the actors descriptions, then the actions they are performing, be specific and detailed here, then a few words on the environment",
-                      "describe the scene in its entirety, POSITIVE PROMPT ONLY",
+                      // [
+                      //   "use short keywords, and other image generation prompt techniques. ",
+                      //   "Give a brief description of the current state of the scene as an image generation prompt with no propernames and no quotes. start with the actors descriptions, then the actions they are performing, be specific and detailed here, then a few words on the environment",
+                      //   "describe the scene focusing on actions and background environment",
+                      // ].join("\n"),
+                      // IMAGE_GEN_PROMPT,
+                      IMAGE_PROMPT,
+
                       {
-                        assistantId:
-                          ":daimon:1742160408239:f2eb61e3-07c9-4f5d-9b18-16b8362f0d4b",
+                        // assistantId:
+                        //   ":daimon:1742160408239:f2eb61e3-07c9-4f5d-9b18-16b8362f0d4b",
                         onUpdate: (content) => {
                           setImageGenPrompt(String(content.value));
                         },
@@ -143,13 +153,13 @@ export const TextEntry = forwardRef(({ ...rest }: TextFieldProps, ref) => {
         open={openGenerateImage}
         value={imageContent}
         defaultRequest={{
-          prompt: "8k, realistic, masterpiece, " + String(imageGenPrompt),
+          prompt: String(imageGenPrompt),
           negative_prompt:
             "boring, bad composition, bad anatomy, bad lighting, weird eyes, weird hands. low detail, poor quality, cartoon, cgi, render, unity, unreal",
-          steps: 40,
+          steps: 50,
           width: 800,
           height: 600,
-          cfg_scale: 9,
+          cfg_scale: 5,
         }}
         onClose={() => setOpenGenerateImage(false)}
         onSave={async (value) => {

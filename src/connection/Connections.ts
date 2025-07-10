@@ -1,5 +1,6 @@
 import { Idbs } from "@mjt-engine/idb";
-import { Errors, Messages } from "@mjt-engine/message";
+import { Errors } from "@mjt-engine/error";
+import { Messages } from "@mjt-engine/message";
 import type { AsrConnectionMap } from "@mjt-services/asr-common-2025";
 import type { TextgenConnectionMap } from "@mjt-services/textgen-common-2025";
 import { AppConfig } from "../AppConfig";
@@ -10,6 +11,7 @@ import type { DataConnectionMap } from "@mjt-services/data-common-2025";
 import type { ImagegenConnectionMap } from "@mjt-services/imagegen-common-2025";
 import type { WebclientConnectionMap } from "@mjt-services/webclient-common-2025";
 import { Caches } from "@mjt-engine/cache";
+import { Asserts } from "@mjt-engine/assert";
 
 const CONNECTION_CACHE = Caches.create<ReturnType<typeof createConnection>>();
 
@@ -36,9 +38,10 @@ export const createConnection = async () => {
 };
 
 export const getConnection = async () => {
-  return CONNECTION_CACHE.get("connection", createConnection);
+  return Asserts.assertValue(
+    await CONNECTION_CACHE.get("connection", createConnection)
+  );
 };
-
 
 export const Connections = {
   getConnection,
