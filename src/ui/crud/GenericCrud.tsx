@@ -1,24 +1,26 @@
-import React, { useState, useEffect, useRef } from "react";
-import {
-  Table,
-  TableHead,
-  TableBody,
-  TableRow,
-  TableCell,
-  Dialog,
-  DialogTitle,
-  DialogContent,
-  DialogActions,
-  Button,
-  TextField,
-  Checkbox,
-  Toolbar,
-  IconButton,
-  Typography,
-} from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
+import {
+  Box,
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+  IconButton,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableRow,
+  TextField,
+  Toolbar,
+} from "@mui/material";
+import { Stack } from "@mui/system";
+import React, { useState } from "react";
+import { CheckboxWithLabel } from "../common/CheckboxWithLabel";
+import { StringArrayEditor } from "../common/StringArrayEditor";
 
 // A generic schema that (for each property K in T) optionally defines:
 // 1) a label (e.g. column header or field label),
@@ -152,9 +154,10 @@ export function GenericCrud<T extends object>({
     // Basic fallback editors by type:
     if (typeof value === "boolean") {
       return (
-        <Checkbox
+        <CheckboxWithLabel
           checked={value}
-          onChange={(e) => handleChange(key, e.target.checked as T[typeof key])}
+          label={fieldSchema?.label ?? String(key)}
+          onChange={(value) => handleChange(key, value as T[typeof key])}
         />
       );
     } else if (typeof value === "number") {
@@ -162,10 +165,27 @@ export function GenericCrud<T extends object>({
         <TextField
           type="number"
           fullWidth
+          label={fieldSchema?.label ?? String(key)}
           value={value}
           onChange={(e) =>
             handleChange(key, parseFloat(e.target.value) as T[typeof key])
           }
+        />
+      );
+    } else if (Array.isArray(value)) {
+      return (
+        <StringArrayEditor
+          direction="row"
+          spacing={1}
+          useFlexGap
+          flexWrap="wrap"
+          alignItems="flex-start"
+          sx={{ width: "fit-content" }}
+          value={value}
+          label={fieldSchema?.label ?? String(key)}
+          onChange={(newValue) => {
+            handleChange(key, newValue as T[typeof key]);
+          }}
         />
       );
     } else if (value instanceof Date) {
@@ -174,6 +194,7 @@ export function GenericCrud<T extends object>({
         <TextField
           type="date"
           fullWidth
+          label={fieldSchema?.label ?? String(key)}
           // Convert to yyyy-MM-dd
           value={(value as Date).toISOString().substring(0, 10)}
           onChange={(e) =>
@@ -188,6 +209,7 @@ export function GenericCrud<T extends object>({
           type="text"
           fullWidth
           multiline
+          label={fieldSchema?.label ?? String(key)}
           value={(value ?? "") as string}
           onChange={(e) => handleChange(key, e.target.value as T[typeof key])}
         />
@@ -267,19 +289,11 @@ export function GenericCrud<T extends object>({
           {selectedIndex == null ? "Add Item" : "Edit Item"}
         </DialogTitle>
         <DialogContent dividers>
-          {columns.map((key) => (
-            <div key={String(key)} style={{ marginBottom: 16 }}>
-              <Typography
-                fontWeight={"bold"}
-                sx={{ textTransform: "capitalize" }}
-              >
-                {schema[key]?.label ?? String(key)}
-              </Typography>
-              <div style={{ marginTop: 8 }}>
-                {renderEditor(key, draft as T)}
-              </div>
-            </div>
-          ))}
+          <Stack spacing={2} direction="column">
+            {columns.map((key) => (
+              <Box key={String(key)}>{renderEditor(key, draft as T)}</Box>
+            ))}
+          </Stack>
         </DialogContent>
         <DialogActions>
           <Button onClick={() => setOpen(false)}>Cancel</Button>
