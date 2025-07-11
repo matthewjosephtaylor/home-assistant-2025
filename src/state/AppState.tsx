@@ -33,7 +33,7 @@ export const useAppState = create<AppState>((set) => ({
   setUserDaimonId: (daimon) => set({ userDaimonId: daimon }),
   getUrlHash: () => {
     const hash = window.location.hash;
-    return hash ? (hash.substring(1) as keyof typeof SCREENS) : "kiosk";
+    return hash ? (hash.substring(1) as keyof typeof SCREENS) : "room";
   },
   setUrlHash: (hash) => {
     window.location.hash = hash;

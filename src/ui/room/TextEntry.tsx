@@ -1,10 +1,11 @@
 import { Colors } from "@mjt-engine/color";
 import {
   CONTENT_OBJECT_STORE,
+  DAIMON_OBJECT_STORE,
   type Content,
 } from "@mjt-services/daimon-common-2025";
 import { Ids } from "@mjt-services/data-common-2025";
-import { AutoFixHigh, Image, Send } from "@mui/icons-material";
+import { AutoFixHigh, Image, RecordVoiceOver, Send } from "@mui/icons-material";
 import {
   IconButton,
   InputAdornment,
@@ -26,7 +27,9 @@ import { putRoom } from "../common/putRoom";
 import { askDaimon } from "../daimon/askDaimon";
 import { handleTextEntry } from "./handleTextEntry";
 
+import { useDatas } from "../../state/useDatas";
 import IMAGE_PROMPT from "./prompt.txt?raw";
+import { addRandomGreeting } from "./addRandomGreeting";
 
 console.log("IMAGE_PROMPT", IMAGE_PROMPT);
 
@@ -38,6 +41,8 @@ export const TextEntry = forwardRef(({ ...rest }: TextFieldProps, ref) => {
   const [imageGenPrompt, setImageGenPrompt] = useState("");
   const [imageContent, setImageContent] = useState<Content>();
 
+  const { activeRoomId } = useAppState();
+  const daimons = useDatas({ from: DAIMON_OBJECT_STORE });
   // Expose focus method to the parent component
   useImperativeHandle(ref, () => ({
     focus: () => {
@@ -98,6 +103,13 @@ export const TextEntry = forwardRef(({ ...rest }: TextFieldProps, ref) => {
                 </IconButton>
                 <IconButton
                   onClick={async () => {
+                    await addRandomGreeting(activeRoomId);
+                  }}
+                >
+                  <RecordVoiceOver />
+                </IconButton>
+                <IconButton
+                  onClick={async () => {
                     setImageContent({
                       id: Ids.fromObjectStore(CONTENT_OBJECT_STORE),
                       createdAt: Date.now(),
@@ -106,23 +118,11 @@ export const TextEntry = forwardRef(({ ...rest }: TextFieldProps, ref) => {
                       value: undefined,
                     });
                     setOpenGenerateImage(true);
-                    const imageGenPrompt = await askDaimon(
-                      // [
-                      //   "use short keywords, and other image generation prompt techniques. ",
-                      //   "Give a brief description of the current state of the scene as an image generation prompt with no propernames and no quotes. start with the actors descriptions, then the actions they are performing, be specific and detailed here, then a few words on the environment",
-                      //   "describe the scene focusing on actions and background environment",
-                      // ].join("\n"),
-                      // IMAGE_GEN_PROMPT,
-                      IMAGE_PROMPT,
-
-                      {
-                        // assistantId:
-                        //   ":daimon:1742160408239:f2eb61e3-07c9-4f5d-9b18-16b8362f0d4b",
-                        onUpdate: (content) => {
-                          setImageGenPrompt(String(content.value));
-                        },
-                      }
-                    );
+                    const imageGenPrompt = await askDaimon(IMAGE_PROMPT, {
+                      onUpdate: (content) => {
+                        setImageGenPrompt(String(content.value));
+                      },
+                    });
                     setImageGenPrompt(String(imageGenPrompt.value));
                   }}
                 >

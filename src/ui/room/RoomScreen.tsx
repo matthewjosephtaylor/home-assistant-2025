@@ -24,6 +24,7 @@ export const RoomScreen = () => {
             overflowY: "auto",
             marginTop: "5em",
             minWidth: "10ch",
+            maxHeight: "80vh",
           }}
         >
           {daimons.map((daimon) => (
