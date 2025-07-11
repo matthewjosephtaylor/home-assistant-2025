@@ -1,6 +1,9 @@
 # Changelog
 
 
+## 2025-07-11
+- added random greeting ([5dce05b](https://github.com/matthewjosephtaylor/home-assistant-2025/commit/5dce05b3ecccb535ba4da4ae34cde362f6c263fd)) by Matt Taylor
+
 ## 2025-07-10
 - improvements to CRUD to allow for string arrays ([307a87c](https://github.com/matthewjosephtaylor/home-assistant-2025/commit/307a87c40cdd285f2c9f4e4cdbe717d880490895)) by Matt Taylor
 - update deps, remove kiosk as bad dep in bab somewhere, update daimon edit CRUD ([0bb56cf](https://github.com/matthewjosephtaylor/home-assistant-2025/commit/0bb56cfabb9a6f01b273682a0424d9efe3d55497)) by Matt Taylor
