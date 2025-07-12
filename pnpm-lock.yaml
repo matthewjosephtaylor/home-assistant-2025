@@ -28,7 +28,7 @@ importers:
         version: https://codeload.github.com/mjt-engine/assert/tar.gz/58b808f45ca8a23cd7d613e75ba9e76c5fb70e55
       '@mjt-engine/babs':
         specifier: github:mjt-engine/babs
-        version: https://codeload.github.com/mjt-engine/babs/tar.gz/f2f4cb9adee514b917d90508097a24358b529e08(@babylonjs/addons@8.16.0(@babylonjs/core@7.54.3))(@babylonjs/gui-editor@8.16.0(@babylonjs/core@7.54.3)(@babylonjs/gui@8.16.0(@babylonjs/core@7.54.3))(@types/react-dom@19.1.6(@types/react@19.1.8))(@types/react@19.1.8))(@babylonjs/materials@8.16.0(@babylonjs/core@7.54.3))(@babylonjs/serializers@8.16.0(@babylonjs/core@7.54.3)(babylonjs-gltf2interface@8.16.0))(@types/react-dom@19.1.6(@types/react@19.1.8))(@types/react@19.1.8)(babylonjs-gltf2interface@8.16.0)
+        version: https://codeload.github.com/mjt-engine/babs/tar.gz/f2f4cb9adee514b917d90508097a24358b529e08(@babylonjs/addons@8.16.0(@babylonjs/core@7.54.3))(@babylonjs/gui-editor@8.16.0(@babylonjs/core@7.54.3)(@babylonjs/gui@8.16.1(@babylonjs/core@7.54.3))(@types/react-dom@19.1.6(@types/react@19.1.8))(@types/react@19.1.8))(@babylonjs/materials@8.16.0(@babylonjs/core@7.54.3))(@babylonjs/serializers@8.16.0(@babylonjs/core@7.54.3)(babylonjs-gltf2interface@8.16.0))(@types/react-dom@19.1.6(@types/react@19.1.8))(@types/react@19.1.8)(babylonjs-gltf2interface@8.16.0)
       '@mjt-engine/byte':
         specifier: github:mjt-engine/byte
         version: https://codeload.github.com/mjt-engine/byte/tar.gz/02fcb5bdd8acbb1675c6aa34777955c6d88aa399
@@ -43,7 +43,7 @@ importers:
         version: https://codeload.github.com/mjt-engine/idb/tar.gz/a3e4630b47e06ed3c3b744e25177cf96e8061c90
       '@mjt-engine/message':
         specifier: github:mjt-engine/message
-        version: https://codeload.github.com/mjt-engine/message/tar.gz/f7fb40394e8fbdec06f4a42bca0802cbbe144368(nats.ws@1.30.3)
+        version: https://codeload.github.com/mjt-engine/message/tar.gz/18c912af39f76310bf698de6ff399fd2575d6e07(nats.ws@1.30.3)
       '@mjt-engine/object':
         specifier: github:mjt-engine/object
         version: https://codeload.github.com/mjt-engine/object/tar.gz/6e096ec8b073cde78d595c55740e44f8812e7428
@@ -55,7 +55,7 @@ importers:
         version: https://codeload.github.com/mjt-services/daimon-common-2025/tar.gz/af25f43613b4fd6a0c612ef5fe0f9475dea81a3f(nats.ws@1.30.3)
       '@mjt-services/data-common-2025':
         specifier: github:mjt-services/data-common-2025
-        version: https://codeload.github.com/mjt-services/data-common-2025/tar.gz/3e2c9315614711a71c5413c9e23c16dcde2b8a35(nats.ws@1.30.3)
+        version: https://codeload.github.com/mjt-services/data-common-2025/tar.gz/6a79a8fc94b55106f3a3abe9d9bf33d18ae726cf(nats.ws@1.30.3)
       '@mjt-services/imagegen-common-2025':
         specifier: github:mjt-services/imagegen-common-2025
         version: https://codeload.github.com/mjt-services/imagegen-common-2025/tar.gz/8a23143b522549ae7eb265e5d4e9f12556523a91
@@ -67,10 +67,10 @@ importers:
         version: https://codeload.github.com/mjt-services/webclient-common-2025/tar.gz/8dabd273b7b34cd7b46f5a4ed758f1592b704840(nats.ws@1.30.3)
       '@mjtdev/avatar-3d':
         specifier: github:matthewjosephtaylor/avatar-3d
-        version: https://codeload.github.com/matthewjosephtaylor/avatar-3d/tar.gz/fe9dd6a0c6413a05e79ba366f465f67e29179b06(@emotion/is-prop-valid@1.3.1)(@mjt-engine/babs@https://codeload.github.com/mjt-engine/babs/tar.gz/f2f4cb9adee514b917d90508097a24358b529e08(@babylonjs/addons@8.16.0(@babylonjs/core@7.54.3))(@babylonjs/gui-editor@8.16.0(@babylonjs/core@7.54.3)(@babylonjs/gui@8.16.0(@babylonjs/core@7.54.3))(@types/react-dom@19.1.6(@types/react@19.1.8))(@types/react@19.1.8))(@babylonjs/materials@8.16.0(@babylonjs/core@7.54.3))(@babylonjs/serializers@8.16.0(@babylonjs/core@7.54.3)(babylonjs-gltf2interface@8.16.0))(@types/react-dom@19.1.6(@types/react@19.1.8))(@types/react@19.1.8)(babylonjs-gltf2interface@8.16.0))(@types/react@19.1.8)(babylonjs-gltf2interface@8.16.0)(react-dom@19.1.0(react@19.1.0))(react-router-dom@6.30.1(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(react@19.1.0)(rollup@4.44.2)
+        version: https://codeload.github.com/matthewjosephtaylor/avatar-3d/tar.gz/fe9dd6a0c6413a05e79ba366f465f67e29179b06(@emotion/is-prop-valid@1.3.1)(@mjt-engine/babs@https://codeload.github.com/mjt-engine/babs/tar.gz/f2f4cb9adee514b917d90508097a24358b529e08(@babylonjs/addons@8.16.0(@babylonjs/core@7.54.3))(@babylonjs/gui-editor@8.16.0(@babylonjs/core@7.54.3)(@babylonjs/gui@8.16.1(@babylonjs/core@7.54.3))(@types/react-dom@19.1.6(@types/react@19.1.8))(@types/react@19.1.8))(@babylonjs/materials@8.16.0(@babylonjs/core@7.54.3))(@babylonjs/serializers@8.16.0(@babylonjs/core@7.54.3)(babylonjs-gltf2interface@8.16.0))(@types/react-dom@19.1.6(@types/react@19.1.8))(@types/react@19.1.8)(babylonjs-gltf2interface@8.16.0))(@types/react@19.1.8)(babylonjs-gltf2interface@8.16.0)(react-dom@19.1.0(react@19.1.0))(react-router-dom@6.30.1(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(react@19.1.0)(rollup@4.44.2)
       '@mjtdev/vad-2025':
         specifier: github:matthewjosephtaylor/vad-2025
-        version: https://codeload.github.com/matthewjosephtaylor/vad-2025/tar.gz/8d930278bf9005524b278c99532fd3aac549114e(@types/node@24.0.12)(@types/react@19.1.8)(react-dom@19.1.0(react@19.1.0))(react-router-dom@6.30.1(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(react@19.1.0)(rollup@4.44.2)(sass-embedded@1.89.2)(typescript@5.8.3)
+        version: https://codeload.github.com/matthewjosephtaylor/vad-2025/tar.gz/8d930278bf9005524b278c99532fd3aac549114e(@types/node@24.0.13)(@types/react@19.1.8)(react-dom@19.1.0(react@19.1.0))(react-router-dom@6.30.1(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(react@19.1.0)(rollup@4.44.2)(sass-embedded@1.89.2)(typescript@5.8.3)
       '@mui/icons-material':
         specifier: ^6.5.0
         version: 6.5.0(@mui/material@6.5.0(@emotion/react@11.14.0(@types/react@19.1.8)(react@19.1.0))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.1.8)(react@19.1.0))(@types/react@19.1.8)(react@19.1.0))(@types/react@19.1.8)(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(@types/react@19.1.8)(react@19.1.0)
@@ -84,8 +84,8 @@ importers:
         specifier: ^0.21.3
         version: 0.21.3
       eslint:
-        specifier: ^9.30.1
-        version: 9.30.1
+        specifier: ^9.31.0
+        version: 9.31.0
       framer-motion:
         specifier: ^11.18.2
         version: 11.18.2(@emotion/is-prop-valid@1.3.1)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
@@ -143,28 +143,28 @@ importers:
         version: 19.1.6(@types/react@19.1.8)
       '@typescript-eslint/eslint-plugin':
         specifier: ^8.36.0
-        version: 8.36.0(@typescript-eslint/parser@8.36.0(eslint@9.30.1)(typescript@5.8.3))(eslint@9.30.1)(typescript@5.8.3)
+        version: 8.36.0(@typescript-eslint/parser@8.36.0(eslint@9.31.0)(typescript@5.8.3))(eslint@9.31.0)(typescript@5.8.3)
       '@typescript-eslint/parser':
         specifier: ^8.36.0
-        version: 8.36.0(eslint@9.30.1)(typescript@5.8.3)
+        version: 8.36.0(eslint@9.31.0)(typescript@5.8.3)
       eslint-config-prettier:
         specifier: ^9.1.0
-        version: 9.1.0(eslint@9.30.1)
+        version: 9.1.0(eslint@9.31.0)
       eslint-plugin-import:
         specifier: ^2.32.0
-        version: 2.32.0(@typescript-eslint/parser@8.36.0(eslint@9.30.1)(typescript@5.8.3))(eslint@9.30.1)
+        version: 2.32.0(@typescript-eslint/parser@8.36.0(eslint@9.31.0)(typescript@5.8.3))(eslint@9.31.0)
       eslint-plugin-jsx-a11y:
         specifier: ^6.10.2
-        version: 6.10.2(eslint@9.30.1)
+        version: 6.10.2(eslint@9.31.0)
       eslint-plugin-prettier:
         specifier: ^5.5.1
-        version: 5.5.1(eslint-config-prettier@9.1.0(eslint@9.30.1))(eslint@9.30.1)(prettier@3.6.2)
+        version: 5.5.1(eslint-config-prettier@9.1.0(eslint@9.31.0))(eslint@9.31.0)(prettier@3.6.2)
       eslint-plugin-react:
         specifier: ^7.37.5
-        version: 7.37.5(eslint@9.30.1)
+        version: 7.37.5(eslint@9.31.0)
       eslint-plugin-react-hooks:
         specifier: ^5.2.0
-        version: 5.2.0(eslint@9.30.1)
+        version: 5.2.0(eslint@9.31.0)
       gh-pages:
         specifier: ^6.3.0
         version: 6.3.0
@@ -176,7 +176,7 @@ importers:
         version: 1.89.2
       vite:
         specifier: ^6.3.5
-        version: 6.3.5(@types/node@24.0.12)(sass-embedded@1.89.2)
+        version: 6.3.5(@types/node@24.0.13)(sass-embedded@1.89.2)
 
 packages:
 
@@ -233,8 +233,8 @@ packages:
   '@babylonjs/core@7.54.3':
     resolution: {integrity: sha512-P5ncXVd8GEUJLhwloP9V0oVwQYIrvZztguVeLlvd5Rx+9aQnenKjpV8auJ6SRsUlAmNZU4pFTKzwF6o2EUfhAw==}
 
-  '@babylonjs/core@8.16.0':
-    resolution: {integrity: sha512-F8IDWVEeJkG4Xn0iEWoFvx4YhKtbmw+kFkYTwhSvWUtaOHN9Ymd+rujH95pJ+eEMKAJ5eOaJtimBsmG4YDrnQQ==}
+  '@babylonjs/core@8.16.1':
+    resolution: {integrity: sha512-r+vBkOqqBaceT4azInG3vtCxfnjcl0btVcAqMa/pgj/abT8d76m3eLgMsgUuS5Rs1loyudexPGgNSkluySr0PA==}
 
   '@babylonjs/gui-editor@8.16.0':
     resolution: {integrity: sha512-d+iot8UrsXVkrWyBR4cEXTJZTFSi5pHiKIDlpzgKfwJuPlSKWiyq1eCLhfIMWCzmrPL7vIhoAqMC/NLnTmR8CA==}
@@ -244,13 +244,13 @@ packages:
       '@types/react': '>=16.7.3'
       '@types/react-dom': '>=16.0.9'
 
-  '@babylonjs/gui@8.16.0':
-    resolution: {integrity: sha512-mfR8XE1LO3iXut06m+wgPUMJy4cQxAVKoDXK7FtUJqBY/mb+hDh+Q/Usfm9eJHEy/tp2QXvTagwkojjxdhYJCw==}
+  '@babylonjs/gui@8.16.1':
+    resolution: {integrity: sha512-0MiC1BDgGLOihhKN5OGQnH8vpLAY+Jff4koRyfkmOsFmXpbEwAKKwTtbVChf+ZN3TE/KJKBsh+xICzxxX3av3A==}
     peerDependencies:
       '@babylonjs/core': ^8.0.0
 
-  '@babylonjs/inspector@8.16.0':
-    resolution: {integrity: sha512-mWCXHS3TnaIFs3wKxuAijQNN4Rv5oVgFFVkUNKV03AQkcl4bTOFPlVkXH9TnuPSITSruPZ9ijZhr4iIAiNi50A==}
+  '@babylonjs/inspector@8.16.1':
+    resolution: {integrity: sha512-LwCz7X+VaeLOTTFqqv4bhImOtMV+ZO6LnRVRo/uVgz6cE+GSKA8ymV0gR5gwTku9hc46oH52ouSbc3hi6HSydA==}
     peerDependencies:
       '@babylonjs/addons': ^8.0.0
       '@babylonjs/core': ^8.0.0
@@ -268,8 +268,8 @@ packages:
       '@babylonjs/core': ^7.0.0
       babylonjs-gltf2interface: ^7.0.0
 
-  '@babylonjs/loaders@8.16.0':
-    resolution: {integrity: sha512-BLhMle6QU1rY1w4vtmP7Ri4XuBRy1bLZmxsiJgYAFiV0dzhclWXw3iyPSORwxyqzsP08zQ5otPMIsknuUOQXiQ==}
+  '@babylonjs/loaders@8.16.1':
+    resolution: {integrity: sha512-0iBLLH3l8xRJdlgo/8TmmrQXUmr8gymeW6RDB3mXsQQQxZH3p0EuMGjVzh12OpKaEuC/+T3XXj6SYKsLUr0YKQ==}
     peerDependencies:
       '@babylonjs/core': ^8.0.0
       babylonjs-gltf2interface: ^8.0.0
@@ -526,10 +526,6 @@ packages:
     resolution: {integrity: sha512-ViuymvFmcJi04qdZeDc2whTHryouGcDlaxPqarTD0ZE10ISpxGUVZGZDx4w01upyIynL3iu6IXH2bS1NhclQMw==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
 
-  '@eslint/core@0.14.0':
-    resolution: {integrity: sha512-qIbV0/JZr7iSDjqAc60IqbLdsj9GDt16xQtWD+B78d/HAlvysGdZZ6rpJHGAc2T0FQx1X6thsSPdnoiGKdNtdg==}
-    engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
-
   '@eslint/core@0.15.1':
     resolution: {integrity: sha512-bkOp+iumZCCbt1K1CmWf0R9pM5yKpDv+ZXtvSyQpudrI9kuFLp+bM2WOPXImuD/ceQuaa8f5pj93Y7zyECIGNA==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
@@ -538,8 +534,8 @@ packages:
     resolution: {integrity: sha512-gtF186CXhIl1p4pJNGZw8Yc6RlshoePRvE0X91oPGb3vZ8pM3qOS9W9NGPat9LziaBV7XrJWGylNQXkGcnM3IQ==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
 
-  '@eslint/js@9.30.1':
-    resolution: {integrity: sha512-zXhuECFlyep42KZUhWjfvsmXGX39W8K8LFb8AWXM9gSV9dQB+MrJGLKvW6Zw0Ggnbpw0VHTtrhFXYe3Gym18jg==}
+  '@eslint/js@9.31.0':
+    resolution: {integrity: sha512-LOm5OVt7D4qiKCqoiPbA7LWmI+tbw1VbTUowBcUMgQSuM6poJufkFkYDcQpo5KfgD39TnNySV26QjOh7VFpSyw==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
 
   '@eslint/object-schema@2.1.6':
@@ -667,9 +663,9 @@ packages:
     resolution: {tarball: https://codeload.github.com/mjt-engine/math/tar.gz/a249367f68634dced61478917a3061d5a3379b61}
     version: 2025.5.2-1412
 
-  '@mjt-engine/message@https://codeload.github.com/mjt-engine/message/tar.gz/f7fb40394e8fbdec06f4a42bca0802cbbe144368':
-    resolution: {tarball: https://codeload.github.com/mjt-engine/message/tar.gz/f7fb40394e8fbdec06f4a42bca0802cbbe144368}
-    version: 2025.6.26-1146
+  '@mjt-engine/message@https://codeload.github.com/mjt-engine/message/tar.gz/18c912af39f76310bf698de6ff399fd2575d6e07':
+    resolution: {tarball: https://codeload.github.com/mjt-engine/message/tar.gz/18c912af39f76310bf698de6ff399fd2575d6e07}
+    version: 2025.7.11-2058
     peerDependencies:
       nats.ws: ^1.27.0
 
@@ -704,8 +700,8 @@ packages:
     resolution: {tarball: https://codeload.github.com/mjt-services/daimon-common-2025/tar.gz/af25f43613b4fd6a0c612ef5fe0f9475dea81a3f}
     version: 2025.3.28-1607
 
-  '@mjt-services/data-common-2025@https://codeload.github.com/mjt-services/data-common-2025/tar.gz/3e2c9315614711a71c5413c9e23c16dcde2b8a35':
-    resolution: {tarball: https://codeload.github.com/mjt-services/data-common-2025/tar.gz/3e2c9315614711a71c5413c9e23c16dcde2b8a35}
+  '@mjt-services/data-common-2025@https://codeload.github.com/mjt-services/data-common-2025/tar.gz/6a79a8fc94b55106f3a3abe9d9bf33d18ae726cf':
+    resolution: {tarball: https://codeload.github.com/mjt-services/data-common-2025/tar.gz/6a79a8fc94b55106f3a3abe9d9bf33d18ae726cf}
     version: 2025.3.28-1448
 
   '@mjt-services/imagegen-common-2025@https://codeload.github.com/mjt-services/imagegen-common-2025/tar.gz/8a23143b522549ae7eb265e5d4e9f12556523a91':
@@ -1134,8 +1130,8 @@ packages:
   '@types/node@17.0.45':
     resolution: {integrity: sha512-w+tIMs3rq2afQdsPJlODhoUEKzFP1ayaoyl1CcnwtIlsVe7K7bA1NGm4s3PraqTLlXnbIN84zuBlxBWo1u9BLw==}
 
-  '@types/node@24.0.12':
-    resolution: {integrity: sha512-LtOrbvDf5ndC9Xi+4QZjVL0woFymF/xSTKZKPgrrl7H7XoeDvnD+E2IclKVDyaK9UM756W/3BXqSU+JEHopA9g==}
+  '@types/node@24.0.13':
+    resolution: {integrity: sha512-Qm9OYVOFHFYg3wJoTSrz80hoec5Lia/dPp84do3X7dZvLikQvM1YpmvTBEdIr/e+U8HTkFjLHLnl78K/qjf+jQ==}
 
   '@types/parse-json@4.0.2':
     resolution: {integrity: sha512-dISoDXWWQwUquiKsyZ4Ng+HX2KsPL7LyHKHQwgGFEA3IaKac4Obd+h2a/a6waisAoepJlBcx9paWqjA8/HVjCw==}
@@ -1752,8 +1748,8 @@ packages:
     resolution: {integrity: sha512-Uhdk5sfqcee/9H/rCOJikYz67o0a2Tw2hGRPOG2Y1R2dg7brRe1uG0yaNQDHu+TO/uQPF/5eCapvYSmHUjt7JQ==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
 
-  eslint@9.30.1:
-    resolution: {integrity: sha512-zmxXPNMOXmwm9E0yQLi5uqXHs7uq2UIiqEKo3Gq+3fwo1XrJ+hijAZImyF7hclW3E6oHz43Yk3RP8at6OTKflQ==}
+  eslint@9.31.0:
+    resolution: {integrity: sha512-QldCVh/ztyKJJZLr4jXNUByx3gR+TDYZCRXEktiZoUR3PGy4qCmSbkxcIle8GEwGpb5JBZazlaJ/CxLidXdEbQ==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
     hasBin: true
     peerDependencies:
@@ -3317,26 +3313,26 @@ snapshots:
 
   '@babylonjs/core@7.54.3': {}
 
-  '@babylonjs/core@8.16.0': {}
+  '@babylonjs/core@8.16.1': {}
 
-  '@babylonjs/gui-editor@8.16.0(@babylonjs/core@7.54.3)(@babylonjs/gui@8.16.0(@babylonjs/core@7.54.3))(@types/react-dom@19.1.6(@types/react@19.1.8))(@types/react@19.1.8)':
+  '@babylonjs/gui-editor@8.16.0(@babylonjs/core@7.54.3)(@babylonjs/gui@8.16.1(@babylonjs/core@7.54.3))(@types/react-dom@19.1.6(@types/react@19.1.8))(@types/react@19.1.8)':
     dependencies:
       '@babylonjs/core': 7.54.3
-      '@babylonjs/gui': 8.16.0(@babylonjs/core@7.54.3)
+      '@babylonjs/gui': 8.16.1(@babylonjs/core@7.54.3)
       '@types/react': 19.1.8
       '@types/react-dom': 19.1.6(@types/react@19.1.8)
 
-  '@babylonjs/gui@8.16.0(@babylonjs/core@7.54.3)':
+  '@babylonjs/gui@8.16.1(@babylonjs/core@7.54.3)':
     dependencies:
       '@babylonjs/core': 7.54.3
 
-  '@babylonjs/inspector@8.16.0(@babylonjs/addons@8.16.0(@babylonjs/core@7.54.3))(@babylonjs/core@8.16.0)(@babylonjs/gui-editor@8.16.0(@babylonjs/core@7.54.3)(@babylonjs/gui@8.16.0(@babylonjs/core@7.54.3))(@types/react-dom@19.1.6(@types/react@19.1.8))(@types/react@19.1.8))(@babylonjs/gui@8.16.0(@babylonjs/core@8.16.0))(@babylonjs/loaders@8.16.0(@babylonjs/core@8.16.0)(babylonjs-gltf2interface@8.16.0))(@babylonjs/materials@8.16.0(@babylonjs/core@7.54.3))(@babylonjs/serializers@8.16.0(@babylonjs/core@7.54.3)(babylonjs-gltf2interface@8.16.0))(@types/react-dom@19.1.6(@types/react@19.1.8))(@types/react@19.1.8)':
+  '@babylonjs/inspector@8.16.1(@babylonjs/addons@8.16.0(@babylonjs/core@7.54.3))(@babylonjs/core@8.16.1)(@babylonjs/gui-editor@8.16.0(@babylonjs/core@7.54.3)(@babylonjs/gui@8.16.1(@babylonjs/core@7.54.3))(@types/react-dom@19.1.6(@types/react@19.1.8))(@types/react@19.1.8))(@babylonjs/gui@8.16.1(@babylonjs/core@8.16.1))(@babylonjs/loaders@8.16.1(@babylonjs/core@8.16.1)(babylonjs-gltf2interface@8.16.0))(@babylonjs/materials@8.16.0(@babylonjs/core@7.54.3))(@babylonjs/serializers@8.16.0(@babylonjs/core@7.54.3)(babylonjs-gltf2interface@8.16.0))(@types/react-dom@19.1.6(@types/react@19.1.8))(@types/react@19.1.8)':
     dependencies:
       '@babylonjs/addons': 8.16.0(@babylonjs/core@7.54.3)
-      '@babylonjs/core': 8.16.0
-      '@babylonjs/gui': 8.16.0(@babylonjs/core@7.54.3)
-      '@babylonjs/gui-editor': 8.16.0(@babylonjs/core@7.54.3)(@babylonjs/gui@8.16.0(@babylonjs/core@7.54.3))(@types/react-dom@19.1.6(@types/react@19.1.8))(@types/react@19.1.8)
-      '@babylonjs/loaders': 8.16.0(@babylonjs/core@8.16.0)(babylonjs-gltf2interface@8.16.0)
+      '@babylonjs/core': 8.16.1
+      '@babylonjs/gui': 8.16.1(@babylonjs/core@7.54.3)
+      '@babylonjs/gui-editor': 8.16.0(@babylonjs/core@7.54.3)(@babylonjs/gui@8.16.1(@babylonjs/core@7.54.3))(@types/react-dom@19.1.6(@types/react@19.1.8))(@types/react@19.1.8)
+      '@babylonjs/loaders': 8.16.1(@babylonjs/core@8.16.1)(babylonjs-gltf2interface@8.16.0)
       '@babylonjs/materials': 8.16.0(@babylonjs/core@7.54.3)
       '@babylonjs/serializers': 8.16.0(@babylonjs/core@7.54.3)(babylonjs-gltf2interface@8.16.0)
       '@fortawesome/fontawesome-svg-core': 6.7.2
@@ -3350,9 +3346,9 @@ snapshots:
       '@babylonjs/core': 7.54.3
       babylonjs-gltf2interface: 8.16.0
 
-  '@babylonjs/loaders@8.16.0(@babylonjs/core@8.16.0)(babylonjs-gltf2interface@8.16.0)':
+  '@babylonjs/loaders@8.16.1(@babylonjs/core@8.16.1)(babylonjs-gltf2interface@8.16.0)':
     dependencies:
-      '@babylonjs/core': 8.16.0
+      '@babylonjs/core': 8.16.1
       babylonjs-gltf2interface: 8.16.0
 
   '@babylonjs/materials@8.16.0(@babylonjs/core@7.54.3)':
@@ -3541,9 +3537,9 @@ snapshots:
   '@esbuild/win32-x64@0.25.6':
     optional: true
 
-  '@eslint-community/eslint-utils@4.7.0(eslint@9.30.1)':
+  '@eslint-community/eslint-utils@4.7.0(eslint@9.31.0)':
     dependencies:
-      eslint: 9.30.1
+      eslint: 9.31.0
       eslint-visitor-keys: 3.4.3
 
   '@eslint-community/regexpp@4.12.1': {}
@@ -3557,10 +3553,6 @@ snapshots:
       - supports-color
 
   '@eslint/config-helpers@0.3.0': {}
-
-  '@eslint/core@0.14.0':
-    dependencies:
-      '@types/json-schema': 7.0.15
 
   '@eslint/core@0.15.1':
     dependencies:
@@ -3580,7 +3572,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@eslint/js@9.30.1': {}
+  '@eslint/js@9.31.0': {}
 
   '@eslint/object-schema@2.1.6': {}
 
@@ -3652,12 +3644,12 @@ snapshots:
 
   '@mjt-engine/assert@https://codeload.github.com/mjt-engine/assert/tar.gz/58b808f45ca8a23cd7d613e75ba9e76c5fb70e55': {}
 
-  '@mjt-engine/babs@https://codeload.github.com/mjt-engine/babs/tar.gz/f2f4cb9adee514b917d90508097a24358b529e08(@babylonjs/addons@8.16.0(@babylonjs/core@7.54.3))(@babylonjs/gui-editor@8.16.0(@babylonjs/core@7.54.3)(@babylonjs/gui@8.16.0(@babylonjs/core@7.54.3))(@types/react-dom@19.1.6(@types/react@19.1.8))(@types/react@19.1.8))(@babylonjs/materials@8.16.0(@babylonjs/core@7.54.3))(@babylonjs/serializers@8.16.0(@babylonjs/core@7.54.3)(babylonjs-gltf2interface@8.16.0))(@types/react-dom@19.1.6(@types/react@19.1.8))(@types/react@19.1.8)(babylonjs-gltf2interface@8.16.0)':
+  '@mjt-engine/babs@https://codeload.github.com/mjt-engine/babs/tar.gz/f2f4cb9adee514b917d90508097a24358b529e08(@babylonjs/addons@8.16.0(@babylonjs/core@7.54.3))(@babylonjs/gui-editor@8.16.0(@babylonjs/core@7.54.3)(@babylonjs/gui@8.16.1(@babylonjs/core@7.54.3))(@types/react-dom@19.1.6(@types/react@19.1.8))(@types/react@19.1.8))(@babylonjs/materials@8.16.0(@babylonjs/core@7.54.3))(@babylonjs/serializers@8.16.0(@babylonjs/core@7.54.3)(babylonjs-gltf2interface@8.16.0))(@types/react-dom@19.1.6(@types/react@19.1.8))(@types/react@19.1.8)(babylonjs-gltf2interface@8.16.0)':
     dependencies:
-      '@babylonjs/core': 8.16.0
-      '@babylonjs/gui': 8.16.0(@babylonjs/core@7.54.3)
-      '@babylonjs/inspector': 8.16.0(@babylonjs/addons@8.16.0(@babylonjs/core@7.54.3))(@babylonjs/core@8.16.0)(@babylonjs/gui-editor@8.16.0(@babylonjs/core@7.54.3)(@babylonjs/gui@8.16.0(@babylonjs/core@7.54.3))(@types/react-dom@19.1.6(@types/react@19.1.8))(@types/react@19.1.8))(@babylonjs/gui@8.16.0(@babylonjs/core@8.16.0))(@babylonjs/loaders@8.16.0(@babylonjs/core@8.16.0)(babylonjs-gltf2interface@8.16.0))(@babylonjs/materials@8.16.0(@babylonjs/core@7.54.3))(@babylonjs/serializers@8.16.0(@babylonjs/core@7.54.3)(babylonjs-gltf2interface@8.16.0))(@types/react-dom@19.1.6(@types/react@19.1.8))(@types/react@19.1.8)
-      '@babylonjs/loaders': 8.16.0(@babylonjs/core@8.16.0)(babylonjs-gltf2interface@8.16.0)
+      '@babylonjs/core': 8.16.1
+      '@babylonjs/gui': 8.16.1(@babylonjs/core@7.54.3)
+      '@babylonjs/inspector': 8.16.1(@babylonjs/addons@8.16.0(@babylonjs/core@7.54.3))(@babylonjs/core@8.16.1)(@babylonjs/gui-editor@8.16.0(@babylonjs/core@7.54.3)(@babylonjs/gui@8.16.1(@babylonjs/core@7.54.3))(@types/react-dom@19.1.6(@types/react@19.1.8))(@types/react@19.1.8))(@babylonjs/gui@8.16.1(@babylonjs/core@8.16.1))(@babylonjs/loaders@8.16.1(@babylonjs/core@8.16.1)(babylonjs-gltf2interface@8.16.0))(@babylonjs/materials@8.16.0(@babylonjs/core@7.54.3))(@babylonjs/serializers@8.16.0(@babylonjs/core@7.54.3)(babylonjs-gltf2interface@8.16.0))(@types/react-dom@19.1.6(@types/react@19.1.8))(@types/react@19.1.8)
+      '@babylonjs/loaders': 8.16.1(@babylonjs/core@8.16.1)(babylonjs-gltf2interface@8.16.0)
       '@mjt-engine/animate': https://codeload.github.com/mjt-engine/animate/tar.gz/3a7302f491c51e81b0188002d1f2c0aa0c8c991a
       '@mjt-engine/assert': https://codeload.github.com/mjt-engine/assert/tar.gz/58b808f45ca8a23cd7d613e75ba9e76c5fb70e55
       '@mjt-engine/color': https://codeload.github.com/mjt-engine/color/tar.gz/7e6d8911d8ed201b09d196e1f7a5d43950c2fccb
@@ -3725,7 +3717,7 @@ snapshots:
       '@flatten-js/core': 1.6.2
       '@mjt-engine/object': https://codeload.github.com/mjt-engine/object/tar.gz/6e096ec8b073cde78d595c55740e44f8812e7428
 
-  '@mjt-engine/message@https://codeload.github.com/mjt-engine/message/tar.gz/f7fb40394e8fbdec06f4a42bca0802cbbe144368(nats.ws@1.30.3)':
+  '@mjt-engine/message@https://codeload.github.com/mjt-engine/message/tar.gz/18c912af39f76310bf698de6ff399fd2575d6e07(nats.ws@1.30.3)':
     dependencies:
       '@mjt-engine/byte': https://codeload.github.com/mjt-engine/byte/tar.gz/02fcb5bdd8acbb1675c6aa34777955c6d88aa399
       '@mjt-engine/error': https://codeload.github.com/mjt-engine/error/tar.gz/9b170db171d86c3a1a0afdc6c7de205259a3b564
@@ -3761,16 +3753,16 @@ snapshots:
   '@mjt-services/daimon-common-2025@https://codeload.github.com/mjt-services/daimon-common-2025/tar.gz/af25f43613b4fd6a0c612ef5fe0f9475dea81a3f(nats.ws@1.30.3)':
     dependencies:
       '@mjt-engine/assert': https://codeload.github.com/mjt-engine/assert/tar.gz/58b808f45ca8a23cd7d613e75ba9e76c5fb70e55
-      '@mjt-engine/message': https://codeload.github.com/mjt-engine/message/tar.gz/f7fb40394e8fbdec06f4a42bca0802cbbe144368(nats.ws@1.30.3)
+      '@mjt-engine/message': https://codeload.github.com/mjt-engine/message/tar.gz/18c912af39f76310bf698de6ff399fd2575d6e07(nats.ws@1.30.3)
       '@mjt-engine/object': https://codeload.github.com/mjt-engine/object/tar.gz/6e096ec8b073cde78d595c55740e44f8812e7428
-      '@mjt-services/data-common-2025': https://codeload.github.com/mjt-services/data-common-2025/tar.gz/3e2c9315614711a71c5413c9e23c16dcde2b8a35(nats.ws@1.30.3)
+      '@mjt-services/data-common-2025': https://codeload.github.com/mjt-services/data-common-2025/tar.gz/6a79a8fc94b55106f3a3abe9d9bf33d18ae726cf(nats.ws@1.30.3)
       '@mjt-services/textgen-common-2025': https://codeload.github.com/mjt-services/textgen-common-2025/tar.gz/10692d0f5dbdd85bb91a2008e9b00587bcb4297c(nats.ws@1.30.3)
     transitivePeerDependencies:
       - nats.ws
 
-  '@mjt-services/data-common-2025@https://codeload.github.com/mjt-services/data-common-2025/tar.gz/3e2c9315614711a71c5413c9e23c16dcde2b8a35(nats.ws@1.30.3)':
+  '@mjt-services/data-common-2025@https://codeload.github.com/mjt-services/data-common-2025/tar.gz/6a79a8fc94b55106f3a3abe9d9bf33d18ae726cf(nats.ws@1.30.3)':
     dependencies:
-      '@mjt-engine/message': https://codeload.github.com/mjt-engine/message/tar.gz/f7fb40394e8fbdec06f4a42bca0802cbbe144368(nats.ws@1.30.3)
+      '@mjt-engine/message': https://codeload.github.com/mjt-engine/message/tar.gz/18c912af39f76310bf698de6ff399fd2575d6e07(nats.ws@1.30.3)
       '@mjt-engine/object': https://codeload.github.com/mjt-engine/object/tar.gz/6e096ec8b073cde78d595c55740e44f8812e7428
     transitivePeerDependencies:
       - nats.ws
@@ -3781,19 +3773,19 @@ snapshots:
 
   '@mjt-services/textgen-common-2025@https://codeload.github.com/mjt-services/textgen-common-2025/tar.gz/10692d0f5dbdd85bb91a2008e9b00587bcb4297c(nats.ws@1.30.3)':
     dependencies:
-      '@mjt-engine/message': https://codeload.github.com/mjt-engine/message/tar.gz/f7fb40394e8fbdec06f4a42bca0802cbbe144368(nats.ws@1.30.3)
+      '@mjt-engine/message': https://codeload.github.com/mjt-engine/message/tar.gz/18c912af39f76310bf698de6ff399fd2575d6e07(nats.ws@1.30.3)
       '@mjt-engine/object': https://codeload.github.com/mjt-engine/object/tar.gz/6e096ec8b073cde78d595c55740e44f8812e7428
     transitivePeerDependencies:
       - nats.ws
 
   '@mjt-services/webclient-common-2025@https://codeload.github.com/mjt-services/webclient-common-2025/tar.gz/8dabd273b7b34cd7b46f5a4ed758f1592b704840(nats.ws@1.30.3)':
     dependencies:
-      '@mjt-engine/message': https://codeload.github.com/mjt-engine/message/tar.gz/f7fb40394e8fbdec06f4a42bca0802cbbe144368(nats.ws@1.30.3)
+      '@mjt-engine/message': https://codeload.github.com/mjt-engine/message/tar.gz/18c912af39f76310bf698de6ff399fd2575d6e07(nats.ws@1.30.3)
       '@mjt-engine/object': https://codeload.github.com/mjt-engine/object/tar.gz/6e096ec8b073cde78d595c55740e44f8812e7428
     transitivePeerDependencies:
       - nats.ws
 
-  '@mjtdev/avatar-3d@https://codeload.github.com/matthewjosephtaylor/avatar-3d/tar.gz/fe9dd6a0c6413a05e79ba366f465f67e29179b06(@emotion/is-prop-valid@1.3.1)(@mjt-engine/babs@https://codeload.github.com/mjt-engine/babs/tar.gz/f2f4cb9adee514b917d90508097a24358b529e08(@babylonjs/addons@8.16.0(@babylonjs/core@7.54.3))(@babylonjs/gui-editor@8.16.0(@babylonjs/core@7.54.3)(@babylonjs/gui@8.16.0(@babylonjs/core@7.54.3))(@types/react-dom@19.1.6(@types/react@19.1.8))(@types/react@19.1.8))(@babylonjs/materials@8.16.0(@babylonjs/core@7.54.3))(@babylonjs/serializers@8.16.0(@babylonjs/core@7.54.3)(babylonjs-gltf2interface@8.16.0))(@types/react-dom@19.1.6(@types/react@19.1.8))(@types/react@19.1.8)(babylonjs-gltf2interface@8.16.0))(@types/react@19.1.8)(babylonjs-gltf2interface@8.16.0)(react-dom@19.1.0(react@19.1.0))(react-router-dom@6.30.1(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(react@19.1.0)(rollup@4.44.2)':
+  '@mjtdev/avatar-3d@https://codeload.github.com/matthewjosephtaylor/avatar-3d/tar.gz/fe9dd6a0c6413a05e79ba366f465f67e29179b06(@emotion/is-prop-valid@1.3.1)(@mjt-engine/babs@https://codeload.github.com/mjt-engine/babs/tar.gz/f2f4cb9adee514b917d90508097a24358b529e08(@babylonjs/addons@8.16.0(@babylonjs/core@7.54.3))(@babylonjs/gui-editor@8.16.0(@babylonjs/core@7.54.3)(@babylonjs/gui@8.16.1(@babylonjs/core@7.54.3))(@types/react-dom@19.1.6(@types/react@19.1.8))(@types/react@19.1.8))(@babylonjs/materials@8.16.0(@babylonjs/core@7.54.3))(@babylonjs/serializers@8.16.0(@babylonjs/core@7.54.3)(babylonjs-gltf2interface@8.16.0))(@types/react-dom@19.1.6(@types/react@19.1.8))(@types/react@19.1.8)(babylonjs-gltf2interface@8.16.0))(@types/react@19.1.8)(babylonjs-gltf2interface@8.16.0)(react-dom@19.1.0(react@19.1.0))(react-router-dom@6.30.1(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(react@19.1.0)(rollup@4.44.2)':
     dependencies:
       '@babylonjs/core': 7.54.3
       '@babylonjs/loaders': 7.54.3(@babylonjs/core@7.54.3)(babylonjs-gltf2interface@8.16.0)
@@ -3801,7 +3793,7 @@ snapshots:
       '@emotion/styled': 11.14.1(@emotion/react@11.14.0(@types/react@19.1.8)(react@19.1.0))(@types/react@19.1.8)(react@19.1.0)
       '@mjt-engine/animate': https://codeload.github.com/mjt-engine/animate/tar.gz/3a7302f491c51e81b0188002d1f2c0aa0c8c991a
       '@mjt-engine/assert': https://codeload.github.com/mjt-engine/assert/tar.gz/58b808f45ca8a23cd7d613e75ba9e76c5fb70e55
-      '@mjt-engine/babs': https://codeload.github.com/mjt-engine/babs/tar.gz/f2f4cb9adee514b917d90508097a24358b529e08(@babylonjs/addons@8.16.0(@babylonjs/core@7.54.3))(@babylonjs/gui-editor@8.16.0(@babylonjs/core@7.54.3)(@babylonjs/gui@8.16.0(@babylonjs/core@7.54.3))(@types/react-dom@19.1.6(@types/react@19.1.8))(@types/react@19.1.8))(@babylonjs/materials@8.16.0(@babylonjs/core@7.54.3))(@babylonjs/serializers@8.16.0(@babylonjs/core@7.54.3)(babylonjs-gltf2interface@8.16.0))(@types/react-dom@19.1.6(@types/react@19.1.8))(@types/react@19.1.8)(babylonjs-gltf2interface@8.16.0)
+      '@mjt-engine/babs': https://codeload.github.com/mjt-engine/babs/tar.gz/f2f4cb9adee514b917d90508097a24358b529e08(@babylonjs/addons@8.16.0(@babylonjs/core@7.54.3))(@babylonjs/gui-editor@8.16.0(@babylonjs/core@7.54.3)(@babylonjs/gui@8.16.1(@babylonjs/core@7.54.3))(@types/react-dom@19.1.6(@types/react@19.1.8))(@types/react@19.1.8))(@babylonjs/materials@8.16.0(@babylonjs/core@7.54.3))(@babylonjs/serializers@8.16.0(@babylonjs/core@7.54.3)(babylonjs-gltf2interface@8.16.0))(@types/react-dom@19.1.6(@types/react@19.1.8))(@types/react@19.1.8)(babylonjs-gltf2interface@8.16.0)
       '@mjt-engine/byte': https://codeload.github.com/mjt-engine/byte/tar.gz/02fcb5bdd8acbb1675c6aa34777955c6d88aa399
       '@mjt-engine/cache': https://codeload.github.com/mjt-engine/cache/tar.gz/1f7dba33f49bce1a232d2c147441579f026512a5
       '@mjt-engine/color': https://codeload.github.com/mjt-engine/color/tar.gz/7e6d8911d8ed201b09d196e1f7a5d43950c2fccb
@@ -3813,7 +3805,7 @@ snapshots:
       '@mui/system': 6.5.0(@emotion/react@11.14.0(@types/react@19.1.8)(react@19.1.0))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.1.8)(react@19.1.0))(@types/react@19.1.8)(react@19.1.0))(@types/react@19.1.8)(react@19.1.0)
       '@pixiv/three-vrm': 3.4.2(three@0.169.0)
       babylon-vrm-loader: 2.0.0(@babylonjs/core@7.54.3)(@babylonjs/loaders@7.54.3(@babylonjs/core@7.54.3)(babylonjs-gltf2interface@8.16.0))
-      eslint: 9.30.1
+      eslint: 9.31.0
       framer-motion: 11.18.2(@emotion/is-prop-valid@1.3.1)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       immer: 10.1.1
       meyda: 5.6.3(rollup@4.44.2)
@@ -3832,7 +3824,7 @@ snapshots:
       - supports-color
       - use-sync-external-store
 
-  '@mjtdev/vad-2025@https://codeload.github.com/matthewjosephtaylor/vad-2025/tar.gz/8d930278bf9005524b278c99532fd3aac549114e(@types/node@24.0.12)(@types/react@19.1.8)(react-dom@19.1.0(react@19.1.0))(react-router-dom@6.30.1(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(react@19.1.0)(rollup@4.44.2)(sass-embedded@1.89.2)(typescript@5.8.3)':
+  '@mjtdev/vad-2025@https://codeload.github.com/matthewjosephtaylor/vad-2025/tar.gz/8d930278bf9005524b278c99532fd3aac549114e(@types/node@24.0.13)(@types/react@19.1.8)(react-dom@19.1.0(react@19.1.0))(react-router-dom@6.30.1(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(react@19.1.0)(rollup@4.44.2)(sass-embedded@1.89.2)(typescript@5.8.3)':
     dependencies:
       '@emotion/react': 11.14.0(@types/react@19.1.8)(react@19.1.0)
       '@emotion/styled': 11.14.1(@emotion/react@11.14.0(@types/react@19.1.8)(react@19.1.0))(@types/react@19.1.8)(react@19.1.0)
@@ -3845,7 +3837,7 @@ snapshots:
       react-dom: 19.1.0(react@19.1.0)
       react-router-dom: 6.30.1(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       typescript: 5.8.3
-      vite: 6.3.5(@types/node@24.0.12)(sass-embedded@1.89.2)
+      vite: 6.3.5(@types/node@24.0.13)(sass-embedded@1.89.2)
       zustand: 5.0.6(@types/react@19.1.8)(immer@10.1.1)(react@19.1.0)
     transitivePeerDependencies:
       - '@mui/material-pigment-css'
@@ -4192,7 +4184,7 @@ snapshots:
 
   '@types/node@17.0.45': {}
 
-  '@types/node@24.0.12':
+  '@types/node@24.0.13':
     dependencies:
       undici-types: 7.8.0
 
@@ -4202,13 +4194,13 @@ snapshots:
 
   '@types/pngjs@6.0.5':
     dependencies:
-      '@types/node': 24.0.12
+      '@types/node': 24.0.13
 
   '@types/prop-types@15.7.15': {}
 
   '@types/qrcode@1.5.5':
     dependencies:
-      '@types/node': 24.0.12
+      '@types/node': 24.0.13
 
   '@types/react-dom@19.1.6(@types/react@19.1.8)':
     dependencies:
@@ -4228,15 +4220,15 @@ snapshots:
 
   '@types/unist@3.0.3': {}
 
-  '@typescript-eslint/eslint-plugin@8.36.0(@typescript-eslint/parser@8.36.0(eslint@9.30.1)(typescript@5.8.3))(eslint@9.30.1)(typescript@5.8.3)':
+  '@typescript-eslint/eslint-plugin@8.36.0(@typescript-eslint/parser@8.36.0(eslint@9.31.0)(typescript@5.8.3))(eslint@9.31.0)(typescript@5.8.3)':
     dependencies:
       '@eslint-community/regexpp': 4.12.1
-      '@typescript-eslint/parser': 8.36.0(eslint@9.30.1)(typescript@5.8.3)
+      '@typescript-eslint/parser': 8.36.0(eslint@9.31.0)(typescript@5.8.3)
       '@typescript-eslint/scope-manager': 8.36.0
-      '@typescript-eslint/type-utils': 8.36.0(eslint@9.30.1)(typescript@5.8.3)
-      '@typescript-eslint/utils': 8.36.0(eslint@9.30.1)(typescript@5.8.3)
+      '@typescript-eslint/type-utils': 8.36.0(eslint@9.31.0)(typescript@5.8.3)
+      '@typescript-eslint/utils': 8.36.0(eslint@9.31.0)(typescript@5.8.3)
       '@typescript-eslint/visitor-keys': 8.36.0
-      eslint: 9.30.1
+      eslint: 9.31.0
       graphemer: 1.4.0
       ignore: 7.0.5
       natural-compare: 1.4.0
@@ -4245,14 +4237,14 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@typescript-eslint/parser@8.36.0(eslint@9.30.1)(typescript@5.8.3)':
+  '@typescript-eslint/parser@8.36.0(eslint@9.31.0)(typescript@5.8.3)':
     dependencies:
       '@typescript-eslint/scope-manager': 8.36.0
       '@typescript-eslint/types': 8.36.0
       '@typescript-eslint/typescript-estree': 8.36.0(typescript@5.8.3)
       '@typescript-eslint/visitor-keys': 8.36.0
       debug: 4.4.1
-      eslint: 9.30.1
+      eslint: 9.31.0
       typescript: 5.8.3
     transitivePeerDependencies:
       - supports-color
@@ -4275,12 +4267,12 @@ snapshots:
     dependencies:
       typescript: 5.8.3
 
-  '@typescript-eslint/type-utils@8.36.0(eslint@9.30.1)(typescript@5.8.3)':
+  '@typescript-eslint/type-utils@8.36.0(eslint@9.31.0)(typescript@5.8.3)':
     dependencies:
       '@typescript-eslint/typescript-estree': 8.36.0(typescript@5.8.3)
-      '@typescript-eslint/utils': 8.36.0(eslint@9.30.1)(typescript@5.8.3)
+      '@typescript-eslint/utils': 8.36.0(eslint@9.31.0)(typescript@5.8.3)
       debug: 4.4.1
-      eslint: 9.30.1
+      eslint: 9.31.0
       ts-api-utils: 2.1.0(typescript@5.8.3)
       typescript: 5.8.3
     transitivePeerDependencies:
@@ -4304,13 +4296,13 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@typescript-eslint/utils@8.36.0(eslint@9.30.1)(typescript@5.8.3)':
+  '@typescript-eslint/utils@8.36.0(eslint@9.31.0)(typescript@5.8.3)':
     dependencies:
-      '@eslint-community/eslint-utils': 4.7.0(eslint@9.30.1)
+      '@eslint-community/eslint-utils': 4.7.0(eslint@9.31.0)
       '@typescript-eslint/scope-manager': 8.36.0
       '@typescript-eslint/types': 8.36.0
       '@typescript-eslint/typescript-estree': 8.36.0(typescript@5.8.3)
-      eslint: 9.30.1
+      eslint: 9.31.0
       typescript: 5.8.3
     transitivePeerDependencies:
       - supports-color
@@ -4846,9 +4838,9 @@ snapshots:
 
   escape-string-regexp@5.0.0: {}
 
-  eslint-config-prettier@9.1.0(eslint@9.30.1):
+  eslint-config-prettier@9.1.0(eslint@9.31.0):
     dependencies:
-      eslint: 9.30.1
+      eslint: 9.31.0
 
   eslint-import-resolver-node@0.3.9:
     dependencies:
@@ -4858,17 +4850,17 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  eslint-module-utils@2.12.1(@typescript-eslint/parser@8.36.0(eslint@9.30.1)(typescript@5.8.3))(eslint-import-resolver-node@0.3.9)(eslint@9.30.1):
+  eslint-module-utils@2.12.1(@typescript-eslint/parser@8.36.0(eslint@9.31.0)(typescript@5.8.3))(eslint-import-resolver-node@0.3.9)(eslint@9.31.0):
     dependencies:
       debug: 3.2.7
     optionalDependencies:
-      '@typescript-eslint/parser': 8.36.0(eslint@9.30.1)(typescript@5.8.3)
-      eslint: 9.30.1
+      '@typescript-eslint/parser': 8.36.0(eslint@9.31.0)(typescript@5.8.3)
+      eslint: 9.31.0
       eslint-import-resolver-node: 0.3.9
     transitivePeerDependencies:
       - supports-color
 
-  eslint-plugin-import@2.32.0(@typescript-eslint/parser@8.36.0(eslint@9.30.1)(typescript@5.8.3))(eslint@9.30.1):
+  eslint-plugin-import@2.32.0(@typescript-eslint/parser@8.36.0(eslint@9.31.0)(typescript@5.8.3))(eslint@9.31.0):
     dependencies:
       '@rtsao/scc': 1.1.0
       array-includes: 3.1.9
@@ -4877,9 +4869,9 @@ snapshots:
       array.prototype.flatmap: 1.3.3
       debug: 3.2.7
       doctrine: 2.1.0
-      eslint: 9.30.1
+      eslint: 9.31.0
       eslint-import-resolver-node: 0.3.9
-      eslint-module-utils: 2.12.1(@typescript-eslint/parser@8.36.0(eslint@9.30.1)(typescript@5.8.3))(eslint-import-resolver-node@0.3.9)(eslint@9.30.1)
+      eslint-module-utils: 2.12.1(@typescript-eslint/parser@8.36.0(eslint@9.31.0)(typescript@5.8.3))(eslint-import-resolver-node@0.3.9)(eslint@9.31.0)
       hasown: 2.0.2
       is-core-module: 2.16.1
       is-glob: 4.0.3
@@ -4891,13 +4883,13 @@ snapshots:
       string.prototype.trimend: 1.0.9
       tsconfig-paths: 3.15.0
     optionalDependencies:
-      '@typescript-eslint/parser': 8.36.0(eslint@9.30.1)(typescript@5.8.3)
+      '@typescript-eslint/parser': 8.36.0(eslint@9.31.0)(typescript@5.8.3)
     transitivePeerDependencies:
       - eslint-import-resolver-typescript
       - eslint-import-resolver-webpack
       - supports-color
 
-  eslint-plugin-jsx-a11y@6.10.2(eslint@9.30.1):
+  eslint-plugin-jsx-a11y@6.10.2(eslint@9.31.0):
     dependencies:
       aria-query: 5.3.2
       array-includes: 3.1.9
@@ -4907,7 +4899,7 @@ snapshots:
       axobject-query: 4.1.0
       damerau-levenshtein: 1.0.8
       emoji-regex: 9.2.2
-      eslint: 9.30.1
+      eslint: 9.31.0
       hasown: 2.0.2
       jsx-ast-utils: 3.3.5
       language-tags: 1.0.9
@@ -4916,20 +4908,20 @@ snapshots:
       safe-regex-test: 1.1.0
       string.prototype.includes: 2.0.1
 
-  eslint-plugin-prettier@5.5.1(eslint-config-prettier@9.1.0(eslint@9.30.1))(eslint@9.30.1)(prettier@3.6.2):
+  eslint-plugin-prettier@5.5.1(eslint-config-prettier@9.1.0(eslint@9.31.0))(eslint@9.31.0)(prettier@3.6.2):
     dependencies:
-      eslint: 9.30.1
+      eslint: 9.31.0
       prettier: 3.6.2
       prettier-linter-helpers: 1.0.0
       synckit: 0.11.8
     optionalDependencies:
-      eslint-config-prettier: 9.1.0(eslint@9.30.1)
+      eslint-config-prettier: 9.1.0(eslint@9.31.0)
 
-  eslint-plugin-react-hooks@5.2.0(eslint@9.30.1):
+  eslint-plugin-react-hooks@5.2.0(eslint@9.31.0):
     dependencies:
-      eslint: 9.30.1
+      eslint: 9.31.0
 
-  eslint-plugin-react@7.37.5(eslint@9.30.1):
+  eslint-plugin-react@7.37.5(eslint@9.31.0):
     dependencies:
       array-includes: 3.1.9
       array.prototype.findlast: 1.2.5
@@ -4937,7 +4929,7 @@ snapshots:
       array.prototype.tosorted: 1.1.4
       doctrine: 2.1.0
       es-iterator-helpers: 1.2.1
-      eslint: 9.30.1
+      eslint: 9.31.0
       estraverse: 5.3.0
       hasown: 2.0.2
       jsx-ast-utils: 3.3.5
@@ -4960,15 +4952,15 @@ snapshots:
 
   eslint-visitor-keys@4.2.1: {}
 
-  eslint@9.30.1:
+  eslint@9.31.0:
     dependencies:
-      '@eslint-community/eslint-utils': 4.7.0(eslint@9.30.1)
+      '@eslint-community/eslint-utils': 4.7.0(eslint@9.31.0)
       '@eslint-community/regexpp': 4.12.1
       '@eslint/config-array': 0.21.0
       '@eslint/config-helpers': 0.3.0
-      '@eslint/core': 0.14.0
+      '@eslint/core': 0.15.1
       '@eslint/eslintrc': 3.3.1
-      '@eslint/js': 9.30.1
+      '@eslint/js': 9.31.0
       '@eslint/plugin-kit': 0.3.3
       '@humanfs/node': 0.16.6
       '@humanwhocodes/module-importer': 1.0.1
@@ -6127,7 +6119,7 @@ snapshots:
       '@protobufjs/pool': 1.1.0
       '@protobufjs/utf8': 1.1.0
       '@types/long': 4.0.2
-      '@types/node': 24.0.12
+      '@types/node': 24.0.13
       long: 4.0.0
 
   punycode@2.3.1: {}
@@ -6749,7 +6741,7 @@ snapshots:
       '@types/unist': 3.0.3
       vfile-message: 4.0.2
 
-  vite@6.3.5(@types/node@24.0.12)(sass-embedded@1.89.2):
+  vite@6.3.5(@types/node@24.0.13)(sass-embedded@1.89.2):
     dependencies:
       esbuild: 0.25.6
       fdir: 6.4.6(picomatch@4.0.2)
@@ -6758,7 +6750,7 @@ snapshots:
       rollup: 4.44.2
       tinyglobby: 0.2.14
     optionalDependencies:
-      '@types/node': 24.0.12
+      '@types/node': 24.0.13
       fsevents: 2.3.3
       sass-embedded: 1.89.2
 

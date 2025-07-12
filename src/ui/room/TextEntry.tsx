@@ -1,7 +1,8 @@
 import { Colors } from "@mjt-engine/color";
 import {
   CONTENT_OBJECT_STORE,
-  DAIMON_OBJECT_STORE,
+  Daimon,
+  Daimons,
   type Content,
 } from "@mjt-services/daimon-common-2025";
 import { Ids } from "@mjt-services/data-common-2025";
@@ -27,9 +28,9 @@ import { putRoom } from "../common/putRoom";
 import { askDaimon } from "../daimon/askDaimon";
 import { handleTextEntry } from "./handleTextEntry";
 
-import { useDatas } from "../../state/useDatas";
-import IMAGE_PROMPT from "./prompt.txt?raw";
+import { useData } from "../../state/useData";
 import { addRandomGreeting } from "./addRandomGreeting";
+import IMAGE_PROMPT from "./prompt.txt?raw";
 
 console.log("IMAGE_PROMPT", IMAGE_PROMPT);
 
@@ -41,8 +42,16 @@ export const TextEntry = forwardRef(({ ...rest }: TextFieldProps, ref) => {
   const [imageGenPrompt, setImageGenPrompt] = useState("");
   const [imageContent, setImageContent] = useState<Content>();
 
-  const { activeRoomId } = useAppState();
-  const daimons = useDatas({ from: DAIMON_OBJECT_STORE });
+  const { activeRoomId, userDaimonId, activeAssistantId } = useAppState();
+  // const daimons = useDatas({ from: DAIMON_OBJECT_STORE });
+  const userDaimon = useData<Daimon>(userDaimonId);
+  const charaDaimon = useData<Daimon>(activeAssistantId);
+
+  const positiveImagePrompt = Daimons.renderTemplate(IMAGE_PROMPT, {
+    user: userDaimon?.chara.data.name ?? "User",
+    chara: charaDaimon?.chara.data.name ?? "Assistant",
+  });
+  console.log("positiveImagePrompt", positiveImagePrompt);
   // Expose focus method to the parent component
   useImperativeHandle(ref, () => ({
     focus: () => {
@@ -118,11 +127,14 @@ export const TextEntry = forwardRef(({ ...rest }: TextFieldProps, ref) => {
                       value: undefined,
                     });
                     setOpenGenerateImage(true);
-                    const imageGenPrompt = await askDaimon(IMAGE_PROMPT, {
-                      onUpdate: (content) => {
-                        setImageGenPrompt(String(content.value));
-                      },
-                    });
+                    const imageGenPrompt = await askDaimon(
+                      String(positiveImagePrompt),
+                      {
+                        onUpdate: (content) => {
+                          setImageGenPrompt(String(content.value));
+                        },
+                      }
+                    );
                     setImageGenPrompt(String(imageGenPrompt.value));
                   }}
                 >
@@ -130,8 +142,9 @@ export const TextEntry = forwardRef(({ ...rest }: TextFieldProps, ref) => {
                 </IconButton>
                 <IconButton
                   onClick={async () => {
+                    const userName = userDaimon?.chara.data.name ?? "User";
                     await askDaimon(
-                      "What would the user do and/or say next? Just give the response only. use the same tone and style as the user. use *to indicate actions*",
+                      `What would ${userName} do and/or say next? Just give the response only. use the same tone and style as ${userName}. use *to indicate actions*`,
                       {
                         onUpdate: (content) => {
                           const { value = "" } = content;
@@ -153,6 +166,7 @@ export const TextEntry = forwardRef(({ ...rest }: TextFieldProps, ref) => {
         open={openGenerateImage}
         value={imageContent}
         defaultRequest={{
+          // prompt: positiveImagePrompt,
           prompt: String(imageGenPrompt),
           negative_prompt:
             "boring, bad composition, bad anatomy, bad lighting, weird eyes, weird hands. low detail, poor quality, cartoon, cgi, render, unity, unreal",

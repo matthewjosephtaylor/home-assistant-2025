@@ -12,6 +12,8 @@ type AppState = {
   setUrlHash: (hash: keyof typeof SCREENS) => void;
   activeRoomId: string | undefined;
   setActiveRoomId: (id: string | undefined) => void;
+  activeAssistantId?: string;
+  setActiveAssistantId: (id?: string) => void;
   selectedRoomIds: string[];
   setSelectedRoomIds: (ids: string[]) => void;
   abortController?: AbortController;
@@ -40,6 +42,8 @@ export const useAppState = create<AppState>((set) => ({
   },
   activeRoomId: undefined,
   setActiveRoomId: (id) => set({ activeRoomId: id }),
+  activeAssistantId: undefined,
+  setActiveAssistantId: (id) => set({ activeAssistantId: id }),
   abortController: undefined,
   setAbortController: (abortController) => set({ abortController }),
   textEntryElement: undefined,

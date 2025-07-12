@@ -59,6 +59,7 @@ export const DaimonMenuAvatar = ({
           useAppState
             .getState()
             .setTopRoomId(daimon.chara.data.extensions?.dmRoom);
+          useAppState.getState().setActiveAssistantId(daimonId);
         }}
         contentId={imageContentId}
         imgProps={{ style: { maxHeight: "4em" } }}
