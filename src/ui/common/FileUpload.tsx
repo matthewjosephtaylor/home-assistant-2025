@@ -1,6 +1,6 @@
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import EditIcon from "@mui/icons-material/Edit";
-import { Box, IconButton, Typography } from "@mui/material";
+import { Box, BoxProps, IconButton, Typography } from "@mui/material";
 import { ReactNode, useState } from "react";
 import { useDropzone } from "react-dropzone";
 
@@ -8,7 +8,8 @@ export const FileUpload = ({
   onChange,
   renderFile,
   placeholder,
-}: {
+  ...rest
+}: Omit<BoxProps, "onChange"> & {
   onChange?: (file?: File) => void;
   renderFile?: (file: File) => ReactNode;
   placeholder?: ReactNode;
@@ -18,7 +19,7 @@ export const FileUpload = ({
   const onDrop = (acceptedFiles: File[]) => {
     if (acceptedFiles.length > 0) {
       const newFile = acceptedFiles[0];
-      setFile(newFile);
+      // setFile(newFile);
       onChange?.(newFile);
     }
   };
@@ -33,8 +34,6 @@ export const FileUpload = ({
       {...getRootProps()}
       sx={{
         position: "relative",
-        width: 200,
-        height: 200,
         border: "2px dashed gray",
         borderRadius: 2,
         display: "flex",
@@ -43,11 +42,13 @@ export const FileUpload = ({
         cursor: "pointer",
         overflow: "hidden",
         "&:hover": { borderColor: "primary.main" },
+        ...rest.sx,
       }}
+      {...rest}
     >
       <input {...getInputProps()} />
 
-      {file ? (
+      {renderFile && file ? (
         <>
           {renderFile?.(file)}
           <IconButton
@@ -78,7 +79,7 @@ export const FileUpload = ({
         >
           {placeholder || <CloudUploadIcon fontSize="large" />}
           <Typography variant="body2">
-            Drag & drop or click to upload
+            Drag & drop PNG or click to upload
           </Typography>
         </Box>
       )}

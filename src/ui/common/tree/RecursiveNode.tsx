@@ -22,21 +22,30 @@ export const RecursiveNode = ({
   }) => void;
 }) => {
   const [search, setSearch] = useState("");
-  const { activeRoomId, setActiveRoomId, selectedRoomIds, setSelectedRoomIds } =
-    useAppState();
+  const {
+    activeRoomId,
+    topRoomId,
+    setActiveRoomId,
+    selectedRoomIds,
+    setSelectedRoomIds,
+  } = useAppState();
   const [selectedChildId, setSelectedChildId] = useState<string | undefined>();
   const children = useTreeNodes({ parentId, search });
-
   useEffect(() => {
     if (selectedChildId && !children.some((n) => n.id === selectedChildId)) {
       setSelectedChildId(undefined);
-      // setActiveNoteParentId(parentId);
     }
     if (activeRoomId && children.some((n) => n.id === activeRoomId)) {
       setSelectedChildId(activeRoomId);
       focusTextEntry();
     }
-  }, [parentId, selectedChildId, children]);
+  }, [
+    parentId,
+    selectedChildId,
+    children,
+    // testing
+    activeRoomId,
+  ]);
 
   const handleDelete = async (nodeId: string) => {
     Datas.remove(await getConnection())({
@@ -48,6 +57,7 @@ export const RecursiveNode = ({
   const handleSelectNote = () => {
     setActiveRoomId(parentId);
   };
+  const reverse = topRoomId === parentId;
 
   return (
     <Stack
@@ -66,7 +76,7 @@ export const RecursiveNode = ({
       >
         <SearchBar search={search} setSearch={setSearch} />
         <NodeList
-          children={children}
+          children={reverse ? children.reverse() : children}
           selectedChildId={activeRoomId}
           setSelectedChildId={(id) => {
             focusTextEntry();

@@ -32,8 +32,6 @@ import { useData } from "../../state/useData";
 import { addRandomGreeting } from "./addRandomGreeting";
 import IMAGE_PROMPT from "./prompt.txt?raw";
 
-console.log("IMAGE_PROMPT", IMAGE_PROMPT);
-
 export const TextEntry = forwardRef(({ ...rest }: TextFieldProps, ref) => {
   const [message, setMessage] = useState("");
   const textFieldRef = useRef<HTMLInputElement>(null);
@@ -43,15 +41,36 @@ export const TextEntry = forwardRef(({ ...rest }: TextFieldProps, ref) => {
   const [imageContent, setImageContent] = useState<Content>();
 
   const { activeRoomId, userDaimonId, activeAssistantId } = useAppState();
-  // const daimons = useDatas({ from: DAIMON_OBJECT_STORE });
   const userDaimon = useData<Daimon>(userDaimonId);
   const charaDaimon = useData<Daimon>(activeAssistantId);
+  // Inside component state
+  const [expanded, setExpanded] = useState(false);
+
+  // Detect overflow
+  // useEffect(() => {
+  //   if (!textFieldRef.current) return;
+  //   const el = textFieldRef.current;
+  //   const isOverflowing = el.scrollHeight > el.clientHeight;
+  //   console.log("TextField overflow:", isOverflowing);
+  //   // Set expanded state based on overflow
+  //   setExpanded(isOverflowing);
+  // }, [message]);
+
+  useEffect(() => {
+    const el = textFieldRef.current;
+    if (!el) return;
+
+    const style = getComputedStyle(el);
+    const lineHeight = parseFloat(style.lineHeight || "24"); // fallback
+    const lines = Math.round(el.scrollHeight / lineHeight);
+
+    setExpanded(lines > 3);
+  }, [message]);
 
   const positiveImagePrompt = Daimons.renderTemplate(IMAGE_PROMPT, {
     user: userDaimon?.chara.data.name ?? "User",
     chara: charaDaimon?.chara.data.name ?? "Assistant",
   });
-  console.log("positiveImagePrompt", positiveImagePrompt);
   // Expose focus method to the parent component
   useImperativeHandle(ref, () => ({
     focus: () => {
@@ -91,14 +110,32 @@ export const TextEntry = forwardRef(({ ...rest }: TextFieldProps, ref) => {
           }}
           sx={{
             width: "100%",
+            position: expanded ? "fixed" : "relative",
+            bottom: expanded ? 0 : "auto",
+            left: expanded ? 0 : "auto",
+            right: expanded ? 0 : "auto",
+            zIndex: expanded ? 1300 : "auto", // above most content
             backgroundColor: Colors.from("grey").darken(0.65).toString(),
-            marginTop: "1.8em",
+            marginTop: expanded ? 0 : "1.8em",
+            transition: "all 0.3s ease",
+            maxHeight: expanded ? "60vh" : "auto",
+            // overflow: "auto",
+            padding: expanded ? "1em" : 0,
             "& .MuiOutlinedInput-root": {
               borderRadius: "0.5em",
             },
           }}
+          // sx={{
+          //   width: "100%",
+          //   backgroundColor: Colors.from("grey").darken(0.65).toString(),
+          //   marginTop: "1.8em",
+          //   "& .MuiOutlinedInput-root": {
+          //     borderRadius: "0.5em",
+          //   },
+          // }}
           multiline
-          maxRows={10}
+          minRows={3}
+          maxRows={20}
           InputProps={{
             endAdornment: (
               <InputAdornment position="end">
@@ -166,7 +203,6 @@ export const TextEntry = forwardRef(({ ...rest }: TextFieldProps, ref) => {
         open={openGenerateImage}
         value={imageContent}
         defaultRequest={{
-          // prompt: positiveImagePrompt,
           prompt: String(imageGenPrompt),
           negative_prompt:
             "boring, bad composition, bad anatomy, bad lighting, weird eyes, weird hands. low detail, poor quality, cartoon, cgi, render, unity, unreal",
@@ -177,7 +213,6 @@ export const TextEntry = forwardRef(({ ...rest }: TextFieldProps, ref) => {
         }}
         onClose={() => setOpenGenerateImage(false)}
         onSave={async (value) => {
-          // onUpdate?.(value);
           await putContent(value);
           await putRoom({
             contentId: value.id,

@@ -3,23 +3,40 @@ import {
   DAIMON_OBJECT_STORE,
 } from "@mjt-services/daimon-common-2025";
 import { Datas, Ids } from "@mjt-services/data-common-2025";
+import { Tooltip, Typography } from "@mui/material";
 import { getConnection } from "../../connection/Connections";
 import { useAppState } from "../../state/AppState";
 import { ContextMenu } from "../common/ContextMenu";
 import { ContentView } from "../content/ContentView";
-import { startChatWith } from "./startChatWith";
 import { createDaimonRooms } from "./createDaimonRooms";
+import { startChatWith } from "./startChatWith";
+
 export const DaimonMenuAvatar = ({
   imageContentId,
   daimonId,
   onUpdate,
+  name,
+  selected = false,
+  tooltip,
 }: {
+  selected?: boolean;
+  name?: string;
+  tooltip?: string;
   imageContentId?: string;
   daimonId: string;
   onUpdate?: (id?: string) => void;
 }) => {
   return (
     <ContextMenu
+      sx={{
+        width: "10ch",
+        textAlign: "center",
+        padding: "0.5em",
+        margin: "0.5em",
+        borderRadius: "1em",
+        border: `1px solid ${selected ? "#1976d2" : "transparent"}`, // MUI default selected color (primary.main)
+        backgroundColor: selected ? "action.selected" : undefined,
+      }}
       actions={{
         Edit: () => {
           useAppState.getState().setUrlHash("daimon");
@@ -51,19 +68,36 @@ export const DaimonMenuAvatar = ({
         },
       }}
     >
-      <ContentView
-        onClick={async () => {
-          const daimon = (await Datas.get(await getConnection())({
-            key: daimonId,
-          })) as Daimon;
-          useAppState
-            .getState()
-            .setTopRoomId(daimon.chara.data.extensions?.dmRoom);
-          useAppState.getState().setActiveAssistantId(daimonId);
-        }}
-        contentId={imageContentId}
-        imgProps={{ style: { maxHeight: "4em" } }}
-      />
+      <Tooltip title={tooltip} enterDelay={1000} enterNextDelay={1000}>
+        <ContentView
+          onClick={async () => {
+            const daimon = (await Datas.get(await getConnection())({
+              key: daimonId,
+            })) as Daimon;
+            useAppState
+              .getState()
+              .setTopRoomId(daimon.chara.data.extensions?.dmRoom);
+            useAppState.getState().setActiveAssistantId(daimonId);
+          }}
+          contentId={imageContentId}
+          imgProps={{ style: { maxHeight: "4em" } }}
+        />
+      </Tooltip>
+      {name && (
+        <Typography
+          sx={{
+            textAlign: "center",
+            fontSize: "0.8em",
+            marginTop: "0.5em",
+            maxWidth: "10ch",
+            overflow: "hidden",
+            textOverflow: "ellipsis",
+            whiteSpace: "nowrap",
+          }}
+        >
+          {name}
+        </Typography>
+      )}
     </ContextMenu>
   );
 };

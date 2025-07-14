@@ -54,12 +54,7 @@ export const NodeList = ({
       ref={listRef}
       sx={{
         backgroundColor: Colors.from("grey").darken(0.65).toString(),
-        // backgroundColor: "background.paper",
-        // bgcolor: "background.paper",
         border: (theme) => `1px solid ${theme.palette.divider}`,
-        // borderRadius: 1,
-        // borderRadius: "1em",
-        // height: "80vh",
         height: "100%",
         overflow: "auto",
       }}

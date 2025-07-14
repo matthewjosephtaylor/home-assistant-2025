@@ -4,7 +4,7 @@ import MenuItem from "@mui/material/MenuItem";
 import Typography from "@mui/material/Typography";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import { Box } from "@mui/system";
+import { Box, BoxProps } from "@mui/system";
 
 export type ContextMenuActions = Record<string, (() => void) | ContextMenuItem>;
 
@@ -14,12 +14,14 @@ export type ContextMenuItem = Partial<{
   action: () => void;
 }>;
 
-interface ContextMenuProps {
+export const ContextMenu = ({
+  actions,
+  children,
+  ...rest
+}: BoxProps & {
   actions: ContextMenuActions;
   children: React.ReactNode;
-}
-
-export const ContextMenu = ({ actions, children }: ContextMenuProps) => {
+}) => {
   const [menuPosition, setMenuPosition] = useState<{
     mouseX: number;
     mouseY: number;
@@ -38,7 +40,11 @@ export const ContextMenu = ({ actions, children }: ContextMenuProps) => {
   };
 
   return (
-    <Box onContextMenu={handleContextMenu} style={{ cursor: "context-menu" }}>
+    <Box
+      onContextMenu={handleContextMenu}
+      style={{ cursor: "context-menu" }}
+      {...rest}
+    >
       {children}
       <Menu
         sx={{ borderRadius: "1em" }}

@@ -6,6 +6,7 @@ import { TreeEditorForm } from "../../room/root-tree/TreeEditorForm";
 import { RecursiveNode } from "./RecursiveNode";
 import { stableHash } from "stable-hash";
 import { Bytes } from "@mjt-engine/byte";
+import { useAppState } from "../../../state/AppState";
 
 /**
  * The main TreeView component holds the top-level RecursiveNode and

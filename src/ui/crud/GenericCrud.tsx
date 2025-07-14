@@ -18,7 +18,7 @@ import {
   Toolbar,
 } from "@mui/material";
 import { Stack } from "@mui/system";
-import React, { useState } from "react";
+import React, { ReactNode, useState } from "react";
 import { CheckboxWithLabel } from "../common/CheckboxWithLabel";
 import { StringArrayEditor } from "../common/StringArrayEditor";
 
@@ -45,9 +45,14 @@ export function GenericCrud<T extends object>({
   onUpdate,
   onCreate,
   onDelete,
+  itemName = "Item",
+  tools,
 }: {
   items: T[];
   schema: CrudSchema<T>;
+  tools?: ReactNode;
+  itemName?: string;
+
   onUpdate?: (newItem: T, index: number) => void;
   onCreate?: (newItem: T) => void;
   onDelete?: (index: number) => void;
@@ -221,60 +226,78 @@ export function GenericCrud<T extends object>({
   const columns = Object.keys(schema) as (keyof T)[];
 
   return (
-    <>
-      <Toolbar>
-        <IconButton color="primary" onClick={handleAddClick}>
-          <AddIcon />
-        </IconButton>
+    <Stack spacing={2} sx={{ height: "90vh" }}>
+      <Toolbar sx={{ flexShrink: 0 }}>
+        <Stack justifyContent={"center"} direction={"row"} gap={"5em"}>
+          <IconButton color="primary" onClick={handleAddClick}>
+            <AddIcon />
+          </IconButton>
+          {tools}
+        </Stack>
       </Toolbar>
-      <Table>
-        <TableHead>
-          <TableRow>
-            {columns.map((key) => (
-              <TableCell sx={{ textTransform: "capitalize" }} key={String(key)}>
-                {schema[key]?.label ?? String(key)}
-              </TableCell>
-            ))}
-            <TableCell>Actions</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {items.map((item, rowIndex) => (
-            <TableRow
-              key={rowIndex}
-              hover
-              style={{ cursor: "pointer" }}
-              onClick={() => handleRowClick(rowIndex)}
-            >
+      <div style={{ overflowY: "auto", flex: 1 }}>
+        <Table stickyHeader>
+          <TableHead>
+            <TableRow>
               {columns.map((key) => (
-                <TableCell key={String(key)}>
-                  {renderTableCell(key, item)}
+                <TableCell
+                  sx={{
+                    textTransform: "capitalize",
+                  }}
+                  key={String(key)}
+                >
+                  {schema[key]?.label ?? String(key)}
                 </TableCell>
               ))}
-              <TableCell>
-                <IconButton
-                  color="secondary"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    handleDeleteClick(rowIndex);
-                  }}
-                >
-                  <DeleteIcon />
-                </IconButton>
-                <IconButton
-                  color="default"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    handleJsonClick(rowIndex);
-                  }}
-                >
-                  <EditIcon />
-                </IconButton>
-              </TableCell>
+              <TableCell>Actions</TableCell>
             </TableRow>
-          ))}
-        </TableBody>
-      </Table>
+          </TableHead>
+          <TableBody>
+            {items.map((item, rowIndex) => (
+              <TableRow
+                key={rowIndex}
+                hover
+                style={{ cursor: "pointer" }}
+                onClick={() => handleRowClick(rowIndex)}
+              >
+                {columns.map((key) => (
+                  <TableCell key={String(key)}>
+                    <Box
+                      sx={{
+                        maxWidth: "8ch",
+                        maxHeight: "5em",
+                        overflow: "hidden",
+                      }}
+                    >
+                      {renderTableCell(key, item)}
+                    </Box>
+                  </TableCell>
+                ))}
+                <TableCell>
+                  <IconButton
+                    color="secondary"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleDeleteClick(rowIndex);
+                    }}
+                  >
+                    <DeleteIcon />
+                  </IconButton>
+                  <IconButton
+                    color="default"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleJsonClick(rowIndex);
+                    }}
+                  >
+                    <EditIcon />
+                  </IconButton>
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </div>
 
       {/* Modal Dialog for editing the selected item */}
       <Dialog
@@ -352,6 +375,6 @@ export function GenericCrud<T extends object>({
           </Button>
         </DialogActions>
       </Dialog>
-    </>
+    </Stack>
   );
 }

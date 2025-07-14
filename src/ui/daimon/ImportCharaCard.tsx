@@ -15,7 +15,7 @@ export const ImportCharaJson = ({ onImport }: { onImport?: () => void }) => {
   return (
     <>
       <IconButton onClick={() => setOpen(true)}>
-        <UploadFile fontSize="large" />
+        <UploadFile fontSize="large" /> JSON
       </IconButton>
       <TextDialog
         open={open}
