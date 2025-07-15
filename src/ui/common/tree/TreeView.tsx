@@ -1,12 +1,12 @@
+import { Bytes } from "@mjt-engine/byte";
 import { ROOM_OBJECT_STORE } from "@mjt-services/daimon-common-2025";
 import { Stack, type StackProps } from "@mui/material";
 import { useEffect, useState } from "react";
+import { stableHash } from "stable-hash";
 import { useDatas } from "../../../state/useDatas";
 import { TreeEditorForm } from "../../room/root-tree/TreeEditorForm";
 import { RecursiveNode } from "./RecursiveNode";
-import { stableHash } from "stable-hash";
-import { Bytes } from "@mjt-engine/byte";
-import { useAppState } from "../../../state/AppState";
+import { ChatListNode } from "./ChatListNode";
 
 /**
  * The main TreeView component holds the top-level RecursiveNode and
@@ -43,11 +43,10 @@ export const TreeView = ({
     setEditorNodeId(params.nodeId);
     setEditorOpen(true);
   };
-  console.log("key", key);
 
   return (
     <Stack {...rest}>
-      <RecursiveNode
+      <ChatListNode
         key={key}
         parentId={parentId}
         onOpenEditor={handleOpenEditor}

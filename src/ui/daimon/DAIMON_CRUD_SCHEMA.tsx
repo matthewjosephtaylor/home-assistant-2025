@@ -18,7 +18,7 @@ export const DAIMON_CRUD_SCHEMA: CrudSchema<DaimonCrud> = {
             await putContent(value);
             onChange?.(value.id);
           }}
-          imgProps={{ style: { maxHeight: "8em" } }}
+          imgProps={{ style: { maxHeight: "12em" } }}
         />
       );
     },

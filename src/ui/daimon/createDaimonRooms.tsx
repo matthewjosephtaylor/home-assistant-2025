@@ -1,12 +1,11 @@
 import { Asserts } from "@mjt-engine/assert";
 import {
   type Daimon,
-  ROOM_OBJECT_STORE,
   DAIMON_OBJECT_STORE,
+  ROOM_OBJECT_STORE,
 } from "@mjt-services/daimon-common-2025";
 import { Datas, Ids } from "@mjt-services/data-common-2025";
 import { getConnection } from "../../connection/Connections";
-import { putEntity } from "../common/putEntity";
 import { linkDaimonToRoom } from "../room/linkDaimonToRoom";
 
 export const createDaimonRooms = async (daimonId: string) => {
@@ -23,7 +22,7 @@ export const createDaimonRooms = async (daimonId: string) => {
     dmRoom = Ids.fromObjectStore(ROOM_OBJECT_STORE),
   } = extensions;
 
-  await putEntity(con)(DAIMON_OBJECT_STORE)({
+  await Datas.putEntity(con)(DAIMON_OBJECT_STORE)({
     ...daimon,
     chara: {
       ...daimon.chara,

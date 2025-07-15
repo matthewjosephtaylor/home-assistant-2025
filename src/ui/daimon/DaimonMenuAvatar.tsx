@@ -58,6 +58,7 @@ export const DaimonMenuAvatar = ({
           if (!current) {
             return;
           }
+          current.chara.data.extensions = {};
           const clone: Daimon = {
             ...current,
             id: Ids.fromObjectStore(DAIMON_OBJECT_STORE),

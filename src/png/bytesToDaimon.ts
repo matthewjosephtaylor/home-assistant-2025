@@ -1,12 +1,14 @@
 import type { ByteLike } from "@mjt-engine/byte";
 import { isUndefined } from "@mjt-engine/object";
-import { type Daimon, DAIMON_OBJECT_STORE } from "@mjt-services/daimon-common-2025";
+import {
+  type Daimon,
+  DAIMON_OBJECT_STORE,
+} from "@mjt-services/daimon-common-2025";
 import { Ids, Datas } from "@mjt-services/data-common-2025";
 import { getConnection } from "../connection/Connections";
 import { bytesToContentId } from "../ui/daimon/fileToContentId";
 import { bytesToDecodedPng } from "./decodePng";
 import { objectToDaimonCharaCard } from "./objectTodiamonCharaCard";
-
 
 export const bytesToDaimon = async (bytes: ByteLike): Promise<Daimon> => {
   const decoded = await bytesToDecodedPng(bytes);
@@ -20,6 +22,7 @@ export const bytesToDaimon = async (bytes: ByteLike): Promise<Daimon> => {
   chara.data.extensions = {
     ...chara.data.extensions,
     avatar: contentId,
+    lastUsed: Date.now(),
   };
   const daimon: Daimon = {
     chara,

@@ -1,13 +1,16 @@
 import { DAIMON_OBJECT_STORE } from "@mjt-services/daimon-common-2025";
-import { Box, Stack } from "@mui/material";
+import { Stack } from "@mui/material";
+import { sortDaimonsByLastUsed } from "../../daimon/sortDaimonsByLastUsed";
+import { useAppState } from "../../state/AppState";
 import { useDatas } from "../../state/useDatas";
 import { TreeView } from "../common/tree/TreeView";
 import { DaimonMenuAvatar } from "../daimon/DaimonMenuAvatar";
 import { TextEntry } from "./TextEntry";
-import { useAppState } from "../../state/AppState";
 
 export const RoomScreen = () => {
-  const daimons = useDatas({ from: DAIMON_OBJECT_STORE });
+  const daimons = useDatas({ from: DAIMON_OBJECT_STORE }).toSorted(
+    sortDaimonsByLastUsed
+  );
   const { topRoomId } = useAppState();
   const { activeAssistantId } = useAppState();
   return (

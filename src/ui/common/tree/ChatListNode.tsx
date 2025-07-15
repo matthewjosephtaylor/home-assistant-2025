@@ -9,8 +9,9 @@ import { NoteContent } from "../../room/root-tree/NoteContent";
 import { NodeList } from "./NodeList";
 import { SearchBar } from "./SearchBar";
 import { useTreeNodes } from "./useTreeNodes";
+import { RecursiveNode } from "./RecursiveNode";
 
-export const RecursiveNode = ({
+export const ChatListNode = ({
   parentId,
   onOpenEditor,
 }: {
@@ -57,13 +58,14 @@ export const RecursiveNode = ({
     >
       <Stack
         sx={{
+          maxWidth: "30ch",
           // minWidth: "20ch",
           height: "100%",
         }}
       >
         <SearchBar search={search} setSearch={setSearch} />
         <NodeList
-          children={children}
+          children={children.toReversed()}
           selectedChildId={activeRoomId}
           setSelectedChildId={(id) => {
             focusTextEntry();
@@ -74,9 +76,9 @@ export const RecursiveNode = ({
           handleDelete={handleDelete}
         />
 
-        <Box onClick={handleSelectNote}>
+        {/* <Box onClick={handleSelectNote}>
           <NoteContent parentId={parentId}></NoteContent>
-        </Box>
+        </Box> */}
       </Stack>
       {selectedChildId && (
         <RecursiveNode parentId={selectedChildId} onOpenEditor={onOpenEditor} />

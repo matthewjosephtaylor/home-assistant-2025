@@ -14,62 +14,26 @@ import { AppConfig } from "../../AppConfig";
 import { getConnection } from "../../connection/Connections";
 import { listDaimons } from "../../daimon/listDaimons";
 import { useAppState } from "../../state/AppState";
+import { TagSelector } from "../common/TagSelector";
 import { DAIMON_CRUD_SCHEMA } from "./DAIMON_CRUD_SCHEMA";
 import type { DaimonCrud } from "./DaimonCrud";
 import { daimonToDaimonCrud } from "./daimonToDaimonCrud";
 import { DaimonUpload } from "./DaimonUpload";
-import { Button } from "@mui/material";
-
-export const TagSelector = ({
-  allTags = [],
-  selected = [],
-  narrowTags = [],
-  onChange,
-}: {
-  allTags: string[];
-  narrowTags?: string[];
-  selected: string[];
-  onChange?: (newSelected: string[]) => void;
-}) => {
-  return (
-    <Stack direction={"row"} flexWrap={"wrap"}>
-      {allTags.toSorted().map((tag, index) => (
-        <Button
-          key={index}
-          variant={selected.includes(tag) ? "contained" : "outlined"}
-          color={narrowTags?.includes(tag) ? "primary" : "secondary"}
-          size="small"
-          // sx={{
-          //   minWidth: 80,
-          //   padding: "6px 16px",
-          //   boxSizing: "border-box",
-          // }}
-          disableElevation
-          sx={{ boxShadow: "none" }}
-          onClick={() => {
-            if (selected.includes(tag)) {
-              selected = selected.filter((t) => t !== tag);
-            } else {
-              selected = [...selected, tag];
-            }
-            onChange?.(selected);
-          }}
-        >
-          {tag}
-        </Button>
-      ))}
-    </Stack>
-  );
-};
+import { sortDaimonsByLastUsed } from "../../daimon/sortDaimonsByLastUsed";
+import { useDatas } from "../../state/useDatas";
 
 export const DaimonsScreen = () => {
   const { userDaimonId, setUserDaimonId } = useAppState();
+
+  // const daimons = useDatas({ from: DAIMON_OBJECT_STORE }).toSorted(
+  //   sortDaimonsByLastUsed
+  // );
   const [daimonCruds, setDaimonCruds] = useState<DaimonCrud[]>([]);
   const [filterTags, setFilterTags] = useState<string[]>([]);
   const [allTags, setAllTags] = useState<string[]>([]);
   const [narrowTags, setNarrowTags] = useState<string[]>([]);
-  const updateDaimons = async () => {
-    const daimons = (await listDaimons()).reverse();
+  const updateDaimonCruds = async () => {
+    const daimons = await listDaimons();
     const allTagsSet = new Set<string>();
     daimons.forEach((d) => {
       d.chara.data.tags?.forEach((tag) => allTagsSet.add(tag));
@@ -93,11 +57,11 @@ export const DaimonsScreen = () => {
     setDaimonCruds(daimonCruds);
   };
   useEffect(() => {
-    updateDaimons();
+    updateDaimonCruds();
   }, [userDaimonId, filterTags]);
   const tools = (
     <Stack>
-      <DaimonUpload onUpload={updateDaimons} />
+      <DaimonUpload onUpload={updateDaimonCruds} />
       <TagSelector
         allTags={allTags}
         selected={filterTags}

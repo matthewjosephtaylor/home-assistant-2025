@@ -28,7 +28,10 @@ export const ImportCharaJson = ({ onImport }: { onImport?: () => void }) => {
             chara: {
               spec: "chara_card_v2",
               spec_version: "2",
-              data: data,
+              data: {
+                ...data,
+                extensions: { ...data.extensions, lastUsed: Date.now() },
+              },
             },
           };
 
