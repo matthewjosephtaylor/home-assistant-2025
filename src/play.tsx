@@ -1,3 +1,4 @@
+import { Daimons } from "@mjt-services/daimon-common-2025";
 import { evaluateProgram } from "./chatlang/evaluateProgram";
 import { parseProgram } from "./chatlang/parseProgram";
 import { SimpleEvaluator } from "./chatlang/SimpleEvaluator";
@@ -5,10 +6,20 @@ import { getConnection } from "./connection/Connections";
 
 export const play = async () => {
   try {
-    await playEmbed();
+    // await playEmbed();
+    await playRpg();
   } catch (error) {
     console.error(error);
   }
+};
+
+export const playRpg = async () => {
+  const con = await getConnection();
+  const result = await Daimons.askDaimon(con)({
+    query:
+      "JSON number ARRAY response only!. give me 5 random dice roles, each between 1 and 6",
+  });
+  console.log("Daimon Result:", result);
 };
 
 export const playEmbed = async () => {

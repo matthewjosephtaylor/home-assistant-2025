@@ -1,14 +1,13 @@
 import { useEffect, useState } from "react";
 import { GenericCrud } from "../crud/GenericCrud";
 
-import { Errors } from "@mjt-engine/error";
 import { Idbs } from "@mjt-engine/idb";
 import { isEmpty } from "@mjt-engine/object";
 import {
   DAIMON_OBJECT_STORE,
   type Daimon,
 } from "@mjt-services/daimon-common-2025";
-import { Datas, Ids } from "@mjt-services/data-common-2025";
+import { Datas } from "@mjt-services/data-common-2025";
 import { Stack } from "@mui/system";
 import { AppConfig } from "../../AppConfig";
 import { getConnection } from "../../connection/Connections";
@@ -19,15 +18,11 @@ import { DAIMON_CRUD_SCHEMA } from "./DAIMON_CRUD_SCHEMA";
 import type { DaimonCrud } from "./DaimonCrud";
 import { daimonToDaimonCrud } from "./daimonToDaimonCrud";
 import { DaimonUpload } from "./DaimonUpload";
-import { sortDaimonsByLastUsed } from "../../daimon/sortDaimonsByLastUsed";
-import { useDatas } from "../../state/useDatas";
+import { persistDaimonCrud } from "./persistDaimonCrud";
 
 export const DaimonsScreen = () => {
   const { userDaimonId, setUserDaimonId } = useAppState();
 
-  // const daimons = useDatas({ from: DAIMON_OBJECT_STORE }).toSorted(
-  //   sortDaimonsByLastUsed
-  // );
   const [daimonCruds, setDaimonCruds] = useState<DaimonCrud[]>([]);
   const [filterTags, setFilterTags] = useState<string[]>([]);
   const [allTags, setAllTags] = useState<string[]>([]);
@@ -63,7 +58,7 @@ export const DaimonsScreen = () => {
     <Stack>
       <DaimonUpload onUpload={updateDaimonCruds} />
       <TagSelector
-        allTags={allTags}
+        allTags={allTags.toSorted()}
         selected={filterTags}
         narrowTags={narrowTags}
         onChange={(newSelected) => {
@@ -80,6 +75,7 @@ export const DaimonsScreen = () => {
         items={daimonCruds}
         schema={DAIMON_CRUD_SCHEMA}
         onUpdate={async (item, index) => {
+          console.log("Updating item at index", index, item);
           const con = await getConnection();
           const { id, image, model, isUser, ...rest } = item;
           if (isUser) {
@@ -97,6 +93,7 @@ export const DaimonsScreen = () => {
                   ...(rest.extensions ?? {}),
                   avatar: image,
                   isUser,
+                  lastUsed: Date.now(),
                   llm: isEmpty(model) ? undefined : model,
                 },
               },
@@ -114,36 +111,8 @@ export const DaimonsScreen = () => {
           });
         }}
         onCreate={async (item) => {
-          console.log("Created item", item);
-          const con = await getConnection();
-          const { id: _id, image, model, isUser, ...rest } = item;
-          try {
-            const id = Ids.fromObjectStore(DAIMON_OBJECT_STORE);
-            const daimon: Daimon = {
-              id,
-              chara: {
-                data: {
-                  ...rest,
-                  extensions: {
-                    ...(item.extensions ?? {}),
-                    avatar: image,
-                    isUser,
-                    llm: isEmpty(model) ? undefined : model,
-                  },
-                },
-                spec: "chara_card_v2",
-                spec_version: "2",
-              },
-            };
-            await Datas.put(con)({
-              value: daimon,
-            });
-
-            const daimonCrud: DaimonCrud = { ...item, id };
-            setDaimonCruds((prev) => [...prev, daimonCrud]);
-          } catch (error) {
-            console.log(Errors.errorToText(error));
-          }
+          const persisted = await persistDaimonCrud(item);
+          setDaimonCruds((prev) => [...prev, persisted]);
         }}
         onDelete={async (index) => {
           console.log("Deleted item at index", index);

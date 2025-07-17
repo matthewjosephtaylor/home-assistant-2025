@@ -41,18 +41,20 @@ export const RoomScreen = () => {
             />
           ))}
         </Stack>
-        <TreeView
-          parentId={topRoomId}
-          sx={{
-            height: "100%",
-            maxHeight: "calc(100vh - 12em)",
-            maxWidth: "calc(100vw - 10ch)",
-            overflowX: "auto",
-            overflowY: "hidden",
-          }}
-        />
+        <Stack direction="column" sx={{ flex: 1 }}>
+          <TreeView
+            parentId={topRoomId}
+            sx={{
+              height: "100%",
+              maxHeight: "calc(100vh - 12em)",
+              maxWidth: "calc(100vw - 10ch)",
+              overflowX: "auto",
+              overflowY: "hidden",
+            }}
+          />
+          <TextEntry />
+        </Stack>
       </Stack>
-      <TextEntry />
     </Stack>
   );
 };

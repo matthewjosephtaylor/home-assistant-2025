@@ -6,10 +6,18 @@ import {
   type Content,
 } from "@mjt-services/daimon-common-2025";
 import { Ids } from "@mjt-services/data-common-2025";
-import { AutoFixHigh, Image, RecordVoiceOver, Send } from "@mui/icons-material";
+import {
+  AutoFixHigh,
+  Image,
+  RecordVoiceOver,
+  Send,
+  Casino,
+  Ballot,
+} from "@mui/icons-material";
 import {
   IconButton,
   InputAdornment,
+  Stack,
   TextField,
   type TextFieldProps,
 } from "@mui/material";
@@ -31,6 +39,9 @@ import { handleTextEntry } from "./handleTextEntry";
 import { useData } from "../../state/useData";
 import { addRandomGreeting } from "./addRandomGreeting";
 import IMAGE_PROMPT from "./prompt.txt?raw";
+import { Textgens } from "@mjt-services/textgen-common-2025";
+import { parseMarkdownJson } from "./parseMarkdownJson";
+import { RpgChoice, RpgChoiceSelect } from "./RpgChoice";
 
 export const TextEntry = forwardRef(({ ...rest }: TextFieldProps, ref) => {
   const [message, setMessage] = useState("");
@@ -43,18 +54,8 @@ export const TextEntry = forwardRef(({ ...rest }: TextFieldProps, ref) => {
   const { activeRoomId, userDaimonId, activeAssistantId } = useAppState();
   const userDaimon = useData<Daimon>(userDaimonId);
   const charaDaimon = useData<Daimon>(activeAssistantId);
-  // Inside component state
   const [expanded, setExpanded] = useState(false);
-
-  // Detect overflow
-  // useEffect(() => {
-  //   if (!textFieldRef.current) return;
-  //   const el = textFieldRef.current;
-  //   const isOverflowing = el.scrollHeight > el.clientHeight;
-  //   console.log("TextField overflow:", isOverflowing);
-  //   // Set expanded state based on overflow
-  //   setExpanded(isOverflowing);
-  // }, [message]);
+  const [rpgChoices, setRpgChoices] = useState<RpgChoice[]>([]);
 
   useEffect(() => {
     const el = textFieldRef.current;
@@ -85,7 +86,30 @@ export const TextEntry = forwardRef(({ ...rest }: TextFieldProps, ref) => {
   }, []);
 
   return (
-    <>
+    <Stack direction="column" spacing={1} sx={{ width: "100%" }}>
+      <RpgChoiceSelect
+        choices={rpgChoices}
+        onSelect={async (choice) => {
+          console.log("Selected choice:", choice);
+          const userName = userDaimon?.chara.data.name ?? "User";
+          // const checkResult = `CRITICAL FAILURE`;
+          const outcome = choiceToOutcome(choice);
+          console.log("Outcome:", outcome);
+          await askDaimon(
+            [
+              `${userName} chose action: ${choice.action}`,
+              `RPG Action Check Outcome: ${outcome}}`,
+              `What would ${userName} do and/or say for the action? Just give the response only. use the same tone and style as ${userName}. use *to indicate actions* and take into account the request and what the RPG action check result was`,
+            ].join("\n"),
+            {
+              onUpdate: (content) => {
+                const { value = "" } = content;
+                setMessage(String(value));
+              },
+            }
+          );
+        }}
+      />
       <ContextMenu
         actions={{
           Clear: () => setMessage(""),
@@ -125,14 +149,6 @@ export const TextEntry = forwardRef(({ ...rest }: TextFieldProps, ref) => {
               borderRadius: "0.5em",
             },
           }}
-          // sx={{
-          //   width: "100%",
-          //   backgroundColor: Colors.from("grey").darken(0.65).toString(),
-          //   marginTop: "1.8em",
-          //   "& .MuiOutlinedInput-root": {
-          //     borderRadius: "0.5em",
-          //   },
-          // }}
           multiline
           minRows={3}
           maxRows={20}
@@ -193,6 +209,51 @@ export const TextEntry = forwardRef(({ ...rest }: TextFieldProps, ref) => {
                 >
                   <AutoFixHigh />
                 </IconButton>
+                <IconButton
+                  onClick={async () => {
+                    const userName = userDaimon?.chara.data.name ?? "User";
+                    const checkResult = `CRITICAL FAILURE`;
+                    await askDaimon(
+                      [
+                        message,
+                        `RPG Action Check Result: ${checkResult}}`,
+                        `What would ${userName} do and/or say next? Just give the response only. use the same tone and style as ${userName}. use *to indicate actions* and take into account the request and what the RPG action check result was`,
+                      ].join("\n"),
+                      {
+                        onUpdate: (content) => {
+                          const { value = "" } = content;
+                          setMessage(String(value));
+                        },
+                      }
+                    );
+                  }}
+                >
+                  <Casino />
+                </IconButton>
+                <IconButton
+                  onClick={async () => {
+                    const userName = userDaimon?.chara.data.name ?? "User";
+                    const result = await askDaimon(
+                      [
+                        "type Choice {action: string, successChanceOutOf100: number, why?: string, relevantStats?: string[]}",
+                        `MARKDOWN JSON Choice ARRAY RESPONSE ONLY. Generate 3-5 one or two word actions that the user can take next in the CYOA RPG. Use the same tone and style as ${userName}.`,
+                      ].join("\n"),
+                      {
+                        assistantId: activeAssistantId,
+                        onUpdate: (content) => {
+                          const { value = "" } = content;
+                          setMessage(String(value));
+                        },
+                      }
+                    );
+                    const parsed = parseMarkdownJson(result.value as string);
+                    console.log(parsed);
+                    setRpgChoices(parsed as RpgChoice[]);
+                    setMessage("");
+                  }}
+                >
+                  <Ballot />
+                </IconButton>
               </InputAdornment>
             ),
           }}
@@ -221,6 +282,19 @@ export const TextEntry = forwardRef(({ ...rest }: TextFieldProps, ref) => {
           setOpenGenerateImage(false);
         }}
       />
-    </>
+    </Stack>
   );
 });
+
+export const choiceToOutcome = (choice: RpgChoice) => {
+  const { action, why, successChanceOutOf100, relevantStats } = choice;
+
+  // Generate a random number to determine success
+  const randomValue = Math.random() * 100;
+  const isSuccess = randomValue < successChanceOutOf100;
+  const outcome = isSuccess
+    ? `Success! ${action} was successful.`
+    : `Failure! ${action} failed.`;
+
+  return outcome;
+};

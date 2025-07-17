@@ -1,5 +1,3 @@
-
-
 import { Button } from "@mui/material";
 import { Stack } from "@mui/system";
 
@@ -16,7 +14,7 @@ export const TagSelector = ({
 }) => {
   return (
     <Stack direction={"row"} flexWrap={"wrap"}>
-      {allTags.toSorted().map((tag, index) => (
+      {allTags.map((tag, index) => (
         <Button
           key={index}
           variant={selected.includes(tag) ? "contained" : "outlined"}

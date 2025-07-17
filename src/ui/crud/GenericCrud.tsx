@@ -19,8 +19,7 @@ import {
 } from "@mui/material";
 import { Stack } from "@mui/system";
 import React, { ReactNode, useState } from "react";
-import { CheckboxWithLabel } from "../common/CheckboxWithLabel";
-import { StringArrayEditor } from "../common/StringArrayEditor";
+import { CrudSchemaDialog } from "./CrudSchemaDialog";
 
 // A generic schema that (for each property K in T) optionally defines:
 // 1) a label (e.g. column header or field label),
@@ -78,16 +77,8 @@ export function GenericCrud<T extends object>({
     setOpen(true);
   };
 
-  // Called when the user types/changes a form field
-  const handleChange = <K extends keyof T>(key: K, value: T[K]) => {
-    setDraft((prev) => ({
-      ...prev,
-      [key]: value,
-    }));
-  };
-
   // If the user confirms the dialog
-  const handleSave = () => {
+  const handleSave = (draft: Partial<T>) => {
     if (selectedIndex == null) {
       if (onCreate) {
         onCreate(draft as T);
@@ -141,85 +132,6 @@ export function GenericCrud<T extends object>({
     }
     // If no custom renderer, just display the raw value
     return String(value);
-  };
-
-  // Render a generic editor for the dialog
-  const renderEditor = (key: keyof T, item: T) => {
-    const value = draft[key];
-    const fieldSchema = schema[key];
-
-    if (fieldSchema?.renderEditor) {
-      return fieldSchema.renderEditor(
-        value!,
-        (v) => handleChange(key, v),
-        draft as T
-      );
-    }
-
-    // Basic fallback editors by type:
-    if (typeof value === "boolean") {
-      return (
-        <CheckboxWithLabel
-          checked={value}
-          label={fieldSchema?.label ?? String(key)}
-          onChange={(value) => handleChange(key, value as T[typeof key])}
-        />
-      );
-    } else if (typeof value === "number") {
-      return (
-        <TextField
-          type="number"
-          fullWidth
-          label={fieldSchema?.label ?? String(key)}
-          value={value}
-          onChange={(e) =>
-            handleChange(key, parseFloat(e.target.value) as T[typeof key])
-          }
-        />
-      );
-    } else if (Array.isArray(value)) {
-      return (
-        <StringArrayEditor
-          direction="row"
-          spacing={1}
-          useFlexGap
-          flexWrap="wrap"
-          alignItems="flex-start"
-          sx={{ width: "fit-content" }}
-          value={value}
-          label={fieldSchema?.label ?? String(key)}
-          onChange={(newValue) => {
-            handleChange(key, newValue as T[typeof key]);
-          }}
-        />
-      );
-    } else if (value instanceof Date) {
-      // Minimal date editing example (HTML date input).
-      return (
-        <TextField
-          type="date"
-          fullWidth
-          label={fieldSchema?.label ?? String(key)}
-          // Convert to yyyy-MM-dd
-          value={(value as Date).toISOString().substring(0, 10)}
-          onChange={(e) =>
-            handleChange(key, new Date(e.target.value) as T[typeof key])
-          }
-        />
-      );
-    } else {
-      // Default to a text field
-      return (
-        <TextField
-          type="text"
-          fullWidth
-          multiline
-          label={fieldSchema?.label ?? String(key)}
-          value={(value ?? "") as string}
-          onChange={(e) => handleChange(key, e.target.value as T[typeof key])}
-        />
-      );
-    }
   };
 
   // Column keys in stable order:
@@ -298,33 +210,16 @@ export function GenericCrud<T extends object>({
           </TableBody>
         </Table>
       </div>
-
       {/* Modal Dialog for editing the selected item */}
-      <Dialog
+      <CrudSchemaDialog
+        title={selectedIndex == null ? `Add ${itemName}` : `Edit ${itemName}`}
         open={open}
-        onClose={() => setOpen(false)}
-        fullWidth
-        maxWidth="sm"
-        disableRestoreFocus
-        slotProps={{ paper: { sx: { width: "80vw", maxWidth: "none" } } }}
-      >
-        <DialogTitle>
-          {selectedIndex == null ? "Add Item" : "Edit Item"}
-        </DialogTitle>
-        <DialogContent dividers>
-          <Stack spacing={2} direction="column">
-            {columns.map((key) => (
-              <Box key={String(key)}>{renderEditor(key, draft as T)}</Box>
-            ))}
-          </Stack>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={() => setOpen(false)}>Cancel</Button>
-          <Button onClick={handleSave} variant="contained" color="primary">
-            Save
-          </Button>
-        </DialogActions>
-      </Dialog>
+        setOpen={setOpen}
+        value={draft as T}
+        schema={schema as CrudSchema<Partial<T>>}
+        // handleChange={handleChange}
+        onSave={handleSave}
+      />
 
       {/* Confirmation Dialog for deletion */}
       <Dialog
