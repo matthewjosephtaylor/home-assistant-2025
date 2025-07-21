@@ -3,7 +3,7 @@ import { isUndefined } from "@mjt-engine/object";
 import { Stack } from "@mui/system";
 import { bytesToDaimon } from "../../png/bytesToDaimon";
 import { FileUpload } from "../common/FileUpload";
-import { ImportCharaJson } from "./ImportCharaCard";
+import { ImportCharaJson } from "./ImportCharaJson";
 
 export const DaimonUpload = ({ onUpload }: { onUpload?: () => void }) => {
   return (

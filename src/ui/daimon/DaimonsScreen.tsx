@@ -19,6 +19,8 @@ import type { DaimonCrud } from "./DaimonCrud";
 import { daimonToDaimonCrud } from "./daimonToDaimonCrud";
 import { DaimonUpload } from "./DaimonUpload";
 import { persistDaimonCrud } from "./persistDaimonCrud";
+import { TextField } from "@mui/material";
+import { matchJsonValues } from "../../common/matchJsonValues";
 
 export const DaimonsScreen = () => {
   const { userDaimonId, setUserDaimonId } = useAppState();
@@ -27,6 +29,7 @@ export const DaimonsScreen = () => {
   const [filterTags, setFilterTags] = useState<string[]>([]);
   const [allTags, setAllTags] = useState<string[]>([]);
   const [narrowTags, setNarrowTags] = useState<string[]>([]);
+  const [searchQuery, setSearchQuery] = useState("");
   const updateDaimonCruds = async () => {
     const daimons = await listDaimons();
     const allTagsSet = new Set<string>();
@@ -35,11 +38,13 @@ export const DaimonsScreen = () => {
     });
     setAllTags(Array.from(allTagsSet));
 
-    const filteredDaimons = daimons.filter(
-      (d) =>
-        filterTags.length === 0 ||
-        filterTags.every((tag) => d.chara.data.tags?.includes(tag))
-    );
+    const filteredDaimons = daimons
+      .filter(
+        (d) =>
+          filterTags.length === 0 ||
+          filterTags.every((tag) => d.chara.data.tags?.includes(tag))
+      )
+      .filter((d) => matchJsonValues(d.chara.data, searchQuery));
     console.log("Filtered Daimons", filteredDaimons);
     const narrowTagsSet = new Set<string>();
     filteredDaimons.forEach((d) => {
@@ -53,7 +58,7 @@ export const DaimonsScreen = () => {
   };
   useEffect(() => {
     updateDaimonCruds();
-  }, [userDaimonId, filterTags]);
+  }, [userDaimonId, filterTags, searchQuery]);
   const tools = (
     <Stack>
       <DaimonUpload onUpload={updateDaimonCruds} />
@@ -69,6 +74,14 @@ export const DaimonsScreen = () => {
   );
   return (
     <Stack alignContent={"center"} spacing={"2em"} padding={"2em"}>
+      <TextField
+        fullWidth
+        label={"Search"}
+        value={searchQuery}
+        onChange={(e) => {
+          setSearchQuery(e.target.value);
+        }}
+      />
       <GenericCrud
         itemName="Daimon"
         tools={tools}
@@ -109,10 +122,12 @@ export const DaimonsScreen = () => {
             copy[index] = item;
             return copy;
           });
+          updateDaimonCruds();
         }}
         onCreate={async (item) => {
           const persisted = await persistDaimonCrud(item);
           setDaimonCruds((prev) => [...prev, persisted]);
+          updateDaimonCruds();
         }}
         onDelete={async (index) => {
           console.log("Deleted item at index", index);
@@ -127,6 +142,7 @@ export const DaimonsScreen = () => {
             copy.splice(index, 1);
             return copy;
           });
+          updateDaimonCruds();
         }}
       />
     </Stack>

@@ -8,8 +8,10 @@ export const FileUpload = ({
   onChange,
   renderFile,
   placeholder,
+  label = "file",
   ...rest
 }: Omit<BoxProps, "onChange"> & {
+  label?: string;
   onChange?: (file?: File) => void;
   renderFile?: (file: File) => ReactNode;
   placeholder?: ReactNode;
@@ -79,7 +81,7 @@ export const FileUpload = ({
         >
           {placeholder || <CloudUploadIcon fontSize="large" />}
           <Typography variant="body2">
-            Drag & drop PNG or click to upload
+            Drag & drop {label} or click to upload
           </Typography>
         </Box>
       )}

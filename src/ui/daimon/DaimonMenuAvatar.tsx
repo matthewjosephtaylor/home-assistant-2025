@@ -60,12 +60,24 @@ export const DaimonMenuAvatar = ({
           }
           current.chara.data.extensions = {};
           const clone: Daimon = {
-            ...current,
             id: Ids.fromObjectStore(DAIMON_OBJECT_STORE),
+
+            chara: {
+              ...current.chara,
+              data: {
+                ...current.chara.data,
+                name: current.chara.data.name + " (Clone)",
+                extensions: {
+                  lastUsed: Date.now(),
+                },
+              },
+            },
           };
           await Datas.put(con)({
             value: clone,
           });
+
+          onUpdate?.();
         },
       }}
     >
