@@ -13,6 +13,7 @@ import {
   MyLocation,
   RecordVoiceOver,
   Send,
+  ShortText,
 } from "@mui/icons-material";
 import {
   IconButton,
@@ -43,6 +44,7 @@ import { addRandomGreeting } from "./addRandomGreeting";
 import IMAGE_PROMPT from "./prompt.txt?raw";
 import { RpgChoice, RpgChoiceSelect } from "./RpgChoiceSelect";
 import { RpgLocation, RpgLocationSelect } from "./RpgLocationSelect";
+import { getRandomUserGreeting } from "./getRandomUserGreeting";
 
 export const TextEntry = forwardRef(({ ...rest }: TextFieldProps, ref) => {
   const [message, setMessage] = useState("");
@@ -89,20 +91,43 @@ export const TextEntry = forwardRef(({ ...rest }: TextFieldProps, ref) => {
 
   return (
     <Stack direction="column" sx={{ width: "100%" }}>
-      <RpgLocationSelect choices={rpgLocations} onSelect={(choice) => {}} />
+      <RpgLocationSelect
+        choices={rpgLocations}
+        onSelect={async (choice) => {
+          console.log("Selected choice:", choice);
+          const userName = userDaimon?.chara.data.name ?? "User";
+          // const checkResult = `CRITICAL FAILURE`;
+          // const outcome = choiceToOutcome(choice);
+          const { name, travelTimeMinutes, description } = choice;
+          // console.log("Outcome:", outcome);
+          await askDaimon(
+            [
+              `${userName} chose action to visit location: ${name}: ${description} with travel time of ${travelTimeMinutes} minutes`,
+              // `RPG Action Check Outcome: ${outcome}}`,
+              `What would ${userName} do and/or say for the action? Just give the response only. use the same tone and style as ${userName}. use *to indicate actions* and take into account the request and what the RPG action result was`,
+            ].join("\n"),
+            {
+              onUpdate: (content) => {
+                const { value = "" } = content;
+                setMessage(String(value));
+              },
+            }
+          );
+        }}
+      />
       <RpgChoiceSelect
         choices={rpgChoices}
         onSelect={async (choice) => {
           console.log("Selected choice:", choice);
           const userName = userDaimon?.chara.data.name ?? "User";
           // const checkResult = `CRITICAL FAILURE`;
-          const outcome = choiceToOutcome(choice);
-          console.log("Outcome:", outcome);
+          // const outcome = choiceToOutcome(choice);
+          // console.log("Outcome:", outcome);
           await askDaimon(
             [
               `${userName} chose action: ${choice.action}: ${choice.why}`,
-              `RPG Action Check Outcome: ${outcome}}`,
-              `What would ${userName} do and/or say for the action? Just give the response only. use the same tone and style as ${userName}. use *to indicate actions* and take into account the request and what the RPG action check result was`,
+              // `RPG Action Check Outcome: ${outcome}}`,
+              `What would ${userName} do and/or say for the action? Just give the response only, be brief. use the same tone and style as ${userName}. use *to indicate actions* and take into account the request and what the RPG action check result was`,
             ].join("\n"),
             {
               onUpdate: (content) => {
@@ -163,6 +188,7 @@ export const TextEntry = forwardRef(({ ...rest }: TextFieldProps, ref) => {
                     handleTextEntry({ text: message });
                     setMessage("");
                     setRpgChoices([]);
+                    setRpgLocations([]);
                   }}
                 >
                   <Send />
@@ -173,6 +199,18 @@ export const TextEntry = forwardRef(({ ...rest }: TextFieldProps, ref) => {
                   }}
                 >
                   <RecordVoiceOver />
+                </IconButton>
+                <IconButton
+                  onClick={async () => {
+                    const greeting = await getRandomUserGreeting(activeRoomId);
+                    if (!greeting) {
+                      console.warn("No greeting found");
+                      return;
+                    }
+                    setMessage(greeting);
+                  }}
+                >
+                  <ShortText />
                 </IconButton>
                 <IconButton
                   onClick={async () => {
@@ -219,7 +257,7 @@ export const TextEntry = forwardRef(({ ...rest }: TextFieldProps, ref) => {
                     const extractor = new MarkdownJsonExtractor();
                     const result = await askDaimon(
                       [
-                        "type Choice {action: string, successChanceOutOf100: number, why?: string, relevantStats?: string[]}",
+                        "type Choice {action: string, pickChanceOutOf100: number, why?: string, relevantStats?: string[]}",
                         `MARKDOWN JSON Choice ARRAY RESPONSE ONLY. Generate 3-5 one or two word actions that the user can take next in the CYOA RPG. Use the same tone and style as ${userName}.`,
                       ].join("\n"),
                       {
@@ -316,11 +354,11 @@ export const TextEntry = forwardRef(({ ...rest }: TextFieldProps, ref) => {
 });
 
 export const choiceToOutcome = (choice: RpgChoice) => {
-  const { action, why, successChanceOutOf100, relevantStats } = choice;
+  const { action, why, pickChanceOutOf100, relevantStats } = choice;
 
   // Generate a random number to determine success
   const randomValue = Math.random() * 100;
-  const isSuccess = randomValue < successChanceOutOf100;
+  const isSuccess = randomValue < pickChanceOutOf100;
   const outcome = isSuccess
     ? `Success! ${action} was successful.`
     : `Failure! ${action} failed.`;

@@ -8,8 +8,10 @@ import {
   type Daimon,
 } from "@mjt-services/daimon-common-2025";
 import { Datas } from "@mjt-services/data-common-2025";
+import { TextField } from "@mui/material";
 import { Stack } from "@mui/system";
 import { AppConfig } from "../../AppConfig";
+import { matchJsonValues } from "../../common/matchJsonValues";
 import { getConnection } from "../../connection/Connections";
 import { listDaimons } from "../../daimon/listDaimons";
 import { useAppState } from "../../state/AppState";
@@ -19,8 +21,9 @@ import type { DaimonCrud } from "./DaimonCrud";
 import { daimonToDaimonCrud } from "./daimonToDaimonCrud";
 import { DaimonUpload } from "./DaimonUpload";
 import { persistDaimonCrud } from "./persistDaimonCrud";
-import { TextField } from "@mui/material";
-import { matchJsonValues } from "../../common/matchJsonValues";
+import { Reacts } from "@mjt-engine/reacts";
+
+export const DAMIONS_UPDATED_EVENT = "daimonsUpdated";
 
 export const DaimonsScreen = () => {
   const { userDaimonId, setUserDaimonId } = useAppState();
@@ -30,6 +33,11 @@ export const DaimonsScreen = () => {
   const [allTags, setAllTags] = useState<string[]>([]);
   const [narrowTags, setNarrowTags] = useState<string[]>([]);
   const [searchQuery, setSearchQuery] = useState("");
+
+  Reacts.useCustomEventListener(DAMIONS_UPDATED_EVENT, () => {
+    updateDaimonCruds();
+  });
+
   const updateDaimonCruds = async () => {
     const daimons = await listDaimons();
     const allTagsSet = new Set<string>();
@@ -45,7 +53,6 @@ export const DaimonsScreen = () => {
           filterTags.every((tag) => d.chara.data.tags?.includes(tag))
       )
       .filter((d) => matchJsonValues(d.chara.data, searchQuery));
-    console.log("Filtered Daimons", filteredDaimons);
     const narrowTagsSet = new Set<string>();
     filteredDaimons.forEach((d) => {
       d.chara.data.tags?.forEach((tag) => narrowTagsSet.add(tag));
@@ -63,6 +70,7 @@ export const DaimonsScreen = () => {
     <Stack>
       <DaimonUpload onUpload={updateDaimonCruds} />
       <TagSelector
+        style={{ maxHeight: "10em", overflowY: "auto" }}
         allTags={allTags.toSorted()}
         selected={filterTags}
         narrowTags={narrowTags}

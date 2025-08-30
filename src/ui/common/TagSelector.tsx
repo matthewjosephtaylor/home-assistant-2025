@@ -1,30 +1,26 @@
 import { Button } from "@mui/material";
-import { Stack } from "@mui/system";
+import { Stack, StackProps } from "@mui/system";
 
 export const TagSelector = ({
   allTags = [],
   selected = [],
   narrowTags = [],
   onChange,
-}: {
+  ...rest
+}: Omit<StackProps, "onChange"> & {
   allTags: string[];
   narrowTags?: string[];
   selected: string[];
   onChange?: (newSelected: string[]) => void;
 }) => {
   return (
-    <Stack direction={"row"} flexWrap={"wrap"}>
+    <Stack direction={"row"} flexWrap={"wrap"} {...rest}>
       {allTags.map((tag, index) => (
         <Button
           key={index}
           variant={selected.includes(tag) ? "contained" : "outlined"}
           color={narrowTags?.includes(tag) ? "primary" : "secondary"}
           size="small"
-          // sx={{
-          //   minWidth: 80,
-          //   padding: "6px 16px",
-          //   boxSizing: "border-box",
-          // }}
           disableElevation
           sx={{ boxShadow: "none" }}
           onClick={() => {

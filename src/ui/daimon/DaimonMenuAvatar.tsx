@@ -10,6 +10,8 @@ import { ContextMenu } from "../common/ContextMenu";
 import { ContentView } from "../content/ContentView";
 import { createDaimonRooms } from "./createDaimonRooms";
 import { startChatWith } from "./startChatWith";
+import { Reacts } from "@mjt-engine/reacts";
+import { DAMIONS_UPDATED_EVENT } from "./DaimonsScreen";
 
 export const DaimonMenuAvatar = ({
   imageContentId,
@@ -78,6 +80,7 @@ export const DaimonMenuAvatar = ({
           });
 
           onUpdate?.();
+          Reacts.dispatchCustomEvent(DAMIONS_UPDATED_EVENT, undefined);
         },
       }}
     >

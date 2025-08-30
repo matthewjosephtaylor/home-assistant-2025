@@ -52,6 +52,7 @@ export const GenerateImageDialog = ({
     ...defaultRequest,
     ...(value?.source ?? {}),
   });
+  const [prompt, setPrompt] = useState<string>(request.prompt ?? "");
   const handleSave = () => {
     const updatedContent = {
       ...(localValue ?? {
@@ -75,6 +76,7 @@ export const GenerateImageDialog = ({
       ...defaultRequest,
       ...(value?.source ?? {}),
     });
+    setPrompt(defaultRequest.prompt ?? "");
   }, [value, defaultRequest]);
 
   return (
@@ -167,10 +169,11 @@ export const GenerateImageDialog = ({
           />
           <TextField
             label="Prompt"
-            value={request.prompt}
-            onChange={(e) =>
-              setRequest((cur) => ({ ...cur, prompt: e.target.value }))
-            }
+            value={prompt}
+            onChange={(e) => {
+              setPrompt(e.target.value);
+              setRequest((cur) => ({ ...cur, prompt: e.target.value }));
+            }}
             fullWidth
             multiline
             variant="outlined"

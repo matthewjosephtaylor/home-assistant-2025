@@ -5,12 +5,11 @@ import {
   Typography,
   type ButtonProps,
 } from "@mui/material";
-import { textAlign } from "@mui/system";
 
 export type RpgChoice = {
   action: string;
   why: string;
-  successChanceOutOf100: number;
+  pickChanceOutOf100: number;
   relevantStats?: string[];
 };
 
@@ -39,7 +38,7 @@ export const RpgChoiceSelect = ({
         <Button
           key={index}
           variant="outlined"
-          color={getMuiColorForChance(choice.successChanceOutOf100)}
+          color={getMuiColorForChance(choice.pickChanceOutOf100)}
           onClick={() => onSelect(choice, index)}
           {...buttonProps}
           sx={{ textAlign: "left", maxWidth: "20ch", ...buttonProps?.sx }}
@@ -50,7 +49,7 @@ export const RpgChoiceSelect = ({
             </Typography>
             <Typography variant="caption">{choice.why}</Typography>
             <Stack sx={{ borderLeft: "1px solid", paddingLeft: "0.5em" }}>
-              {choice.successChanceOutOf100}% success
+              {choice.pickChanceOutOf100}% success
               {choice.relevantStats?.length ? (
                 <Typography variant="caption" color="textSecondary">
                   {choice.relevantStats.join(", ")}
